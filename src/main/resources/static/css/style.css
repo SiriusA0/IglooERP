@@ -1,0 +1,330 @@
+/* Index */
+
+.bg_index {
+  background-image: url("../img/Index.jpg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Login */
+.bg_login {
+  background-image: url("../img/SignInBg.jpg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.form_bg {
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: rgb(53, 58, 64, 0.7);
+}
+.btn-login {
+  background-color: #59bec9;
+  color: whitesmoke;
+}
+
+/* Register Agent */
+.bg_register {
+  background-image: url("../img/appWall.jpg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/**/
+#register {
+  color: red;
+}
+#login {
+  color: rgb(6, 130, 194);
+}
+
+/* Register */
+.register-icon {
+  width: 40px;
+}
+
+/* Clients Form */
+.inputBox {
+  font-size: 10px;
+  color: grey;
+  border: 0;
+  outline: 0;
+  border-bottom: 2px solid grey;
+}
+.card {
+  width: 400px;
+  height: 150px;
+  margin: 25px;
+}
+.newClientsForm_SupBar {
+  height: 3rem;
+}
+#clientName {
+  font-size: 3em;
+}
+.purpleNumber {
+  color: rgb(104, 70, 95);
+  font-weight: bold;
+}
+
+.newClientSaveButton {
+  border-radius: 0px;
+  border: 0px;
+}
+
+.newClientDiscardButton {
+  border-radius: 0px;
+  border: 0px;
+}
+
+/**/
+#fondo {
+  background-image: url("../img/fondo.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+.icononav {
+  margin-right: 12px;
+  color: white;
+}
+
+.icononav2 {
+  margin-left: 20px;
+  margin-right: 5px;
+  color: white;
+}
+
+.gris {
+  color: gray;
+}
+
+.botonazul {
+  border-radius: 0px;
+}
+
+.botonsinborde {
+  border: none;
+}
+
+.iconitos {
+  float: right;
+
+  padding: 10px;
+}
+
+.iconitos:hover {
+  background-color: #ccc;
+  opacity: 50%;
+  color: black;
+}
+
+.relojitoRojo {
+  color: crimson;
+}
+
+.relojitoAmarillo {
+  color: burlywood;
+}
+
+.relojitoVerde {
+  color: cornflowerblue;
+}
+
+th {
+  color: rgb(105, 106, 110);
+}
+
+.invertiricono {
+  transform: scaleX(-1);
+}
+
+.letramodulos {
+  font-size: 15px;
+  color: white;
+  text-align: center;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: white;
+}
+
+.cajatexto {
+  font-size: 10px;
+  color: grey;
+  border: 0;
+  outline: 0;
+  border-bottom: 2px solid grey;
+}
+
+.titulo {
+  color: rgb(151, 161, 172);
+  font-size: 25px;
+}
+
+.subtituloconversaciones {
+  color: rgb(151, 161, 172);
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.navbaritem:hover {
+  background-color: rgb(104, 70, 95);
+}
+
+.cajaformulario {
+  border-left: solid 2px lightgray;
+  border-right: solid 2px lightgray;
+}
+
+.listamenuconversaciones {
+  list-style: none;
+  padding-left: 15px;
+}
+
+.letrablanca {
+  color: whitesmoke;
+}
+
+.letragris {
+  padding-top: 5px;
+  color: lightgray;
+  font-size: 15px;
+}
+
+.letragris {
+  color: gray;
+}
+
+.letrapeq {
+  font-size: 15px;
+}
+
+.atributomodulos {
+  width: 65px;
+}
+
+.barrasuperior {
+  background-color: rgb(135, 90, 123);
+  height: 55px;
+}
+
+.ddmflecha {
+  padding-left: 4px;
+}
+
+.estiloentrada {
+  border: 0;
+  outline: 0;
+  border-bottom: 2px solid grey;
+  font-size: 1rem;
+  color: #ccc;
+}
+
+.form-control:focus {
+  border-color: gray;
+  box-shadow: inset 0 0px 0px grey, 0 0 8px transparent;
+}
+
+.presupuesto {
+  background-color: cadetblue;
+  border-radius: 15px;
+  opacity: 75%;
+  padding: 5px;
+}
+
+.pedidodeventa {
+  background-color: rgb(31, 155, 97);
+  border-radius: 15px;
+  opacity: 75%;
+  padding: 5px;
+}
+
+.cancelado {
+  background-color: lightgray;
+  border-radius: 15px;
+  opacity: 75%;
+  padding: 5px;
+}
+
+.procesoDePago {
+  background-color: khaki;
+  border-radius: 15px;
+  opacity: 75%;
+  padding: 5px;
+}
+
+.titulomenuconversaciones {
+  color: grey;
+  font-size: 12px;
+}
+
+.menuconversaciones {
+  background-color: #282f33;
+  color: white;
+}
+
+.cajaAjustes {
+  overflow: auto;
+  height: 600px;
+  border-top: solid lightgray 3px;
+}
+
+.iconomenuajustes {
+  width: 50px;
+  padding-right: 10px;
+}
+
+.subtituloajustes {
+  background-color: rgb(233, 236, 239);
+  padding: 5px;
+  padding-left: 40px;
+  font-size: 25px;
+}
+
+.moduloajustes {
+  border-left: solid 1px black;
+}
+
+.linkverde {
+  color: rgb(0, 160, 157);
+}
+
+.seleccionado:active {
+  background-color: indigo;
+}
+
+.fondoclientes {
+  border-top: solid 2px lightgray;
+  background-color: rgb(233, 236, 239);
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+}
+
+.clientes {
+  background-color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 2px solid lightgray;
+}
+
+.barraclientesnew {
+  border: 2px solid lightgray;
+}
+
+.barraclientesnewpeq {
+  border-left: 2px solid lightgray;
+}
+
+.barraclientesgrd {
+  border-left: 2px solid lightgray;
+  border-right: 2px solid lightgray;
+  border-bottom: 2px solid lightgray;
+}

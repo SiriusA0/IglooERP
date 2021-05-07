@@ -1,0 +1,184 @@
+<!--Coded with love by Igloo! team-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign up</title>
+    <!-- Bootstrap & Jquery -->
+    <script src="bootstrap/js/jquery-3.6.0.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/e22ea825df.js" crossorigin="anonymous"></script>
+    <!-- Libraries -->
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Titillium+Web:wght@600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="bg_login">
+    <div class="container" style="max-width: 500px">
+      <div class="row d-flex justify-content-center">
+        <div class="col mt-5 form_bg">
+          <div class="row pt-3">
+            <div class="col d-flex justify-content-center">
+              <a href="/"><i class="fas fa-igloo fa-5x" style="color: whitesmoke"></i></a>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-center pt-2 pb-2">
+            <div class="col mb-4">
+              <h2
+                class="d-flex justify-content-center"
+                style="color: whitesmoke; font-family: 'Titillium Web', sans-serif"
+              >
+                Sign up to Igloo!
+              </h2>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-center">
+            <div class="col">
+              <form class="mb-3" action="/signup" method="post">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <div class="input-group">
+                      <div class="input-group-prepend register-icon">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                      </div>
+                      <input
+                        th:value="${previousInput?.firstName}"
+                        name="FirstName"
+                        type="text"
+                        class="form-control newUser"
+                        placeholder="Name"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-group col-md-6">
+                    <div class="input-group">
+                      <div class="input-group-prepend register-icon">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                      </div>
+                      <input
+                        th:value="${previousInput?.lastName}"
+                        name="lastName"
+                        type="text"
+                        class="form-control newUser"
+                        placeholder="Last Name"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-group col-md-12">
+                    <div class="input-group">
+                      <div class="input-group-prepend register-icon" style="width: 40px">
+                        <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                      </div>
+                      <input
+                        th:value="${previousInput?.userName}"
+                        name="userName"
+                        type="text"
+                        class="form-control newUser"
+                        placeholder="User name"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-prepend register-icon">
+                      <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                    </div>
+                    <input
+                      th:value="${previousInput?.email}"
+                      name="email"
+                      type="email"
+                      class="form-control newUser"
+                      placeholder="Email"
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend register-icon">
+                      <span class="input-group-text"><i class="fas fa-phone-square-alt"></i></span>
+                    </div>
+                    <input
+                      th:value="${previousInput?.telnumber}"
+                      name="telnumber"
+                      type="tel"
+                      class="form-control newUser"
+                      placeholder="Phone number"
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend register-icon">
+                      <span class="input-group-text"><i class="fas fa-briefcase"></i></span>
+                    </div>
+
+                    <select name="jobs" class="form-control newUser" multiple>
+                      <option value="Student" th:selected="${previousInput?.jobs?.contains('Student')}">Student</option>
+                      <option value="Farmer" th:selected="${previousInput?.jobs?.contains('Farmer')}">Farmer</option>
+                      <option value="Bodybuilder" th:selected="${previousInput?.jobs?.contains('Bodybuilder')}">
+                        Bodybuilder
+                      </option>
+                      <option value="Drug_Dealer" th:selected="${previousInput?.jobs?.contains('Drug Dealer')}">
+                        Drug Dealer
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <div class="input-group">
+                      <div class="input-group-prepend register-icon">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                      </div>
+                      <input name="password" type="password" class="form-control newUser" placeholder="Password" />
+                    </div>
+                  </div>
+
+                  <div class="form-group col-md-6">
+                    <div class="input-group">
+                      <div class="input-group-prepend register-icon">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                      </div>
+                      <input id="confirmPassword" type="password" class="form-control" placeholder="Confirm password" />
+                    </div>
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  class="btn btn-lg btn-block btn-login"
+                  style="font-family: 'Titillium Web', sans-serif"
+                >
+                  Create your account
+                </button>
+                <div class="mt-2 alert alert-danger" th:if="${error != null && error}">
+                  <span th:text="${errorMsg}"></span>
+                </div>
+              </form>
+              <small style="color: whitesmoke; font-family: 'Titillium Web', sans-serif">Already registered?</small>
+              <button
+                onclick="window.location.href='/signin'"
+                type="button"
+                class="btn btn-outline-light btn-block"
+                style="font-family: 'Titillium Web', sans-serif"
+              >
+                Sign in
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

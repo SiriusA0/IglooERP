@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Index</title>
+<!-- Bootstrap & Jquery -->
+<script src="bootstrap/js/jquery-3.6.0.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+<!-- Fontawesome -->
+<script src="https://kit.fontawesome.com/e22ea825df.js"
+	crossorigin="anonymous"></script>
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link
+	href="https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap"
+	rel="stylesheet" />
+<!-- Libraries -->
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="bg_register">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="/"><i class="fas fa-igloo"></i></a>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<label class="nav-brand mr-5 mt-2"
+					style="color: white; font-family: 'Titillium Web', sans-serif"><b>EMPLOYEES</b></label>
+				<li role="button" class="nav-item"><span class="nav-link">Agents</span>
+				</li>
+				<li role="button" class="nav-item"><span class="nav-link">Clients</span>
+				</li>
+				<li role="button" class="nav-item"><span class="nav-link">Sales</span>
+				</li>
+				<li role="button" class="nav-item"><span class="nav-link">Billing</span>
+				</li>
+			</ul>
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><i style="color: white"
+					class="fas fa-snowman"></i></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-2">
+				<div class="row ml-3 mr-3 pt-2">
+					<div class="mt-1">
+						<div class="input-group">
+							<input class="form-control py-2 border-right-0 estiloentrada"
+								type="search" placeholder="Buscar" /> <span
+								class="input-group-append">
+								<div class="input-group-text bg-transparent estiloentrada">
+									<i class="fa fa-search"></i>
+								</div>
+							</span>
+						</div>
+						<i class="fas fa-filter fa-sm gris" role="button"></i><label><small
+							class="ml-2">Filtros</small></label>&nbsp&nbsp <i
+							class="fas fa-bars fa-sm gris" role="button"></i><label><small
+							class="ml-2">Agrupar por</small></label>&nbsp&nbsp <i
+							class="fas fa-star fa-sm gris" role="button"></i><label><small
+							class="ml-2">Favoritos</small></label>
+					</div>
+					<div></div>
+					<div>
+						<i class="fas fa-list gris iconitos" role="button"></i> <i
+							class="fas fa-th-large gris iconitos" role="button"></i> <i
+							class="fas fa-angle-right gris iconitos" role="button"></i> <i
+							class="fas fa-angle-right gris iconitos invertiricono"
+							role="button"></i> <label class="letragris pl-5">1-1/1</label>
+					</div>
+				</div>
+			</div>
+			<div class="col-10">
+				<div class="row ml-2 mr-3 pt-3">
+					<div class="col-6">
+						<label class="titulo">Sales Agents</label>
+					</div>
+
+					<div class="col-6"></div>
+				</div>
+
+				<div class="row ml-3 mr-3 mt-3 fondoclientes"
+					id="contenedorClientes">
+					<div id="contenedor_crear" class="container-fluid">
+						<div class="row pt-5 pb-5 pl-5 pr-5">
+							<div class="form_bg">
+								<form class="mb-3" action="/agent" method="post">
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<div class="input-group">
+												<div class="input-group-prepend register-icon">
+													<span class="input-group-text"><i
+														class="fas fa-user"></i></span>
+												</div>
+												<input name="firstName" type="text" class="form-control"
+													placeholder="Name" />
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<div class="input-group">
+												<div class="input-group-prepend register-icon">
+													<span class="input-group-text"><i
+														class="fas fa-user"></i></span>
+												</div>
+												<input name="lastName" type="text" class="form-control"
+													placeholder="Last Name" />
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="input-group">
+											<div class="input-group-prepend register-icon">
+												<span class="input-group-text"><i
+													class="fas fa-envelope"></i></span>
+											</div>
+											<input type="email" class="form-control" placeholder="Email" />
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="input-group mb-3">
+											<div class="input-group-prepend register-icon">
+												<span class="input-group-text"><i
+													class="fas fa-phone-square-alt"></i></span>
+											</div>
+											<!-- name="telnumber" -->
+											<input type="tel" class="form-control"
+												placeholder="Phone number" />
+										</div>
+									</div>
+									<button type="submit" class="btn btn-lg btn-block btn-login"
+										style="font-family: 'Titillium Web', sans-serif">
+										Add Agent</button>
+								</form>
+							</div>
+						</div>
+					</div>
+
+					<table id="tabla_agentes" class="table table-dark">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">First Name</th>
+								<th scope="col">Last Name</th>
+								<th scope="col">Profile Pic</th>
+							</tr>
+
+						</thead>
+						<tbody th:remove="all-but-first">
+							<tr th:each="agent : ${agents}">
+								<td scope="row"><input type="checkbox" /><label>&nbspREF0001</label></td>
+								<td><span th:text="${agent.first_name}"></span></td>
+								<td><span th:text="${agent.last_name}"></span></td>
+								<td></td>
+							</tr>
+						</tbody>
+
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script>
+    function create_agent() {
+      document.querySelector("#contenedor_crear").style.display = "";
+      document.querySelector("#tabla_agentes").style.display = "none";
+    }
+    function list_agent() {
+      document.querySelector("#contenedor_crear").style.display = "none";
+      document.querySelector("#tabla_agentes").style.display = "";
+    }
+  </script>
+</html>

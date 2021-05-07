@@ -1,0 +1,86 @@
+<!--Coded with love by Igloo! team-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In</title>
+    <!-- Bootstrap & Jquery -->
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/e22ea825df.js" crossorigin="anonymous"></script>
+    <!-- Libraries -->
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Titillium+Web:wght@600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="bg_login">
+    <div class="container" style="max-width: 500px">
+      <div class="row d-flex justify-content-center">
+        <div class="col mt-5 form_bg">
+          <div class="row pt-5">
+            <div class="col d-flex justify-content-center">
+              <a href="/"><i class="fas fa-igloo fa-5x" style="color: whitesmoke"></i></a>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-center pt-2 pb-2">
+            <div class="col">
+              <h2
+                class="d-flex justify-content-center"
+                style="color: whitesmoke; font-family: 'Titillium Web', sans-serif"
+              >
+                Log in to Igloo!
+              </h2>
+              <div class="alert alert-info" th:if="${newUserFlag == true}">
+                            Confirm your E-mail please!
+                        </div>
+              
+            </div>
+          </div>
+          <div class="row d-flex justify-content-center">
+            <div class="col">
+              <form class="mb-4" action="signin" method="post">
+                <div class="form-group">
+                  <label for="username" style="color: whitesmoke; font-family: 'Titillium Web', sans-serif"
+                    >Username</label
+                  >
+                  <input type="text" class="form-control" name="username" id="username" />
+                </div>
+                <div class="form-group">
+                  <label for="Password" style="color: whitesmoke; font-family: 'Titillium Web', sans-serif"
+                    >Password</label
+                  >
+                  <input type="password" class="form-control" name="password" id="password" />
+                </div>
+                <button
+                  type="submit"
+                  class="mt-4 btn btn-login btn-lg btn-block"
+                  style="font-family: 'Titillium Web', sans-serif"
+                >
+                  Sign in
+                </button>
+              </form>
+              <small style="color: whitesmoke; font-family: 'Titillium Web', sans-serif">Don't have an account?</small>
+              <button
+                onclick="window.location.href='/signup'"
+                type="button"
+                class="btn btn-outline-light btn-block"
+                style="font-family: 'Titillium Web', sans-serif"
+              >
+                Create an account
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

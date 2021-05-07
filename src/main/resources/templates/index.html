@@ -1,0 +1,55 @@
+<!--Coded with love by Igloo! team-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Index</title>
+    <!-- Bootstrap & Jquery -->
+    <script src="bootstrap/js/jquery-3.6.0.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/e22ea825df.js" crossorigin="anonymous"></script>
+    <!-- Libraries -->
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Titillium+Web:wght@600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg_index">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="/index"><i class="fas fa-igloo"></i></a>
+      <ul class="navbar-nav ml-auto">
+        <i style="color: white" class="fas fa-snowman"></i>
+      </ul>
+    </nav>
+    <div class="container-fluid">
+      <div class="row ml-3 mt-5">
+        <div class="col mt-5">
+          <h1 class="display-3" style="font-family: 'Titillium Web', sans-serif">Get started with</h1>
+          <h1 class="display-1" style="font-family: 'Nunito', sans-serif">Igloo!</h1>
+          <div class="row pt-5">
+            <div class="col">
+              <button
+                type="button"
+                onclick="window.location.href='/signin'"
+                class="ml-3 mr-1 btn btn-lg btn-outline-dark"
+              >
+                Sign In
+              </button>
+              <button type="button" onclick="window.location.href='/signup'" class="btn btn-lg btn-dark">
+                Sign Up
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col"></div>
+      </div>
+    </div>
+  </body>
+</html>
