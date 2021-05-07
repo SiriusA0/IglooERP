@@ -1,0 +1,9 @@
+// Planing Fin de semana del infierno
+
+        0.  Repasar modelo de datos, coordinar nombre atributos entre bbdd y clases java.
+        1.  Terminar barra lateral e implementarla junto con navbar en todos los html.
+        2.  Introducir tablas y formulario de creacion en presupuestos y ventas.
+        3.  Introducir  tarjetas y formulario de creacion en clientes y agentes.
+        4.  Darle vida al buscador, filtros, sorts...
+        5.  Incluir borrado en todas las paginas.
+        6.

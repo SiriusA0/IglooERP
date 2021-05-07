@@ -8,44 +8,39 @@ public class Agent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int agent_id;
+    private int agentId;
 
     @Column
-    private String first_name;
+    private String firstName;
 
     @Column
-    private String last_name;
-    
-    public Agent() {
-    	
+    private String lastName;
+
+    public Agent(String firstName, String lastName) {
     }
 
 
-    public Agent(String first_name, String last_name) {
-        super();
-        this.first_name = first_name;
-        this.last_name = last_name;
+    public int getAgentId() {
+        return agentId;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public void setAgentId(int agentId) {
+        this.agentId = agentId;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-
-    public int getAgent_id() {
-        return agent_id;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
-
 }
