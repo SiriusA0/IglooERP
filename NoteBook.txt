@@ -6,4 +6,95 @@
         3.  Introducir  tarjetas y formulario de creacion en clientes y agentes.
         4.  Darle vida al buscador, filtros, sorts...
         5.  Incluir borrado en todas las paginas.
-        6.
+
+// User
+- id (PK)
+- firstName
+- lastName
+- userName
+- email
+- phoneNumber
+- job
+- password
+- profilePic
+- favAgents
+- favClients
+
+// Client
+
+- id (PK)
+- idNumber (nif/tax id... NO foreign key)
+- firstName
+- lastName
+- type (Char C,I)
+- streetLine1
+- streetLine2
+- zipCode
+- email
+- phoneNumber1
+- phoneNumber2
+- web
+- profilePic
+- categoryId (FK) many to one
+- countryId (FK) many to one
+- regionId (FK) many to one
+- cityId (FK)  many to one
+- 1 to many - order
+- 1 to many - invoice
+
+// Country
+- id (PK)
+- name
+- 1 to 1 - client
+- 1 to many - region
+
+// Region
+- id (PK)
+- name
+- many to 1 - country
+- 1 to many - city
+
+// City
+- id (PK)
+- name
+- many to 1 - region
+
+// Category
+- id (PK)
+- name
+
+// Order
+- id (PK)
+- creationDate
+- totalAmount
+- clientId (FK) many to one
+- agentId (FK) many to one
+- statusId (FK) many to one
+
+// Invoice
+- id (PK)
+- clientId (FK) many to one
+- creationDate 
+- dueDate
+- preTax
+- afterTax
+- statusId (FK) many to one
+- paymentStatusId (FK) many to one
+
+// Status
+- id (PK)
+- name
+- one to many - order
+- one to many - invoice
+
+// Payment Status
+- id (PK)
+- name
+- one to many - invoice
+
+// Agent
+- id (PK)
+- firstName
+- lastName
+- profilePic
+- 1 to many - order

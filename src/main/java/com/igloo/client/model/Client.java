@@ -1,7 +1,5 @@
 package com.igloo.client.model;
 
-import com.igloo.region.model.Region;
-
 import javax.persistence.*;
 
 @Entity
@@ -40,17 +38,10 @@ public class Client {
     private Integer countryId;
 
     @Column
-    @OneToOne
     private Integer zipCode;
 
-    //TODO
-    @Column
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "client")
-    private Region region;
 
 //    @Column
-//     @OneToOne(fetch = FetchType.LAZY, mappedBy = "client")
-//    private Integer cityId;
-
-
+//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "client")
+//    private Region region;
 }

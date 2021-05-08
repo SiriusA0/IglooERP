@@ -14,8 +14,8 @@ public class user {
     // Favorites
 
     @Column
-    private List<Integer> favoriteAgents;
+    private String favoriteAgents;
 
     @Column
-    private List<Integer> favoriteClients;
+    private String favoriteClients;
 }
