@@ -17,11 +17,7 @@
 }
 /* Background */
 .bg_igloo {
-  background-image: url("../img/IglooBg.jpg");
-  height: 100vh;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-color: whitesmoke;
 }
 /* Input Search */
 .search {
@@ -56,4 +52,13 @@
   background-color: rgb(53, 58, 64, 0.7);
 
   color: whitesmoke;
+}
+/* Card */
+.agentForm {
+  background-color: rgb(255, 255, 255);
+  padding: 3rem;
+  border-radius: 1rem;
+}
+.agentCard {
+  background-color: rgb(255, 255, 255);
 }

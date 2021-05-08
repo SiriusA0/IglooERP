@@ -12,9 +12,6 @@ public class AgentServices {
     @Autowired
     private AgentRepository agentRepo;
 
-    public void create(String lastName,String firstName) {
-
-    }
     
     public List<Agent> get() {
 

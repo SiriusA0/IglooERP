@@ -6,24 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Index</title>
     <!-- Bootstrap & Jquery -->
-    <script src="/src/main/resources/static/bootstrap/js/jquery-3.6.0.min.js"></script>
-    <script src="/src/main/resources/static/bootstrap/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/src/main/resources/static/bootstrap/css/bootstrap.min.css" />
+    <script src="bootstrap/js/jquery-3.6.0.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/e22ea825df.js" crossorigin="anonymous"></script>
+    <!-- Libraries -->
+    <link rel="stylesheet" href="css/agent.css" />
+    <!-- Scripts -->
+    <script src="js/agents.js"></script>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Titillium+Web:wght@600&display=swap"
       rel="stylesheet"
     />
-    <!-- Libraries -->
-    <link rel="stylesheet" href="/src/main/resources/static/css/style.css" />
-    <link rel="stylesheet" href="/src/main/resources/static/css/agent.css" />
   </head>
-  <body class="bg_igloo">
+  <body class="bg_igloo" style="height: 100%; overflow: hidden">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="/"><i class="fas fa-igloo"></i></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <label class="nav-brand mr-5 mt-2" style="color: white; font-family: 'Titillium Web', sans-serif"
@@ -41,8 +53,7 @@
     </nav>
     <div class="container-fluid">
       <div class="row">
-        <!-- Lateral Menu -->
-        <div class="col-2 lateralMenu border-top" style="min-height: 95vh">
+        <div class="col-2 lateralMenu border-top">
           <div class="row mt-5">
             <div class="col">
               <h3 class="filterText pl-1">Sales Agents</h3>
@@ -98,7 +109,9 @@
           </div>
           <div class="row pt-4">
             <div class="col">
-              <button type="button" class="btn btn-addAgent btn-lg btn-block filterText">Add Agent</button>
+              <button type="button" onclick="addAgent()" class="btn btn-addAgent btn-lg btn-block filterText">
+                Add Agent
+              </button>
             </div>
           </div>
           <div class="row pt-4">
@@ -107,13 +120,48 @@
             </div>
           </div>
         </div>
-        <div class="col-10">
-          <div class="row" id="agentForm"></div>
-          <div class="row" id="agentList"></div>
+        <div class="col-10" style="overflow: auto; height: 1000px; width: fit-content">
+          <div class="row agentForm m-5" id="agentForm" style="display: none">
+            <div class="col-8">
+              <form>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" name="firstName" id="firstName" />
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control" name="lastName" id="lastName" />
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                  <label for="email">Email</label>
+                  <input type="text" class="form-control" id="email" placeholder="snowman@igloo.com" />
+                </div>
+                  <div class="form-group col-md-6">
+                  <label for="email">Profile Picture</label>
+                  <input type="text" class="form-control" id="profilePic" placeholder="https://robohash.org/quoasdfsdffsdsendain.png?size=250x250&set=set1" />
+                </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Confirm Adding</button>
+              </form>
+            </div>
+            <div class="4"></div>
+          </div>
+          <div class="row row-cols-1 row-cols-md-4 mr-5 mb-5 p-5">
+            <div th:each="agent:${agents}" class="col mb-4">
+              <div class="card h-90 w-80">
+                <img th:src="${agent.profilePic}" class="card-img-top" alt="..." />
+                <div class="card-body">
+                  <h5 th:text="${agent.firstName}+' '+${agent.lastName}" class="card-title"></h5>
+                  <p th:text="${agent.email}" class="card-text"></p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <!-- Lateral Menu -->
     </div>
   </body>
-  <script></script>
 </html>

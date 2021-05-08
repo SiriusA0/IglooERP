@@ -1,3 +1,13 @@
+// Add Agent Button
+function addAgent() {
+
+    if (document.querySelector("#agentForm").style.display == "none") {
+        document.querySelector("#agentForm").style.display = "";
+    } else {
+        document.querySelector("#agentForm").style.display = "none";
+    }
+
+}
 // Crear funcion fetch
 
 //onclick='load_client('#clientContainer')';

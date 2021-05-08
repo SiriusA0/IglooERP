@@ -15,74 +15,90 @@ public class Agent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="first_name")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name="last_name")
+    @Column(name = "last_name")
     private String lastName;
-    
-    @Column(name="profile_pic")
+
+    @Column
+    private String email;
+
+    @Column(name = "profile_pic")
     private String profilePic;
-    
-    @OneToMany(mappedBy="agent"/**, fetch = FetchType.EAGER**/)
+
+    @OneToMany(mappedBy = "agent"/**, fetch = FetchType.EAGER**/)
     private List<Order> orders = new LinkedList<Order>();
 
-	public Agent(String firstName, String lastName, String profilePic, List<Order> orders) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.profilePic = profilePic;
-		this.orders = orders;
-	}
+    public Agent() {
 
-	public Agent(int id, String firstName, String lastName, String profilePic, List<Order> orders) {
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.profilePic = profilePic;
-		this.orders = orders;
-	}
+    }
 
-	public int getId() {
-		return id;
-	}
+    public Agent(String firstName, String lastName, String email, String profilePic, List<Order> orders) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.profilePic = profilePic;
+        this.orders = orders;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    }
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public Agent(int id, String firstName, String lastName, String email, String profilePic, List<Order> orders) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.profilePic = profilePic;
+        this.orders = orders;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public String getProfilePic() {
-		return profilePic;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public void setProfilePic(String profilePic) {
-		this.profilePic = profilePic;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public List<Order> getOrders() {
-		return orders;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
-	}
-	
-	
-    
-    
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+
 }
