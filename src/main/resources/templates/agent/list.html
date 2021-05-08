@@ -6,18 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Index</title>
     <!-- Bootstrap & Jquery -->
-    <script src="bootstrap/js/jquery-3.6.0.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <script src="/src/main/resources/static/bootstrap/js/jquery-3.6.0.min.js"></script>
+    <script src="/src/main/resources/static/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/src/main/resources/static/bootstrap/css/bootstrap.min.css" />
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/e22ea825df.js" crossorigin="anonymous"></script>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Titillium+Web:wght@600&display=swap"
+      rel="stylesheet"
+    />
     <!-- Libraries -->
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/css/style.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/css/agent.css" />
   </head>
-  <body>
+  <body class="bg_igloo">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="/"><i class="fas fa-igloo"></i></a>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -38,73 +42,77 @@
     <div class="container-fluid">
       <div class="row">
         <!-- Lateral Menu -->
-        <div class="col-2 bg-dark border-top">
+        <div class="col-2 lateralMenu border-top" style="min-height: 95vh">
           <div class="row mt-5">
             <div class="col">
-              <h3 class="text-light">Agents</h3>
+              <h3 class="filterText pl-1">Sales Agents</h3>
             </div>
           </div>
-          <div class="row mt-2">
+          <div class="row mt-4">
             <div class="col">
               <div class="input-group">
-                <input type="text" class="form-control" />
+                <input type="text" class="form-control search filterText" />
               </div>
             </div>
           </div>
           <div class="row mt-2">
+            <div class="col d-flex justify-content-between">
+              <small class="filterText ml-1">Find agents by name</small>
+              <button type="button" class="btn btn-sm btn-search filterText">Search</button>
+            </div>
+          </div>
+          <div class="row mt-3 mb-3 pl-3">
+            <div class="col-2">
+              <i type="button" class="fas fa-star filterIcons"></i>
+            </div>
+            <div class="filterText col-10">Favorites</div>
+          </div>
+          <div class="row mt-3 mb-3 pl-3">
+            <div class="col-2">
+              <i type="button" class="fas fa-sort-numeric-up filterIcons"></i>
+            </div>
+            <div class="filterText col-10">Order by ID (Asc)</div>
+          </div>
+          <div class="row mt-3 mb-3 pl-3">
+            <div class="col-2">
+              <i type="button" class="fas fa-sort-numeric-down filterIcons"></i>
+            </div>
+            <div class="filterText col-10">Order by ID (Des)</div>
+          </div>
+          <div class="row mt-3 mb-3 pl-3">
+            <div class="col-2">
+              <i type="button" class="fas fa-sort-alpha-down filterIcons"></i>
+            </div>
+            <div class="filterText col-10">Order by Last Name (Asc)</div>
+          </div>
+          <div class="row mt-3 mb-3 pl-3">
+            <div class="col-2">
+              <i type="button" class="fas fa-sort-alpha-up filterIcons"></i>
+            </div>
+            <div class="filterText col-10">Order by Last Name (Des)</div>
+          </div>
+          <div class="row">
             <div class="col">
-              <button type="button" class="btn btn-light">Search</button>
+              <hr />
             </div>
           </div>
-          <div class="row mt-2 mb-2">
-            <div class="col-3">
-              <i class="fas fa-star"></i>
-            </div>
-            <div class="col-3">
-              <i class="fas fa-filter"></i>
-            </div>
-            <div class="col-3">
-              <i class="far fa-arrow-alt-circle-down"></i>
-            </div>
-            <div class="col-3">
-              <i class="far fa-arrow-alt-circle-up"></i>
-            </div>
-          </div>
-          <div class="row mt-4 mb-4 d-flex justify-content-center">
-            <div class="col-6">
-              <button type="button" class="btn btn-block btn-success">Add</button>
-            </div>
-            <div class="col-6">
-              <button type="button" class="btn btn-block btn-danger">Delete</button>
-            </div>
-          </div>
-          <div class="row mt-5">
+          <div class="row pt-4">
             <div class="col">
-              <hr>
+              <button type="button" class="btn btn-addAgent btn-lg btn-block filterText">Add Agent</button>
             </div>
           </div>
-          <div class="row mt-5">
+          <div class="row pt-4">
             <div class="col">
-              <h3 class="text-light">Configuration</h3>
-            </div>
-          </div>
-		  <div class="row mt-5">
-            <div class="col">
-              <h5 class="text-light">Activities</h5>
-            </div>
-          </div>
-		  <div class="row mt-5">
-            <div class="col">
-              <h5 class="text-light">Statuses</h5>
+              <button type="button" class="btn btn-delAgent btn-lg btn-block filterText">Delete Agent</button>
             </div>
           </div>
         </div>
-        <!-- Lateral Menu -->
         <div class="col-10">
           <div class="row" id="agentForm"></div>
           <div class="row" id="agentList"></div>
         </div>
       </div>
+      <!-- Lateral Menu -->
     </div>
   </body>
   <script></script>

@@ -1,0 +1,59 @@
+/* Filter Icons */
+.filterIcons {
+  color: whitesmoke;
+  font-size: 1.5rem;
+}
+.filterIcons:hover {
+  color: #59bec9;
+}
+/* Filter Text */
+.filterText {
+  color: whitesmoke;
+  font-family: "Titillium Web", sans-serif;
+}
+/* Lateral Menu */
+.lateralMenu {
+  background-color: rgb(53, 58, 64, 0.6);
+}
+/* Background */
+.bg_igloo {
+  background-image: url("../img/IglooBg.jpg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+/* Input Search */
+.search {
+  background-color: rgb(53, 58, 64, 0.2);
+  color: whitesmoke;
+  font-family: "Titillium Web", sans-serif;
+}
+.search:focus {
+  background-color: rgb(53, 58, 64, 0.4);
+  color: whitesmoke;
+  font-family: "Titillium Web", sans-serif;
+}
+/* Add Agent Button */
+.btn-addAgent {
+  background-color: #59bec9;
+  color: whitesmoke;
+}
+/* Delete Agent Button */
+.btn-delAgent {
+  background-color: transparent;
+  border: solid 0.15rem #59bec9;
+  color: whitesmoke;
+}
+/* Search Agent Button */
+.btn-search {
+  background-color: transparent;
+  border: solid 0.1rem whitesmoke;
+  color: whitesmoke;
+  width: 6rem;
+}
+.btn-search:hover {
+  background-color: rgb(53, 58, 64, 0.7);
+
+  color: whitesmoke;
+}
