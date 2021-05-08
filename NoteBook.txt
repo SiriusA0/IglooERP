@@ -7,7 +7,10 @@
         4.  Darle vida al buscador, filtros, sorts...
         5.  Incluir borrado en todas las paginas.
 
-// User
+-------------------------------------
+1. Comprobar tipo de campo de "fav_agents" y "fav_clients" en "users".
+2. ¿Hacer tabla "roles"?
+// User ----------------------
 - id (PK)
 - firstName
 - lastName
@@ -59,11 +62,11 @@
 - name
 - many to 1 - region
 
-// Category
+// Category -----------------------------
 - id (PK)
 - name
 
-// Order
+// Order  -----------------------
 - id (PK)
 - creationDate
 - totalAmount
@@ -71,7 +74,7 @@
 - agentId (FK) many to one
 - statusId (FK) many to one
 
-// Invoice
+// Invoice ----------------------
 - id (PK)
 - clientId (FK) many to one
 - creationDate 
@@ -81,13 +84,13 @@
 - statusId (FK) many to one
 - paymentStatusId (FK) many to one
 
-// Status
+// Status ---------------------------
 - id (PK)
 - name
 - one to many - order
 - one to many - invoice
 
-// Payment Status
+// Payment Status -------------------------
 - id (PK)
 - name
 - one to many - invoice

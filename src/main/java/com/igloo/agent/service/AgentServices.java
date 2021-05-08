@@ -14,9 +14,6 @@ public class AgentServices {
 
     public void create(String lastName,String firstName) {
 
-    	Agent agent = new Agent(firstName, lastName);
-    	
-        agentRepo.save(agent);
     }
     
     public List<Agent> get() {
