@@ -17,9 +17,6 @@ public interface AgentRepository extends JpaRepository<Agent, Integer> {
     List<Agent> findAllByOrderByIdAsc();
     List<Agent> findAllByOrderByIdDesc();
 
-
-
-
 }
 
 

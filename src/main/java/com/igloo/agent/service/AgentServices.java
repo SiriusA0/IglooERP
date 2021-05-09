@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.igloo.agent.model.Agent;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 public class AgentServices {
@@ -42,4 +43,25 @@ public class AgentServices {
 
         return agentRepo.findAllByOrderByIdDesc();
     }
+
+    public Agent add(String firstName, String lastName, String email, String profilePic) {
+        Agent agent = new Agent();
+        agent.setFirstName(firstName);
+        agent.setLastName(lastName);
+        agent.setEmail(email);
+        agent.setProfilePic(profilePic);
+        agentRepo.save(agent);
+        return agent;
+    }
+
+    public void delete(String idtodelete) {
+
+        String idArray[] = idtodelete.split(",");
+        for (String i : idArray){
+            int id = Integer.valueOf(i);
+            agentRepo.deleteById(id);
+        }
+
+    }
+
 }

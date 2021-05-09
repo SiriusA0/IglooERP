@@ -55,38 +55,52 @@ public class AgentController {
 //        return "agent/detail";
 //    }
 
+
     @GetMapping("/api/agent/search")
     @ResponseBody
     public List<Agent> find_API(@RequestParam String searchTerm) {
         return agentServ.search(searchTerm);
     }
+
+    @GetMapping("/api/agent/add")
+    @ResponseBody
+    public Agent add_API(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String profilePic) {
+
+        return agentServ.add(firstName, lastName, email, profilePic);
+    }
+
+    @GetMapping("/api/agent/delete")
+    @ResponseBody
+    public List<Agent> delete_API(@RequestParam String idtodelete) {
+
+        agentServ.delete(idtodelete);
+        return agentServ.get();
+    }
+
     @GetMapping("/api/agent/orderbylastnameasc")
     @ResponseBody
     public List<Agent> ascLastName_API() {
         return agentServ.ascLastName();
     }
+
     @GetMapping("/api/agent/orderbylastnamedesc")
     @ResponseBody
     public List<Agent> descLastName_API() {
         return agentServ.descLastName();
     }
+
     @GetMapping("/api/agent/orderbyidasc")
     @ResponseBody
     public List<Agent> ascId_API() {
         return agentServ.ascId();
     }
+
     @GetMapping("/api/agent/orderbyiddesc")
     @ResponseBody
     public List<Agent> descId_API() {
         return agentServ.descId();
     }
 
-    @GetMapping("/api/agent/{agent_id}")
-    @ResponseBody
-    public Agent findById_API(@PathVariable int agent_id) {
-
-        return null;
-    }
 
 }
 

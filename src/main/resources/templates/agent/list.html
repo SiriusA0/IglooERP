@@ -148,7 +148,7 @@
           </div>
           <div class="row pt-4">
             <div class="col">
-              <button type="button" class="btn btn-delAgent btn-lg btn-block filterText">Delete Agent</button>
+              <button type="button" onclick="deleteAgents()" class="btn btn-delAgent btn-lg btn-block filterText">Delete Agent</button>
             </div>
           </div>
         </div>
@@ -169,7 +169,7 @@
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="email">Email</label>
-                    <input type="text" class="form-control" id="email" placeholder="snowman@igloo.com" />
+                    <input type="text" class="form-control" name="email" id="email" placeholder="snowman@igloo.com" />
                   </div>
                   <div class="form-group col-md-6">
                     <label for="email">Profile Picture</label>
@@ -177,11 +177,23 @@
                       type="text"
                       class="form-control"
                       id="profilePic"
+                      name="profilePic"
                       placeholder="https://robohash.org/quoasdfsdffsdsendain.png?size=250x250&set=set1"
                     />
                   </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Confirm Adding</button>
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <button type="button" onclick="createAgent()" class="btn btn-block btn-addAgent filterText">
+                      Create
+                    </button>
+                  </div>
+                  <div class="form-group col-md-10">
+                    <div class="alert alert-info" role="alert" style="display: none" id="successAlert">
+                      Agent successfully added
+                    </div>
+                  </div>
+                </div>
               </form>
             </div>
             <div class="4"></div>
@@ -194,14 +206,20 @@
                     <i type="button" class="far fa-star cardIcon"></i>
                   </div>
                   <div class="col-3">
-                    <i type="button" class="fas fa-trash-alt d-flex justify-content-end cardIcon"></i>
+                    <i type="button" onclick="selectForDelete(event)" class="fas fa-trash-alt d-flex justify-content-end cardIcon"></i>
                   </div>
                 </div>
-
                 <div class="row">
                   <img th:src="${agent.profilePic}" class="card-img-top" />
                   <div class="card-body">
-                    <h5 th:text="${agent.firstName}+' '+${agent.lastName}" class="card-title"></h5>
+                    <div class="row">
+                      <div class="col-8">
+                        <h5 th:text="${agent.firstName}+' '+${agent.lastName}" class="card-title"></h5>
+                      </div>
+                      <div class="col-4">
+                        <h5 th:text="'#00'+${agent.id}" class="card-title cardId"></h5>
+                      </div>
+                    </div>
                     <p th:text="${agent.email}" class="card-text"></p>
                   </div>
                 </div>
