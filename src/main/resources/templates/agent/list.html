@@ -134,6 +134,7 @@
               <label for="lastNameAgentDesc" class="filterText">Order by Last Name (Des)</label>
             </div>
           </div>
+
           <div class="row">
             <div class="col">
               <hr />
@@ -148,7 +149,9 @@
           </div>
           <div class="row pt-4">
             <div class="col">
-              <button type="button" onclick="deleteAgents()" class="btn btn-delAgent btn-lg btn-block filterText">Delete Agent</button>
+              <button type="button" onclick="deleteAgents()" class="btn btn-delAgent btn-lg btn-block filterText">
+                Delete Agent
+              </button>
             </div>
           </div>
         </div>
@@ -206,21 +209,29 @@
                     <i type="button" class="far fa-star cardIcon"></i>
                   </div>
                   <div class="col-3">
-                    <i type="button" onclick="selectForDelete(event)" class="fas fa-trash-alt d-flex justify-content-end cardIcon"></i>
+                    <i
+                      type="button"
+                      onclick="selectForDelete(event)"
+                      class="fas fa-trash-alt d-flex justify-content-end cardIcon"
+                    ></i>
                   </div>
                 </div>
                 <div class="row">
-                  <img th:src="${agent.profilePic}" class="card-img-top" />
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-8">
-                        <h5 th:text="${agent.firstName}+' '+${agent.lastName}" class="card-title"></h5>
-                      </div>
-                      <div class="col-4">
-                        <h5 th:text="'#00'+${agent.id}" class="card-title cardId"></h5>
-                      </div>
+                  <div class="col">
+                    <div style="height: 348px; margin: 0 15px; display: flex; align-items: center">
+                      <img th:src="${agent.profilePic}" class="card-img-top" />
                     </div>
-                    <p th:text="${agent.email}" class="card-text"></p>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-8">
+                          <h5 th:text="${agent.firstName}+' '+${agent.lastName}" class="card-title"></h5>
+                        </div>
+                        <div class="col-4">
+                          <h5 th:text="'#00'+${agent.id}" class="card-title cardId"></h5>
+                        </div>
+                      </div>
+                      <p th:text="${agent.email}" class="card-text"></p>
+                    </div>
                   </div>
                 </div>
               </div>
