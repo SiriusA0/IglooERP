@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings</title>
+    <!-- Bootstrap & Jquery -->
+
+    <script src="/src/main/resources/static/bootstrap/js/jquery-3.6.0.min.js"></script>
+    <script src="/src/main/resources/static/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/src/main/resources/static/bootstrap/css/bootstrap.min.css" />
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/e22ea825df.js" crossorigin="anonymous"></script>
+    <!-- Libraries -->
+    <link rel="stylesheet" href="/src/main/resources/static/css/igloo.css" />
+    <!-- Scripts -->
+    <script rel="stylesheet" href="/src/main/resources/static/js/settings.js"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Titillium+Web:wght@600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg_igloo" style="height: 100%; overflow: hidden">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="/"><i class="fas fa-igloo"></i></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <label class="nav-brand mr-5 mt-2" style="color: white; font-family: 'Titillium Web', sans-serif"
+            ><b>Settings</b></label
+          >
+          <li role="button" onclick="window.location.href='/agent'" class="nav-item">
+            <span class="nav-link">Agents</span>
+          </li>
+          <li role="button" onclick="window.location.href='/client'" class="nav-item">
+            <span class="nav-link">Clients</span>
+          </li>
+          <li role="button" onclick="window.location.href='/order'" class="nav-item">
+            <span class="nav-link">Orders</span>
+          </li>
+          <li role="button" onclick="window.location.href='/invoice'" class="nav-item">
+            <span class="nav-link">Billing</span>
+          </li>
+          <li role="button" onclick="window.location.href='/settings'" class="nav-item">
+            <span class="nav-link">Settings</span>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><i style="color: white" class="fas fa-snowman"></i></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-2 lateralMenu border-top pb-5">
+          <div class="row mt-5">
+            <div class="col">
+              <h3 class="filterText pl-1">Settings</h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <hr />
+            </div>
+          </div>
+            <!-- Show user button -->
+            <div class="row pt-4">
+                <div class="col">
+                  <button type="button" onclick="showUser()" class="btn btn-add btn-lg btn-block filterText">
+                    User Data
+                  </button>
+                </div>
+              </div>
+          <!-- Show countries button -->
+          <div class="row pt-4">
+            <div class="col">
+              <button type="button" onclick="showCountry()" class="btn btn-add btn-lg btn-block filterText">
+                Countries
+              </button>
+            </div>
+          </div>
+          <!-- Show regions button -->
+          <div class="row pt-4">
+            <div class="col">
+              <button type="button" onclick="showRegion()" class="btn btn-add btn-lg btn-block filterText">
+                Regions
+              </button>
+            </div>
+          </div>
+          <!-- Show cities button -->
+          <div class="row pt-4">
+            <div class="col">
+              <button type="button" onclick="showCity()" class="btn btn-add btn-lg btn-block filterText">
+                Cities
+              </button>
+            </div>
+          </div>
+          <!-- Show sectors button -->
+          <div class="row pt-4">
+            <div class="col">
+              <button type="button" onclick="showSector()" class="btn btn-add btn-lg btn-block filterText">
+                Sectors
+              </button>
+            </div>
+          </div>
+          <!-- Show statuses button -->
+          <div class="row pt-4">
+            <div class="col">
+              <button type="button" onclick="showStatus()" class="btn btn-add btn-lg btn-block filterText">
+                Statuses
+              </button>
+            </div>
+          </div>
+          <!-- Show payment statuses button -->
+          <div class="row pt-4">
+            <div class="col">
+              <button type="button" onclick="showPaymentStatus()" class="btn btn-add btn-lg btn-block filterText">
+                Payment Statuses
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
