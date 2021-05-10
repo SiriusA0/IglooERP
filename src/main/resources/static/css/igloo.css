@@ -19,6 +19,10 @@
   color: whitesmoke;
   font-family: "Titillium Web", sans-serif;
 }
+.filterTextDark {
+  color: black;
+  font-family: "Titillium Web", sans-serif;
+}
 
 /* Input Search */
 .search {

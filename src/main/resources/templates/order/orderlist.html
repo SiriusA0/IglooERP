@@ -4,16 +4,17 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index</title>
+    <title>Orders</title>
     <!-- Bootstrap & Jquery -->
-    <script src="bootstrap/js/jquery-3.6.0.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+
+    <script src="/src/main/resources/static/bootstrap/js/jquery-3.6.0.min.js"></script>
+    <script src="/src/main/resources/static/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/src/main/resources/static/bootstrap/css/bootstrap.min.css" />
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/e22ea825df.js" crossorigin="anonymous"></script>
     <!-- Libraries -->
-    <link rel="stylesheet" href="css/igloo.css" />
-    <link rel="stylesheet" href="css/orders.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/css/igloo.css" />
+
     <!-- Scripts -->
     <script src="js/orders.js"></script>
     <!-- Fonts -->
@@ -54,6 +55,9 @@
           <li role="button" onclick="window.location.href='/invoice'" class="nav-item">
             <span class="nav-link">Billing</span>
           </li>
+          <li role="button" onclick="window.location.href='/settings'" class="nav-item">
+            <span class="nav-link">Settings</span>
+          </li>
         </ul>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item"><i style="color: white" class="fas fa-snowman"></i></li>
@@ -65,7 +69,7 @@
         <div class="col-2 lateralMenu border-top">
           <div class="row mt-5">
             <div class="col">
-              <h3 class="filterText pl-1">Invoices</h3>
+              <h3 class="filterText pl-1">Orders</h3>
             </div>
           </div>
           <div>
@@ -252,22 +256,38 @@
               <table class="table table-hover">
                 <thead class="thead-dark">
                   <tr>
+                    <th scope="col"></th>
                     <th scope="col">Ref</th>
                     <th scope="col">Creation date</th>
                     <th scope="col">Client</th>
                     <th scope="col">Agent</th>
                     <th scope="col">Total amount</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr th:each="order : ${orders}">
-                    <th th:text="${order.id}" scope="row"></th>
-                    <th th:text="${order.creationDate}"></th>
-                    <th th:text="${order.clientId}"></th>
-                    <th th:text="${order.agentId}"></th>
-                    <th th:text="${order.totalAmount}"></th>
-                    <th th:text="${order.statusId}"></th>
+                    <td><input type="checkbox" /></td>
+                    <td class="filterTextDark" th:text="${order.id}" scope="row">REF0000</td>
+                    <td class="filterTextDark" th:text="${order.creationDate}">2021/5/21</td>
+                    <td class="filterTextDark" th:text="${order.clientId}">0</td>
+                    <td class="filterTextDark" th:text="${order.agentId}">0</td>
+                    <td class="filterTextDark" th:text="${order.totalAmount}">100000</td>
+                    <td class="filterTextDark" th:text="${order.statusId}">0</td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <button type="button" onclick="orderFav()" class="btn btn-secondary">
+                          <i class="far fa-star"></i>
+                        </button>
+                        <button type="button" onclick="orderEdit()" class="btn btn-secondary">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button type="button" onclick="orderDelete()" class="btn btn-secondary">
+                          <i class="fas fa-trash-alt"></i>
+                        </button>
+                      </div>
+                    </td>
                   </tr>
                 </tbody>
               </table>

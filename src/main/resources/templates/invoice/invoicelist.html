@@ -4,17 +4,19 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index</title>
+    <title>Invoices</title>
     <!-- Bootstrap & Jquery -->
-    <script src="bootstrap/js/jquery-3.6.0.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+
+    <script src="/src/main/resources/static/bootstrap/js/jquery-3.6.0.min.js"></script>
+    <script src="/src/main/resources/static/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/src/main/resources/static/bootstrap/css/bootstrap.min.css" />
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/e22ea825df.js" crossorigin="anonymous"></script>
     <!-- Libraries -->
-    <link rel="stylesheet" href="css/agent.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/css/igloo.css" />
+
     <!-- Scripts -->
-    <script src="js/agents.js"></script>
+    <script src="js/invoices.js"></script>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -39,7 +41,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <label class="nav-brand mr-5 mt-2" style="color: white; font-family: 'Titillium Web', sans-serif"
-            ><b>Human Resources</b></label
+            ><b>Billing / Invoices</b></label
           >
           <li role="button" onclick="window.location.href='/agent'" class="nav-item">
             <span class="nav-link">Agents</span>
@@ -64,25 +66,37 @@
     </nav>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-2 lateralMenu border-top">
+        <div class="col-2 lateralMenu binvoice-top">
           <div class="row mt-5">
             <div class="col">
-              <h3 class="filterText pl-1">Sales Agents</h3>
+              <h3 class="filterText pl-1">Invoices</h3>
             </div>
           </div>
-          <div class="row mt-4">
-            <div class="col">
-              <div class="input-group">
-                <input onkeyup="searchAgent()" type="text" id="searchTerm" class="form-control search filterText" />
+          <div>
+            <div class="row mt-4">
+              <div class="col">
+                <div class="input-group">
+                  <input
+                    onkeyup="searchInvoiceByClient()"
+                    type="text"
+                    id="searchTerm"
+                    class="form-control search filterText"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          <div class="row mt-2">
-            <div class="col d-flex justify-content-between">
-              <small class="filterText ml-1">Find agents by name</small>
-              <button type="button" name="searchTerm" onclick="searchAgent()" class="btn btn-sm btn-search filterText">
-                Search
-              </button>
+            <div class="row mt-2">
+              <div class="col d-flex justify-content-between">
+                <small class="filterText ml-1">Find Invoices by clients</small>
+                <button
+                  type="button"
+                  name="searchTerm"
+                  onclick="searchInvoiceByClient()"
+                  class="btn btn-sm btn-search filterText"
+                >
+                  Search
+                </button>
+              </div>
             </div>
           </div>
           <div class="row mt-3 mb-3 pl-3">
@@ -96,56 +110,55 @@
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="idAgentAsc()"
-                id="idAgentAsc"
+                onclick="idInvoiceAsc()"
+                id="idInvoiceAsc"
                 type="button"
                 class="fas fa-sort-numeric-up-alt filterIcons"
               ></i>
             </div>
             <div class="col-10">
-              <label for="idAgentAsc" class="filterText">Order by ID (Asc)</label>
+              <label for="idInvoiceAsc" class="filterText">Invoice by Ref (Asc)</label>
             </div>
           </div>
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="idAgentDesc()"
-                id="idAgentDesc"
+                onclick="idInvoiceDesc()"
+                id="idInvoiceDesc"
                 type="button"
                 class="fas fa-sort-numeric-down-alt filterIcons"
               ></i>
             </div>
             <div class="col-10">
-              <label for="idAgentDesc" class="filterText">Order by ID (Des)</label>
+              <label for="idInvoiceDesc" class="filterText">Invoice by Ref (Des)</label>
             </div>
           </div>
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="lastNameAgentAsc()"
-                id="lastNameAgentAsc"
+                onclick="amountInvoiceAsc()"
+                id="amountInvoiceAsc"
                 type="button"
                 class="fas fa-sort-alpha-up-alt filterIcons"
               ></i>
             </div>
             <div class="col-10">
-              <label for="lastNameAgentAsc" class="filterText">Order by Last Name (Asc)</label>
+              <label for="amountInvoiceAsc" class="filterText">Invoice by Amount (Asc)</label>
             </div>
           </div>
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="lastNameAgentDesc()"
-                id="lastNameAgentDesc"
+                onclick="amountInvoiceDesc()"
+                id="amountInvoiceDesc"
                 type="button"
                 class="fas fa-sort-alpha-down-alt filterIcons"
               ></i>
             </div>
             <div class="col-10">
-              <label for="lastNameAgentDesc" class="filterText">Order by Last Name (Des)</label>
+              <label for="amountInvoiceDesc" class="filterText">Invoice by Amount (Des)</label>
             </div>
           </div>
-
           <div class="row">
             <div class="col">
               <hr />
@@ -153,22 +166,23 @@
           </div>
           <div class="row pt-4">
             <div class="col">
-              <button type="button" onclick="addAgent()" class="btn btn-addAgent btn-lg btn-block filterText">
-                Add Agent
+              <button type="button" onclick="addInvoice()" class="btn btn-add btn-lg btn-block filterText">
+                Add Invoice
               </button>
             </div>
           </div>
           <div class="row pt-4">
             <div class="col">
-              <button type="button" onclick="deleteAgents()" class="btn btn-delAgent btn-lg btn-block filterText">
-                Delete Agent
+              <button type="button" onclick="deleteInvoices()" class="btn btn-del btn-lg btn-block filterText">
+                Delete Selected Invoices
               </button>
             </div>
           </div>
         </div>
         <div class="col-10" style="overflow: auto; height: 1000px; width: fit-content">
-          <div class="row agentForm m-5" id="agentForm" style="display: none">
-            <div class="col-8">
+          <!-- Invoice Form INI -->
+          <div class="row invoiceForm m-5" id="invoiceForm" style="display: none">
+            <div class="col">
               <form>
                 <div class="form-row">
                   <div class="form-group col-md-6">
@@ -198,54 +212,64 @@
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-2">
-                    <button type="button" onclick="createAgent()" class="btn btn-block btn-addAgent filterText">
+                    <button type="button" onclick="createInvoice()" class="btn btn-block btn-addInvoice filterText">
                       Create
                     </button>
                   </div>
                   <div class="form-group col-md-10">
                     <div class="alert alert-info" role="alert" style="display: none" id="successAlert">
-                      Agent successfully added
+                      Invoice successfully added
                     </div>
                   </div>
                 </div>
               </form>
             </div>
-            <div class="4"></div>
           </div>
-          <div class="row row-cols-1 row-cols-md-4 mr-5 mb-5 p-5" id="agentsContainer">
-            <div th:each="agent:${agents}" class="col mb-4">
-              <div class="card h-90 w-80">
-                <div class="row pt-2 pl-2 pr-2 d-flex justify-content-between">
-                  <div class="col-3">
-                    <i type="button" class="far fa-star cardIcon"></i>
-                  </div>
-                  <div class="col-3">
-                    <i
-                      type="button"
-                      onclick="selectForDelete(event)"
-                      class="fas fa-trash-alt d-flex justify-content-end cardIcon"
-                    ></i>
-                  </div>
-                </div>
-                <div class="row" id="infernalRow">
-                  <div class="col">
-                    <div class="agentProfilePic">
-                      <img th:src="${agent.profilePic}" class="card-img-top" />
-                    </div>
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col-8">
-                          <h5 th:text="${agent.firstName}+' '+${agent.lastName}" class="card-title"></h5>
-                        </div>
-                        <div class="col-4">
-                          <h5 th:text="'#00'+${agent.id}" class="card-title cardId"></h5>
-                        </div>
+          <!-- Invoice Form END -->
+          <div class="row invoiceTable m-5" id="invoiceTable">
+            <div class="col">
+              <table class="table table-hover">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Ref</th>
+                    <th scope="col">Creation date</th>
+                    <th scope="col">Due date</th>
+                    <th scope="col">Sectors</th>
+                    <th scope="col">Pre tax amount</th>
+                    <th scope="col">Total amount</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Payment status</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="invoice : ${invoices}">
+                    <td><input type="checkbox" /></td>
+                    <td class="filterTextDark" th:text="${invoice.id}" scope="row">REF0000</td>
+                    <td class="filterTextDark" th:text="${invoice.creationDate}">2021/5/20</td>
+                    <td class="filterTextDark" th:text="${invoice.dueDate}">2021/5/21</td>
+                    <td class="filterTextDark" th:text="${invoice.sectorId}">0</td>
+                    <td class="filterTextDark" th:text="${invoice.preTax}">10000</td>
+                    <td class="filterTextDark" th:text="${invoice.afterTax}">12000</td>
+                    <td class="filterTextDark" th:text="${invoice.statusId}">0</td>
+                    <td class="filterTextDark" th:text="${invoice.paymentStatusId}">0</td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <button type="button" onclick="invoiceFav()" class="btn btn-secondary">
+                          <i class="far fa-star"></i>
+                        </button>
+                        <button type="button" onclick="invoiceEdit()" class="btn btn-secondary">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button type="button" onclick="invoiceDelete()" class="btn btn-secondary">
+                          <i class="fas fa-trash-alt"></i>
+                        </button>
                       </div>
-                      <p th:text="${agent.email}" class="card-text"></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
