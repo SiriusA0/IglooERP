@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.igloo.sector.model.Sector;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.igloo.agent.model.Agent;
@@ -18,96 +19,107 @@ import com.igloo.client.model.Client;
 import com.igloo.status.model.Status;
 
 @Entity
-@Table(name="orders")
+@Table(name = "orders")
 public class Order {
-	
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
+
     @Column(name = "creation_date", columnDefinition = "DATE")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date creationDate;
-    
-    @Column(name="total_amount")
+
+    @Column(name = "total_amount")
     private Double totalAmount;
-    
+
     @ManyToOne
-    @JoinColumn(name="client_id")
+    @JoinColumn(name = "client_id")
     private Client client;
-    
+
     @ManyToOne
-    @JoinColumn(name="agent_id")
+    @JoinColumn(name = "agent_id")
     private Agent agent;
-    
+
     @ManyToOne
-    @JoinColumn(name="status_id")
+    @JoinColumn(name = "status_id")
     private Status status;
 
-	public Order(Date creationDate, Double totalAmount, Client client, Agent agent, Status status) {
-		this.creationDate = creationDate;
-		this.totalAmount = totalAmount;
-		this.client = client;
-		this.agent = agent;
-		this.status = status;
-	}
+    @ManyToOne
+    @JoinColumn(name = "sector_id")
+    private Sector sector;
 
-	public Order(int id, Date creationDate, Double totalAmount, Client client, Agent agent, Status status) {
-		this.id = id;
-		this.creationDate = creationDate;
-		this.totalAmount = totalAmount;
-		this.client = client;
-		this.agent = agent;
-		this.status = status;
-	}
+    public Order(Date creationDate, Double totalAmount, Client client, Agent agent, Status status, Sector sector) {
+        this.creationDate = creationDate;
+        this.totalAmount = totalAmount;
+        this.client = client;
+        this.agent = agent;
+        this.status = status;
+        this.sector = sector;
+    }
 
-	public int getId() {
-		return id;
-	}
+    public Order(int id, Date creationDate, Double totalAmount, Client client, Agent agent, Status status, Sector sector) {
+        this.id = id;
+        this.creationDate = creationDate;
+        this.totalAmount = totalAmount;
+        this.client = client;
+        this.agent = agent;
+        this.status = status;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public Date getCreationDate() {
-		return creationDate;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
+    public Date getCreationDate() {
+        return creationDate;
+    }
 
-	public Double getTotalAmount() {
-		return totalAmount;
-	}
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
 
-	public void setTotalAmount(Double totalAmount) {
-		this.totalAmount = totalAmount;
-	}
+    public Double getTotalAmount() {
+        return totalAmount;
+    }
 
-	public Client getClient() {
-		return client;
-	}
+    public void setTotalAmount(Double totalAmount) {
+        this.totalAmount = totalAmount;
+    }
 
-	public void setClient(Client client) {
-		this.client = client;
-	}
+    public Client getClient() {
+        return client;
+    }
 
-	public Agent getAgent() {
-		return agent;
-	}
+    public void setClient(Client client) {
+        this.client = client;
+    }
 
-	public void setAgent(Agent agent) {
-		this.agent = agent;
-	}
+    public Agent getAgent() {
+        return agent;
+    }
 
-	public Status getStatus() {
-		return status;
-	}
+    public void setAgent(Agent agent) {
+        this.agent = agent;
+    }
 
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-    
-    
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Sector getSector() {
+        return sector;
+    }
+
+    public void setSector(Sector sector) {
+        this.sector = sector;
+    }
 }

@@ -72,12 +72,12 @@ function deleteAgents() {
     var urlFinal = server_url + '/api/agent/delete?' + "idtodelete=" + agentsSelected.join(',');
 
     fetch(urlFinal)
-    .then(r => r.json())
-    .then(agents => {
-        cleanList();
-        fillList(agents);
-        agentsSelected.splice(0,agentsSelected.length);
-    });
+        .then(r => r.json())
+        .then(agents => {
+            cleanList();
+            fillList(agents);
+            agentsSelected.splice(0, agentsSelected.length);
+        });
 }
 // Search Agent Button
 function searchAgent() {
@@ -175,17 +175,17 @@ function fillList(agents) {
         favContainer.className = "col-3";
 
         var favIcon = document.createElement("i");
-        favIcon.setAttribute("type","button");
+        favIcon.setAttribute("type", "button");
         favIcon.className = "far fa-star cardIcon";
 
         var binContainer = document.createElement("div");
         binContainer.className = "col-3";
 
         var binIcon = document.createElement("i");
-        binIcon.setAttribute("type","button");
+        binIcon.setAttribute("type", "button");
         binIcon.className = "fas fa-trash-alt d-flex justify-content-end cardIcon";
-        binIcon.addEventListener("click",function (event) {selectForDelete(event)});
-      
+        binIcon.addEventListener("click", function (event) { selectForDelete(event) });
+
         // Appends
 
         favContainer.appendChild(favIcon);
@@ -197,6 +197,12 @@ function fillList(agents) {
 
         var cardContent = document.createElement("div");
         cardContent.className = "row";
+
+        var cardContentCol = document.createElement("div");
+        cardContentCol.className = "col";
+
+        var containerImg = document.createElement("div");
+        containerImg.className = "agentProfilePic";
 
         var cardImg = document.createElement("img");
         cardImg.className = "card-img-top";
@@ -239,8 +245,11 @@ function fillList(agents) {
 
         cardBody.appendChild(cardEmail);
 
-        cardContent.appendChild(cardImg);
-        cardContent.appendChild(cardBody);
+        containerImg.appendChild(cardImg);
+        cardContentCol.appendChild(containerImg);
+        cardContentCol.appendChild(cardBody);
+
+        cardContent.appendChild(cardContentCol);
 
         // Agent Card Appends
 

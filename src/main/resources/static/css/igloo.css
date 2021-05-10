@@ -1,3 +1,11 @@
+/* Lateral Menu */
+.lateralMenu {
+  background-color: rgb(53, 58, 64, 0.6);
+}
+/* Background */
+.bg_igloo {
+  background-color: whitesmoke;
+}
 /* Filter Icons */
 .filterIcons {
   color: whitesmoke;
@@ -11,14 +19,7 @@
   color: whitesmoke;
   font-family: "Titillium Web", sans-serif;
 }
-/* Lateral Menu */
-.lateralMenu {
-  background-color: rgb(53, 58, 64, 0.6);
-}
-/* Background */
-.bg_igloo {
-  background-color: whitesmoke;
-}
+
 /* Input Search */
 .search {
   background-color: rgb(53, 58, 64, 0.2);
@@ -30,18 +31,7 @@
   color: whitesmoke;
   font-family: "Titillium Web", sans-serif;
 }
-/* Add Agent Button */
-.btn-addAgent {
-  background-color: #59bec9;
-  color: whitesmoke;
-}
-/* Delete Agent Button */
-.btn-delAgent {
-  background-color: transparent;
-  border: solid 0.15rem #59bec9;
-  color: whitesmoke;
-}
-/* Search Agent Button */
+/* Search Button */
 .btn-search {
   background-color: transparent;
   border: solid 0.1rem whitesmoke;
@@ -53,21 +43,15 @@
 
   color: whitesmoke;
 }
-/* Card */
-.agentForm {
-  background-color: rgb(255, 255, 255);
-  padding: 3rem;
-  border-radius: 1rem;
+
+/* Add Button */
+.btn-add {
+  background-color: #59bec9;
+  color: whitesmoke;
 }
-.agentCard {
-  background-color: rgb(255, 255, 255);
-}
-.cardIcon {
-  font-size: 1.5rem;
-}
-.agentProfilePic {
-  height: "348px";
-  margin: "0 15px";
-  display: "flex";
-  align-items: "center";
+/* Delete Button */
+.btn-del {
+  background-color: transparent;
+  border: solid 0.15rem #59bec9;
+  color: whitesmoke;
 }

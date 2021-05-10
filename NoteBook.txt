@@ -15,7 +15,6 @@ menu lateral/superior?
 3. Favoritos
 4. Agregar imagen, subir archivos/urls previsualizacion --
 5. tamaño imagen cards done
-6. que tal el finde crack
 // User ----------------------
 - id (PK)
 - firstName

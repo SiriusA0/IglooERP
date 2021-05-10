@@ -12,9 +12,10 @@
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/e22ea825df.js" crossorigin="anonymous"></script>
     <!-- Libraries -->
-    <link rel="stylesheet" href="css/agent.css" />
+    <link rel="stylesheet" href="css/igloo.css" />
+    <link rel="stylesheet" href="css/orders.css" />
     <!-- Scripts -->
-    <script src="js/agents.js"></script>
+    <script src="js/orders.js"></script>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -39,12 +40,20 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <label class="nav-brand mr-5 mt-2" style="color: white; font-family: 'Titillium Web', sans-serif"
-            ><b>Human Resources</b></label
+            ><b>Orders / Budgets</b></label
           >
-          <li role="button" class="nav-item"><span class="nav-link">Agents</span></li>
-          <li role="button" class="nav-item"><span class="nav-link">Clients</span></li>
-          <li role="button" class="nav-item"><span class="nav-link">Sales</span></li>
-          <li role="button" class="nav-item"><span class="nav-link">Billing</span></li>
+          <li role="button" onclick="window.location.href='/agent'" class="nav-item">
+            <span class="nav-link">Agents</span>
+          </li>
+          <li role="button" onclick="window.location.href='/client'" class="nav-item">
+            <span class="nav-link">Clients</span>
+          </li>
+          <li role="button" onclick="window.location.href='/order'" class="nav-item">
+            <span class="nav-link">Orders</span>
+          </li>
+          <li role="button" onclick="window.location.href='/invoice'" class="nav-item">
+            <span class="nav-link">Billing</span>
+          </li>
         </ul>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item"><i style="color: white" class="fas fa-snowman"></i></li>
@@ -56,20 +65,57 @@
         <div class="col-2 lateralMenu border-top">
           <div class="row mt-5">
             <div class="col">
-              <h3 class="filterText pl-1">Sales Agents</h3>
+              <h3 class="filterText pl-1">Invoices</h3>
+            </div>
+          </div>
+          <div>
+            <div class="row mt-4">
+              <div class="col">
+                <div class="input-group">
+                  <input
+                    onkeyup="searchOrderByClient()"
+                    type="text"
+                    id="searchTerm"
+                    class="form-control search filterText"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col d-flex justify-content-between">
+                <small class="filterText ml-1">Find Orders by clients</small>
+                <button
+                  type="button"
+                  name="searchTerm"
+                  onclick="searchOrderByClient()"
+                  class="btn btn-sm btn-search filterText"
+                >
+                  Search
+                </button>
+              </div>
             </div>
           </div>
           <div class="row mt-4">
             <div class="col">
               <div class="input-group">
-                <input onkeyup="searchAgent()" type="text" id="searchTerm" class="form-control search filterText" />
+                <input
+                  onkeyup="searchOrderByAgent()"
+                  type="text"
+                  id="searchTerm"
+                  class="form-control search filterText"
+                />
               </div>
             </div>
           </div>
           <div class="row mt-2">
             <div class="col d-flex justify-content-between">
-              <small class="filterText ml-1">Find agents by name</small>
-              <button type="button" name="searchTerm" onclick="searchAgent()" class="btn btn-sm btn-search filterText">
+              <small class="filterText ml-1">Find Orders by agent</small>
+              <button
+                type="button"
+                name="searchTerm"
+                onclick="searchOrderByAgent()"
+                class="btn btn-sm btn-search filterText"
+              >
                 Search
               </button>
             </div>
@@ -85,56 +131,55 @@
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="idAgentAsc()"
-                id="idAgentAsc"
+                onclick="idOrderAsc()"
+                id="idOrderAsc"
                 type="button"
                 class="fas fa-sort-numeric-up-alt filterIcons"
               ></i>
             </div>
             <div class="col-10">
-              <label for="idAgentAsc" class="filterText">Order by ID (Asc)</label>
+              <label for="idOrderAsc" class="filterText">Order by ID (Asc)</label>
             </div>
           </div>
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="idAgentDesc()"
-                id="idAgentDesc"
+                onclick="idOrderDesc()"
+                id="idOrderDesc"
                 type="button"
                 class="fas fa-sort-numeric-down-alt filterIcons"
               ></i>
             </div>
             <div class="col-10">
-              <label for="idAgentDesc" class="filterText">Order by ID (Des)</label>
+              <label for="idOrderDesc" class="filterText">Order by ID (Des)</label>
             </div>
           </div>
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="lastNameAgentAsc()"
-                id="lastNameAgentAsc"
+                onclick="amountOrderAsc()"
+                id="amountOrderAsc"
                 type="button"
                 class="fas fa-sort-alpha-up-alt filterIcons"
               ></i>
             </div>
             <div class="col-10">
-              <label for="lastNameAgentAsc" class="filterText">Order by Last Name (Asc)</label>
+              <label for="amountOrderAsc" class="filterText">Order by Amount (Asc)</label>
             </div>
           </div>
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="lastNameAgentDesc()"
-                id="lastNameAgentDesc"
+                onclick="amountOrderDesc()"
+                id="amountOrderDesc"
                 type="button"
                 class="fas fa-sort-alpha-down-alt filterIcons"
               ></i>
             </div>
             <div class="col-10">
-              <label for="lastNameAgentDesc" class="filterText">Order by Last Name (Des)</label>
+              <label for="amountOrderDesc" class="filterText">Order by Amount (Des)</label>
             </div>
           </div>
-
           <div class="row">
             <div class="col">
               <hr />
@@ -142,22 +187,23 @@
           </div>
           <div class="row pt-4">
             <div class="col">
-              <button type="button" onclick="addAgent()" class="btn btn-addAgent btn-lg btn-block filterText">
-                Add Agent
+              <button type="button" onclick="addOrder()" class="btn btn-add btn-lg btn-block filterText">
+                Add Order
               </button>
             </div>
           </div>
           <div class="row pt-4">
             <div class="col">
-              <button type="button" onclick="deleteAgents()" class="btn btn-delAgent btn-lg btn-block filterText">
-                Delete Agent
+              <button type="button" onclick="deleteOrders()" class="btn btn-del btn-lg btn-block filterText">
+                Delete Selected Orders
               </button>
             </div>
           </div>
         </div>
         <div class="col-10" style="overflow: auto; height: 1000px; width: fit-content">
-          <div class="row agentForm m-5" id="agentForm" style="display: none">
-            <div class="col-8">
+          <!-- Order Form INI -->
+          <div class="row orderForm m-5" id="orderForm" style="display: none">
+            <div class="col">
               <form>
                 <div class="form-row">
                   <div class="form-group col-md-6">
@@ -199,42 +245,32 @@
                 </div>
               </form>
             </div>
-            <div class="4"></div>
           </div>
-          <div class="row row-cols-1 row-cols-md-4 mr-5 mb-5 p-5" id="agentsContainer">
-            <div th:each="agent:${agents}" class="col mb-4">
-              <div class="card h-90 w-80">
-                <div class="row pt-2 pl-2 pr-2 d-flex justify-content-between">
-                  <div class="col-3">
-                    <i type="button" class="far fa-star cardIcon"></i>
-                  </div>
-                  <div class="col-3">
-                    <i
-                      type="button"
-                      onclick="selectForDelete(event)"
-                      class="fas fa-trash-alt d-flex justify-content-end cardIcon"
-                    ></i>
-                  </div>
-                </div>
-                <div class="row" id="infernalRow">
-                  <div class="col">
-                    <div class="agentProfilePic">
-                      <img th:src="${agent.profilePic}" class="card-img-top" />
-                    </div>
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col-8">
-                          <h5 th:text="${agent.firstName}+' '+${agent.lastName}" class="card-title"></h5>
-                        </div>
-                        <div class="col-4">
-                          <h5 th:text="'#00'+${agent.id}" class="card-title cardId"></h5>
-                        </div>
-                      </div>
-                      <p th:text="${agent.email}" class="card-text"></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <!-- Order Form END -->
+          <div class="row orderTable m-5" id="orderTable">
+            <div class="col">
+              <table class="table table-hover">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Ref</th>
+                    <th scope="col">Creation date</th>
+                    <th scope="col">Client</th>
+                    <th scope="col">Agent</th>
+                    <th scope="col">Total amount</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="order : ${orders}">
+                    <th th:text="${order.id}" scope="row"></th>
+                    <th th:text="${order.creationDate}"></th>
+                    <th th:text="${order.clientId}"></th>
+                    <th th:text="${order.agentId}"></th>
+                    <th th:text="${order.totalAmount}"></th>
+                    <th th:text="${order.statusId}"></th>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
