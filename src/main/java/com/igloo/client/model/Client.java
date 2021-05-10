@@ -47,10 +47,10 @@ public class Client {
     @Column(name = "phone_number_1")
     private String phoneNumber1;
 
-    @Column(name = "phone_number_1")
+    @Column(name = "phone_number_2")
     private String phoneNumber2;
 
-    @Column
+    @Column(name="zip_code")
     private Integer zipCode;
 
     @Column(name = "profile_pic")

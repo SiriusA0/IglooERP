@@ -15,6 +15,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.igloo.client.model.Client;
 import com.igloo.payment.model.Payment;
+import com.igloo.sector.model.Sector;
 import com.igloo.status.model.Status;
 
 @Entity
@@ -50,9 +51,13 @@ public class Invoice {
     @ManyToOne
     @JoinColumn(name="payment_status_id")
     private Payment payment;
+    
+    @ManyToOne
+    @JoinColumn(name = "sector_id")
+    private Sector sector;
 
 	public Invoice(Client client, Date creationDate, Date dueDate, Double preTax, Double afterTax, Status status,
-			Payment payment) {
+			Payment payment, Sector sector) {
 		this.client = client;
 		this.creationDate = creationDate;
 		this.dueDate = dueDate;
@@ -60,10 +65,12 @@ public class Invoice {
 		this.afterTax = afterTax;
 		this.status = status;
 		this.payment = payment;
+		this.sector = sector;
 	}
-
+	
 	public Invoice(int id, Client client, Date creationDate, Date dueDate, Double preTax, Double afterTax,
-			Status status, Payment payment) {
+			Status status, Payment payment, Sector sector) {
+		super();
 		this.id = id;
 		this.client = client;
 		this.creationDate = creationDate;
@@ -72,7 +79,10 @@ public class Invoice {
 		this.afterTax = afterTax;
 		this.status = status;
 		this.payment = payment;
+		this.sector = sector;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -137,6 +147,15 @@ public class Invoice {
 	public void setPayment(Payment payment) {
 		this.payment = payment;
 	}
+
+	public Sector getSector() {
+		return sector;
+	}
+
+	public void setSector(Sector sector) {
+		this.sector = sector;
+	}
     
+	
     
 }

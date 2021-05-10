@@ -19,26 +19,29 @@ public class Sector {
     private String name;
 
     //TODO
-    @OneToMany(mappedBy = "sectors"/**, fetch = FetchType.EAGER**/)
+    @OneToMany(mappedBy = "sector"/**, fetch = FetchType.EAGER**/)
     private List<Order> orders = new LinkedList<Order>();
+    
+    @OneToMany(mappedBy = "sector"/**, fetch = FetchType.EAGER**/)
+    private List<Invoice> invoices = new LinkedList<Invoice>();
 
     public Sector() {
     }
 
-    public Sector(String name, List<Order> orders) {
-        this.name = name;
-        this.orders = orders;
+    public Sector(String name, List<Order> orders, List<Invoice> invoices) {
+		this.name = name;
+		this.orders = orders;
+		this.invoices = invoices;
+	}
 
-    }
+	public Sector(int id, String name, List<Order> orders, List<Invoice> invoices) {
+		this.id = id;
+		this.name = name;
+		this.orders = orders;
+		this.invoices = invoices;
+	}
 
-    public Sector(int id, String name, List<Order> orders) {
-        this.id = id;
-        this.name = name;
-        this.orders = orders;
-
-    }
-
-    public int getId() {
+	public int getId() {
         return id;
     }
 
@@ -62,5 +65,12 @@ public class Sector {
         this.orders = orders;
     }
 
+	public List<Invoice> getInvoices() {
+		return invoices;
+	}
+
+	public void setInvoices(List<Invoice> invoices) {
+		this.invoices = invoices;
+	}
 
 }

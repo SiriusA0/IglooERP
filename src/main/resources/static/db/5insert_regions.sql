@@ -1,0 +1,10 @@
+use igloo;
+insert into regions (id, name, country_id) values (1, 'Normandia', 2);
+insert into regions (id, name, country_id) values (2, 'Extremadura', 1);
+insert into regions (id, name, country_id) values (3, 'Madrid', 1);
+insert into regions (id, name, country_id) values (4, 'Algarve', 3);
+insert into regions (id, name, country_id) values (5, 'Comunidad Valenciana', 1);
+insert into regions (id, name, country_id) values (6, 'Aquitania', 2);
+insert into regions (id, name, country_id) values (7, 'Alentejo', 3);
+insert into regions (id, name, country_id) values (8, 'Region de Lisboa', 3);
+insert into regions (id, name, country_id) values (9, 'Andalucia', 1);
