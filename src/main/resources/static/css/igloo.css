@@ -59,3 +59,9 @@
   border: solid 0.15rem #59bec9;
   color: whitesmoke;
 }
+
+.createForm {
+  background-color: rgb(255, 255, 255);
+  padding: 3rem;
+  border-radius: 1rem;
+}

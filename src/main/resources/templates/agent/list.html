@@ -6,15 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Index</title>
     <!-- Bootstrap & Jquery -->
-    <script src="bootstrap/js/jquery-3.6.0.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <script src="/src/main/resources/static/bootstrap/js/jquery-3.6.0.min.js"></script>
+    <script src="/src/main/resources/static/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/src/main/resources/static/bootstrap/css/bootstrap.min.css" />
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/e22ea825df.js" crossorigin="anonymous"></script>
     <!-- Libraries -->
-    <link rel="stylesheet" href="css/agent.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/css/agent.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/css/igloo.css" />
     <!-- Scripts -->
-    <script src="js/agents.js"></script>
+    <script src="/src/main/resources/static/js/agents.js"></script>
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -167,9 +169,14 @@
           </div>
         </div>
         <div class="col-10" style="overflow: auto; height: 1000px; width: fit-content">
-          <div class="row agentForm m-5" id="agentForm" style="display: none">
+          <div class="row createForm m-5" id="agentForm" style="display: none">
             <div class="col-8">
               <form>
+                <div class="row">
+                  <div class="col">
+                    <h2 class="filterTextDark">New Agent Form</h2>
+                  </div>
+                </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="firstName">First Name</label>
