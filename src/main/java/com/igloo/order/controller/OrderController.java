@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -32,6 +33,19 @@ public class OrderController {
         model.addAttribute("orders", orders);
 
         return "order/orderlist";
+    }
+    
+    @GetMapping("/api/order/orderbyidasc")
+    @ResponseBody
+    public List<Order> ascId_API() {
+    	
+        return orderServ.ascId();
+    }
+
+    @GetMapping("/api/order/orderbyiddesc")
+    @ResponseBody
+    public List<Order> descId_API() {
+        return orderServ.descId();
     }
 
 }

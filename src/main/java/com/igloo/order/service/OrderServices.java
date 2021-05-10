@@ -13,11 +13,24 @@ public class OrderServices {
 
     @Autowired
     private OrderRepository orderRepo;
+    
+    
+    
 
 
     public List<Order> get() {
 
         return orderRepo.findAll();
 
+    }
+    
+    public List<Order> ascId() {
+
+        return orderRepo.findAllByOrderByIdAsc();
+    }
+
+    public List<Order> descId() {
+
+        return orderRepo.findAllByOrderByIdDesc();
     }
 }
