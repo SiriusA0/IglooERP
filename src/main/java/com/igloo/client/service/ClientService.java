@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.igloo.category.service.CategoryRepository;
 import com.igloo.city.service.CityRepository;
 import com.igloo.client.model.Client;
 import com.igloo.country.service.CountryRepository;
@@ -20,6 +21,8 @@ public class ClientService {
     private RegionRepository regionRepository;
 	@Autowired
     private CityRepository cityRepository;
+	@Autowired
+    private CategoryRepository categoryRepository;
 	
     public List<Client> get() {
 
@@ -53,7 +56,7 @@ public class ClientService {
     }
 
     public Client add(char type, String firstName, String lastName, String streetLine1, String streetLine2, Integer cityId, Integer regionId, Integer zipCode,
-    		Integer countryId, String idNumber, String phoneNumber1, String phoneNumber2, String email, String web, Integer categoryId) {
+    		Integer countryId, String idNumber, String phoneNumber1, String phoneNumber2, String email, String web, String profilePic,Integer categoryId) {
         Client client = new Client();
         client.setType(type);
         client.setFirstName(firstName);
@@ -69,7 +72,8 @@ public class ClientService {
         client.setPhoneNumber2(phoneNumber2);
         client.setEmail(email);
         client.setWeb(web);
-
+        client.setProfilePic(profilePic);
+        client.setCategory(categoryRepository.findById(categoryId).get());
 
         clientRepository.save(client);
         return client;

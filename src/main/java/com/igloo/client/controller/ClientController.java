@@ -66,10 +66,10 @@ public class ClientController {
     public Client add_API(@RequestParam char type, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String streetLine1,
     		@RequestParam String streetLine2, @RequestParam Integer cityId, @RequestParam Integer regionId, @RequestParam Integer zipCode,
     		@RequestParam Integer countryId, @RequestParam String idNumber, @RequestParam String phoneNumber1, @RequestParam String phoneNumber2, 
-    		@RequestParam String email, @RequestParam String web, @RequestParam Integer categoryId) {
+    		@RequestParam String email, @RequestParam String web, @RequestParam String profilePic,@RequestParam Integer categoryId) {
 
         return clientService.add(type, firstName, lastName, streetLine1, streetLine2, cityId, regionId, zipCode, countryId, idNumber,
-        		phoneNumber1, phoneNumber2, email, web, categoryId);
+        		phoneNumber1, phoneNumber2, email, web, profilePic,categoryId);
     }
 
     @GetMapping("/api/client/delete")
