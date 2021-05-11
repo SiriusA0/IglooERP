@@ -50,7 +50,7 @@ public class Client {
     @Column(name = "phone_number_2")
     private String phoneNumber2;
 
-    @Column(name="zip_code")
+    @Column(name = "zip_code")
     private Integer zipCode;
 
     @Column(name = "profile_pic")
@@ -77,6 +77,9 @@ public class Client {
 
     @OneToMany(mappedBy = "client"/**, fetch = FetchType.EAGER**/)
     private List<Order> orders = new LinkedList<Order>();
+
+    public Client() {
+    }
 
     public Client(int id, String idNumber, String firstName, String lastName, char type, String email, String web, String streetLine1, String streetLine2, String phoneNumber1, String phoneNumber2, Integer zipCode, String profilePic, Country country, Region region, City city, Category category, List<Invoice> invoices, List<Order> orders) {
         this.id = id;

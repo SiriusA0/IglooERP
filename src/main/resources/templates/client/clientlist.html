@@ -7,15 +7,18 @@
     <title>Clients</title>
     <!-- Bootstrap & Jquery -->
 
-    <script src="/src/main/resources/static/bootstrap/js/jquery-3.6.0.min.js"></script>
-    <script src="/src/main/resources/static/bootstrap/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/src/main/resources/static/bootstrap/css/bootstrap.min.css" />
+    <script src="/bootstrap/js/jquery-3.6.0.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
     <!-- Fontawesome -->
-    <script src="https://kit.fontawesome.com/e22ea825df.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/e22ea825df.js"
+      crossorigin="anonymous"
+    ></script>
     <!-- Libraries -->
-    <link rel="stylesheet" href="/src/main/resources/static/css/igloo.css" />
+    <link rel="stylesheet" href="/css/igloo.css" />
     <!-- Scripts -->
-    <script src="/src/main/resources/static/js/clients.js"></script>
+    <script src="/js/clients.js"></script>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -39,27 +42,51 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <label class="nav-brand mr-5 mt-2" style="color: white; font-family: 'Titillium Web', sans-serif"
+          <label
+            class="nav-brand mr-5 mt-2"
+            style="color: white; font-family: 'Titillium Web', sans-serif"
             ><b>Clients</b></label
           >
-          <li role="button" onclick="window.location.href='/agent'" class="nav-item">
+          <li
+            role="button"
+            onclick="window.location.href='/agent'"
+            class="nav-item"
+          >
             <span class="nav-link">Agents</span>
           </li>
-          <li role="button" onclick="window.location.href='/client'" class="nav-item">
+          <li
+            role="button"
+            onclick="window.location.href='/client'"
+            class="nav-item"
+          >
             <span class="nav-link">Clients</span>
           </li>
-          <li role="button" onclick="window.location.href='/order'" class="nav-item">
+          <li
+            role="button"
+            onclick="window.location.href='/order'"
+            class="nav-item"
+          >
             <span class="nav-link">Orders</span>
           </li>
-          <li role="button" onclick="window.location.href='/invoice'" class="nav-item">
+          <li
+            role="button"
+            onclick="window.location.href='/invoice'"
+            class="nav-item"
+          >
             <span class="nav-link">Billing</span>
           </li>
-          <li role="button" onclick="window.location.href='/settings'" class="nav-item">
+          <li
+            role="button"
+            onclick="window.location.href='/settings'"
+            class="nav-item"
+          >
             <span class="nav-link">Settings</span>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><i style="color: white" class="fas fa-snowman"></i></li>
+          <li class="nav-item">
+            <i style="color: white" class="fas fa-snowman"></i>
+          </li>
         </ul>
       </div>
     </nav>
@@ -74,14 +101,24 @@
           <div class="row mt-4">
             <div class="col">
               <div class="input-group">
-                <input onkeyup="searchClient()" type="text" id="searchTerm" class="form-control search filterText" />
+                <input
+                  onkeyup="searchClient()"
+                  type="text"
+                  id="searchTerm"
+                  class="form-control search filterText"
+                />
               </div>
             </div>
           </div>
           <div class="row mt-2">
             <div class="col d-flex justify-content-between">
               <small class="filterText ml-1">Find clients by name</small>
-              <button type="button" name="searchTerm" onclick="searchClient()" class="btn btn-sm btn-search filterText">
+              <button
+                type="button"
+                name="searchTerm"
+                onclick="searchClient()"
+                class="btn btn-sm btn-search filterText"
+              >
                 Search
               </button>
             </div>
@@ -104,7 +141,9 @@
               ></i>
             </div>
             <div class="col-10">
-              <label for="idClientAsc" class="filterText">Order by ID (Asc)</label>
+              <label for="idClientAsc" class="filterText"
+                >Order by ID (Asc)</label
+              >
             </div>
           </div>
           <div class="row mt-3 mb-3 pl-3">
@@ -117,7 +156,9 @@
               ></i>
             </div>
             <div class="col-10">
-              <label for="idClientDesc" class="filterText">Order by ID (Des)</label>
+              <label for="idClientDesc" class="filterText"
+                >Order by ID (Des)</label
+              >
             </div>
           </div>
           <div class="row mt-3 mb-3 pl-3">
@@ -130,7 +171,9 @@
               ></i>
             </div>
             <div class="col-10">
-              <label for="lastNameClientAsc" class="filterText">Order by Last Name (Asc)</label>
+              <label for="lastNameClientAsc" class="filterText"
+                >Order by Last Name (Asc)</label
+              >
             </div>
           </div>
           <div class="row mt-3 mb-3 pl-3">
@@ -143,7 +186,9 @@
               ></i>
             </div>
             <div class="col-10">
-              <label for="lastNameClientDesc" class="filterText">Order by Last Name (Des)</label>
+              <label for="lastNameClientDesc" class="filterText"
+                >Order by Last Name (Des)</label
+              >
             </div>
           </div>
 
@@ -154,21 +199,36 @@
           </div>
           <div class="row pt-4">
             <div class="col">
-              <button type="button" onclick="addClient()" class="btn btn-add btn-lg btn-block filterText">
+              <button
+                type="button"
+                onclick="addClient()"
+                class="btn btn-add btn-lg btn-block filterText"
+              >
                 Add Client
               </button>
             </div>
           </div>
           <div class="row pt-4">
             <div class="col">
-              <button type="button" onclick="deleteClients()" class="btn btn-del btn-lg btn-block filterText">
+              <button
+                type="button"
+                onclick="deleteClients()"
+                class="btn btn-del btn-lg btn-block filterText"
+              >
                 Delete Selected Clients
               </button>
             </div>
           </div>
         </div>
-        <div class="col-10" style="overflow: auto; height: 1000px; width: fit-content">
-          <div class="row createForm mt-5 ml-5 mr-5" id="clientForm" style="display: none">
+        <div
+          class="col-10"
+          style="overflow: auto; height: 1000px; width: fit-content"
+        >
+          <div
+            class="row createForm mt-5 ml-5 mr-5"
+            id="clientForm"
+            style="display: none"
+          >
             <div class="col">
               <form>
                 <div class="row">
@@ -187,7 +247,9 @@
                         value="individual_option"
                         checked
                       />
-                      <label class="form-check-label" for="individual_option"> Individual </label>
+                      <label class="form-check-label" for="individual_option">
+                        Individual
+                      </label>
                     </div>
                     <div class="form-check form-check-inline">
                       <input
@@ -197,7 +259,9 @@
                         id="company_option"
                         value="company_option"
                       />
-                      <label class="form-check-label" for="company_option"> Company </label>
+                      <label class="form-check-label" for="company_option">
+                        Company
+                      </label>
                     </div>
                     <input
                       name="clientName"
@@ -210,7 +274,9 @@
                   <div class="col-sm-8 d-flex justify-content-end"></div>
                 </div>
                 <div class="form-group row">
-                  <label for="Company_Adress_1" class="col-sm-2 col-form-label">Company Address</label>
+                  <label for="Company_Adress_1" class="col-sm-2 col-form-label"
+                    >Company Address</label
+                  >
                   <div class="col-sm-4">
                     <input
                       name="Company_Adress_1"
@@ -219,7 +285,9 @@
                       placeholder="Street"
                     />
                   </div>
-                  <label for="Phone_Number" class="col-sm-2 col-form-label">Phone number</label>
+                  <label for="Phone_Number" class="col-sm-2 col-form-label"
+                    >Phone number</label
+                  >
                   <div class="col-sm-4">
                     <input
                       name="Phone_Number"
@@ -231,7 +299,10 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="Company_Adress_2" class="col-sm-2 col-form-label"></label>
+                  <label
+                    for="Company_Adress_2"
+                    class="col-sm-2 col-form-label"
+                  ></label>
                   <div class="col-sm-4">
                     <input
                       name="Company_Adress_2"
@@ -240,7 +311,9 @@
                       placeholder="Street 2"
                     />
                   </div>
-                  <label for="Mobile_Number" class="col-sm-2 col-form-label">Mobile number</label>
+                  <label for="Mobile_Number" class="col-sm-2 col-form-label"
+                    >Mobile number</label
+                  >
                   <div class="col-sm-4">
                     <input
                       name="Mobile_Number"
@@ -252,7 +325,10 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="Company_Adress_3" class="col-sm-2 col-form-label"></label>
+                  <label
+                    for="Company_Adress_3"
+                    class="col-sm-2 col-form-label"
+                  ></label>
                   <div class="col-sm">
                     <input
                       name="City"
@@ -262,7 +338,10 @@
                     />
                   </div>
                   <div class="col-sm">
-                    <select name="Province" class="newClientFormInput inputBox form-control">
+                    <select
+                      name="Province"
+                      class="newClientFormInput inputBox form-control"
+                    >
                       <option value="Madrid">Madrid</option>
                       <option value="Badajoz">Badajoz</option>
                       <option value="Valencia">Valencia</option>
@@ -276,7 +355,9 @@
                       placeholder="ZIP"
                     />
                   </div>
-                  <label for="Email" class="col-sm-2 col-form-label">E-mail</label>
+                  <label for="Email" class="col-sm-2 col-form-label"
+                    >E-mail</label
+                  >
                   <div class="col-sm-4">
                     <input
                       name="Email"
@@ -290,14 +371,19 @@
                 <div class="form-group row">
                   <label for="Country" class="col-sm-2 col-form-label"></label>
                   <div class="col-sm-4">
-                    <select name="Country" class="newClientFormInput inputBox form-control">
+                    <select
+                      name="Country"
+                      class="newClientFormInput inputBox form-control"
+                    >
                       <option value="Spain">España</option>
                       <option value="Venezuela">Venezuela</option>
                       <option value="Portugal">Portugal</option>
                       <option value="France">Francia</option>
                     </select>
                   </div>
-                  <label for="WebPage" class="col-sm-2 col-form-label">Web page</label>
+                  <label for="WebPage" class="col-sm-2 col-form-label"
+                    >Web page</label
+                  >
                   <div class="col-sm-4">
                     <input
                       name="WebPage"
@@ -309,7 +395,9 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="NIF" class="col-sm-2 col-form-label">Ident. Number (NIF)</label>
+                  <label for="NIF" class="col-sm-2 col-form-label"
+                    >Ident. Number (NIF)</label
+                  >
                   <div class="col-sm-4">
                     <input
                       name="NIF"
@@ -318,9 +406,14 @@
                       placeholder="00000000X or X0000000"
                     />
                   </div>
-                  <label for="Category" class="col-sm-2 col-form-label">Category</label>
+                  <label for="Category" class="col-sm-2 col-form-label"
+                    >Category</label
+                  >
                   <div class="col-sm-4">
-                    <select name="Category" class="newClientFormInput inputBox form-control">
+                    <select
+                      name="Category"
+                      class="newClientFormInput inputBox form-control"
+                    >
                       <option>Labels</option>
                       <option value="3">3</option>
                       <option value="4">4</option>
@@ -331,18 +424,30 @@
 
                 <div class="row ml-3 mr-3 pt-5 pl-1 pb-5">
                   <div class="col-1">
-                    <button type="button" onclick="add_client('.entradaCliente')" class="btn btn-block btn-add">
+                    <button
+                      type="button"
+                      onclick="add_client('.entradaCliente')"
+                      class="btn btn-block btn-add"
+                    >
                       <b>ADD</b>
                     </button>
                   </div>
-                  <div class="col-11 alert alert-info" role="alert" style="display: none" id="successAlert">
+                  <div
+                    class="col-11 alert alert-info"
+                    role="alert"
+                    style="display: none"
+                    id="successAlert"
+                  >
                     Client successfully added
                   </div>
                 </div>
               </form>
             </div>
           </div>
-          <div class="row row-cols-1 row-cols-md-4 mr-5 mb-5 p-5" id="clientsContainer">
+          <div
+            class="row row-cols-1 row-cols-md-4 mr-5 mb-5 p-5"
+            id="clientsContainer"
+          >
             <div th:each="client:${clients}" class="col mb-4">
               <div class="card h-90 w-80">
                 <div class="row pt-2 pl-2 pr-2 d-flex justify-content-between">
@@ -353,7 +458,13 @@
                     <i
                       type="button"
                       onclick="selectForDelete(event)"
-                      class="fas fa-trash-alt d-flex justify-content-end cardIcon"
+                      class="
+                        fas
+                        fa-trash-alt
+                        d-flex
+                        justify-content-end
+                        cardIcon
+                      "
                     ></i>
                   </div>
                 </div>
@@ -365,10 +476,16 @@
                     <div class="card-body">
                       <div class="row">
                         <div class="col-8">
-                          <h5 th:text="${client.firstName}+' '+${client.lastName}" class="card-title"></h5>
+                          <h5
+                            th:text="${client.firstName}+' '+${client.lastName}"
+                            class="card-title"
+                          ></h5>
                         </div>
                         <div class="col-4">
-                          <h5 th:text="'#00'+${client.id}" class="card-title cardId"></h5>
+                          <h5
+                            th:text="'#00'+${client.id}"
+                            class="card-title cardId"
+                          ></h5>
                         </div>
                       </div>
                       <p th:text="${client.email}" class="card-text"></p>
