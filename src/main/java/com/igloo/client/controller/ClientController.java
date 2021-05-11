@@ -24,12 +24,12 @@ public class ClientController {
     @GetMapping("/client")
     public String readAgent(Model model) {
 
-        List<Client> agents = clientService.get();
+        List<Client> clients = clientService.get();
 
-        model.addAttribute("agents", agents);
+        model.addAttribute("clients", clients);
 
 
-        return "client/list";
+        return "client/clientlist";
     }
 
     @PostMapping("/client")
