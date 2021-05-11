@@ -27,12 +27,12 @@ function showSector() {
 function createSector(){
 
 var sectorName=document.querySelector("#sectorName").value;
-var urlFinal= server_url + '/api/sector/add?'+"sectorName="+ sectorName;
+var urlFinal= server_url + '/api/sector/add?'+"name="+ sectorName;
 
 fetch(urlFinal)
         .then(r => r.json())
         .then(newsector => {
-            console.log("Added sector: " + newsector.sectorName);
+            console.log("Added sector: " + newsector.name);
         });
 
 document.querySelector("#sectorName").value = "";
@@ -209,7 +209,7 @@ function showStatus() {
 function createStatus(){
 
   var statusName=document.querySelector("#statusName").value;
-  var urlFinal= server_url + '/api/status/add?'+"statusName="+ statusName;
+  var urlFinal= server_url + '/api/status/add?'+"name="+ name;
   
   fetch(urlFinal)
           .then(r => r.json())
@@ -259,12 +259,12 @@ function showPaymentStatus() {
 function createPaymentStatus(){
 
   var paymentStatusName=document.querySelector("#paymentStatusName").value;
-  var urlFinal= server_url + '/api/status/add?'+"paymentStatusName="+ paymentStatusName;
+  var urlFinal= server_url + '/api/status/add?'+"name="+ paymentStatusName;
   
   fetch(urlFinal)
           .then(r => r.json())
           .then(newpaymentStatus => {
-              console.log("Added status: " + newpaymentStatus.paymentStatusNam);
+              console.log("Added status: " + newpaymentStatus.name);
           });
   
   document.querySelector("#paymentStatusName").value = "";
