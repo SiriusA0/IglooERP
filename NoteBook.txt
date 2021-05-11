@@ -7,11 +7,11 @@
         4.  Darle vida al buscador, filtros, sorts...
         5.  Incluir borrado en todas las paginas.
 
+- Cambiar como se muestran los IDs en clientes y comerciales
 -------------------------------------
 hover - iconos agentes.
 menu lateral/superior?
 1. Comprobar tipo de campo de "fav_agents" y "fav_clients" en "users".
-2. ¿Hacer tabla "roles"? -- abortar
 3. Favoritos
 4. Agregar imagen, subir archivos/urls previsualizacion --
 5. tamaño imagen cards done

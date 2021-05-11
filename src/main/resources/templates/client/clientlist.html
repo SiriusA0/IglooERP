@@ -243,11 +243,11 @@
                         class="form-check-input inputBox"
                         type="radio"
                         name="typeOfClient"
-                        id="individual_option"
-                        value="individual_option"
+                        id="individualOption"
+                        value="I"
                         checked
                       />
-                      <label class="form-check-label" for="individual_option">
+                      <label class="form-check-label" for="individualOption">
                         Individual
                       </label>
                     </div>
@@ -256,10 +256,10 @@
                         class="form-check-input inputBox"
                         type="radio"
                         name="typeOfClient"
-                        id="company_option"
-                        value="company_option"
+                        id="companyOption"
+                        value="C"
                       />
-                      <label class="form-check-label" for="company_option">
+                      <label class="form-check-label" for="companyOption">
                         Company
                       </label>
                     </div>
@@ -274,23 +274,23 @@
                   <div class="col-sm-8 d-flex justify-content-end"></div>
                 </div>
                 <div class="form-group row">
-                  <label for="Company_Adress_1" class="col-sm-2 col-form-label"
+                  <label for="companyAdress1" class="col-sm-2 col-form-label"
                     >Company Address</label
                   >
                   <div class="col-sm-4">
                     <input
-                      name="Company_Adress_1"
+                      name="companyAdress1"
                       type="text"
                       class="newClientFormInput inputBox form-control"
                       placeholder="Street"
                     />
                   </div>
-                  <label for="Phone_Number" class="col-sm-2 col-form-label"
+                  <label for="phoneNumber1" class="col-sm-2 col-form-label"
                     >Phone number</label
                   >
                   <div class="col-sm-4">
                     <input
-                      name="Phone_Number"
+                      name="phoneNumber1"
                       type="tel"
                       class="newClientFormInput inputBox form-control"
                       placeholder="999999999"
@@ -300,23 +300,23 @@
 
                 <div class="form-group row">
                   <label
-                    for="Company_Adress_2"
+                    for="companyAdress2"
                     class="col-sm-2 col-form-label"
                   ></label>
                   <div class="col-sm-4">
                     <input
-                      name="Company_Adress_2"
+                      name="companyAdress2"
                       type="text"
                       class="newClientFormInput inputBox form-control"
                       placeholder="Street 2"
                     />
                   </div>
-                  <label for="Mobile_Number" class="col-sm-2 col-form-label"
+                  <label for="phoneNumber2" class="col-sm-2 col-form-label"
                     >Mobile number</label
                   >
                   <div class="col-sm-4">
                     <input
-                      name="Mobile_Number"
+                      name="phoneNumber2"
                       type="tel"
                       class="newClientFormInput inputBox form-control"
                       placeholder="666666666"
@@ -325,26 +325,55 @@
                 </div>
 
                 <div class="form-group row">
-                  <label
-                    for="Company_Adress_3"
-                    class="col-sm-2 col-form-label"
-                  ></label>
+                  <label for="city" class="col-sm-2 col-form-label"></label>
                   <div class="col-sm">
-                    <input
-                      name="City"
-                      type="text"
+                    <select
+                      name="city"
                       class="newClientFormInput inputBox form-control"
-                      placeholder="City"
-                    />
+                    >
+                      <option value="1">Badajoz</option>
+                      <option value="2">Getafe</option>
+                      <option value="3">Setubal</option>
+                      <option value="4">Cordoba</option>
+                      <option value="5">Beja</option>
+                      <option value="6">Evora</option>
+                      <option value="7">Granada</option>
+                      <option value="8">Eure</option>
+                      <option value="9">Calvados</option>
+                      <option value="10">Valencia</option>
+                      <option value="11">Fuenlabrada</option>
+                      <option value="12">Castellon</option>
+                      <option value="13">Madrid</option>
+                      <option value="14">Manche</option>
+                      <option value="15">Faro</option>
+                      <option value="16">Lisboa</option>
+                      <option value="17">Leganes</option>
+                      <option value="18">Sevilla</option>
+                      <option value="19">Pozuelos</option>
+                      <option value="20">Vienne</option>
+                      <option value="21">Creusea</option>
+                      <option value="22">Alicante</option>
+                      <option value="23">Jaen</option>
+                      <option value="24">Huelva</option>
+                      <option value="25">Benidorm</option>
+                      <option value="26">Caceres</option>
+                      <option value="27">Malaga</option>
+                    </select>
                   </div>
                   <div class="col-sm">
                     <select
-                      name="Province"
+                      name="region"
                       class="newClientFormInput inputBox form-control"
                     >
-                      <option value="Madrid">Madrid</option>
-                      <option value="Badajoz">Badajoz</option>
-                      <option value="Valencia">Valencia</option>
+                      <option value="1">Normandia</option>
+                      <option value="2">Extremadura</option>
+                      <option value="3">Madrid</option>
+                      <option value="4">Algarve</option>
+                      <option value="5 ">Comunidad Valencia</option>
+                      <option value="6">Aquitania</option>
+                      <option value="7">Alentejo</option>
+                      <option value="8">Region de Lisboa</option>
+                      <option value="9">Andalucia</option>
                     </select>
                   </div>
                   <div class="col-sm">
@@ -355,12 +384,12 @@
                       placeholder="ZIP"
                     />
                   </div>
-                  <label for="Email" class="col-sm-2 col-form-label"
+                  <label for="email" class="col-sm-2 col-form-label"
                     >E-mail</label
                   >
                   <div class="col-sm-4">
                     <input
-                      name="Email"
+                      name="email"
                       type="email"
                       class="newClientFormInput inputBox form-control"
                       placeholder="example@erp.com"
@@ -369,24 +398,23 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="Country" class="col-sm-2 col-form-label"></label>
+                  <label for="country" class="col-sm-2 col-form-label"></label>
                   <div class="col-sm-4">
                     <select
-                      name="Country"
+                      name="country"
                       class="newClientFormInput inputBox form-control"
                     >
-                      <option value="Spain">España</option>
-                      <option value="Venezuela">Venezuela</option>
-                      <option value="Portugal">Portugal</option>
-                      <option value="France">Francia</option>
+                      <option value="1">España</option>
+                      <option value="2">Francia</option>
+                      <option value="3">Portugal</option>
                     </select>
                   </div>
-                  <label for="WebPage" class="col-sm-2 col-form-label"
+                  <label for="webPage" class="col-sm-2 col-form-label"
                     >Web page</label
                   >
                   <div class="col-sm-4">
                     <input
-                      name="WebPage"
+                      name="webPage"
                       type="url"
                       class="newClientFormInput inputBox form-control"
                       placeholder="www.example.com"
@@ -395,29 +423,31 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="NIF" class="col-sm-2 col-form-label"
+                  <label for="nif" class="col-sm-2 col-form-label"
                     >Ident. Number (NIF)</label
                   >
                   <div class="col-sm-4">
                     <input
-                      name="NIF"
+                      name="nif"
                       type="text"
                       class="newClientFormInput inputBox form-control"
                       placeholder="00000000X or X0000000"
                     />
                   </div>
-                  <label for="Category" class="col-sm-2 col-form-label"
+                  <label for="category" class="col-sm-2 col-form-label"
                     >Category</label
                   >
                   <div class="col-sm-4">
                     <select
-                      name="Category"
+                      name="category"
                       class="newClientFormInput inputBox form-control"
                     >
                       <option>Labels</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
+                      <option value="1">1A</option>
+                      <option value="2">1B</option>
+                      <option value="3">2A</option>
+                      <option value="4">2B</option>
+                      <option value="5">3B</option>
                     </select>
                   </div>
                 </div>
@@ -426,10 +456,10 @@
                   <div class="col-1">
                     <button
                       type="button"
-                      onclick="add_client('.entradaCliente')"
+                      onclick="createClient()"
                       class="btn btn-block btn-add"
                     >
-                      <b>ADD</b>
+                      <b>Create Client</b>
                     </button>
                   </div>
                   <div
