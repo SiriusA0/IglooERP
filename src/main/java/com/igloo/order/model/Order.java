@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.igloo.sector.model.Sector;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -33,18 +34,22 @@ public class Order {
     @Column(name = "total_amount")
     private Double totalAmount;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "agent_id")
     private Agent agent;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "status_id")
     private Status status;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "sector_id")
     private Sector sector;

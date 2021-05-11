@@ -54,6 +54,8 @@ function showASectorsTable() {
 }
 
 
+
+fillSectorTable([{id: 1,name :"Agro"},{id :2,name: "Petrol"}]);
 // Fill Sector Table 
 
 function fillSectorTable(sectors){

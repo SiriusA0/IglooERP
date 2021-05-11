@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.igloo.category.model.Category;
 import com.igloo.city.model.City;
 import com.igloo.country.model.Country;
@@ -56,13 +57,16 @@ public class Client {
     @Column(name = "profile_pic")
     private String profilePic;
 
+
     @ManyToOne
     @JoinColumn(name = "country_id")
     private Country country;
 
+
     @ManyToOne
     @JoinColumn(name = "region_id")
     private Region region;
+
 
     @ManyToOne
     @JoinColumn(name = "city_id")

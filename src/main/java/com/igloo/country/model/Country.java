@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.igloo.city.model.City;
 import com.igloo.region.model.Region;
 
@@ -18,6 +19,7 @@ public class Country {
     @Column
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy="country", fetch = FetchType.LAZY)
     private List<Region> regions = new LinkedList<Region>();
     
