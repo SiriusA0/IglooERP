@@ -8,6 +8,7 @@ import com.igloo.order.model.Order;
 import com.igloo.order.service.OrderRepository;
 import com.igloo.order.service.OrderServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,6 +47,22 @@ public class OrderController {
     @ResponseBody
     public List<Order> descId_API() {
         return orderServ.descId();
+    }
+    
+    @GetMapping("/api/order/orderbyamountdesc")
+    @ResponseBody
+    public List<Order> descAmount_API() {
+    	
+    	
+        return orderRepo.findAll(Sort.by(Sort.Direction.DESC, "totalAmount"));
+    }
+    
+    @GetMapping("/api/order/orderbyamountasc")
+    @ResponseBody
+    public List<Order> ascAmount_API() {
+    	
+    	
+        return orderRepo.findAll(Sort.by(Sort.Direction.ASC, "totalAmount"));
     }
 
 }

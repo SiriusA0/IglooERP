@@ -33,4 +33,12 @@ public class OrderServices {
 
         return orderRepo.findAllByOrderByIdDesc();
     }
+    
+    public List<Order> descAmount(){
+    	
+    	return orderRepo.findAll();
+    	
+    }
+    
+    
 }
