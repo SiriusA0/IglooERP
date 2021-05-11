@@ -20,7 +20,7 @@ public class Region {
     @Column
     private String name;
 
-    @OneToMany(mappedBy="region"/**, fetch = FetchType.EAGER**/)
+    @OneToMany(mappedBy="region", fetch = FetchType.LAZY)
     private List<City> cities = new LinkedList<City>();
     
     @ManyToOne

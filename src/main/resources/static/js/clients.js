@@ -113,7 +113,7 @@ function createClient() {
   fetch(urlFinal)
     .then((r) => r.json())
     .then((newClient) => {
-      console.log("Added agent: " + newClient.firstName);
+      console.log("Added client: ", newClient);
     });
 }
 ////////////////////////////////////// Selection //////////////////////////////////////

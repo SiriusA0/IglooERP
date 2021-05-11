@@ -21,6 +21,7 @@ function showSector() {
   } else {
     showSectorOFF();
   }
+  showASectorsTable()
 }
 
 // Create New Sector

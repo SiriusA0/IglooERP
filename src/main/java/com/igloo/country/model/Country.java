@@ -3,15 +3,7 @@ package com.igloo.country.model;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.igloo.city.model.City;
 import com.igloo.region.model.Region;
@@ -26,7 +18,7 @@ public class Country {
     @Column
     private String name;
 
-    @OneToMany(mappedBy="country"/**, fetch = FetchType.EAGER**/)
+    @OneToMany(mappedBy="country", fetch = FetchType.LAZY)
     private List<Region> regions = new LinkedList<Region>();
     
     
