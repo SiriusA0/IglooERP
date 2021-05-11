@@ -7,18 +7,18 @@
     <title>Settings</title>
     <!-- Bootstrap & Jquery -->
 
-    <script src="/bootstrap/js/jquery-3.6.0.min.js"></script>
-    <script src="/bootstrap/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <script src="/src/main/resources/static/bootstrap/js/jquery-3.6.0.min.js"></script>
+    <script src="/src/main/resources/static/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/src/main/resources/static/bootstrap/css/bootstrap.min.css" />
     <!-- Fontawesome -->
     <script
       src="https://kit.fontawesome.com/e22ea825df.js"
       crossorigin="anonymous"
     ></script>
     <!-- Libraries -->
-    <link rel="stylesheet" href="/css/igloo.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/css/igloo.css" />
     <!-- Scripts -->
-    <script src="/js/settings.js"></script>
+    <script src="/src/main/resources/static/js/settings.js"></script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -223,9 +223,9 @@
                   <div class="col-sm-3">
                     <button
                       type="button"
-                      onclick="createSector()"
-                      class="btn btn-add btn-block btn-lg"
-                    >
+                     
+                      class="btn btn-add btn-block btn-lg">
+                    <!--  onclick="createSector()" -->
                       Add Sector
                     </button>
                   </div>
@@ -342,9 +342,9 @@
           <div
             class="row sectorTable m-5"
             id="sectorTable"
-            style="display: none"
           >
-            <div class="col-8 offset-2">
+          <!-- style="display: none" -->
+            <!-- <div class="col-8 offset-2">
               <table class="table table-hover">
                 <thead class="thead-dark">
                   <tr>
@@ -395,7 +395,7 @@
                   </tr>
                 </tbody>
               </table>
-            </div>
+            </div> -->
           </div>
           <!-- Status table -->
           <div

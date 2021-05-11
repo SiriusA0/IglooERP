@@ -1,5 +1,7 @@
 //url inicial
 var server_url = 'http://localhost:8080/';
+var sectors=[{"id":1 ,"name":"hola"}, {"id":3 , "name":"holffff"},{"id":4 , "name":"holiiffff"}];
+
 
 
 // Sector
@@ -21,7 +23,8 @@ function showSector() {
   } else {
     showSectorOFF();
   }
-  showASectorsTable()
+  cleanSectorTable();
+  fillSectorTable(sectors); // AQUU EN REALIDAD LLAMARIAMOS A SHOW SECTOR TABLE
 }
 
 // Create New Sector
@@ -43,7 +46,7 @@ document.querySelector("#successAlertSector").style.display = "";
 
 // Show Sectors
 
-function showASectorsTable() {
+function showSectorsTable() {
 
   fetch("http://localhost:8080/api/sector/show")
       .then(r => r.json())
@@ -55,14 +58,13 @@ function showASectorsTable() {
 
 
 
-fillSectorTable([{id: 1,name :"Agro"},{id :2,name: "Petrol"}]);
 // Fill Sector Table 
 
 function fillSectorTable(sectors){
 
 
-var statusTable = document.querySelector("#statusTable");
-document.querySelector("#statusTable").style.display="";
+var statusTable = document.querySelector("#sectorTable");
+//document.querySelector("#sectorTable").style.display="";
 
 
 //Sector Table Container and Head
@@ -94,51 +96,56 @@ tableFirstRow.appendChild(thAction);
 tableHeadContainer.appendChild(tableFirstRow);
 tableContainer.appendChild(tableHeadContainer);
 tableDivCOl.appendChild(tableContainer);
-
+statusTable.appendChild(tableDivCOl);
 //table info 
 
 var tableBody=document.createElement("tbody");
 tableContainer.appendChild(tableBody);
 
 for (i in sectors){
-var tableBodyrow=document.createElement(tr);
+var tableBodyrow=document.createElement("tr");
 
-var tableBodyCol1=document.createElement(td);
-var col1Check=document.createElement(input);
+var tableBodyCol1=document.createElement("td");
+var col1Check=document.createElement("input");
 col1Check.setAttribute("type", "checkbox");
-tableBodyCol1.appendChild(col1check);
+tableBodyCol1.appendChild(col1Check);
 tableBodyrow.appendChild(tableBodyCol1);
 
-var colName=document.createElement(td);
+var colRef=document.createElement("td");
+colRef.innerHTML="REF00" +sectors[i].id;
+tableBodyrow.appendChild(colRef);
+
+
+var colName=document.createElement("td");
 colName.innerHTML=sectors[i].name;
 tableBodyrow.appendChild(colName);
 
 
-var colOptions=document.createElement(td);
-var colOptionsDiv=document.createElement(div);
+var colOptions=document.createElement("td");
+var colOptionsDiv=document.createElement("div");
 colOptionsDiv.className="btn-group";
 colOptionsDiv.setAttribute("role", "group");
 
-var favbutton=document.createElement(button);
+var favbutton=document.createElement("button");
 favbutton.type="button";
 favbutton.className="btn btn-secondary";
 
-var favIcon=document.createElement(i);
+var favIcon=document.createElement("i");
 favIcon.className="far fa-star";
 
 favbutton.appendChild(favIcon);
 
-var editbutton=document.createElement(button);
+var editbutton=document.createElement("button");
 editbutton.type="button";
 editbutton.className="btn btn-secondary";
-var editIcon=document.createElement(i);
+var editIcon=document.createElement("i");
 editIcon.className="fas fa-edit";
 editbutton.appendChild(editIcon);
 
-var deletebutton=document.createElement(button);
+var deletebutton=document.createElement("button");
 deletebutton.type="button";
 deletebutton.className="btn btn-secondary";
-var deleteIcon=document.createElement(i);
+var deleteIcon=document.createElement("i");
 deleteIcon.className="fas fa-trash-alt";
 deletebutton.appendChild(deleteIcon);
 
@@ -146,25 +153,42 @@ colOptionsDiv.appendChild(favbutton);
 colOptionsDiv.appendChild(editbutton);
 colOptionsDiv.appendChild(deletebutton);
 
-colOptions.appendChild(colOptionDiv);
+colOptions.appendChild(colOptionsDiv);
 tableBodyrow.appendChild(colOptions);
 
-}
+tableBody.appendChild(tableBodyrow);
 
+//Adding of Event Listeners to Options Buttons
+
+favbutton.addEventListener("click", addSectorToFavorites());
+editbutton.addEventListener("click", editSector());
+deletebutton.addEventListener("click", deleteSector());
+}
 }
 
 //cleanSectorTable
 
 function cleanSectorTable(){
 
-  document.querySelector("#statusTable").innerHTML = "";
-
+  document.querySelector("#sectorTable").innerHTML = "";
 
 }
 
+function addSectorToFavorites(){
 
+    console.log("añadido a favoritos");
+    
+}
 
+function editSector(){
 
+  console.log("editado");
+}
+
+function deleteSector(){
+
+  console.log("borrado");
+}
 
 
 
