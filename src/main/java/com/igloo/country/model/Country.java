@@ -29,6 +29,12 @@ public class Country {
     @OneToMany(mappedBy="country"/**, fetch = FetchType.EAGER**/)
     private List<Region> regions = new LinkedList<Region>();
     
+    
+    
+	public Country() {
+		
+	}
+
 	public Country(String name, List<Region> regions) {
 		this.name = name;
 		this.regions = regions;

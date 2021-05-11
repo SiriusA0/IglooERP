@@ -49,7 +49,14 @@ public class Order {
     @JoinColumn(name = "sector_id")
     private Sector sector;
 
-    public Order(Date creationDate, Double totalAmount, Client client, Agent agent, Status status, Sector sector) {
+    
+    
+    
+    public Order() {
+	
+	}
+
+	public Order(Date creationDate, Double totalAmount, Client client, Agent agent, Status status, Sector sector) {
         this.creationDate = creationDate;
         this.totalAmount = totalAmount;
         this.client = client;

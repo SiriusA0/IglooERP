@@ -26,6 +26,13 @@ public class Payment {
 	
 	@OneToMany(mappedBy="payment"/**, fetch = FetchType.EAGER**/)
     private List<Invoice> invoices = new LinkedList<Invoice>();
+	
+	
+	
+
+	public Payment() {
+		
+	}
 
 	public Payment(String name, List<Invoice> invoices) {
 		this.name = name;

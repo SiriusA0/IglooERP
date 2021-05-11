@@ -25,6 +25,11 @@ public class City {
     @ManyToOne
     @JoinColumn(name="region_id")
     private Region region;
+    
+    
+
+	public City() {
+	}
 
 	public City(String name, Region region) {
 		this.name = name;

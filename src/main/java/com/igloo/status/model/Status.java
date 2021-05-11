@@ -32,6 +32,11 @@ public class Status {
 	//TODO
 	@OneToMany(mappedBy="status"/**, fetch = FetchType.EAGER**/)
     private List<Invoice> invoices = new LinkedList<Invoice>();
+	
+	
+
+	public Status() {
+	}
 
 	public Status(String name, List<Order> orders, List<Invoice> invoices) {
 		this.name = name;

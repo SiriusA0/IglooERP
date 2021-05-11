@@ -43,6 +43,11 @@ public class User {
     @Column(name="fav_clients")
     private String favClients;
     
+    
+    
+	public User() {
+	}
+
 	public User(String firstName, String lastName, String userName, String email, String phoneNumber, String job,
 			String password, String profilePic, String favAgents, String favClients) {
 		this.firstName = firstName;

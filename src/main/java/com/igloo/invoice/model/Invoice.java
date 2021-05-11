@@ -55,6 +55,12 @@ public class Invoice {
     @ManyToOne
     @JoinColumn(name = "sector_id")
     private Sector sector;
+    
+    
+
+	public Invoice() {
+	
+	}
 
 	public Invoice(Client client, Date creationDate, Date dueDate, Double preTax, Double afterTax, Status status,
 			Payment payment, Sector sector) {

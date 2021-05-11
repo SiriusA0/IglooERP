@@ -27,6 +27,12 @@ public class Region {
     @JoinColumn(name="country_id")
     private Country country;
     
+    
+    
+	public Region() {
+	
+	}
+
 	public Region(String name, List<City> cities, Country country) {
 		this.name = name;
 		this.cities = cities;
