@@ -9,13 +9,19 @@
 
     <script src="/src/main/resources/static/bootstrap/js/jquery-3.6.0.min.js"></script>
     <script src="/src/main/resources/static/bootstrap/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/src/main/resources/static/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="/src/main/resources/static/bootstrap/css/bootstrap.min.css"
+    />
     <!-- Fontawesome -->
-    <script src="https://kit.fontawesome.com/e22ea825df.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/e22ea825df.js"
+      crossorigin="anonymous"
+    ></script>
     <!-- Libraries -->
     <link rel="stylesheet" href="/src/main/resources/static/css/igloo.css" />
     <!-- Scripts -->
-    <script rel="stylesheet" href="/src/main/resources/static/js/settings.js"></script>
+    <script src="/src/main/resources/static/js/settings.js"></script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -40,27 +46,51 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <label class="nav-brand mr-5 mt-2" style="color: white; font-family: 'Titillium Web', sans-serif"
+          <label
+            class="nav-brand mr-5 mt-2"
+            style="color: white; font-family: 'Titillium Web', sans-serif"
             ><b>Settings</b></label
           >
-          <li role="button" onclick="window.location.href='/agent'" class="nav-item">
+          <li
+            role="button"
+            onclick="window.location.href='/agent'"
+            class="nav-item"
+          >
             <span class="nav-link">Agents</span>
           </li>
-          <li role="button" onclick="window.location.href='/client'" class="nav-item">
+          <li
+            role="button"
+            onclick="window.location.href='/client'"
+            class="nav-item"
+          >
             <span class="nav-link">Clients</span>
           </li>
-          <li role="button" onclick="window.location.href='/order'" class="nav-item">
+          <li
+            role="button"
+            onclick="window.location.href='/order'"
+            class="nav-item"
+          >
             <span class="nav-link">Orders</span>
           </li>
-          <li role="button" onclick="window.location.href='/invoice'" class="nav-item">
+          <li
+            role="button"
+            onclick="window.location.href='/invoice'"
+            class="nav-item"
+          >
             <span class="nav-link">Billing</span>
           </li>
-          <li role="button" onclick="window.location.href='/settings'" class="nav-item">
+          <li
+            role="button"
+            onclick="window.location.href='/settings'"
+            class="nav-item"
+          >
             <span class="nav-link">Settings</span>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><i style="color: white" class="fas fa-snowman"></i></li>
+          <li class="nav-item">
+            <i style="color: white" class="fas fa-snowman"></i>
+          </li>
         </ul>
       </div>
     </nav>
@@ -77,18 +107,28 @@
               <hr />
             </div>
           </div>
-            <!-- Show user button -->
-            <div class="row pt-4">
-                <div class="col">
-                  <button type="button" onclick="showUser()" class="btn btn-add btn-lg btn-block filterText">
-                    User Data
-                  </button>
-                </div>
-              </div>
+          <!-- Show user button -->
+          <div class="row pt-4">
+            <div class="col">
+              <button
+                type="button"
+                onclick="showUser()"
+                class="btn btn-add btn-lg btn-block filterText"
+                disabled
+              >
+                User Data
+              </button>
+            </div>
+          </div>
           <!-- Show countries button -->
           <div class="row pt-4">
             <div class="col">
-              <button type="button" onclick="showCountry()" class="btn btn-add btn-lg btn-block filterText">
+              <button
+                type="button"
+                onclick="showCountry()"
+                class="btn btn-add btn-lg btn-block filterText"
+                disabled
+              >
                 Countries
               </button>
             </div>
@@ -96,7 +136,12 @@
           <!-- Show regions button -->
           <div class="row pt-4">
             <div class="col">
-              <button type="button" onclick="showRegion()" class="btn btn-add btn-lg btn-block filterText">
+              <button
+                type="button"
+                onclick="showRegion()"
+                class="btn btn-add btn-lg btn-block filterText"
+                disabled
+              >
                 Regions
               </button>
             </div>
@@ -104,7 +149,12 @@
           <!-- Show cities button -->
           <div class="row pt-4">
             <div class="col">
-              <button type="button" onclick="showCity()" class="btn btn-add btn-lg btn-block filterText">
+              <button
+                type="button"
+                onclick="showCity()"
+                class="btn btn-add btn-lg btn-block filterText"
+                disabled
+              >
                 Cities
               </button>
             </div>
@@ -112,7 +162,11 @@
           <!-- Show sectors button -->
           <div class="row pt-4">
             <div class="col">
-              <button type="button" onclick="showSector()" class="btn btn-add btn-lg btn-block filterText">
+              <button
+                type="button"
+                onclick="showSector()"
+                class="btn btn-add btn-lg btn-block filterText"
+              >
                 Sectors
               </button>
             </div>
@@ -120,7 +174,11 @@
           <!-- Show statuses button -->
           <div class="row pt-4">
             <div class="col">
-              <button type="button" onclick="showStatus()" class="btn btn-add btn-lg btn-block filterText">
+              <button
+                type="button"
+                onclick="showStatus()"
+                class="btn btn-add btn-lg btn-block filterText"
+              >
                 Statuses
               </button>
             </div>
@@ -128,9 +186,324 @@
           <!-- Show payment statuses button -->
           <div class="row pt-4">
             <div class="col">
-              <button type="button" onclick="showPaymentStatus()" class="btn btn-add btn-lg btn-block filterText">
+              <button
+                type="button"
+                onclick="showPaymentStatus()"
+                class="btn btn-add btn-lg btn-block filterText"
+              >
                 Payment Statuses
               </button>
+            </div>
+          </div>
+        </div>
+        <!-- Forms -->
+        <div
+          class="col-10"
+          style="overflow: auto; height: 1000px; width: fit-content"
+        >
+          <!-- Sectors -->
+          <div class="row createForm m-5" id="sectorForm" style="display: none">
+            <div class="col-12">
+              <form>
+                <div class="row">
+                  <div class="col pb-3">
+                    <h2 class="filterTextDark">New Sector Form</h2>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label
+                    for="sectorName"
+                    class="col-sm-2 col-form-label col-form-label-lg"
+                    >Sector Name</label
+                  >
+                  <div class="col-sm-7">
+                    <input
+                      type="text"
+                      class="form-control form-control-lg"
+                      id="sectorName"
+                    />
+                  </div>
+                  <div class="col-sm-3">
+                    <button type="button" class="btn btn-add btn-block btn-lg">
+                      Add Sector
+                    </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div
+                    class="col-sm-12 alert alert-info"
+                    role="alert"
+                    style="display: none"
+                    id="successAlertSector"
+                  >
+                    Sector successfully added
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- Statuses -->
+          <div class="row createForm m-5" id="statusForm" style="display: none">
+            <div class="col-12">
+              <form>
+                <div class="row">
+                  <div class="col pb-3">
+                    <h2 class="filterTextDark">New Status Form</h2>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label
+                    for="statusName"
+                    class="col-sm-2 col-form-label col-form-label-lg"
+                    >Status Name</label
+                  >
+                  <div class="col-sm-7">
+                    <input
+                      type="text"
+                      class="form-control form-control-lg"
+                      id="statusName"
+                    />
+                  </div>
+                  <div class="col-sm-3">
+                    <button type="button" class="btn btn-add btn-block btn-lg">
+                      Add Status
+                    </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div
+                    class="col-sm-12 alert alert-info"
+                    role="alert"
+                    style="display: none"
+                    id="successAlertStatus"
+                  >
+                    Status successfully added
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- Payment Status -->
+          <div
+            class="row createForm m-5"
+            id="paymentStatusForm"
+            style="display: none"
+          >
+            <div class="col-12">
+              <form>
+                <div class="row">
+                  <div class="col pb-3">
+                    <h2 class="filterTextDark">New Payment Status Form</h2>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label
+                    for="paymentStatusName"
+                    class="col-sm-2 col-form-label col-form-label-lg"
+                    >Payment Status Name</label
+                  >
+                  <div class="col-sm-7">
+                    <input
+                      type="text"
+                      class="form-control form-control-lg"
+                      id="paymentStatusName"
+                    />
+                  </div>
+                  <div class="col-sm-3">
+                    <button type="button" class="btn btn-add btn-block btn-lg">
+                      Add Payment Status
+                    </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div
+                    class="col-sm-12 alert alert-info"
+                    role="alert"
+                    style="display: none"
+                    id="successAlertPaymentStatus"
+                  >
+                    Payment status successfully added
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Sector table -->
+          <div
+            class="row sectorTable m-5"
+            id="sectorTable"
+            style="display: none"
+          >
+            <div class="col-8 offset-2">
+              <table class="table table-hover">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Ref</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="sector : ${sectors}">
+                    <td><input type="checkbox" /></td>
+                    <td
+                      class="filterTextDark"
+                      th:text="${sector.id}"
+                      scope="row"
+                    >
+                      REF0000
+                    </td>
+                    <td class="filterTextDark" th:text="${sector.name}">
+                      Sector
+                    </td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <button
+                          type="button"
+                          onclick="sectorFav()"
+                          class="btn btn-secondary"
+                        >
+                          <i class="far fa-star"></i>
+                        </button>
+                        <button
+                          type="button"
+                          onclick="sectorEdit()"
+                          class="btn btn-secondary"
+                        >
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button
+                          type="button"
+                          onclick="sectorDelete()"
+                          class="btn btn-secondary"
+                        >
+                          <i class="fas fa-trash-alt"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- Status table -->
+          <div
+            class="row statusTable m-5"
+            id="statusTable"
+            style="display: none"
+          >
+            <div class="col-8 offset-2">
+              <table class="table table-hover">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Ref</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="status : ${statuses}">
+                    <td><input type="checkbox" /></td>
+                    <td
+                      class="filterTextDark"
+                      th:text="${status.id}"
+                      scope="row"
+                    >
+                      REF0000
+                    </td>
+                    <td class="filterTextDark" th:text="${status.name}">
+                      Status
+                    </td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <button
+                          type="button"
+                          onclick="statusFav()"
+                          class="btn btn-secondary"
+                        >
+                          <i class="far fa-star"></i>
+                        </button>
+                        <button
+                          type="button"
+                          onclick="statusEdit()"
+                          class="btn btn-secondary"
+                        >
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button
+                          type="button"
+                          onclick="statusDelete()"
+                          class="btn btn-secondary"
+                        >
+                          <i class="fas fa-trash-alt"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- Payment Status table -->
+          <div
+            class="row paymentStatusTable m-5"
+            id="paymentStatusTable"
+            style="display: none"
+          >
+            <div class="col-8 offset-2">
+              <table class="table table-hover">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Ref</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="paymentStatus : ${paymentStatuses}">
+                    <td><input type="checkbox" /></td>
+                    <td
+                      class="filterTextDark"
+                      th:text="${paymentStatus.id}"
+                      scope="row"
+                    >
+                      REF0000
+                    </td>
+                    <td class="filterTextDark" th:text="${paymentStatus.name}">
+                      Payment Status
+                    </td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <button
+                          type="button"
+                          onclick="paymentStatusFav()"
+                          class="btn btn-secondary"
+                        >
+                          <i class="far fa-star"></i>
+                        </button>
+                        <button
+                          type="button"
+                          onclick="paymentStatusEdit()"
+                          class="btn btn-secondary"
+                        >
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button
+                          type="button"
+                          onclick="paymentStatusDelete()"
+                          class="btn btn-secondary"
+                        >
+                          <i class="fas fa-trash-alt"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
