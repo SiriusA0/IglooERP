@@ -1,6 +1,6 @@
 // Server
 var server_url = "http://localhost:8080/";
-// Load all clients
+////////////////////////////////////// Load all clients //////////////////////////////////////
 function showClients() {
   fetch("http://localhost:8080/api/client/show")
     .then((r) => r.json())
@@ -10,7 +10,7 @@ function showClients() {
     });
 }
 
-// Show client form
+////////////////////////////////////// Show client form //////////////////////////////////////
 function addClient() {
   if (document.querySelector("#clientForm").style.display == "none") {
     document.querySelector("#clientForm").style.display = "";
@@ -20,10 +20,9 @@ function addClient() {
   }
 }
 
-// Create Client
+////////////////////////////////////// Create Client //////////////////////////////////////
 function createClient() {
   // Getting the values of the form.
-
   var type = document.querySelector("input[name=typeOfClient").value;
   var clientName = document.querySelector("input[name=clientName").value;
   clientName = clientName.split(" ");
@@ -43,6 +42,7 @@ function createClient() {
   var categoryId = document.querySelector("select[name=category]").value;
   var profilePic = document.querySelector("input[name=profilePic]").value;
 
+  // Making the URL.
   var formData =
     "type" +
     "=" +
@@ -116,7 +116,7 @@ function createClient() {
       console.log("Added agent: " + newClient.firstName);
     });
 }
-// Selection
+////////////////////////////////////// Selection //////////////////////////////////////
 var clientsSelected = [];
 function selectForDelete(event) {
   var clientCard = event.currentTarget.closest(".card");
@@ -150,7 +150,7 @@ function deleteClients() {
       clientsSelected.splice(0, clientsSelected.length);
     });
 }
-// Search Client Button
+////////////////////////////////////// Search Client //////////////////////////////////////
 function searchClient() {
   var searchTerm = document.querySelector("#searchTerm").value;
   var urlFinal = server_url + "/api/client/search?" + getQueryVars(searchTerm);
@@ -162,7 +162,11 @@ function searchClient() {
       fillList(clients);
     });
 }
-// Order by Last Name
+// Query Vars
+function getQueryVars(searchTerm) {
+  return "searchTerm=" + searchTerm;
+}
+////////////////////////////////////// Order by Last Name //////////////////////////////////////
 function lastNameClientAsc() {
   var urlFinal = server_url + "/api/client/orderbylastnameasc";
 
@@ -183,7 +187,7 @@ function lastNameClientDesc() {
       fillList(clients);
     });
 }
-// Order by ID
+////////////////////////////////////// Order by ID //////////////////////////////////////
 function idClientAsc() {
   var urlFinal = server_url + "/api/client/orderbyidasc";
 
@@ -204,122 +208,39 @@ function idClientDesc() {
       fillList(clients);
     });
 }
-// Clean Client
+////////////////////////////////////// Clean Client //////////////////////////////////////
 function cleanList(event) {
   document.querySelector("#clientsContainer").innerHTML = "";
 }
-// Fill Client
+////////////////////////////////////// Fill Client //////////////////////////////////////
 function fillList(clients) {
-  var clientsContainer = document.querySelector("#clientsContainer");
 
-  for (i in clients) {
-    // Client Card
+    // Creating the profile picture container
 
-    var clientCol = document.createElement("div");
-    clientCol.className = "col mb-4";
 
-    var clientCard = document.createElement("div");
-    clientCard.className = "card h-90 w-80";
 
-    // Card Content
 
-    // Icons
 
-    var cardIcons = document.createElement("div");
-    cardIcons.className = "row pt-2 pl-2 pr-2 d-flex justify-content-between";
 
-    var favContainer = document.createElement("div");
-    favContainer.className = "col-3";
 
-    var favIcon = document.createElement("i");
-    favIcon.setAttribute("type", "button");
-    favIcon.className = "far fa-star cardIcon";
 
-    var binContainer = document.createElement("div");
-    binContainer.className = "col-3";
 
-    var binIcon = document.createElement("i");
-    binIcon.setAttribute("type", "button");
-    binIcon.className = "fas fa-trash-alt d-flex justify-content-end cardIcon";
-    binIcon.addEventListener("click", function (event) {
-      selectForDelete(event);
-    });
 
-    // Appends
-
-    favContainer.appendChild(favIcon);
-    binContainer.appendChild(binIcon);
-    cardIcons.appendChild(favContainer);
-    cardIcons.appendChild(binContainer);
-
-    // Img and text
-
-    var cardContent = document.createElement("div");
-    cardContent.className = "row";
-
-    var cardContentCol = document.createElement("div");
-    cardContentCol.className = "col";
-
-    var containerImg = document.createElement("div");
-    containerImg.className = "clientProfilePic";
-
-    var cardImg = document.createElement("img");
-    cardImg.className = "card-img-top";
-    cardImg.src = clients[i].profilePic;
-
-    var cardBody = document.createElement("div");
-    cardBody.className = "card-body";
-
-    var cardBodyRow = document.createElement("div");
-    cardBodyRow.className = "row";
-
-    var cardNameCol = document.createElement("div");
-    cardNameCol.className = "col-8";
-
-    var cardIdCol = document.createElement("div");
-    cardIdCol.className = "col-4";
-
-    var cardName = document.createElement("h5");
-    cardName.className = "card-title";
-    cardName.innerHTML = clients[i].firstName + " " + clients[i].lastName;
-
-    var cardId = document.createElement("h5");
-    cardId.className = "card-title cardId";
-    cardId.innerHTML = "#00" + clients[i].id;
-
-    var cardEmail = document.createElement("p");
-    cardEmail.className = "card-text";
-    cardEmail.innerHTML = clients[i].email;
-
-    // Appends
-
-    cardNameCol.appendChild(cardName);
-    cardIdCol.appendChild(cardId);
-
-    cardBodyRow.appendChild(cardNameCol);
-    cardBodyRow.appendChild(cardIdCol);
-
-    cardBody.appendChild(cardBodyRow);
-
-    cardBody.appendChild(cardEmail);
-
-    containerImg.appendChild(cardImg);
-    cardContentCol.appendChild(containerImg);
-    cardContentCol.appendChild(cardBody);
-
-    cardContent.appendChild(cardContentCol);
-
-    // Client Card Appends
-
-    clientCard.appendChild(cardIcons);
-    clientCard.appendChild(cardContent);
-
-    clientCol.appendChild(clientCard);
-
-    clientsContainer.appendChild(clientCol);
-  }
 }
-// Query Vars
-function getQueryVars(searchTerm) {
-  return "searchTerm=" + searchTerm;
-}
+
+/*
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="..." alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+*/

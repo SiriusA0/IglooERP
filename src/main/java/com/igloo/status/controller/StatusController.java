@@ -24,8 +24,8 @@ public class StatusController {
 	
 	@GetMapping("/api/status/add")
     @ResponseBody
-    public Status add_API(@RequestParam String name) {
+    public Status add_API(@RequestParam String statusName) {
 
-        return statusservice.createStatus(name);
+        return statusservice.createStatus(statusName);
     }
 }

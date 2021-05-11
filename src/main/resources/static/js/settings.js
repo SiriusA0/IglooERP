@@ -214,7 +214,7 @@ function createStatus(){
   fetch(urlFinal)
           .then(r => r.json())
           .then(newstatus => {
-              console.log("Added status: " + newstatus.statusName);
+              console.log("Added status: " + newstatus.name);
           });
   
   document.querySelector("#statusName").value = "";
