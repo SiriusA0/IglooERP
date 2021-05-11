@@ -41,6 +41,7 @@ function createClient() {
   var web = document.querySelector("input[name=webPage]").value;
   var idNumber = document.querySelector("input[name=nif]").value;
   var categoryId = document.querySelector("select[name=category]").value;
+  var profilePic = document.querySelector("input[name=profilePic]").value;
 
   var formData =
     "type" +
@@ -98,6 +99,10 @@ function createClient() {
     "web" +
     "=" +
     web +
+    "&" +
+    "profilePic" +
+    "=" +
+    profilePic +
     "&" +
     "categoryId" +
     "=" +
