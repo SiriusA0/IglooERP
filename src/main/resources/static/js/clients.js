@@ -215,17 +215,47 @@ function cleanList(event) {
 ////////////////////////////////////// Fill Client //////////////////////////////////////
 function fillList(clients) {
 
-    // Creating the profile picture container
+  var cardContainer=document.querySelector("#clientsContainer");
+  for (i in clients){
+  var cardBox=document.createElement("div");
+  cardBox.className="card mb-3";
+  cardBox.style="max-width: 1080px;"
+  cardContainer.appendChild(cardBox);
 
+  var cardRow=document.createElement("div");
+  cardRow.className="row no-gutters";
+  cardContainer.appendChild(cardRow);
 
+  var cardFirstCol=document.createElement("div");
+  cardFirstCol.className="col-md-4";
+  cardRow.appendChild(cardFirstCol);
 
+  var cardImg=document.createElement("img");
+  cardImg.src=clients[i].profilePic;
+  cardFirstCol.appendChild(cardImg);
 
+  var cardSecondCol=document.createElement("div");
+  cardSecondCol.className="col-md-8";
+  cardRow.appendChild(cardSecondCol);
 
+  var cardBody=document.createElement("div");
+  cardBody.className="card-body";
+  cardSecondCol.appendChild(cardBody);   
 
+  var clientName=document.createElement("h5");
+  clientName.className="card-title"
+  clientName.innerHTML=clients[i].firstName + " " + clients[i].lastName
+  cardBody.appendChild(clientName)
+  
+  var clientEmail=document.createElement("p");
+  clientEmail.className="card-text";
+  clientEmail.innerHTML=clients[i].email;
+  cardBody.appendChild(clientEmail);
 
-
-
-
+  var clientLocation=document.createElement("p");
+  clientLocation.className="card-text"
+  clientEmail.innerHTML=clients[i].city + ", " +  clients[i].country + "."
+  }
 }
 
 /*
