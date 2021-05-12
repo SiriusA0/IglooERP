@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -24,6 +25,8 @@ public class OrderServices {
     private OrderAdapter orderadapter;
     @Autowired
     private ClientRepository clientRepository;
+    @Autowired
+    private AgentRepository agentRepository;
     @Autowired
     private ClientAdapter clientAdapter;
     
@@ -47,30 +50,33 @@ public class OrderServices {
     			
     			List <Client> clients = clientRepository.findByFirstNameContainingOrLastNameContaining(term, term);
     			
-    			
+    			orders = new LinkedList<>();
     			
     			for(Client client : clients) {
     				
-    				orders = orderRepo.findByClient(client);
-    				
+    				for(Order order : client.getOrders()) {
+    					
+    					orders.add(order);
+    				}
     			}
     			
     			
+    		}else if(option == "agent") {
+    			
+    			List <Agent> agents = agentRepository.findByFirstNameContainingOrLastNameContaining(term, term);
+    			
+    			orders = new LinkedList<>();
+    			
+    			for(Agent agent : agents) {
+    				
+    				for(Order order : agent.getOrders()) {
+    					
+    					orders.add(order);
+    				}
+    			}	
     		}
-    		
-    		
+  
     	}
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
     	
     	return orderadapter.of(orders);
     }
