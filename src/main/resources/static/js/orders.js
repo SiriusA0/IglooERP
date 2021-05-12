@@ -18,27 +18,27 @@ function getOrders(action, sortTerm, sortMethod) {
   var finalRequest;
   // Action selector
   switch (action) {
-    case "sort": // Sort request /api/order/get?action=sort&sortmethod=asc&sortterm=amount
+    case "sort": // Sort request
       // Sort Definition.
       sortRequest = request + "?action=sort&";
       // Request Parameters.
-      finalRequest = sortRequest + "sortmethod=" + sortMethod + "&" + "sortterm=" + sortTerm;
+      finalRequest = sortRequest + "option=" + sortMethod + "&" + "term=" + sortTerm;
       break;
 
-    case "searchClient": // Search by request client /api/order/get?action=search&searchtermclient=clientname
+    case "searchClient": // Search by request client
       // Search Definition.
       var searchRequest = request + "?action=search&";
       // Request Parameter.
       var searchTerm = document.querySelector("#searchTermClient").value;
-      finalRequest = searchRequest + "searchtermclient=" + searchTerm;
+      finalRequest = searchRequest + "option=client&term=" + searchTerm;
       break;
 
-    case "searchAgent": // Search by request agent  /api/order/get?action=search&searchtermagent=agentname
+    case "searchAgent": // Search by request agent
       // Search Definition.
       var searchRequest = request + "?action=search&";
       // Request Parameter.
       var searchTerm = document.querySelector("#searchTermAgent").value;
-      finalRequest = searchRequest + "searchtermagent=" + searchTerm;
+      finalRequest = searchRequest + "option=agent&term=" + searchTerm;
       break;
 
     default:
@@ -47,7 +47,7 @@ function getOrders(action, sortTerm, sortMethod) {
       finalRequest = request;
   }
   // Fetch request.
-  fetch(finalrequest)
+  fetch(finalRequest)
     .then((r) => r.json())
     .then((orders) => {
       cleanTable();
@@ -61,6 +61,32 @@ function showCreateForm() {
   } else {
     document.querySelector("#successAlert").style.display = "none";
     document.querySelector("#orderForm").style.display = "none";
+  }
+}
+////////// Show EDIT form //////////
+function showEditForm(event) {
+  if (document.querySelector("#orderEditForm").style.display == "none") {
+    document.querySelector("#orderEditForm").style.display = "";
+    // Get order atributes.
+    var orderrow = event.currentTarget.closest("tr");
+    var orderid = orderrow.querySelector(".id").innerHTML;
+
+    // Fetch request.
+    fetch("/api/order/find?id=" + orderid)
+      .then((r) => r.json())
+      .then((orderToEdit) => {
+        console.log("Selected order: " + orderToEdit.id);
+      });
+
+    // Get order old atributes.
+    document.querySelector("input[name=totalAmountEdit").value = orderToEdit.totalAmount;
+    document.querySelector("select[name=clientIdEdit").value = orderToEdit.clientId;
+    document.querySelector("select[name=agentIdEdit").value = orderToEdit.agentId;
+    document.querySelector("select[name=statusIdEdit").value = orderToEdit.statusId;
+    document.querySelector("select[name=sectorIdEdit").value = orderToEdit.sectorId;
+  } else {
+    document.querySelector("#successEditAlert").style.display = "none";
+    document.querySelector("#orderEditForm").style.display = "none";
   }
 }
 ////////// Method CREATE //////////
@@ -91,7 +117,7 @@ function createOrder() {
   finalRequest = creationRequest;
 
   // Fetch request.
-  fetch(finalrequest)
+  fetch(finalRequest)
     .then((r) => r.json())
     .then((neworder) => {
       console.log("Added order: " + neworder.id);
@@ -99,33 +125,16 @@ function createOrder() {
 
   //Clean form
   document.querySelector("input[name=totalAmount").value = "";
-  document.querySelector("select[name=clientId").value = "";
-  document.querySelector("select[name=agentId").value = "";
-  document.querySelector("select[name=statusId").value = "";
-  document.querySelector("select[name=sectorId").value = "";
+  document.querySelector("select[name=clientId").value = "1";
+  document.querySelector("select[name=agentId").value = "1";
+  document.querySelector("select[name=statusId").value = "1";
+  document.querySelector("select[name=sectorId").value = "1";
 }
-////////// Method CREATE //////////
-function editOrder(event) {
+////////// Method EDIT //////////
+function editOrder() {
   // Request Definition.
   var request = server_url + "/api/order/add?";
   var finalRequest;
-
-  // Get order atributes.
-  var orderid = event.currentTarget.closest("input[class=card]").id;
-
-  // Fetch request.
-  fetch("/api/order/find?id=" + orderid)
-    .then((r) => r.json())
-    .then((orderToEdit) => {
-      console.log("Selected order: " + orderToEdit.id);
-    });
-
-  // Get order old atributes.
-  document.querySelector("input[name=totalAmount").value = orderToEdit.totalAmount;
-  document.querySelector("select[name=clientId").value = orderToEdit.clientId;
-  document.querySelector("select[name=agentId").value = orderToEdit.agentId;
-  document.querySelector("select[name=statusId").value = orderToEdit.statusId;
-  document.querySelector("select[name=sectorId").value = orderToEdit.sectorId;
 
   // Get order new atributes.
   var totalAmount = document.querySelector("input[name=totalAmount").value;
@@ -138,7 +147,7 @@ function editOrder(event) {
     request +
     "totalamount=" +
     totalAmount +
-    "&clientdd=" +
+    "&clientid=" +
     clientId +
     "&agentid=" +
     agentId +
@@ -150,18 +159,18 @@ function editOrder(event) {
   finalRequest = editRequest;
 
   // Fetch request.
-  fetch(finalrequest)
+  fetch(finalRequest)
     .then((r) => r.json())
-    .then((neworder) => {
-      console.log("Edited order: " + neworder.id);
+    .then((editedOrder) => {
+      console.log("Edited order: " + editedOrder.id);
     });
 
   //Clean form
   document.querySelector("input[name=totalAmount").value = "";
-  document.querySelector("select[name=clientId").value = "";
-  document.querySelector("select[name=agentId").value = "";
-  document.querySelector("select[name=statusId").value = "";
-  document.querySelector("select[name=sectorId").value = "";
+  document.querySelector("select[name=clientId").value = "1";
+  document.querySelector("select[name=agentId").value = "1";
+  document.querySelector("select[name=statusId").value = "1";
+  document.querySelector("select[name=sectorId").value = "1";
 }
 ////////// Method DELETE //////////
 function deleteOrder(event) {
@@ -169,14 +178,16 @@ function deleteOrder(event) {
   var request = server_url + "/api/order/delete?";
   var finalRequest = "";
   // Get order atributes.
-  var orderid = event.currentTarget.closest("input[class=card]").id;
+  // Get order atributes.
+  var orderrow = event.currentTarget.closest("tr");
+  var orderid = orderrow.querySelector(".id").innerHTML;
 
   var deleteRequest = request + "orderid=" + orderid;
 
   finalRequest = deleteRequest;
 
   // Fetch request.
-  fetch(finalrequest)
+  fetch(finalRequest)
     .then((r) => r.json())
     .then((neworder) => {
       console.log("Added order: " + neworder.id);
@@ -201,49 +212,46 @@ function fillTable(orders) {
 
     //  ID Column
     var idCol = document.createElement("td");
-    idColContent.className = "filterTextDark";
-    idColContent.innerHTML = orders[i].id;
-    idCol.appendChild(idColContent);
+    idCol.className = "filterTextDark";
+    idCol.innerHTML = orders[i].id;
     row.appendChild(idCol);
 
     //  Date Column
     var dateCol = document.createElement("td");
-    dateColContent.className = "filterTextDark";
-    dateColContent.innerHTML = orders[i].creationDate;
-    dateCol.appendChild(dateColContent);
+    dateCol.className = "filterTextDark";
+    dateCol.innerHTML = orders[i].creationDate;
     row.appendChild(dateCol);
 
     //  Client Column
     var clientCol = document.createElement("td");
-    clientColContent.className = "filterTextDark";
-    clientColContent.innerHTML = orders[i].client;
-    clientCol.appendChild(clientColContent);
+    clientCol.className = "filterTextDark";
+    clientCol.innerHTML = orders[i].client;
     row.appendChild(clientCol);
 
     //  Agent Column
     var agentCol = document.createElement("td");
-    agentColContent.className = "filterTextDark";
-    agentColContent.innerHTML = orders[i].agent;
-    agentCol.appendChild(agentColContent);
+    agentCol.className = "filterTextDark";
+    agentCol.innerHTML = orders[i].agent;
     row.appendChild(agentCol);
 
     //  Total Amount Column
     var totalAmountCol = document.createElement("td");
-    totalAmountColContent.className = "filterTextDark";
-    totalAmountColContent.innerHTML = orders[i].totalAmount;
-    totalAmountCol.appendChild(totalAmountColContent);
+    totalAmountCol.className = "filterTextDark";
+    totalAmountCol.innerHTML = orders[i].totalAmount;
     row.appendChild(totalAmountCol);
 
     //  Total Status Column
     var statusCol = document.createElement("td");
-    statusColContent.className = "filterTextDark";
-    statusColContent.innerHTML = orders[i].status;
-    statusCol.appendChild(statusColContent);
+    statusCol.className = "filterTextDark";
+    statusCol.innerHTML = orders[i].status;
     row.appendChild(statusCol);
 
     //  Actions Column
     var actionsCol = document.createElement("td");
-    actionsColContent.className = "filterTextDark";
+    actionsCol.className = "filterTextDark";
+    var buttogroup = document.createElement("div");
+    buttogroup.className = "btn-group";
+    buttogroup.role = "group";
 
     var favbutton = document.createElement("button");
     favbutton.type = "button";
@@ -254,7 +262,7 @@ function fillTable(orders) {
       favoriteOrder(event);
     });
     favbutton.appendChild(favIcon);
-    actionsColContent.appendChild(favbutton);
+    buttogroup.appendChild(favbutton);
 
     var editbutton = document.createElement("button");
     editbutton.type = "button";
@@ -262,10 +270,10 @@ function fillTable(orders) {
     var editIcon = document.createElement("i");
     editIcon.className = "fas fa-edit";
     editIcon.addEventListener("click", function (event) {
-      editOrder(event);
+      showEditForm(event);
     });
     editbutton.appendChild(editIcon);
-    actionsColContent.appendChild(editbutton);
+    buttogroup.appendChild(editbutton);
 
     var deletebutton = document.createElement("button");
     deletebutton.type = "button";
@@ -276,9 +284,9 @@ function fillTable(orders) {
       deleteOrder(event);
     });
     deletebutton.appendChild(deleteIcon);
-    actionsColContent.appendChild(deletebutton);
+    buttogroup.appendChild(deletebutton);
 
-    actionsCol.appendChild(actionsColContent);
+    actionsCol.appendChild(buttogroup);
     row.appendChild(actionsCol);
   }
 }

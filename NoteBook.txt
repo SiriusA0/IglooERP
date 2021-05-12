@@ -1,4 +1,6 @@
 // Planing Fin de semana del infierno
+PIJADAS - COLORES STATUS
+
 
         0.  Repasar modelo de datos, coordinar nombre atributos entre bbdd y clases java.
         1.  Terminar barra lateral e implementarla junto con navbar en todos los html.
