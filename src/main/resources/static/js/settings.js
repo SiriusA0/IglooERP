@@ -1,8 +1,5 @@
 //url inicial
 var server_url = 'http://localhost:8080/';
-//var sectors=[{"id":1 ,"name":"hola"}, {"id":3 , "name":"holffff"},{"id":4 , "name":"holiiffff"}];
-
-
 
 // Sector
 function showSectorON() {
@@ -79,7 +76,7 @@ var tableHeadContainer=document.createElement("thead");
 tableHeadContainer.className="thead-dark";
 
 var tableFirstRow=document.createElement("tr");
-var thFirstColumn=document.createElement("th");
+//var thFirstColumn=document.createElement("th");
 var thRefCol=document.createElement("th");
 thRefCol.innerHTML="Ref";
 var thNameCol=document.createElement("th");
@@ -88,7 +85,7 @@ var thAction=document.createElement("th");
 thAction.innerHTML="Actions";
 
 
-tableFirstRow.appendChild(thFirstColumn);
+//tableFirstRow.appendChild(thFirstColumn);
 tableFirstRow.appendChild(thRefCol);
 tableFirstRow.appendChild(thNameCol);
 tableFirstRow.appendChild(thAction);
@@ -105,11 +102,13 @@ tableContainer.appendChild(tableBody);
 for (i in sectors){
 var tableBodyrow=document.createElement("tr");
 
-var tableBodyCol1=document.createElement("td");
-var col1Check=document.createElement("input");
-col1Check.setAttribute("type", "checkbox");
-tableBodyCol1.appendChild(col1Check);
-tableBodyrow.appendChild(tableBodyCol1);
+// CheckBOX column for next version improvements
+
+//var tableBodyCol1=document.createElement("td");
+//var col1Check=document.createElement("input");
+//col1Check.setAttribute("type", "checkbox");
+//tableBodyCol1.appendChild(col1Check);
+//tableBodyrow.appendChild(tableBodyCol1);
 
 var colRef=document.createElement("td");
 colRef.className="idcolumn";
@@ -162,7 +161,7 @@ tableBody.appendChild(tableBodyrow);
 //Adding of Event Listeners to Options Buttons
 
 favbutton.addEventListener("click", addSectorToFavorites());
-editbutton.addEventListener("click", editSector());
+editbutton.addEventListener("click",function (event) { editSector(event) });
 deletebutton.addEventListener("click",function (event) { deleteSector(event) });
 }
 }
@@ -214,6 +213,23 @@ function deleteSector(event) {
 
 
 
+function editSector(event) {
+
+  var rowToEdit=event.currentTarget.closest("tr");
+  var columnIdToEdit=rowToEdit.querySelector(".idcolumn");
+  var rawId=columnIdToEdit.innerHTML;
+  var idtoedit=rawId.replace("REF00", "");
+  
+
+  var urlFinal = server_url + '/api/sector/edit?' + "idtoedit=" + idtoedit;
+
+  fetch(urlFinal)
+      .then(r => r.json())
+      .then(sectors => {
+          cleanSectorTable()
+          fillSectorTable(sectors)
+      });
+}
 
 
 
