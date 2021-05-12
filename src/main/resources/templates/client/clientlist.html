@@ -488,10 +488,10 @@
             </div>
           </div>
           <div
-            class="row row-cols-md-2 mr-5 mb-5 "
+            class="row row-cols-md-2 m-2 "  
             id="clientsContainer"
-          ><!-- style="max-width: 1080px;" -->
-            <div th:each="client:${clients}" class="card mb-3" >
+          ><!-- (linea 491)row-cols-md-2 mb-5 ------ style="max-width: 1080px;" -->
+            <div th:each="client:${clients}" style="max-width: 540px;" class="card mb-3" >
               <div class="row">
                 <div class="col-md-4">
                   <img th:src="${client.profilePic}" alt="...">
