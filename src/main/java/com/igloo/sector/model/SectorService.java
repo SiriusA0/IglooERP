@@ -12,10 +12,15 @@ public class SectorService {
 		@Autowired
 		SectorRepository secorrepository;
 		
-		public List<Sector> showSector() {
-			
-			return secorrepository.findAll();
-		}
+		@Autowired
+		SectorAdapter sectorAdapter;
+		
+		  public List<SectorResponse> showSector() {
+			  
+		         List<Sector> sectors = secorrepository.findAll();
+		         
+		        return sectorAdapter.of(sectors);
+		    }
 	
 		public Sector createSector(String name){
 		

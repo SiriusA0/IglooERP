@@ -27,8 +27,8 @@ public class SectorController {
     }
 	
 	 @GetMapping("/api/sector/show")
-	    @ResponseBody
-	    public List<Sector> find_API() {
+	 @ResponseBody
+	 public List<SectorResponse> find_API() {
 		 
 	        return sectorservice.showSector();
 	    }
