@@ -7,8 +7,12 @@ import org.springframework.stereotype.Service;
 import com.igloo.category.service.CategoryRepository;
 import com.igloo.city.service.CityRepository;
 import com.igloo.client.model.Client;
+import com.igloo.client.response.ClientAdapter;
+import com.igloo.client.response.ClientResponse;
 import com.igloo.country.service.CountryRepository;
 import com.igloo.region.service.RegionRepository;
+import com.igloo.sector.model.Sector;
+import com.igloo.sector.model.SectorResponse;
 
 
 @Service
@@ -23,36 +27,44 @@ public class ClientService {
     private CityRepository cityRepository;
 	@Autowired
     private CategoryRepository categoryRepository;
+	@Autowired
+	private ClientAdapter clientadapter;
 	
-    public List<Client> get() {
+	  public List<ClientResponse> get() {
+		  
+	         List<Client> clients = clientRepository.findAll();
+	         
+	        return clientadapter.of(clients);
+	    }
 
-        return clientRepository.findAll();
+    public List<ClientResponse> search(String searchTerm) {
 
+    	List<Client> clients = clientRepository.findByFirstNameContainingOrLastNameContaining(searchTerm, searchTerm);
+    	return clientadapter.of(clients);
     }
 
-    public List<Client> search(String searchTerm) {
+    public List<ClientResponse> ascLastName() {
 
-        return clientRepository.findByFirstNameContainingOrLastNameContaining(searchTerm, searchTerm);
+    	List<Client> clients = clientRepository.findAllByOrderByLastNameAsc();
+    	return clientadapter.of(clients);
     }
 
-    public List<Client> ascLastName() {
+    public List<ClientResponse> descLastName() {
 
-        return clientRepository.findAllByOrderByLastNameAsc();
+    	List<Client> clients = clientRepository.findAllByOrderByLastNameDesc();
+    	return clientadapter.of(clients);
     }
 
-    public List<Client> descLastName() {
+    public List<ClientResponse> ascId() {
 
-        return clientRepository.findAllByOrderByLastNameDesc();
+    	List<Client> clients = clientRepository.findAllByOrderByIdAsc();
+    	return clientadapter.of(clients);
     }
 
-    public List<Client> ascId() {
+    public List<ClientResponse> descId() {
 
-        return clientRepository.findAllByOrderByIdAsc();
-    }
-
-    public List<Client> descId() {
-
-        return clientRepository.findAllByOrderByIdDesc();
+    	List<Client> clients = clientRepository.findAllByOrderByIdDesc();
+    	return clientadapter.of(clients);
     }
 
     public Client add(char type, String firstName, String lastName, String streetLine1, String streetLine2, Integer cityId, Integer regionId, Integer zipCode,

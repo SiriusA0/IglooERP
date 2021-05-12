@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.igloo.client.model.Client;
+import com.igloo.client.response.ClientResponse;
 import com.igloo.client.service.ClientService;
 import com.igloo.country.service.CountryRepository;
 
@@ -24,7 +25,7 @@ public class ClientController {
     @GetMapping("/client")
     public String readAgent(Model model) {
 
-        List<Client> clients = clientService.get();
+        List<ClientResponse> clients = clientService.get();
 
         model.addAttribute("clients", clients);
 
@@ -57,7 +58,7 @@ public class ClientController {
 
     @GetMapping("/api/client/search")
     @ResponseBody
-    public List<Client> find_API(@RequestParam String searchTerm) {
+    public List<ClientResponse> find_API(@RequestParam String searchTerm) {
         return clientService.search(searchTerm);
     }
 
@@ -72,6 +73,7 @@ public class ClientController {
         		phoneNumber1, phoneNumber2, email, web, profilePic,categoryId);
     }
 
+    /*
     @GetMapping("/api/client/delete")
     @ResponseBody
     public List<Client> delete_API(@RequestParam String idtodelete) {
@@ -79,28 +81,29 @@ public class ClientController {
         clientService.delete(idtodelete);
         return clientService.get();
     }
+    */
 
     @GetMapping("/api/client/orderbylastnameasc")
     @ResponseBody
-    public List<Client> ascLastName_API() {
+    public List<ClientResponse> ascLastName_API() {
         return clientService.ascLastName();
     }
 
     @GetMapping("/api/client/orderbylastnamedesc")
     @ResponseBody
-    public List<Client> descLastName_API() {
+    public List<ClientResponse> descLastName_API() {
         return clientService.descLastName();
     }
 
     @GetMapping("/api/client/orderbyidasc")
     @ResponseBody
-    public List<Client> ascId_API() {
+    public List<ClientResponse> ascId_API() {
         return clientService.ascId();
     }
 
     @GetMapping("/api/client/orderbyiddesc")
     @ResponseBody
-    public List<Client> descId_API() {
+    public List<ClientResponse> descId_API() {
         return clientService.descId();
     }
 	
