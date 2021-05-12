@@ -77,9 +77,9 @@
               <div class="col">
                 <div class="input-group">
                   <input
-                    onkeyup="searchOrderByClient()"
+                    onkeyup="getOrders('searchClient',null,null)"
                     type="text"
-                    id="searchTerm"
+                    id="searchTermClient"
                     class="form-control search filterText"
                   />
                 </div>
@@ -90,8 +90,8 @@
                 <small class="filterText ml-1">Find Orders by clients</small>
                 <button
                   type="button"
-                  name="searchTerm"
-                  onclick="searchOrderByClient()"
+                  name="searchTermClient"
+                  onclick="getOrders('searchClient',null,null)"
                   class="btn btn-sm btn-search filterText"
                 >
                   Search
@@ -103,9 +103,9 @@
             <div class="col">
               <div class="input-group">
                 <input
-                  onkeyup="searchOrderByAgent()"
+                  onkeyup="getOrders('searchAgent',null,null)"
                   type="text"
-                  id="searchTerm"
+                  id="searchTermAgent"
                   class="form-control search filterText"
                 />
               </div>
@@ -116,8 +116,8 @@
               <small class="filterText ml-1">Find Orders by agent</small>
               <button
                 type="button"
-                name="searchTerm"
-                onclick="searchOrderByAgent()"
+                name="searchTermAgent"
+                onclick="getOrders('searchAgent',null,null)"
                 class="btn btn-sm btn-search filterText"
               >
                 Search
@@ -135,53 +135,53 @@
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="idOrderAsc()"
-                id="idOrderAsc"
+                onclick="getOrders('sort', 'totalAmount', 'asc')"
+                id="totalAmountOrderAsc"
                 type="button"
                 class="fas fa-sort-numeric-up-alt filterIcons"
               ></i>
             </div>
             <div class="col-10">
-              <label for="idOrderAsc" class="filterText">Order by ID (Asc)</label>
+              <label for="totalAmountOrderAsc" class="filterText">Order by Total Amount (Asc)</label>
             </div>
           </div>
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="idOrderDesc()"
-                id="idOrderDesc"
+                onclick="getOrders('sort', 'totalAmount', 'des')"
+                id="totalAmountOrderDes"
                 type="button"
                 class="fas fa-sort-numeric-down-alt filterIcons"
               ></i>
             </div>
             <div class="col-10">
-              <label for="idOrderDesc" class="filterText">Order by ID (Des)</label>
+              <label for="totalAmountOrderDes" class="filterText">Order by Total Amount (Des)</label>
             </div>
           </div>
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="amountOrderAsc()"
-                id="amountOrderAsc"
+                onclick="getOrders('sort', 'date', 'asc')"
+                id="datOrderAsc"
                 type="button"
                 class="fas fa-sort-alpha-up-alt filterIcons"
               ></i>
             </div>
             <div class="col-10">
-              <label for="amountOrderAsc" class="filterText">Order by Amount (Asc)</label>
+              <label for="datOrderAsc" class="filterText">Order by Date (Asc)</label>
             </div>
           </div>
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="amountOrderDesc()"
-                id="amountOrderDesc"
+                onclick="getOrders('sort', 'date', 'des')"
+                id="dateOrderDes"
                 type="button"
                 class="fas fa-sort-alpha-down-alt filterIcons"
               ></i>
             </div>
             <div class="col-10">
-              <label for="amountOrderDesc" class="filterText">Order by Amount (Des)</label>
+              <label for="dateOrderDes" class="filterText">Order by Date (Des)</label>
             </div>
           </div>
           <div class="row">
@@ -191,14 +191,14 @@
           </div>
           <div class="row pt-4">
             <div class="col">
-              <button type="button" onclick="addOrder()" class="btn btn-add btn-lg btn-block filterText">
+              <button type="button" onclick="showCreateForm()" class="btn btn-add btn-lg btn-block filterText">
                 Add Order
               </button>
             </div>
           </div>
           <div class="row pt-4">
             <div class="col">
-              <button type="button" onclick="deleteOrders()" class="btn btn-del btn-lg btn-block filterText">
+              <button type="button" onclick="batchDeleteOrders()" class="btn btn-del btn-lg btn-block filterText">
                 Delete Selected Orders
               </button>
             </div>
@@ -211,39 +211,39 @@
               <form>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="firstName">First Name</label>
-                    <input type="text" class="form-control" name="firstName" id="firstName" />
+                    <label for="totalAmount">Total Amount</label>
+                    <input type="text" class="form-control" name="totalAmount" id="totalAmount" />
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" class="form-control" name="lastName" id="lastName" />
+                    <label for="statusId">Status</label>
+                    <input type="text" class="form-control" name="statusId" id="statusId" />
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="email">Email</label>
-                    <input type="text" class="form-control" name="email" id="email" placeholder="snowman@igloo.com" />
+                    <label for="agentId">Agent</label>
+                    <input type="text" class="form-control" name="agentId" id="agentId" />
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="email">Profile Picture</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="profilePic"
-                      name="profilePic"
-                      placeholder="https://robohash.org/quoasdfsdffsdsendain.png?size=250x250&set=set1"
-                    />
+                    <label for="clientId">Client</label>
+                    <input type="text" class="form-control" name="clientId" id="clientId" />
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="sectorId">Sector</label>
+                    <input type="text" class="form-control" name="sectorId" id="sectorId" />
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-2">
-                    <button type="button" onclick="createAgent()" class="btn btn-block btn-addAgent filterText">
+                    <button type="button" onclick="createOrder()" class="btn btn-block btn-addAgent filterText">
                       Create
                     </button>
                   </div>
                   <div class="form-group col-md-10">
                     <div class="alert alert-info" role="alert" style="display: none" id="successAlert">
-                      Agent successfully added
+                      Order successfully added
                     </div>
                   </div>
                 </div>
@@ -266,15 +266,15 @@
                     <th scope="col">Actions</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="orderList">
                   <tr th:each="order : ${orders}">
                     <td><input type="checkbox" /></td>
                     <td class="filterTextDark" th:text="${order.id}" scope="row">REF0000</td>
                     <td class="filterTextDark" th:text="${order.creationDate}">2021/5/21</td>
-                    <td class="filterTextDark" th:text="${order.clientId}">0</td>
-                    <td class="filterTextDark" th:text="${order.agentId}">0</td>
+                    <td class="filterTextDark" th:text="${order.client}">0</td>
+                    <td class="filterTextDark" th:text="${order.agent}">0</td>
                     <td class="filterTextDark" th:text="${order.totalAmount}">100000</td>
-                    <td class="filterTextDark" th:text="${order.statusId}">0</td>
+                    <td class="filterTextDark" th:text="${order.status}">0</td>
                     <td>
                       <div class="btn-group" role="group">
                         <button type="button" onclick="orderFav()" class="btn btn-secondary">
@@ -283,7 +283,7 @@
                         <button type="button" onclick="orderEdit()" class="btn btn-secondary">
                           <i class="fas fa-edit"></i>
                         </button>
-                        <button type="button" onclick="orderDelete()" class="btn btn-secondary">
+                        <button type="button" onclick="deleteOrder()" class="btn btn-secondary">
                           <i class="fas fa-trash-alt"></i>
                         </button>
                       </div>
