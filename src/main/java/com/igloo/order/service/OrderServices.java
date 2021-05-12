@@ -42,7 +42,7 @@ public class OrderServices {
     	} else if(action == "sort") {
     		
     		
-    		orders = orderRepo.findAll(Sort.by(Sort.Direction.fromString(term),option));
+    		orders = orderRepo.findAll(Sort.by(Sort.Direction.fromString(option),term));
     		
     	}else if(action == "search") {
     		
