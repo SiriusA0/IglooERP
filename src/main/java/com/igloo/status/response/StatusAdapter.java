@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.igloo.status.model.Status;
+import org.springframework.stereotype.Component;
 
+@Component
 public class StatusAdapter {
 public StatusResponse of(Status status) {
 		

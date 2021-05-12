@@ -72,8 +72,8 @@ function createOrder() {
   var totalAmount = document.querySelector("input[name=totalAmount").value;
   var clientId = document.querySelector("select[name=clientId").value;
   var agentId = document.querySelector("select[name=agentId").value;
-  var statusId = document.querySelector("select[ name=statusId").value;
-  var sectorId = document.querySelector("select[ name=sectorId").value;
+  var statusId = document.querySelector("select[name=statusId").value;
+  var sectorId = document.querySelector("select[name=sectorId").value;
 
   var creationRequest =
     request +
@@ -96,6 +96,72 @@ function createOrder() {
     .then((neworder) => {
       console.log("Added order: " + neworder.id);
     });
+
+  //Clean form
+  document.querySelector("input[name=totalAmount").value = "";
+  document.querySelector("select[name=clientId").value = "";
+  document.querySelector("select[name=agentId").value = "";
+  document.querySelector("select[name=statusId").value = "";
+  document.querySelector("select[name=sectorId").value = "";
+}
+////////// Method CREATE //////////
+function editOrder(event) {
+  // Request Definition.
+  var request = server_url + "/api/order/add?";
+  var finalRequest;
+
+  // Get order atributes.
+  var orderid = event.currentTarget.closest("input[class=card]").id;
+
+  // Fetch request.
+  fetch("/api/order/find?id=" + orderid)
+    .then((r) => r.json())
+    .then((orderToEdit) => {
+      console.log("Selected order: " + orderToEdit.id);
+    });
+
+  // Get order old atributes.
+  document.querySelector("input[name=totalAmount").value = orderToEdit.totalAmount;
+  document.querySelector("select[name=clientId").value = orderToEdit.clientId;
+  document.querySelector("select[name=agentId").value = orderToEdit.agentId;
+  document.querySelector("select[name=statusId").value = orderToEdit.statusId;
+  document.querySelector("select[name=sectorId").value = orderToEdit.sectorId;
+
+  // Get order new atributes.
+  var totalAmount = document.querySelector("input[name=totalAmount").value;
+  var clientId = document.querySelector("select[name=clientId").value;
+  var agentId = document.querySelector("select[name=agentId").value;
+  var statusId = document.querySelector("select[ name=statusId").value;
+  var sectorId = document.querySelector("select[ name=sectorId").value;
+
+  var editRequest =
+    request +
+    "totalamount=" +
+    totalAmount +
+    "&clientdd=" +
+    clientId +
+    "&agentid=" +
+    agentId +
+    "&statusid=" +
+    statusId +
+    "&sectorid=" +
+    sectorId;
+
+  finalRequest = editRequest;
+
+  // Fetch request.
+  fetch(finalrequest)
+    .then((r) => r.json())
+    .then((neworder) => {
+      console.log("Edited order: " + neworder.id);
+    });
+
+  //Clean form
+  document.querySelector("input[name=totalAmount").value = "";
+  document.querySelector("select[name=clientId").value = "";
+  document.querySelector("select[name=agentId").value = "";
+  document.querySelector("select[name=statusId").value = "";
+  document.querySelector("select[name=sectorId").value = "";
 }
 ////////// Method DELETE //////////
 function deleteOrder(event) {

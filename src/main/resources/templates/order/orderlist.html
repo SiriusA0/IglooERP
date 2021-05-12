@@ -277,13 +277,13 @@
                     <td class="filterTextDark" th:text="${order.status}">0</td>
                     <td>
                       <div class="btn-group" role="group">
-                        <button type="button" onclick="orderFav()" class="btn btn-secondary">
+                        <button type="button" onclick="orderFav(event)" class="btn btn-secondary">
                           <i class="far fa-star"></i>
                         </button>
-                        <button type="button" onclick="orderEdit()" class="btn btn-secondary">
+                        <button type="button" onclick="orderEdit(event)" class="btn btn-secondary">
                           <i class="fas fa-edit"></i>
                         </button>
-                        <button type="button" onclick="deleteOrder()" class="btn btn-secondary">
+                        <button type="button" onclick="deleteOrder(event)" class="btn btn-secondary">
                           <i class="fas fa-trash-alt"></i>
                         </button>
                       </div>
