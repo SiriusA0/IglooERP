@@ -112,6 +112,7 @@ tableBodyCol1.appendChild(col1Check);
 tableBodyrow.appendChild(tableBodyCol1);
 
 var colRef=document.createElement("td");
+colRef.className="idcolumn";
 colRef.innerHTML="REF00" +sectors[i].id;
 tableBodyrow.appendChild(colRef);
 
@@ -162,7 +163,7 @@ tableBody.appendChild(tableBodyrow);
 
 favbutton.addEventListener("click", addSectorToFavorites());
 editbutton.addEventListener("click", editSector());
-deletebutton.addEventListener("click", deleteSector());
+deletebutton.addEventListener("click",function (event) { deleteSector(event) });
 }
 }
 
@@ -189,6 +190,29 @@ function deleteSector(){
 
   console.log("borrado");
 }
+
+
+//Delete sector
+
+function deleteSector(event) {
+
+  var rowToDelete=event.currentTarget.closest("tr");
+  var columnIdToDelete=rowToDelete.querySelector(".idcolumn");
+  var rawId=columnIdToDelete.innerHTML;
+  var idtodelete=rawId.replace("REF00", "");
+  
+
+  var urlFinal = server_url + '/api/sector/delete?' + "idtodelete=" + idtodelete;
+
+  fetch(urlFinal)
+      .then(r => r.json())
+      .then(sectors => {
+          cleanSectorTable()
+          fillSectorTable(sectors)
+      });
+}
+
+
 
 
 
