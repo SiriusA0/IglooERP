@@ -41,9 +41,7 @@ public class ClientAdapter {
         for(Client client : clients) {
             responses.add(of(client));
         }
-        return responses;
- 
-             
+        return responses;      
     }
 
 }

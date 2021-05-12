@@ -34,22 +34,18 @@ public class Order {
     @Column(name = "total_amount")
     private Double totalAmount;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "agent_id")
     private Agent agent;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "status_id")
     private Status status;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "sector_id")
     private Sector sector;
