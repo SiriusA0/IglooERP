@@ -28,7 +28,6 @@ import java.util.List;
 public class OrderController {
 
 
-
     @Autowired
     private OrderRepository orderRepo;
 
@@ -66,34 +65,16 @@ public class OrderController {
         return "order/orderlist";
     }
 
-    
+
     @GetMapping("api/order/get")
     @ResponseBody
-    public List <OrderResponse> buscador(@RequestParam(required = false) String action,
-    										@RequestParam(required = false) String option,
-    										@RequestParam(required = false) String term ){
-    	
-    	
-    	
-    	
-    	return orderServ.search(action, option, term);
+    public List<OrderResponse> buscador(@RequestParam(required = false) String action,
+                                        @RequestParam(required = false) String option,
+                                        @RequestParam(required = false) String term) {
+
+
+        return orderServ.search(action, option, term);
     }
-    
-  
-    @GetMapping("/api/order/orderbyamountdesc")
-    @ResponseBody
-    public List<Order> descAmount_API() {
-    	
-    	
-        return orderRepo.findAll(Sort.by(Sort.Direction.DESC, "totalAmount"));
-    }
-    
-    @GetMapping("/api/order/orderbyamountasc")
-    @ResponseBody
-    public List<Order> ascAmount_API() {
-    	
-    	
-        return orderRepo.findAll(Sort.by(Sort.Direction.ASC, "totalAmount"));
-    }
+
 
 }
