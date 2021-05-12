@@ -1,6 +1,6 @@
 //url inicial
 var server_url = 'http://localhost:8080/';
-var sectors=[{"id":1 ,"name":"hola"}, {"id":3 , "name":"holffff"},{"id":4 , "name":"holiiffff"}];
+//var sectors=[{"id":1 ,"name":"hola"}, {"id":3 , "name":"holffff"},{"id":4 , "name":"holiiffff"}];
 
 
 
@@ -24,7 +24,7 @@ function showSector() {
     showSectorOFF();
   }
   cleanSectorTable();
-  fillSectorTable(sectors); // AQUU EN REALIDAD LLAMARIAMOS A SHOW SECTOR TABLE
+  showSectorsTable(); // AQUU EN REALIDAD LLAMARIAMOS A SHOW SECTOR TABLE
 }
 
 // Create New Sector
