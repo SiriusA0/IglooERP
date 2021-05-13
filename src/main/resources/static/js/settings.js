@@ -147,6 +147,7 @@ function editItem(event, settingName,settingStringName,  tableId, settingHeadNam
   var rawId=columnIdToEdit.innerHTML;
   var idtoedit=rawId.replace("REF00", "");
   
+  //show edit Form  
 
   var urlFinal = server_url + '/api/'+ settingStringName +'/edit?' + "id=" + idtoedit;
   console.log(urlFinal)
@@ -198,8 +199,8 @@ fetch(urlFinal)
         });
 
 document.querySelector("#sectorName").value = "";
-document.querySelector("#successAlertSector").style.display = "";        
-document.querySelector("#sectorForm").style.display == "none"
+//document.querySelector("#successAlertSector").style.display = "";        
+document.querySelector("#sectorForm").style.display = "none";
 
 }
 
@@ -405,8 +406,8 @@ function createStatus(){
           });
   
   document.querySelector("#statusName").value = "";
-  document.querySelector("#successAlertStatus").style.display = "";        
-    
+  //document.querySelector("#successAlertStatus").style.display = "";        
+  document.querySelector("#statusForm").style.display = "none";  
   }
 
 
@@ -463,8 +464,8 @@ function createPaymentStatus(){
           });
   
   document.querySelector("#paymentStatusName").value = "";
-  document.querySelector("#successAlertPaymentStatus").style.display = "";  
-
+  //document.querySelector("#successAlertPaymentStatus").style.display = "";  
+  document.querySelector("#paymentStatusForm").style.display = "none";
 
         }
 
