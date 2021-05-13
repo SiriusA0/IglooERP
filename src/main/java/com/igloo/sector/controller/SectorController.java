@@ -23,9 +23,11 @@ public class SectorController {
 	
 	@GetMapping("/api/sector/add")
     @ResponseBody
-    public Sector add_API(@RequestParam String name) {
-
-        return sectorservice.createSector(name);
+    public List<SectorResponse> add_API(@RequestParam String name) {
+		sectorservice.createSector(name);
+		 
+        return sectorservice.showSector();
+		  
     }
 	
 	 @GetMapping("/api/sector/show")

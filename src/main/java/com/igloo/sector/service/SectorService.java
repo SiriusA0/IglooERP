@@ -13,14 +13,14 @@ import org.springframework.stereotype.Service;
 public class SectorService {
 	
 		@Autowired
-		SectorRepository secorrepository;
+		SectorRepository sectorRepository;
 		
 		@Autowired
         SectorAdapter sectorAdapter;
 		
 		  public List<SectorResponse> showSector() {
 			  
-		         List<Sector> sectors = secorrepository.findAll();
+		         List<Sector> sectors = sectorRepository.findAll();
 		         
 		        return sectorAdapter.of(sectors);
 		    }
@@ -29,8 +29,7 @@ public class SectorService {
 		
 		Sector sector = new Sector();
 		sector.setName(name);
-		
-		secorrepository.save(sector);
+		sectorRepository.save(sector);
 		
 		
 		return sector;

@@ -15,8 +15,8 @@ public class PaymentAdapter {
 			
 			PaymentResponse response=new PaymentResponse();
 			
-			response.setId(response.getId());
-			response.setName(response.getName());
+			response.setId(payment.getId());
+			response.setName(payment.getName());
 			
 			return response;
 		}

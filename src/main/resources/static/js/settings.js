@@ -193,6 +193,8 @@ fetch(urlFinal)
         .then(r => r.json())
         .then(newsector => {
             console.log("Added sector: " + newsector.name);
+            cleanTable("sectorTable");
+          fillSectorTable(newsector);
         });
 
 document.querySelector("#sectorName").value = "";
@@ -339,7 +341,7 @@ function deleteSector(event) {
   var columnIdToDelete=rowToDelete.querySelector(".idcolumn");
   var rawId=columnIdToDelete.innerHTML;
   var idtodelete=rawId.replace("REF00", "");
-  
+
 
   var urlFinal = server_url + '/api/sector/delete?' + "id=" + idtodelete;
   console.log(urlFinal)
@@ -370,10 +372,6 @@ function editSector(event) {
           fillSectorTable(sectors)
       });
 }
-
-
-
-
 
 ///////////////////////////////////////////// STATUS SETTING OPTIONS ////////////////////////////////////////////////////////////////////////////
 function showStatusON() {
@@ -406,8 +404,10 @@ function createStatus(){
   
   fetch(urlFinal)
           .then(r => r.json())
-          .then(newstatus => {
-              console.log("Added status: " + newstatus.name);
+          .then(newStatus => {
+              console.log("Added status: " + newStatus.name);
+              cleanTable("statusTable");
+              fillTable(newStatus,"status","statusTable","Status Name" );
           });
   
   document.querySelector("#statusName").value = "";
@@ -429,20 +429,7 @@ function showStatusTable() {
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Payment Status
+//////////////////////////////////////////////////////// Payment Status /////////////////////////////////////////////////
 function showPaymentStatusON() {
   document.querySelector("#paymentStatusForm").style.display = "";
   document.querySelector("#paymentStatusTable").style.display = "";
@@ -471,12 +458,14 @@ function showPaymentStatus() {
 function createPaymentStatus(){
 
   var paymentStatusName=document.querySelector("#paymentStatusName").value;
-  var urlFinal= server_url + '/api/paymentstatus/add?'+"name="+ paymentStatusName;
+  var urlFinal= server_url + '/api/payment/add?'+"name="+ paymentStatusName;
   
   fetch(urlFinal)
           .then(r => r.json())
           .then(newpaymentStatus => {
               console.log("Added status: " + newpaymentStatus.name);
+              cleanTable("paymentStatusTable");
+              fillTable(newpaymentstatus,"payment", "paymentStatusTable", "Payment Status Name");
           });
   
   document.querySelector("#paymentStatusName").value = "";
@@ -490,10 +479,10 @@ function createPaymentStatus(){
 
 function showPaymentStatusTable() {
 
-  fetch("http://localhost:8080/api/paymentstatus/get")
+  fetch("http://localhost:8080/api/payment/get")
       .then(r => r.json())
       .then(paymentstatuses => {
           cleanTable("paymentStatusTable");
-          fillTable(paymentstatuses,"paymentStatus", "paymentStatusTable", "Payment Status Name");
+          fillTable(paymentstatuses,"payment", "paymentStatusTable", "Payment Status Name");
       });
 };
