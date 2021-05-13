@@ -58,8 +58,8 @@ public class ClientController {
 
     @GetMapping("/api/client/search")
     @ResponseBody
-    public List<ClientResponse> find_API(@RequestParam String searchTerm) {
-        return clientService.search(searchTerm);
+    public List<ClientResponse> find_API(@RequestParam String searchTerm) {;
+    	return clientService.search(searchTerm);
     }
 
     @GetMapping("/api/client/add")
