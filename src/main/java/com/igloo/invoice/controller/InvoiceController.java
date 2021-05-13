@@ -25,10 +25,20 @@ public class InvoiceController {
 	
 	 @GetMapping("/api/invoice/add")
 	 @ResponseBody
-	 public List<InvoiceResponse> add_API(@RequestParam Integer clientId,@RequestParam Date dueDate,
+	 public List<InvoiceResponse> add_API(@RequestParam(required = false) Integer id, @RequestParam Integer clientId,@RequestParam Date dueDate,
 			 @RequestParam double preTax,@RequestParam double afterTax,@RequestParam Integer statusId,@RequestParam Integer paymentStatusId, 
 			 @RequestParam Integer sectorId) {
+		 
+		 if(id == null) {
 		 	invoiceService.createInvoice(clientId, dueDate, preTax, afterTax, statusId, paymentStatusId, sectorId);
+		 }else {
+			 
+			 invoiceService.editInvoice(id, clientId, dueDate, preTax, afterTax, statusId, paymentStatusId, sectorId);
+		 }
+		 
+		 	
+		 	
+		 	
 		 	return invoiceService.getAll(); 
 	    }
 	    
@@ -45,6 +55,6 @@ public class InvoiceController {
 	    public InvoiceResponse find_API(@RequestParam Integer id) {
 	    	
 	    	
-	    	return invoiceService.editOrder(id);
+	    	return invoiceService.findInvoice(id);
 	    }
 }
