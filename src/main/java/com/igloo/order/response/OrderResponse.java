@@ -8,7 +8,9 @@ import com.igloo.agent.model.Agent;
 import com.igloo.client.model.Client;
 import com.igloo.client.response.ClientResponse;
 import com.igloo.sector.model.Sector;
+import com.igloo.sector.response.SectorResponse;
 import com.igloo.status.model.Status;
+import com.igloo.status.response.StatusResponse;
 
 public class OrderResponse {
 	
@@ -17,7 +19,8 @@ public class OrderResponse {
     private Double totalAmount;
     private ClientResponse client;
     private String agent;
-    private Status status;
+    private StatusResponse status;
+    private SectorResponse sector;
     
     public int getId() {
 		return id;
@@ -49,18 +52,18 @@ public class OrderResponse {
 	public void setAgent(String agent) {
 		this.agent = agent;
 	}
-	public Status getStatus() {
+	public StatusResponse getStatus() {
 		return status;
 	}
-	public void setStatus(Status status) {
+	public void setStatus(StatusResponse status) {
 		this.status = status;
 	}
-	public Sector getSector() {
+	public SectorResponse getSector() {
 		return sector;
 	}
-	public void setSector(Sector sector) {
+	public void setSector(SectorResponse sector) {
 		this.sector = sector;
 	}
-	private Sector sector;
+
 
 }

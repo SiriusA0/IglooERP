@@ -5,14 +5,15 @@ import java.util.List;
 
 import com.igloo.invoice.model.Invoice;
 import com.igloo.order.model.Order;
+import com.igloo.order.response.OrderResponse;
 
 
 public class StatusResponse {
 	
     private int id;
 	private String name;
-    private List<Order> orders = new LinkedList<Order>();
-    private List<Invoice> invoices = new LinkedList<Invoice>();
+    //private List<OrderResponse> orders;
+   // private List<Invoice> invoices = new LinkedList<Invoice>();
 
 	public int getId() {
 		return id;
@@ -30,20 +31,7 @@ public class StatusResponse {
 		this.name = name;
 	}
 
-	public List<Order> getOrders() {
-		return orders;
-	}
 
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
-	}
-
-	public List<Invoice> getInvoices() {
-		return invoices;
-	}
-
-	public void setInvoices(List<Invoice> invoices) {
-		this.invoices = invoices;
-	}
+	
 	
 }

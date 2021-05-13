@@ -12,11 +12,17 @@ import com.igloo.client.model.Client;
 import com.igloo.client.response.ClientAdapter;
 import com.igloo.client.response.ClientResponse;
 import com.igloo.order.model.Order;
+import com.igloo.sector.model.Sector;
+import com.igloo.sector.response.SectorAdapter;
+import com.igloo.status.model.Status;
+import com.igloo.status.response.StatusAdapter;
 
 @Component
 public class OrderAdapter {
 	
 	@Autowired ClientAdapter clientAdapter;
+	@Autowired StatusAdapter statusAdapter;
+	@Autowired SectorAdapter sectorAdapter;
 	
 	public OrderResponse of(Order order) {
 		
@@ -31,10 +37,14 @@ public class OrderAdapter {
 		}
 		
 		Client client = order.getClient();
-		//response.setClient(clientAdapter.of(client));
+		response.setClient(clientAdapter.of(client));
 		
-		//response.setSector(order.getSector());
-		//response.setStatus(order.getStatus());
+		Status status = order.getStatus();
+		response.setStatus(statusAdapter.of(status));
+		
+		Sector sector = order.getSector();
+		response.setSector(sectorAdapter.of(sector));
+		
 		response.setTotalAmount(order.getTotalAmount());
 		
 		return response;
