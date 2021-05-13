@@ -9,12 +9,10 @@ function cleanTable(tableId){
 }
 
 //fill Tables
-                          //sector , "sectorTable", "Sector Name", 
-function fillTable(settingName, tableId,settingHeadName ){
+                          //sector , "sector", "sectorTable", "Sector Name", 
+function fillTable(settingName, settingStringName, tableId,settingHeadName ){
 
   var statusTable = document.querySelector("#"+ tableId +"");
-  //document.querySelector("#sectorTable").style.display="";
-  
   
   //Sector Table Container and Head
   
@@ -113,14 +111,14 @@ function fillTable(settingName, tableId,settingHeadName ){
   //Adding of Event Listeners to Options Buttons
   
   favbutton.addEventListener("click", addSectorToFavorites());
-  editbutton.addEventListener("click",function (event) { editSector(event) });
-  deletebutton.addEventListener("click",function (event) { deleteItem(event, settingName, tableId) });
+  editbutton.addEventListener("click",function (event) { editItem(event, settingName,settingStringName, tableId, settingHeadName) });
+  deletebutton.addEventListener("click",function (event) { deleteItem(event, settingName, settingStringName, tableId, settingHeadName) });
   }
   }
   
   // Delete Item from Table
 
-  function deleteItem(event, settingName, tableId) {
+  function deleteItem(event, settingName, settingStringName, tableId, settingHeadName) {
 
     var rowToDelete=event.currentTarget.closest("tr");
     var columnIdToDelete=rowToDelete.querySelector(".idcolumn");
@@ -128,13 +126,13 @@ function fillTable(settingName, tableId,settingHeadName ){
     var idtodelete=rawId.replace("REF00", "");
     
   
-    var urlFinal = server_url + '/api/'+ settingName + '/delete?' + "id=" + idtodelete;
-  
+    var urlFinal = server_url + '/api/'+ settingStringName + '/delete?' + "id=" + idtodelete;
+    console.log(urlFinal)
     fetch(urlFinal)
         .then(r => r.json())
-        .then(settingName => {
+        .then(ObjectToShow => {
             cleanTable(tableId);
-            fillTable(settingName)
+            fillTable(ObjectToShow,settingStringName, tableId, settingHeadName)
         });
   }
 
@@ -142,7 +140,7 @@ function fillTable(settingName, tableId,settingHeadName ){
 
 //Edit Item from table
 
-function editItem(event, settingName, tableId) {
+function editItem(event, settingName,settingStringName,  tableId, settingHeadName) {
 
   var rowToEdit=event.currentTarget.closest("tr");
   var columnIdToEdit=rowToEdit.querySelector(".idcolumn");
@@ -150,25 +148,19 @@ function editItem(event, settingName, tableId) {
   var idtoedit=rawId.replace("REF00", "");
   
 
-  var urlFinal = server_url + '/api/'+ settingName +'/edit?' + "id=" + idtoedit;
-
+  var urlFinal = server_url + '/api/'+ settingStringName +'/edit?' + "id=" + idtoedit;
+  console.log(urlFinal)
   fetch(urlFinal)
       .then(r => r.json())
-      .then(settingName => {
+      .then(ObjectToShow => {
           cleanTable(tableId);
-          fillTable(settingName, )
+          fillTable(ObjectToShow,settingStringName, tableId, settingHeadName)
       });
 }
 
 
 
-
-
-
-
-
-
-// Sector
+//////////////////////////////// SECTOR SETTING OPTIONS ///////////////////////////////////
 function showSectorON() {
   document.querySelector("#sectorForm").style.display = "";
   document.querySelector("#sectorTable").style.display = "";
@@ -188,7 +180,7 @@ function showSector() {
     showSectorOFF();
   }
   cleanTable("sectorTable");
-  showSectorsTable(); // AQUU EN REALIDAD LLAMARIAMOS A SHOW SECTOR TABLE
+  showSectorsTable(); 
 }
 
 // Create New Sector
@@ -206,6 +198,7 @@ fetch(urlFinal)
 document.querySelector("#sectorName").value = "";
 document.querySelector("#successAlertSector").style.display = "";        
 
+
 }
 
 // Show Sectors
@@ -219,7 +212,6 @@ function showSectorsTable() {
           fillSectorTable(sectors);
       });
 }
-
 
 
 // Fill Sector Table 
@@ -335,7 +327,7 @@ deletebutton.addEventListener("click",function (event) { deleteSector(event) });
 // Add sector to Favorites
 
 function addSectorToFavorites(){
-    console.log("añadido a favoritos");
+    //console.log("añadido a favoritos");
     
 }
 
@@ -350,7 +342,7 @@ function deleteSector(event) {
   
 
   var urlFinal = server_url + '/api/sector/delete?' + "id=" + idtodelete;
-
+  console.log(urlFinal)
   fetch(urlFinal)
       .then(r => r.json())
       .then(sectors => {
@@ -383,7 +375,7 @@ function editSector(event) {
 
 
 
-// Status
+///////////////////////////////////////////// STATUS SETTING OPTIONS ////////////////////////////////////////////////////////////////////////////
 function showStatusON() {
   document.querySelector("#statusForm").style.display = "";
   document.querySelector("#statusTable").style.display = "";
@@ -420,7 +412,7 @@ function createStatus(){
   
   document.querySelector("#statusName").value = "";
   document.querySelector("#successAlertStatus").style.display = "";        
-  
+    
   }
 
 
@@ -432,9 +424,11 @@ function showStatusTable() {
       .then(r => r.json())
       .then(status => {
           cleanTable("statusTable");
-          fillTable(status,"statusTable", "Status Name" );
+          fillTable(status,"status","statusTable","Status Name" );
       });
+
 }
+
 
 
 
@@ -458,6 +452,7 @@ function showPaymentStatusOFF() {
   document.querySelector("#paymentStatusForm").style.display = "none";
   document.querySelector("#paymentStatusTable").style.display = "none";
 }
+
 function showPaymentStatus() {
   if (document.querySelector("#paymentStatusForm").style.display == "none") {
     showPaymentStatusON();
@@ -467,7 +462,7 @@ function showPaymentStatus() {
     showPaymentStatusOFF();
   }
   cleanTable("paymentStatusTable");
-  fillSectorTable(paymentstatuses, "paymentStatusTable", "Payment Status Name");
+  showPaymentStatusTable();
 
 }
 
@@ -487,6 +482,7 @@ function createPaymentStatus(){
   document.querySelector("#paymentStatusName").value = "";
   document.querySelector("#successAlertPaymentStatus").style.display = "";  
 
+
         }
 
 
@@ -498,57 +494,6 @@ function showPaymentStatusTable() {
       .then(r => r.json())
       .then(paymentstatuses => {
           cleanTable("paymentStatusTable");
-          fillSectorTable(paymentstatuses, "paymentStatusTable", "Payment Status Name");
+          fillTable(paymentstatuses,"paymentStatus", "paymentStatusTable", "Payment Status Name");
       });
-}
-
-
-cleanTable("paymentStatusTable");
-fillTable(status,"paymentStatusTable", "Payment Status Name" );
-
-
-
-
-
-
-//Delete Status
-
-function deletePaymentStatus(event) {
-
-  var rowToDelete=event.currentTarget.closest("tr");
-  var columnIdToDelete=rowToDelete.querySelector(".idcolumn");
-  var rawId=columnIdToDelete.innerHTML;
-  var idtodelete=rawId.replace("REF00", "");
-  
-
-  var urlFinal = server_url + '/api/paymentstatus/delete?' + "id=" + idtodelete;
-
-  fetch(urlFinal)
-      .then(r => r.json())
-      .then(statuses => {
-          cleanTable("paymentStatusTable");
-          fillSectorTable(statuses, "paymentStatusTable", "Payment Status Name");
-      });
-}
-
-//Edit Sector
-
-function editPaymentStatus(event) {
-
-  var rowToEdit=event.currentTarget.closest("tr");
-  var columnIdToEdit=rowToEdit.querySelector(".idcolumn");
-  var rawId=columnIdToEdit.innerHTML;
-  var idtoedit=rawId.replace("REF00", "");
-  
-
-  var urlFinal = server_url + '/api/paymentstatus/edit?' + "id=" + idtoedit;
-
-  fetch(urlFinal)
-      .then(r => r.json())
-      .then(paymentstatuses => {
-          cleanTable("paymentStatusTable");
-          fillSectorTable(paymentstatuses,"paymentStatusTable", "Payment Status Name" );
-      });
-}
-
-
+};
