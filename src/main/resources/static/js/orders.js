@@ -132,6 +132,7 @@ function createOrder() {
   document.querySelector("select[name=agentId]").value = "1";
   document.querySelector("select[name=statusId]").value = "1";
   document.querySelector("select[name=sectorId]").value = "1";
+  showCreateForm();
 }
 ////////// Method EDIT //////////
 function editOrder() {
@@ -177,6 +178,7 @@ function editOrder() {
   document.querySelector("select[name=agentEditId]").value = "1";
   document.querySelector("select[name=statusEditId]").value = "1";
   document.querySelector("select[name=sectorEditId]").value = "1";
+  showCreateForm();
 }
 ////////// Method DELETE //////////
 function deleteOrder(event) {
