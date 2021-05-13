@@ -42,11 +42,6 @@ public class OrderServices {
     	} else if(action.equals("sort")) {
     		
     		
-<<<<<<< HEAD
-=======
-    		orders = orderRepo.findAll(Sort.by(Sort.Direction.fromString(option),term));
->>>>>>> ec61c0918475756e17e5671ccfc77fbf642fe7d6
-    		
     		orders = orderRepo.findAll(Sort.by(Sort.Direction.fromString(option),term));
     		
     	}else if(action.equals("search")) {

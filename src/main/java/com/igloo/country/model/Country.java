@@ -19,7 +19,7 @@ public class Country {
     @Column
     private String name;
 
-    @JsonIgnore
+    
     @OneToMany(mappedBy="country", fetch = FetchType.LAZY)
     private List<Region> regions = new LinkedList<Region>();
     
