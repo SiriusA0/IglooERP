@@ -81,10 +81,17 @@ public class OrderController {
     
     @GetMapping("api/order/add")
     @ResponseBody
-    public List<OrderResponse> add_API(@RequestParam double totalAmount,@RequestParam Integer statusId, 
+    public List<OrderResponse> add_API(@RequestParam(required = false) Integer id,@RequestParam double totalAmount,@RequestParam Integer statusId, 
     		@RequestParam Integer agentId, @RequestParam Integer clientId, @RequestParam Integer sectorId){
     	
-    	orderServ.createOrder(totalAmount, statusId, agentId, clientId, sectorId);
+    	if(id == null) {
+    		
+    		orderServ.createOrder(totalAmount, statusId, agentId, clientId, sectorId);
+    	} else {
+    		
+    		orderServ.editOrder(id, totalAmount, statusId, agentId, clientId, sectorId);	
+    	}
+    	
     	
     	
     	return orderServ.getAll();
@@ -103,7 +110,7 @@ public class OrderController {
     public OrderResponse find_API(@RequestParam Integer id) {
     	
     	
-    	return orderServ.editOrder(id);
+    	return orderServ.findOrder(id);
     }
 }
 

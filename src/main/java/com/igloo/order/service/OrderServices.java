@@ -135,12 +135,27 @@ public class OrderServices {
 
     }
 	
-	public OrderResponse editOrder(Integer id) {
+	public OrderResponse findOrder(Integer id) {
 		
 		Order order = new Order();
 		
 		order=orderRepo.findById(id).get();
 		orderRepo.save(order);
 		return orderadapter.of(order);
+	}
+	
+	public void editOrder(Integer id, double totalAmount, Integer statusId, Integer agentId, Integer clientId,
+			Integer sectorId) {
+		
+			Order order = orderRepo.findById(id).get();
+			
+			order.setTotalAmount(totalAmount);
+			order.setStatus(statusRepository.findById(statusId).get());
+			order.setAgent(agentRepository.findById(agentId).get());
+			order.setClient(clientRepository.findById(clientId).get());
+			order.setSector(sectorRepository.findById(sectorId).get());
+			
+			orderRepo.save(order);
+		
 	}
 }
