@@ -215,17 +215,66 @@ function cleanList(event) {
 ////////////////////////////////////// Fill Client //////////////////////////////////////
 function fillList(clients) {
 
-    // Creating the profile picture container
 
+  /*
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="..." alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+*/
 
+  var cardContainer=document.querySelector("#clientsContainer");
+  for (i in clients){
+  var cardBox=document.createElement("div");
+  cardBox.className="card mb-3";
+  cardBox.style="max-width: 540px;"
+  cardContainer.appendChild(cardBox);
 
+  var cardRow=document.createElement("div");
+  cardRow.className="row no-gutters";
+  cardBox.appendChild(cardRow);
 
+  var cardFirstCol=document.createElement("div");
+  cardFirstCol.className="col-md-4";
+  cardRow.appendChild(cardFirstCol);
 
+  var cardImg=document.createElement("img");
+  cardImg.src=clients[i].profilePic;
+  cardFirstCol.appendChild(cardImg);
 
+  var cardSecondCol=document.createElement("div");
+  cardSecondCol.className="col-md-8";
+  cardRow.appendChild(cardSecondCol);
 
+  var cardBody=document.createElement("div");
+  cardBody.className="card-body";
+  cardSecondCol.appendChild(cardBody);   
 
+  var clientName=document.createElement("h5");
+  clientName.className="card-title"
+  clientName.innerHTML=clients[i].firstName + " " + clients[i].lastName
+  cardBody.appendChild(clientName)
+  
+  var clientEmail=document.createElement("p");
+  clientEmail.className="card-text";
+  clientEmail.innerHTML=clients[i].email;
+  cardBody.appendChild(clientEmail);
 
-
+  var clientLocation=document.createElement("p");
+  clientLocation.className="card-text"
+  clientLocation.innerHTML=clients[i].city.name + ", " +  clients[i].country.name + "."
+  cardBody.appendChild(clientLocation);
+  }
 }
 
 /*

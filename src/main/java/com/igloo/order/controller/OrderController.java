@@ -28,7 +28,6 @@ import java.util.List;
 public class OrderController {
 
 
-
     @Autowired
     private OrderRepository orderRepo;
 
@@ -66,7 +65,7 @@ public class OrderController {
         return "order/orderlist";
     }
 
-    
+
     @GetMapping("api/order/get")
     @ResponseBody
     public List <OrderResponse> buscador(@RequestParam(required = false) String action,
@@ -78,9 +77,9 @@ public class OrderController {
     	
     	List<OrderResponse> orders = orderServ.search(action, option, term);
     	
-    	System.out.println("orders en controller:"+orders.size());
+    	
     	
     	return orders;
     }
-    
 }
+

@@ -7,18 +7,18 @@
     <title>Clients</title>
     <!-- Bootstrap & Jquery -->
 
-    <script src="/bootstrap/js/jquery-3.6.0.min.js"></script>
-    <script src="/bootstrap/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <script th:src="@{'/bootstrap/js/jquery-3.6.0.min.js'}" src="/src/main/resources/static/bootstrap/js/jquery-3.6.0.min.js"></script>
+    <script th:src="@{'/bootstrap/js/bootstrap.min.js'}"  src="/src/main/resources/static/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"  th:href="@{'/bootstrap/css/bootstrap.min.css'}" href="/src/main/resources/static/bootstrap/css/bootstrap.min.css" />
     <!-- Fontawesome -->
     <script
       src="https://kit.fontawesome.com/e22ea825df.js"
       crossorigin="anonymous"
     ></script>
     <!-- Libraries -->
-    <link rel="stylesheet" href="/css/igloo.css" />
+    <link rel="stylesheet" th:href="@{'/css/igloo.css'}"  href="/src/main/resources/static/css/igloo.css" />
     <!-- Scripts -->
-    <script src="/js/clients.js"></script>
+    <script th:src="@{'/js/clients.js'}"  src="/js/clients.js"></script>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -488,54 +488,23 @@
             </div>
           </div>
           <div
-            class="row row-cols-1 row-cols-md-4 mr-5 mb-5 p-5"
+            class="row row-cols-md-2 m-2 "  
             id="clientsContainer"
-          >
-            <div th:each="client:${clients}" class="col mb-4">
-              <div class="card h-90 w-80">
-                <div class="row pt-2 pl-2 pr-2 d-flex justify-content-between">
-                  <div class="col-3">
-                    <i type="button" class="far fa-star cardIcon"></i>
-                  </div>
-                  <div class="col-3">
-                    <i
-                      type="button"
-                      onclick="selectForDelete(event)"
-                      class="
-                        fas
-                        fa-trash-alt
-                        d-flex
-                        justify-content-end
-                        cardIcon
-                      "
-                    ></i>
-                  </div>
+          ><!-- (linea 491)row-cols-md-2 mb-5 ------ style="max-width: 1080px;" -->
+            <div th:each="client:${clients}" style="max-width: 540px;" class="card mb-3" >
+              <div class="row">
+                <div class="col-md-4">
+                  <img th:src="${client.profilePic}" alt="...">
                 </div>
-                <div class="row" id="infernalRow">
-                  <div class="col">
-                    <div class="clientProfilePic">
-                      <img th:src="${client.profilePic}" class="card-img-top" />
-                    </div>
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col-8">
-                          <h5
-                            th:text="${client.firstName}+' '+${client.lastName}"
-                            class="card-title"
-                          ></h5>
-                        </div>
-                        <div class="col-4">
-                          <h5
-                            th:text="'#00'+${client.id}"
-                            class="card-title cardId"
-                          ></h5>
-                        </div>
-                      </div>
-                      <p th:text="${client.email}" class="card-text"></p>
-                    </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title" th:text="${client.firstName}+' '+${client.lastName}">Card title</h5>
+                    <p class="card-text" th:text="${client.email}" >email</p>
+                    <p class="card-text" th:text="${client.city.name}+', '+${client.country.name} + '.'" ></p>
                   </div>
                 </div>
               </div>
+            </div>
             </div>
           </div>
         </div>
