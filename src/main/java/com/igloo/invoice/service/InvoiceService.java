@@ -13,7 +13,7 @@ import com.igloo.invoice.model.Invoice;
 import com.igloo.payment.model.Payment;
 import com.igloo.payment.services.PaymentRepository;
 import com.igloo.sector.model.Sector;
-import com.igloo.sector.model.SectorRepository;
+import com.igloo.sector.service.SectorRepository;
 import com.igloo.status.model.Status;
 import com.igloo.status.service.StatusRepository;
 

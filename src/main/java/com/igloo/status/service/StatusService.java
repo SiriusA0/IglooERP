@@ -5,9 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.igloo.sector.model.Sector;
-import com.igloo.sector.model.SectorAdapter;
-import com.igloo.sector.model.SectorResponse;
 import com.igloo.status.model.Status;
 import com.igloo.status.response.StatusAdapter;
 import com.igloo.status.response.StatusResponse;

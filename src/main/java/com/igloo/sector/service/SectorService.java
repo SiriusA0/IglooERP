@@ -1,7 +1,10 @@
-package com.igloo.sector.model;
+package com.igloo.sector.service;
 
 import java.util.List;
 
+import com.igloo.sector.model.Sector;
+import com.igloo.sector.response.SectorAdapter;
+import com.igloo.sector.response.SectorResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +16,7 @@ public class SectorService {
 		SectorRepository secorrepository;
 		
 		@Autowired
-		SectorAdapter sectorAdapter;
+        SectorAdapter sectorAdapter;
 		
 		  public List<SectorResponse> showSector() {
 			  

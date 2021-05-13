@@ -11,8 +11,6 @@ import com.igloo.client.response.ClientAdapter;
 import com.igloo.client.response.ClientResponse;
 import com.igloo.country.service.CountryRepository;
 import com.igloo.region.service.RegionRepository;
-import com.igloo.sector.model.Sector;
-import com.igloo.sector.model.SectorResponse;
 
 
 @Service
