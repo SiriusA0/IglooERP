@@ -230,7 +230,6 @@
                     </button>
                   </div>
                 </div>
-                <div class="row">
                   <div
                     class="col-sm-12 alert alert-info"
                     role="alert"
@@ -239,7 +238,7 @@
                   >
                     Sector successfully added
                   </div>
-                </div>
+              
               </form>
             </div>
           </div>
@@ -338,64 +337,85 @@
             </div>
           </div>
 
+            <!-- EDIT TABLE  -->
+
+            <div class="row m-5" id="editForm" style="display: block">
+              <div class="col-12">
+                <form>
+                  <div class="row">
+                    <div class="col pb-3">
+                      <h2 class="filterTextDark">Edit Form</h2>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label
+                      class="col-sm-2 col-form-label col-form-label-lg"
+                      >To Edit</label
+                    >
+                    
+                    <div class="col-sm-7">
+                      <input
+                        id="settingToEdit"
+                        type="text"
+                        class="form-control form-control-lg"
+                        disabled
+                      />
+                    </div>
+                      <div class="col-sm-3">
+                        <button
+                          type="button"
+                          onclick="CancelEdit()"
+                          class="btn btn-block btn-outline-info btn-lg">
+                          Cancel Edit
+                        </button>
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label
+                      class="col-sm-2 col-form-label col-form-label-lg"
+                      >New Name</label
+                    >
+                    
+                    <div class="col-sm-7">
+                      <input
+                        type="text"
+                        class="form-control form-control-lg"
+                        id="editName"
+                      />
+                    </div>
+                    <div class="col-sm-3">
+                      <button
+                        type="button"
+                        onclick="edit()"
+                        class="btn btn-add btn-block btn-lg .filterText">
+                        Edit
+                      </button>
+                    </div>
+                  </div>
+                    <div
+                      class="col-sm-12 alert alert-info"
+                      role="alert"
+                      style="display: none"
+                      id="successAlertSector"
+                    >
+                      Sector successfully added
+                    </div>
+                
+                </form>
+              </div>
+            </div>
+
+
+
+
+
+
+          
           <!-- Sector table -->
           <div
             class="row sectorTable m-5"
             id="sectorTable"
           >
-          <!-- style="display: none" -->
-            <!-- <div class="col-8 offset-2">
-              <table class="table table-hover">
-                <thead class="thead-dark">
-                  <tr>
-                    <th scope="col"></th>
-                    <th scope="col">Ref</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr th:each="sector : ${sectors}">
-                    <td><input type="checkbox" /></td>
-                    <td
-                      class="filterTextDark"
-                      th:text="${sector.id}"
-                      scope="row"
-                    >
-                      REF0000
-                    </td>
-                    <td class="filterTextDark" th:text="${sector.name}">
-                      Sector
-                    </td>
-                    <td>
-                      <div class="btn-group" role="group">
-                        <button
-                          type="button"
-                          onclick="sectorFav()"
-                          class="btn btn-secondary"
-                        >
-                          <i class="far fa-star"></i>
-                        </button>
-                        <button
-                          type="button"
-                          onclick="sectorEdit()"
-                          class="btn btn-secondary"
-                        >
-                          <i class="fas fa-edit"></i>
-                        </button>
-                        <button
-                          type="button"
-                          onclick="sectorDelete()"
-                          class="btn btn-secondary"
-                        >
-                          <i class="fas fa-trash-alt"></i>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div> -->
           </div>
           <!-- Status table -->
           <div
@@ -403,58 +423,7 @@
             id="statusTable"
             style="display: none"
           >
-            <!-- <div class="col-8 offset-2">
-              <table class="table table-hover">
-                <thead class="thead-dark">
-                  <tr>
-                    <th scope="col"></th>
-                    <th scope="col">Ref</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr th:each="status : ${statuses}">
-                    <td><input type="checkbox" /></td>
-                    <td
-                      class="filterTextDark"
-                      th:text="${status.id}"
-                      scope="row"
-                    >
-                      REF0000
-                    </td>
-                    <td class="filterTextDark" th:text="${status.name}">
-                      Status
-                    </td>
-                    <td>
-                      <div class="btn-group" role="group">
-                        <button
-                          type="button"
-                          onclick="statusFav()"
-                          class="btn btn-secondary"
-                        >
-                          <i class="far fa-star"></i>
-                        </button>
-                        <button
-                          type="button"
-                          onclick="statusEdit()"
-                          class="btn btn-secondary"
-                        >
-                          <i class="fas fa-edit"></i>
-                        </button>
-                        <button
-                          type="button"
-                          onclick="statusDelete()"
-                          class="btn btn-secondary"
-                        >
-                          <i class="fas fa-trash-alt"></i>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div> -->
+            
           </div>
           <!-- Payment Status table -->
           <div
@@ -462,58 +431,7 @@
             id="paymentStatusTable"
             style="display: none"
           >
-            <!-- <div class="col-8 offset-2">
-              <table class="table table-hover">
-                <thead class="thead-dark">
-                  <tr>
-                    <th scope="col"></th>
-                    <th scope="col">Ref</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr th:each="paymentStatus : ${paymentStatuses}">
-                    <td><input type="checkbox" /></td>
-                    <td
-                      class="filterTextDark"
-                      th:text="${paymentStatus.id}"
-                      scope="row"
-                    >
-                      REF0000
-                    </td>
-                    <td class="filterTextDark" th:text="${paymentStatus.name}">
-                      Payment Status
-                    </td>
-                    <td>
-                      <div class="btn-group" role="group">
-                        <button
-                          type="button"
-                          onclick="paymentStatusFav()"
-                          class="btn btn-secondary"
-                        >
-                          <i class="far fa-star"></i>
-                        </button>
-                        <button
-                          type="button"
-                          onclick="paymentStatusEdit()"
-                          class="btn btn-secondary"
-                        >
-                          <i class="fas fa-edit"></i>
-                        </button>
-                        <button
-                          type="button"
-                          onclick="paymentStatusDelete()"
-                          class="btn btn-secondary"
-                        >
-                          <i class="fas fa-trash-alt"></i>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div> -->
+           
           </div>
         </div>
       </div>

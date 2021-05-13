@@ -125,11 +125,28 @@ public List<InvoiceResponse> getAll() {
 	return invoiceAdapter.of(invoiceRepository.findAll());
 }
 
-public InvoiceResponse editOrder(Integer id) {
+public InvoiceResponse findInvoice(Integer id) {
 	Invoice invoice = new Invoice();
 	invoice=invoiceRepository.findById(id).get();
 	
 	return invoiceAdapter.of(invoice);
+}
+
+public void editInvoice(Integer id, Integer clientId, Date dueDate, double preTax, double afterTax, Integer statusId,
+		Integer paymentStatusId, Integer sectorId) {
+	
+	Invoice invoice = invoiceRepository.findById(id).get();
+	
+	invoice.setClient(clientRepository.findById(clientId).get());
+	invoice.setDueDate(dueDate);
+	invoice.setPreTax(preTax);
+	invoice.setAfterTax(preTax*1.21);
+	invoice.setStatus(statusRepository.findById(statusId).get());
+	invoice.setPayment(paymentRepository.findById(paymentStatusId).get());
+	invoice.setSector(sectorRepository.findById(sectorId).get());
+	
+	invoiceRepository.save(invoice);
+	
 }
 
 }
