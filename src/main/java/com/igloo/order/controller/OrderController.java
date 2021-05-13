@@ -45,7 +45,7 @@ public class OrderController {
     @GetMapping("/order")
     public String readOrder(Model model) {
 
-        List<Order> orders = orderServ.get();//TODO unificar nombres
+        List<OrderResponse> orders = orderServ.search(null, null, null);//TODO unificar nombres
         List<StatusResponse> statuses = statusesService.getAll();//TODO unificar nombres
         List<SectorResponse> sectors = sectorsService.showSector();//TODO unificar nombres
         List<ClientResponse> clients = clientsService.get();//TODO unificar nombres

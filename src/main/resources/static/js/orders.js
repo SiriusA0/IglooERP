@@ -51,6 +51,7 @@ function getOrders(action, sortTerm, sortMethod) {
     .then((r) => r.json())
     .then((orders) => {
       cleanTable();
+      console.log("Orders", orders);
       fillTable(orders);
     });
 }
@@ -79,11 +80,11 @@ function showEditForm(event) {
       });
 
     // Get order old atributes.
-    document.querySelector("input[name=totalAmountEdit").value = orderToEdit.totalAmount;
-    document.querySelector("select[name=clientIdEdit").value = orderToEdit.clientId;
-    document.querySelector("select[name=agentIdEdit").value = orderToEdit.agentId;
-    document.querySelector("select[name=statusIdEdit").value = orderToEdit.statusId;
-    document.querySelector("select[name=sectorIdEdit").value = orderToEdit.sectorId;
+    document.querySelector("input[name=totalAmountEdit]").value = orderToEdit.totalAmount;
+    document.querySelector("select[name=clientIdEdit]").value = orderToEdit.clientId;
+    document.querySelector("select[name=agentIdEdit]").value = orderToEdit.agentId;
+    document.querySelector("select[name=statusIdEdit]").value = orderToEdit.statusId;
+    document.querySelector("select[name=sectorIdEdit]").value = orderToEdit.sectorId;
   } else {
     document.querySelector("#successEditAlert").style.display = "none";
     document.querySelector("#orderEditForm").style.display = "none";
@@ -95,11 +96,11 @@ function createOrder() {
   var request = server_url + "/api/order/add?";
   var finalRequest;
   // Get order atributes.
-  var totalAmount = document.querySelector("input[name=totalAmount").value;
-  var clientId = document.querySelector("select[name=clientId").value;
-  var agentId = document.querySelector("select[name=agentId").value;
-  var statusId = document.querySelector("select[name=statusId").value;
-  var sectorId = document.querySelector("select[name=sectorId").value;
+  var totalAmount = document.querySelector("input[name=totalAmount]").value;
+  var clientId = document.querySelector("select[name=clientId]").value;
+  var agentId = document.querySelector("select[name=agentId]").value;
+  var statusId = document.querySelector("select[name=statusId]").value;
+  var sectorId = document.querySelector("select[name=sectorId]").value;
 
   var creationRequest =
     request +
@@ -124,11 +125,11 @@ function createOrder() {
     });
 
   //Clean form
-  document.querySelector("input[name=totalAmount").value = "";
-  document.querySelector("select[name=clientId").value = "1";
-  document.querySelector("select[name=agentId").value = "1";
-  document.querySelector("select[name=statusId").value = "1";
-  document.querySelector("select[name=sectorId").value = "1";
+  document.querySelector("input[name=totalAmount]").value = "";
+  document.querySelector("select[name=clientId]").value = "1";
+  document.querySelector("select[name=agentId]").value = "1";
+  document.querySelector("select[name=statusId]").value = "1";
+  document.querySelector("select[name=sectorId]").value = "1";
 }
 ////////// Method EDIT //////////
 function editOrder() {
@@ -137,11 +138,11 @@ function editOrder() {
   var finalRequest;
 
   // Get order new atributes.
-  var totalAmount = document.querySelector("input[name=totalAmount").value;
-  var clientId = document.querySelector("select[name=clientId").value;
-  var agentId = document.querySelector("select[name=agentId").value;
-  var statusId = document.querySelector("select[ name=statusId").value;
-  var sectorId = document.querySelector("select[ name=sectorId").value;
+  var totalAmount = document.querySelector("input[name=totalAmount]").value;
+  var clientId = document.querySelector("select[name=clientId]").value;
+  var agentId = document.querySelector("select[name=agentId]").value;
+  var statusId = document.querySelector("select[name=statusId]").value;
+  var sectorId = document.querySelector("select[name=sectorId]").value;
 
   var editRequest =
     request +
@@ -166,11 +167,11 @@ function editOrder() {
     });
 
   //Clean form
-  document.querySelector("input[name=totalAmount").value = "";
-  document.querySelector("select[name=clientId").value = "1";
-  document.querySelector("select[name=agentId").value = "1";
-  document.querySelector("select[name=statusId").value = "1";
-  document.querySelector("select[name=sectorId").value = "1";
+  document.querySelector("input[name=totalAmount]").value = "";
+  document.querySelector("select[name=clientId]").value = "1";
+  document.querySelector("select[name=agentId]").value = "1";
+  document.querySelector("select[name=statusId]").value = "1";
+  document.querySelector("select[name=sectorId]").value = "1";
 }
 ////////// Method DELETE //////////
 function deleteOrder(event) {
@@ -225,13 +226,13 @@ function fillTable(orders) {
     //  Client Column
     var clientCol = document.createElement("td");
     clientCol.className = "filterTextDark";
-    clientCol.innerHTML = orders[i].client;
+    clientCol.innerHTML = orders[i].client.firstName + " " + orders[i].client.lastName;
     row.appendChild(clientCol);
 
     //  Agent Column
     var agentCol = document.createElement("td");
     agentCol.className = "filterTextDark";
-    agentCol.innerHTML = orders[i].agent;
+    agentCol.innerHTML = orders[i].agent.firstName + " " + orders[i].agent.lastName;
     row.appendChild(agentCol);
 
     //  Total Amount Column
@@ -240,11 +241,17 @@ function fillTable(orders) {
     totalAmountCol.innerHTML = orders[i].totalAmount;
     row.appendChild(totalAmountCol);
 
-    //  Total Status Column
+    //  Status Column
     var statusCol = document.createElement("td");
     statusCol.className = "filterTextDark";
-    statusCol.innerHTML = orders[i].status;
+    statusCol.innerHTML = orders[i].status.name;
     row.appendChild(statusCol);
+
+    //  Sector Column
+    var sectorCol = document.createElement("td");
+    sectorCol.className = "filterTextDark";
+    sectorCol.innerHTML = orders[i].sector.name;
+    row.appendChild(sectorCol);
 
     //  Actions Column
     var actionsCol = document.createElement("td");
@@ -288,5 +295,6 @@ function fillTable(orders) {
 
     actionsCol.appendChild(buttogroup);
     row.appendChild(actionsCol);
+    document.querySelector("#orderList").appendChild(row);
   }
 }

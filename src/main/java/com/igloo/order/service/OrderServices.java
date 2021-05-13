@@ -10,6 +10,9 @@ import com.igloo.order.response.OrderAdapter;
 import com.igloo.order.response.OrderResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -36,19 +39,21 @@ public class OrderServices {
     	List<Order> orders = null;
     	
     	if(action == null || action.isEmpty()) {
-    		
-    		orders = orderRepo.findAll();
-    		
-    	} else if(action.equals("sort")) {
-    		
-    		
-    		orders = orderRepo.findAll(Sort.by(Sort.Direction.fromString(option),term));
+			Pageable pageable = PageRequest.of(0, 25);
+			Page<Order> lista = orderRepo.findAll(pageable);
+			orders = lista.getContent();
+
+		} else if(action.equals("sort")) {
+			Sort.Direction direction = Sort.Direction.fromString(option);
+			Sort sort = Sort.by(direction,term);
+			Pageable pageable = PageRequest.of(0, 25, sort);
+
+    		orders = orderRepo.findAll(pageable).getContent();
     		
     	}else if(action.equals("search")) {
-    		
     		if(option.equals("client")) {
-    			
-    			orders = orderRepo.findByClientFirstNameContainingOrClientLastNameContaining(term, term);
+				Pageable pageable = PageRequest.of(0, 25);
+    			orders = orderRepo.findByClientFirstNameContainingOrClientLastNameContaining(term, term, pageable);
     			
     			//List <Client> clients = clientRepository.findByFirstNameContainingOrLastNameContaining(term, term);
     			
@@ -69,15 +74,10 @@ public class OrderServices {
     			
     			
     		}else if(option.equals("agent")) {
-    			
     			List <Agent> agents = agentRepository.findByFirstNameContainingOrLastNameContaining(term, term);
-    			
     			orders = new LinkedList<>();
-    			
     			for(Agent agent : agents) {
-    				
     				for(Order order : agent.getOrders()) {
-    					
     					orders.add(order);
     				}
     			}	
@@ -89,13 +89,4 @@ public class OrderServices {
     	
     	return orderadapter.of(orders);
     }
-    
-
-
-    public List<Order> get() {
-
-        return orderRepo.findAll();
-   }
-
-    
 }

@@ -169,7 +169,7 @@
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="getOrders('sort', 'date', 'asc')"
+                onclick="getOrders('sort', 'creationDate', 'asc')"
                 id="datOrderAsc"
                 type="button"
                 class="fas fa-sort-alpha-up-alt filterIcons"
@@ -182,7 +182,7 @@
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="getOrders('sort', 'date', 'desc')"
+                onclick="getOrders('sort', 'creationDate', 'desc')"
                 id="dateOrderDes"
                 type="button"
                 class="fas fa-sort-alpha-down-alt filterIcons"
@@ -321,8 +321,9 @@
                     <th scope="col">Creation date</th>
                     <th scope="col">Client</th>
                     <th scope="col">Agent</th>
-                    <th scope="col">Total amount</th>
+                    <th scope="col">Amount</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Sector</th>
                     <th scope="col">Actions</th>
                   </tr>
                 </thead>
@@ -332,9 +333,10 @@
                     <td class="filterTextDark id" th:text="${order.id}"></td>
                     <td class="filterTextDark" th:text="${order.creationDate}">2021/5/21</td>
                     <td class="filterTextDark" th:text="${order.client.firstName}+' '+${order.client.lastName}">0</td>
-                    <td class="filterTextDark" th:text="${order.agent.firstName}+' '+${order.agent.lastName}">0</td>
+                    <td class="filterTextDark" th:text="${order.agent}">0</td>
                     <td class="filterTextDark" th:text="${order.totalAmount}">100000</td>
                     <td class="filterTextDark" th:text="${order.status.name}">0</td>
+                    <td class="filterTextDark" th:text="${order.sector.name}">0</td>
                     <td>
                       <div class="btn-group" role="group">
                         <button type="button" onclick="orderFav(event)" class="btn btn-secondary">
