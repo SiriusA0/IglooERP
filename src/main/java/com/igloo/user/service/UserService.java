@@ -31,10 +31,10 @@ public class UserService {
 
         User user = userRepository.findByUserName(userName);
         if (user.getPassword().equals(password)) {
+            System.out.println("Login Success - User: " + userName + " - Password: " + password);
             return true;
         }
         return false;
-
     }
 
 }

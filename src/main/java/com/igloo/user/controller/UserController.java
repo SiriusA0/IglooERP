@@ -32,11 +32,12 @@ public class UserController {
     @PostMapping("/login")
     public String login(@RequestParam String userName, @RequestParam String password) {
         System.out.println("Login Attempt - User: " + userName + " - Password: " + password);
+        if(userService.logUserIn(userName,password)){
+            return "redirect:/home?success=true";
+        }else{
+            return "redirect:/login?success=false";
+        }
 
-
-
-        //System.out.println("Login Success: " + user.getFirstName() + user.getPassword());
-        return "redirect:/home?success=true";
 
     }
 
