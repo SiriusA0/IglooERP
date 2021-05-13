@@ -38,6 +38,14 @@ public class PaymentController {
     }
 	
 	
+	@GetMapping("/api/payment/delete")
+	@ResponseBody
+	public List<PaymentResponse> delete_API(@RequestParam String id) {
+		
+	  paymentService.delete(id);
+	  
+	  return paymentService.getAll();
+	}
 	
 	
 	

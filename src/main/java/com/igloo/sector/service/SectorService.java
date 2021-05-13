@@ -25,14 +25,19 @@ public class SectorService {
 		        return sectorAdapter.of(sectors);
 		    }
 	
-		public Sector createSector(String name){
-		
-		Sector sector = new Sector();
-		sector.setName(name);
-		sectorRepository.save(sector);
-		
-		
-		return sector;
-	}
+			public Sector createSector(String name) {
 
+				Sector sector = new Sector();
+				sector.setName(name);
+				sectorRepository.save(sector);
+				return sector;
+			}
+
+			public void delete(String id) {
+			String idArray[] = id.split(",");
+	        for (String i : idArray){
+	            int idToDelete = Integer.valueOf(i);
+	            sectorRepository.deleteById(idToDelete);
+	        }
+		}	        
 }

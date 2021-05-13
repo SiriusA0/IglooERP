@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.igloo.sector.response.SectorResponse;
 import com.igloo.status.model.Status;
 import com.igloo.status.response.StatusResponse;
 import com.igloo.status.service.StatusRepository;
@@ -38,4 +39,16 @@ public class StatusController {
 	public List<StatusResponse> getAll() {
         return statusService.getAll();
     }
+	
+	@GetMapping("/api/status/delete")
+	@ResponseBody
+	public List<StatusResponse> delete_API(@RequestParam String id) {
+		
+	  statusService.delete(id);
+	  
+	  return statusService.getAll();
+	}
+	
+	
+	
 }

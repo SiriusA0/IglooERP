@@ -34,5 +34,11 @@ public class PaymentService {
 		return paymentAdapter.of(payments);
 	}
 		
-	
+	public void delete(String id) {
+		String idArray[] = id.split(",");
+        for (String i : idArray){
+            int idToDelete = Integer.valueOf(i);
+            paymentRepository.deleteById(idToDelete);
+        }
+	}
 }

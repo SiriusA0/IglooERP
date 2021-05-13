@@ -32,4 +32,14 @@ public class StatusService {
         
         return statusAdapter.of(status);
    }
+	
+	
+	public void delete(String id) {
+		String idArray[] = id.split(",");
+        for (String i : idArray){
+            int idToDelete = Integer.valueOf(i);
+            statusRepository.deleteById(idToDelete);
+        }
+	}
+	
 }

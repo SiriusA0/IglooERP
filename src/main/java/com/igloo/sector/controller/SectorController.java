@@ -2,6 +2,7 @@ package com.igloo.sector.controller;
 
 import java.util.List;
 
+import com.igloo.agent.model.Agent;
 import com.igloo.sector.model.Sector;
 import com.igloo.sector.service.SectorRepository;
 import com.igloo.sector.response.SectorResponse;
@@ -30,11 +31,23 @@ public class SectorController {
 		  
     }
 	
-	 @GetMapping("/api/sector/show")
-	 @ResponseBody
-	 public List<SectorResponse> find_API() {
+	@GetMapping("/api/sector/show")
+	@ResponseBody
+	public List<SectorResponse> find_API() {
 		 
 	        return sectorservice.showSector();
-	    }
+	}
 
+	@GetMapping("/api/sector/delete")
+	@ResponseBody
+	public List<SectorResponse> delete_API(@RequestParam String id) {
+		
+	  sectorservice.delete(id);
+	  
+	  return sectorservice.showSector();
+	}
+	
+	
+	
+	
 }
