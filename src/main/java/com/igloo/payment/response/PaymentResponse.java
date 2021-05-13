@@ -21,6 +21,6 @@ public class PaymentResponse {
 		this.name = name;
 	}
 
-	// private List<Invoice> invoices = new LinkedList<Invoice>();
+
 
 }
