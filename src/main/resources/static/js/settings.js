@@ -9,7 +9,7 @@ function cleanTable(tableId){
 }
 
 //fill Tables
-                          //sector , "sector", "sectorTable", "Sector Name", 
+                    //sector , "sector", "sectorTable", "Sector Name", 
 function fillTable(settingName, settingStringName, tableId,settingHeadName ){
 
   var statusTable = document.querySelector("#"+ tableId +"");
@@ -110,7 +110,7 @@ function fillTable(settingName, settingStringName, tableId,settingHeadName ){
   
   //Adding of Event Listeners to Options Buttons
   
-  favbutton.addEventListener("click", addSectorToFavorites());
+  //favbutton.addEventListener("click", addSectorToFavorites());
   editbutton.addEventListener("click",function (event) { editItem(event, settingName,settingStringName, tableId, settingHeadName) });
   deletebutton.addEventListener("click",function (event) { deleteItem(event, settingName, settingStringName, tableId, settingHeadName) });
   }
@@ -194,7 +194,7 @@ fetch(urlFinal)
         .then(newsector => {
             console.log("Added sector: " + newsector.name);
             cleanTable("sectorTable");
-          fillSectorTable(newsector);
+            fillTable(newsector , "sector", "sectorTable", "Sector Name");
         });
 
 document.querySelector("#sectorName").value = "";
@@ -211,12 +211,12 @@ function showSectorsTable() {
       .then(r => r.json())
       .then(sectors => {
           cleanTable("sectorTable");
-          fillSectorTable(sectors);
+          fillTable(sectors , "sector", "sectorTable", "Sector Name");
       });
 }
 
 
-// Fill Sector Table 
+/* // Fill Sector Table 
 
 function fillSectorTable(sectors){
 
@@ -324,17 +324,11 @@ favbutton.addEventListener("click", addSectorToFavorites());
 editbutton.addEventListener("click",function (event) { editSector(event) });
 deletebutton.addEventListener("click",function (event) { deleteSector(event) });
 }
-}
+} */
 
 // Add sector to Favorites
-
-function addSectorToFavorites(){
-    //console.log("añadido a favoritos");
-    
-}
-
 //Delete sector
-
+/* 
 function deleteSector(event) {
 
   var rowToDelete=event.currentTarget.closest("tr");
@@ -372,7 +366,7 @@ function editSector(event) {
           fillSectorTable(sectors)
       });
 }
-
+ */
 ///////////////////////////////////////////// STATUS SETTING OPTIONS ////////////////////////////////////////////////////////////////////////////
 function showStatusON() {
   document.querySelector("#statusForm").style.display = "";
