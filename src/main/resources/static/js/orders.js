@@ -65,28 +65,28 @@ function showCreateForm() {
   }
 }
 ////////// Show EDIT form //////////
+var selectedId;
 function showEditForm(event) {
+  var orderrow = event.currentTarget.closest("tr");
+  selectedId = orderrow.querySelector(".id").innerHTML;
+  var orderId = selectedId;
   if (document.querySelector("#orderEditForm").style.display == "none") {
     document.querySelector("#orderEditForm").style.display = "";
     // Get order atributes.
-    var orderrow = event.currentTarget.closest("tr");
-    var orderid = orderrow.querySelector(".id").innerHTML;
 
     // Fetch request.
-    fetch("/api/order/find?id=" + orderid)
+    fetch("/api/order/find?id=" + orderId)
       .then((r) => r.json())
       .then((orderToEdit) => {
         console.log("Selected order: " + orderToEdit.id);
+        // Get order old atributes.
+        document.querySelector("input[name=totalEditAmount]").value = orderToEdit.totalAmount;
+        document.querySelector("select[name=clientEditId]").value = orderToEdit.clientId;
+        document.querySelector("select[name=agentEditId]").value = orderToEdit.agentId;
+        document.querySelector("select[name=statusEditId]").value = orderToEdit.statusId;
+        document.querySelector("select[name=sectorEditId]").value = orderToEdit.sectorId;
       });
-
-    // Get order old atributes.
-    document.querySelector("input[name=totalAmountEdit]").value = orderToEdit.totalAmount;
-    document.querySelector("select[name=clientIdEdit]").value = orderToEdit.clientId;
-    document.querySelector("select[name=agentIdEdit]").value = orderToEdit.agentId;
-    document.querySelector("select[name=statusIdEdit]").value = orderToEdit.statusId;
-    document.querySelector("select[name=sectorIdEdit]").value = orderToEdit.sectorId;
   } else {
-    document.querySelector("#successEditAlert").style.display = "none";
     document.querySelector("#orderEditForm").style.display = "none";
   }
 }
@@ -104,15 +104,15 @@ function createOrder() {
 
   var creationRequest =
     request +
-    "totalamount=" +
+    "totalAmount=" +
     totalAmount +
-    "&clientdd=" +
+    "&clientId=" +
     clientId +
-    "&agentid=" +
+    "&agentId=" +
     agentId +
-    "&statusid=" +
+    "&statusId=" +
     statusId +
-    "&sectorid=" +
+    "&sectorId=" +
     sectorId;
 
   finalRequest = creationRequest;
@@ -120,8 +120,10 @@ function createOrder() {
   // Fetch request.
   fetch(finalRequest)
     .then((r) => r.json())
-    .then((neworder) => {
-      console.log("Added order: " + neworder.id);
+    .then((orders) => {
+      cleanTable();
+      console.log("Orders", orders);
+      fillTable(orders);
     });
 
   //Clean form
@@ -133,28 +135,29 @@ function createOrder() {
 }
 ////////// Method EDIT //////////
 function editOrder() {
+  var orderId = selectedId;
   // Request Definition.
-  var request = server_url + "/api/order/add?";
+  var request = server_url + "/api/order/add?id=" + orderId + "&";
   var finalRequest;
 
   // Get order new atributes.
-  var totalAmount = document.querySelector("input[name=totalAmount]").value;
-  var clientId = document.querySelector("select[name=clientId]").value;
-  var agentId = document.querySelector("select[name=agentId]").value;
-  var statusId = document.querySelector("select[name=statusId]").value;
-  var sectorId = document.querySelector("select[name=sectorId]").value;
+  var totalAmount = document.querySelector("input[name=totalEditAmount]").value;
+  var clientId = document.querySelector("select[name=clientEditId]").value;
+  var agentId = document.querySelector("select[name=agentEditId]").value;
+  var statusId = document.querySelector("select[name=statusEditId]").value;
+  var sectorId = document.querySelector("select[name=sectorEditId]").value;
 
   var editRequest =
     request +
-    "totalamount=" +
+    "totalAmount=" +
     totalAmount +
-    "&clientid=" +
+    "&clientId=" +
     clientId +
-    "&agentid=" +
+    "&agentId=" +
     agentId +
-    "&statusid=" +
+    "&statusId=" +
     statusId +
-    "&sectorid=" +
+    "&sectorId=" +
     sectorId;
 
   finalRequest = editRequest;
@@ -162,16 +165,18 @@ function editOrder() {
   // Fetch request.
   fetch(finalRequest)
     .then((r) => r.json())
-    .then((editedOrder) => {
-      console.log("Edited order: " + editedOrder.id);
+    .then((orders) => {
+      cleanTable();
+      console.log("Orders", orders);
+      fillTable(orders);
     });
 
   //Clean form
-  document.querySelector("input[name=totalAmount]").value = "";
-  document.querySelector("select[name=clientId]").value = "1";
-  document.querySelector("select[name=agentId]").value = "1";
-  document.querySelector("select[name=statusId]").value = "1";
-  document.querySelector("select[name=sectorId]").value = "1";
+  document.querySelector("input[name=totalEditAmount]").value = "";
+  document.querySelector("select[name=clientEditId]").value = "1";
+  document.querySelector("select[name=agentEditId]").value = "1";
+  document.querySelector("select[name=statusEditId]").value = "1";
+  document.querySelector("select[name=sectorEditId]").value = "1";
 }
 ////////// Method DELETE //////////
 function deleteOrder(event) {
@@ -180,18 +185,18 @@ function deleteOrder(event) {
   var finalRequest = "";
   // Get order atributes.
   // Get order atributes.
-  var orderrow = event.currentTarget.closest("tr");
-  var orderid = orderrow.querySelector(".id").innerHTML;
-
-  var deleteRequest = request + "orderid=" + orderid;
+  var orderRow = event.currentTarget.closest("tr");
+  var orderId = orderRow.querySelector(".id").innerHTML;
+  var deleteRequest = request + "orderId=" + orderId;
 
   finalRequest = deleteRequest;
 
-  // Fetch request.
   fetch(finalRequest)
     .then((r) => r.json())
-    .then((neworder) => {
-      console.log("Added order: " + neworder.id);
+    .then((orders) => {
+      cleanTable();
+      console.log("Orders", orders);
+      fillTable(orders);
     });
 }
 ////////// Utilities //////////
@@ -213,7 +218,7 @@ function fillTable(orders) {
 
     //  ID Column
     var idCol = document.createElement("td");
-    idCol.className = "filterTextDark";
+    idCol.className = "filterTextDark  id";
     idCol.innerHTML = orders[i].id;
     row.appendChild(idCol);
 
@@ -287,7 +292,7 @@ function fillTable(orders) {
     deletebutton.className = "btn btn-secondary";
     var deleteIcon = document.createElement("i");
     deleteIcon.className = "fas fa-trash-alt";
-    favIcon.addEventListener("click", function (event) {
+    deleteIcon.addEventListener("click", function (event) {
       deleteOrder(event);
     });
     deletebutton.appendChild(deleteIcon);

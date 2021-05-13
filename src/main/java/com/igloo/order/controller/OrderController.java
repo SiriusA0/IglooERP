@@ -2,6 +2,7 @@ package com.igloo.order.controller;
 
 import com.igloo.agent.model.Agent;
 import com.igloo.agent.response.AgentResponse;
+import com.igloo.agent.service.AgentServices;
 import com.igloo.client.model.Client;
 import com.igloo.client.response.ClientResponse;
 import com.igloo.client.service.ClientService;
@@ -43,8 +44,8 @@ public class OrderController {
     @Autowired
     private ClientService clientsService;
 
-    //@Autowired
-    //private AgentServices agentsService;
+    @Autowired
+    private AgentServices agentsService;
 
 
     @GetMapping("/order")
@@ -54,13 +55,13 @@ public class OrderController {
         List<StatusResponse> statuses = statusesService.getAll();//TODO unificar nombres
         List<SectorResponse> sectors = sectorsService.showSector();//TODO unificar nombres
         List<ClientResponse> clients = clientsService.get();//TODO unificar nombres
-        //List<AgentResponse> agents = agentsService.showSector();//TODO unificar nombres
+        List<AgentResponse> agents = agentsService.get();//TODO unificar nombres
 
         model.addAttribute("orders", orders);
         model.addAttribute("statuses", statuses);
         model.addAttribute("sectors", sectors);
         model.addAttribute("clients", clients);
-        //model.addAttribute("agents", agents);
+        model.addAttribute("agents", agents);
 
         return "order/orderlist";
     }
@@ -91,9 +92,9 @@ public class OrderController {
     
     @GetMapping("/api/order/delete")
     @ResponseBody
-    public List<OrderResponse> delete_API(@RequestParam String idtodelete) {
+    public List<OrderResponse> delete_API(@RequestParam String orderId) {
 
-    	orderServ.deleteOrder(idtodelete);
+    	orderServ.deleteOrder(orderId);
         return orderServ.getAll();
     }
     

@@ -103,7 +103,7 @@ public class OrderServices {
     
 	public List<OrderResponse>createOrder(double totalAmount,Integer statusId, Integer agentId, Integer clientId, Integer sectorId){ 
     	
-		List<Order> orders = null;
+		List<Order> orders = new LinkedList<>();
 		Order order_ = new Order();
 		
 		order_.setTotalAmount(totalAmount);
@@ -140,7 +140,7 @@ public class OrderServices {
 		Order order = new Order();
 		
 		order=orderRepo.findById(id).get();
-		
+		orderRepo.save(order);
 		return orderadapter.of(order);
 	}
 }

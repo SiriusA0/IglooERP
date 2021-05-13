@@ -22,6 +22,8 @@
     />
   </head>
 
+
+
   <body class="bg_login">
     <div class="container" style="max-width: 500px">
       <div class="row d-flex justify-content-center">
@@ -43,7 +45,7 @@
           </div>
           <div class="row d-flex justify-content-center">
             <div class="col">
-              <form class="mb-3" action="/signup" method="post">
+              <form class="mb-3" action="/register" method="post">
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <div class="input-group">
@@ -52,7 +54,7 @@
                       </div>
                       <input
                         th:value="${previousInput?.firstName}"
-                        name="FirstName"
+                        name="firstName"
                         type="text"
                         class="form-control newUser"
                         placeholder="Name"
@@ -110,8 +112,8 @@
                       <span class="input-group-text"><i class="fas fa-phone-square-alt"></i></span>
                     </div>
                     <input
-                      th:value="${previousInput?.telnumber}"
-                      name="telnumber"
+                      th:value="${previousInput?.telNumber}"
+                      name="telNumber"
                       type="tel"
                       class="form-control newUser"
                       placeholder="Phone number"
@@ -168,7 +170,7 @@
               </form>
               <small style="color: whitesmoke; font-family: 'Titillium Web', sans-serif">Already registered?</small>
               <button
-                onclick="window.location.href='/signin'"
+                onclick="window.location.href='/login'"
                 type="button"
                 class="btn btn-outline-light btn-block"
                 style="font-family: 'Titillium Web', sans-serif"

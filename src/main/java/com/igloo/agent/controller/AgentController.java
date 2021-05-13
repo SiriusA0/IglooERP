@@ -1,6 +1,7 @@
 package com.igloo.agent.controller;
 
 import com.igloo.agent.model.Agent;
+import com.igloo.agent.response.AgentResponse;
 import com.igloo.agent.service.AgentRepository;
 import com.igloo.agent.service.AgentServices;
 
@@ -25,7 +26,7 @@ public class AgentController {
     @GetMapping("/agent")
     public String readAgent(Model model) {
 
-        List<Agent> agents = agentServ.get();
+        List<AgentResponse> agents = agentServ.get();
 
         model.addAttribute("agents", agents);
 
@@ -71,7 +72,7 @@ public class AgentController {
 
     @GetMapping("/api/agent/delete")
     @ResponseBody
-    public List<Agent> delete_API(@RequestParam String idtodelete) {
+    public List<AgentResponse> delete_API(@RequestParam String idtodelete) {
 
         agentServ.delete(idtodelete);
         return agentServ.get();

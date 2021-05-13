@@ -2,6 +2,8 @@ package com.igloo.agent.service;
 
 import java.util.List;
 
+import com.igloo.agent.response.AgentAdapter;
+import com.igloo.agent.response.AgentResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.igloo.agent.model.Agent;
@@ -13,9 +15,14 @@ public class AgentServices {
     @Autowired
     private AgentRepository agentRepo;
 
-    public List<Agent> get() {
+    @Autowired
+    private AgentAdapter agentAdapter;
 
-        return agentRepo.findAll();
+    public List<AgentResponse> get() {
+
+        List<Agent> agents = agentRepo.findAll();
+        return agentAdapter.of(agents);
+
 
     }
 
@@ -57,7 +64,7 @@ public class AgentServices {
     public void delete(String idtodelete) {
 
         String idArray[] = idtodelete.split(",");
-        for (String i : idArray){
+        for (String i : idArray) {
             int id = Integer.valueOf(i);
             agentRepo.deleteById(id);
         }

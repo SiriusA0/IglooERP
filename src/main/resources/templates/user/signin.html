@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign In</title>
     <!-- Bootstrap & Jquery -->
-    <script src="js/jquery-3.6.0.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <script src="bootstrap/js/jquery-3.6.0.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/e22ea825df.js" crossorigin="anonymous"></script>
     <!-- Libraries -->
@@ -39,15 +39,12 @@
               >
                 Log in to Igloo!
               </h2>
-              <div class="alert alert-info" th:if="${newUserFlag == true}">
-                            Confirm your E-mail please!
-                        </div>
-              
+              <div class="alert alert-info" th:if="${success==true}">Welcome to the Igloo family.</div>
             </div>
           </div>
           <div class="row d-flex justify-content-center">
             <div class="col">
-              <form class="mb-4" action="signin" method="post">
+              <form class="mb-4" action="/login" method="post">
                 <div class="form-group">
                   <label for="username" style="color: whitesmoke; font-family: 'Titillium Web', sans-serif"
                     >Username</label
@@ -70,7 +67,7 @@
               </form>
               <small style="color: whitesmoke; font-family: 'Titillium Web', sans-serif">Don't have an account?</small>
               <button
-                onclick="window.location.href='/signup'"
+                onclick="window.location.href='/register'"
                 type="button"
                 class="btn btn-outline-light btn-block"
                 style="font-family: 'Titillium Web', sans-serif"
