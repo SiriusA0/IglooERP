@@ -8,6 +8,10 @@ import com.igloo.client.service.ClientRepository;
 import com.igloo.order.model.Order;
 import com.igloo.order.response.OrderAdapter;
 import com.igloo.order.response.OrderResponse;
+import com.igloo.sector.model.Sector;
+import com.igloo.sector.service.SectorRepository;
+import com.igloo.status.model.Status;
+import com.igloo.status.service.StatusRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +19,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -32,6 +37,11 @@ public class OrderServices {
     private AgentRepository agentRepository;
     @Autowired
     private ClientAdapter clientAdapter;
+    @Autowired
+    private StatusRepository statusRepository;
+    @Autowired
+    private SectorRepository sectorRepository;
+   
     
     
     public List<OrderResponse> search(String action, String option, String term){
@@ -89,4 +99,48 @@ public class OrderServices {
     	
     	return orderadapter.of(orders);
     }
+    
+    
+	public List<OrderResponse>createOrder(double totalAmount,Integer statusId, Integer agentId, Integer clientId, Integer sectorId){ 
+    	
+		List<Order> orders = null;
+		Order order_ = new Order();
+		
+		order_.setTotalAmount(totalAmount);
+		order_.setStatus(statusRepository.findById(statusId).get());
+		order_.setAgent(agentRepository.findById(agentId).get());
+		order_.setClient(clientRepository.findById(clientId).get());
+		order_.setSector(sectorRepository.findById(sectorId).get());
+		
+		orderRepo.save(order_);
+		orders.add(order_);
+		
+
+    	return orderadapter.of(orders);
+    }
+	
+	public List<OrderResponse> getAll(){
+		
+		return orderadapter.of(orderRepo.findAll());
+		
+	}
+	
+	public void deleteOrder(String idtodelete) {
+
+        String idArray[] = idtodelete.split(",");
+        for (String i : idArray){
+            int id = Integer.valueOf(i);
+            orderRepo.deleteById(id);
+        }
+
+    }
+	
+	public OrderResponse editOrder(Integer id) {
+		
+		Order order = new Order();
+		
+		order=orderRepo.findById(id).get();
+		
+		return orderadapter.of(order);
+	}
 }

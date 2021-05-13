@@ -1,13 +1,18 @@
 package com.igloo.order.controller;
 
+import com.igloo.agent.model.Agent;
+import com.igloo.agent.response.AgentResponse;
+import com.igloo.client.model.Client;
 import com.igloo.client.response.ClientResponse;
 import com.igloo.client.service.ClientService;
 import com.igloo.order.model.Order;
 import com.igloo.order.response.OrderResponse;
 import com.igloo.order.service.OrderRepository;
 import com.igloo.order.service.OrderServices;
+import com.igloo.sector.model.Sector;
 import com.igloo.sector.response.SectorResponse;
 import com.igloo.sector.service.SectorService;
+import com.igloo.status.model.Status;
 import com.igloo.status.response.StatusResponse;
 import com.igloo.status.service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,14 +72,37 @@ public class OrderController {
     										@RequestParam(required = false) String option,
     										@RequestParam(required = false) String term ){
     	
-    	
-    	
-    	
+
     	List<OrderResponse> orders = orderServ.search(action, option, term);
-    	
-    	
-    	
+
     	return orders;
+    }
+    
+    @GetMapping("api/order/add")
+    @ResponseBody
+    public List<OrderResponse> add_API(@RequestParam double totalAmount,@RequestParam Integer statusId, 
+    		@RequestParam Integer agentId, @RequestParam Integer clientId, @RequestParam Integer sectorId){
+    	
+    	orderServ.createOrder(totalAmount, statusId, agentId, clientId, sectorId);
+    	
+    	
+    	return orderServ.getAll();
+    }
+    
+    @GetMapping("/api/order/delete")
+    @ResponseBody
+    public List<OrderResponse> delete_API(@RequestParam String idtodelete) {
+
+    	orderServ.deleteOrder(idtodelete);
+        return orderServ.getAll();
+    }
+    
+    @GetMapping("api/order/find")
+    @ResponseBody
+    public OrderResponse find_API(@RequestParam Integer id) {
+    	
+    	
+    	return orderServ.editOrder(id);
     }
 }
 
