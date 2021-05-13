@@ -199,7 +199,7 @@ fetch(urlFinal)
 
 document.querySelector("#sectorName").value = "";
 document.querySelector("#successAlertSector").style.display = "";        
-
+document.querySelector("#sectorForm").style.display == "none"
 
 }
 

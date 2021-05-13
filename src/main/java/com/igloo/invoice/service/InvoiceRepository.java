@@ -17,7 +17,6 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Integer> {
 	List<Invoice> findByClientFirstNameContainingOrClientLastNameContaining(String term, String term2,
 			Pageable pageable);
 
-	List<Invoice> findByAgentFirstNameContainingOrAgentLastNameContaining(String term, String term2, Pageable pageable);
 
 
 }

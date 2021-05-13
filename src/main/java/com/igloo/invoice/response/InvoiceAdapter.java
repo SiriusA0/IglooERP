@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.igloo.client.model.Client;
 import com.igloo.client.response.ClientAdapter;
@@ -12,7 +13,7 @@ import com.igloo.payment.model.Payment;
 import com.igloo.payment.response.PaymentAdapter;
 import com.igloo.sector.model.Sector;
 import com.igloo.sector.response.SectorAdapter;
-
+@Component
 public class InvoiceAdapter {
 	
 	@Autowired 
