@@ -39,29 +39,37 @@ public class OrderServices {
     		
     		orders = orderRepo.findAll();
     		
-    	} else if(action == "sort") {
+    	} else if(action.equals("sort")) {
     		
     		
-    		orders = orderRepo.findAll(Sort.by(Sort.Direction.fromString(term),option));
     		
-    	}else if(action == "search") {
+    		orders = orderRepo.findAll(Sort.by(Sort.Direction.fromString(option),term));
     		
-    		if(option == "client") {
+    	}else if(action.equals("search")) {
+    		
+    		if(option.equals("client")) {
     			
-    			List <Client> clients = clientRepository.findByFirstNameContainingOrLastNameContaining(term, term);
+    			orders = orderRepo.findByClientFirstNameContainingOrClientLastNameContaining(term, term);
     			
-    			orders = new LinkedList<>();
+    			//List <Client> clients = clientRepository.findByFirstNameContainingOrLastNameContaining(term, term);
     			
-    			for(Client client : clients) {
+    			// SELECT * FROM order O 
+    			// Left join CLIENT c ON (o.client = c.id_client)
+    			// WHERE c.firstName LIKE '%'param'%'´
+    		
+    			
+    			//orders = new LinkedList<>();
+    			//System.out.println(clients.size());
+    			//for(Client client : clients) {
     				
-    				for(Order order : client.getOrders()) {
+    			//	for(Order order : client.getOrders()) {
     					
-    					orders.add(order);
-    				}
-    			}
+    			//		orders.add(order);
+    			//	}
+    			//}
     			
     			
-    		}else if(option == "agent") {
+    		}else if(option.equals("agent")) {
     			
     			List <Agent> agents = agentRepository.findByFirstNameContainingOrLastNameContaining(term, term);
     			
@@ -78,6 +86,8 @@ public class OrderServices {
   
     	}
     	
+    	System.out.println("Orders: "+orders.size());
+    	
     	return orderadapter.of(orders);
     }
     
@@ -87,22 +97,6 @@ public class OrderServices {
 
         return orderRepo.findAll();
    }
-//    
-//    public List<Order> ascId() {
-//
-//        return orderRepo.findAllByOrderByIdAsc();
-//    }
-//
-//    public List<Order> descId() {
-//
-//        return orderRepo.findAllByOrderByIdDesc();
-//    }
-//    
-//    public List<Order> descAmount(){
-//    	
-//    	return orderRepo.findAll();
-//    	
-//    }
-//    
+
     
 }

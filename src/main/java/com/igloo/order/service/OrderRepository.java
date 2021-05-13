@@ -16,5 +16,6 @@ public interface OrderRepository  extends JpaRepository<Order, Integer> {
 	List<Order> findAllByOrderByIdAsc();
     List<Order> findAllByOrderByIdDesc();
     List<Order> findByClient(Client client);
+	List<Order> findByClientFirstNameContainingOrClientLastNameContaining(String term, String term2);
 
 }

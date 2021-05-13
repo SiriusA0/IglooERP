@@ -76,24 +76,11 @@ public class OrderController {
     	
     	
     	
-    	return orderServ.search(action, option, term);
+    	List<OrderResponse> orders = orderServ.search(action, option, term);
+    	
+    	System.out.println("orders en controller:"+orders.size());
+    	
+    	return orders;
     }
     
-  
-    @GetMapping("/api/order/orderbyamountdesc")
-    @ResponseBody
-    public List<Order> descAmount_API() {
-    	
-    	
-        return orderRepo.findAll(Sort.by(Sort.Direction.DESC, "totalAmount"));
-    }
-    
-    @GetMapping("/api/order/orderbyamountasc")
-    @ResponseBody
-    public List<Order> ascAmount_API() {
-    	
-    	
-        return orderRepo.findAll(Sort.by(Sort.Direction.ASC, "totalAmount"));
-    }
-
 }

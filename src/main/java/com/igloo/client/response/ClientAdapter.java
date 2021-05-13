@@ -11,6 +11,7 @@ import com.igloo.client.model.Client;
 public class ClientAdapter {
 	
 	public ClientResponse of(Client client) {
+		if(client == null) return null;
 		
 		ClientResponse response = new ClientResponse();
 		

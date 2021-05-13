@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.igloo.agent.model.Agent;
 import com.igloo.client.model.Client;
+import com.igloo.client.response.ClientResponse;
 import com.igloo.sector.model.Sector;
 import com.igloo.status.model.Status;
 
@@ -14,8 +15,8 @@ public class OrderResponse {
 	private int id;
     private Date creationDate;
     private Double totalAmount;
-    private Client client;
-    private Agent agent;
+    private ClientResponse client;
+    private String agent;
     private Status status;
     
     public int getId() {
@@ -36,16 +37,16 @@ public class OrderResponse {
 	public void setTotalAmount(Double totalAmount) {
 		this.totalAmount = totalAmount;
 	}
-	public Client getClient() {
+	public ClientResponse getClient() {
 		return client;
 	}
-	public void setClient(Client client) {
+	public void setClient(ClientResponse client) {
 		this.client = client;
 	}
-	public Agent getAgent() {
+	public String getAgent() {
 		return agent;
 	}
-	public void setAgent(Agent agent) {
+	public void setAgent(String agent) {
 		this.agent = agent;
 	}
 	public Status getStatus() {
