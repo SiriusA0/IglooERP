@@ -1,0 +1,17 @@
+.homeIcon {
+  color: rgb(53, 58, 64);
+}
+
+.bg_home {
+  background-image: url("../img/homeBg.jpg");
+  height: 95vh;
+  width: 100vw;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow-y : hidden;
+}
+
+.homeIconCard {
+  background-color: transparent;
+}
