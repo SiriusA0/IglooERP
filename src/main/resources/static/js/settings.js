@@ -307,7 +307,6 @@ function showStatusTable() {
 }
 
 
-
 //////////////////////////////////////////////////////// Payment Status /////////////////////////////////////////////////
 function showPaymentStatusON() {
   document.querySelector("#paymentStatusForm").style.display = "";

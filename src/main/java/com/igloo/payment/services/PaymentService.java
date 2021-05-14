@@ -36,11 +36,10 @@ public class PaymentService {
 	}
 		
 	public void delete(String id) {
-		String idArray[] = id.split(",");
-        for (String i : idArray){
-            int idToDelete = Integer.valueOf(i);
+	
+            int idToDelete = Integer.valueOf(id);
             paymentRepository.deleteById(idToDelete);
-        }
+        
 	}
 	
 	public void editPayment(Integer id, String name) {

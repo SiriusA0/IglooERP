@@ -34,14 +34,13 @@ public class SectorService {
 				sectorRepository.save(sector);
 				return sector;
 			}
-
+			
 			public void delete(String id) {
-			String idArray[] = id.split(",");
-	        for (String i : idArray){
-	            int idToDelete = Integer.valueOf(i);
+				
+	            int idToDelete = Integer.valueOf(id);
 	            sectorRepository.deleteById(idToDelete);
-	        }
-		}	
+	        
+	        }			
 			
 			
 			public void editSector(Integer id, String name) {
