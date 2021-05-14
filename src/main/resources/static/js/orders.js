@@ -269,7 +269,7 @@ function fillTable(orders) {
     var buttogroup = document.createElement("div");
     buttogroup.className = "btn-group";
     buttogroup.role = "group";
-    var modal = document.createElement(div);
+    var modal = document.createElement("div");
     
 
     var favbutton = document.createElement("button");

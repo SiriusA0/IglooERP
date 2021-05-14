@@ -43,7 +43,7 @@ function showCreateForm() {
   }
 }
 
-function createForm() {
+function createInvoice() {
   hideCreationForm();
   hideEditForm();
   unHideCreationForm();
@@ -67,7 +67,7 @@ function createForm() {
     sectorId +
     "&statusId=" +
     statusId +
-    "&paymentId=" +
+    "&paymentStatusId=" +
     paymentStatusId;
 
   finalRequest = creationRequest;
@@ -103,13 +103,22 @@ function showEditForm(event) {
   fetch("/api/invoice/find?id=" + selectedInvoiceId)
     .then((r) => r.json())
     .then((invoiceToEdit) => {
-      console.log("Selected invoice: " + invoiceToEdit.id);
+      console.log("Selected invoice: ", invoiceToEdit);
       // Get invoice old atributes.
       document.querySelector("input[name=preTaxEdited]").value = invoiceToEdit.preTax;
-      document.querySelector("select[name=clientIdEdited]").value = invoiceToEdit.clientId;
-      document.querySelector("select[name=statusIdEdited]").value = invoiceToEdit.statusId;
-      document.querySelector("select[name=paymentStatusIdEdited]").value = invoiceToEdit.paymentStatusId;
-      document.querySelector("select[name=sectorIdEdited]").value = invoiceToEdit.sectorId;
+      document.querySelector("select[name=clientIdEdited]").getElementsByTagName("option")[
+        invoiceToEdit.client.id-1
+      ].selected = "selected";
+      console.log(document.querySelector("select[name=statusIdEdited]").getElementsByTagName("option"));
+      document.querySelector("select[name=statusIdEdited]").getElementsByTagName("option")[
+        invoiceToEdit.status.id-1
+      ].selected = "selected";
+      document.querySelector("select[name=paymentStatusIdEdited]").getElementsByTagName("option")[
+        invoiceToEdit.payment.id-1
+      ].selected = "selected";
+      document.querySelector("select[name=sectorIdEdited]").getElementsByTagName("option")[
+        invoiceToEdit.sector.id-1
+      ].selected = "selected";
     });
 }
 function editInvoice() {
@@ -135,7 +144,7 @@ function editInvoice() {
     sectorId +
     "&statusId=" +
     statusId +
-    "&paymentId=" +
+    "&paymentStatusId=" +
     paymentStatusId;
 
   finalRequest = editRequest;
@@ -249,6 +258,12 @@ function fillTable(invoices) {
     dueDateCol.innerHTML = invoices[i].dueDate;
     row.appendChild(dueDateCol);
 
+    //  Sector Column
+    var sectorCol = document.createElement("td");
+    sectorCol.className = "filterTextDark";
+    sectorCol.innerHTML = invoices[i].sector.name;
+    row.appendChild(sectorCol);
+
     //  Client Column
     var clientCol = document.createElement("td");
     clientCol.className = "filterTextDark";
@@ -266,12 +281,6 @@ function fillTable(invoices) {
     afterTaxCol.className = "filterTextDark";
     afterTaxCol.innerHTML = invoices[i].afterTax;
     row.appendChild(afterTaxCol);
-
-    //  Sector Column
-    var sectorCol = document.createElement("td");
-    sectorCol.className = "filterTextDark";
-    sectorCol.innerHTML = invoices[i].sector.name;
-    row.appendChild(sectorCol);
 
     //  Status Column
     var paymentStatusCol = document.createElement("td");
