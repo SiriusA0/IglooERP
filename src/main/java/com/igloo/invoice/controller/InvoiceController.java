@@ -90,7 +90,18 @@ public class InvoiceController {
 	    	return invoiceService.findInvoice(id);
 	    }
 
+	    
+	    @GetMapping("api/invoice/get")
+	    @ResponseBody
+	    public List <InvoiceResponse> buscador(@RequestParam(required = false) String action,
+	    										@RequestParam(required = false) String option,
+	    										@RequestParam(required = false) String term ){
+	    	
 
+	    	List<InvoiceResponse> invoices = invoiceService.search(action, option, term);
+
+	    	return invoices;
+	    }
 }
 
    
