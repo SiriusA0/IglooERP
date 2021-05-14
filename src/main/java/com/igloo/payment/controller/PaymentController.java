@@ -36,13 +36,13 @@ public class PaymentController {
 	@ResponseBody
 	public List<PaymentResponse> add_API(@RequestParam(required = false) String id,@RequestParam String name){
 	    	
-			int idInt=Integer.valueOf(id);
+			
 			
 	    	if(id == null) {
 	    		
 	    		paymentService.createPayment(name);
 	    	} else {
-	    		
+	    		int idInt=Integer.valueOf(id);
 	    		paymentService.editPayment(idInt, name);	
 	    	}
 	

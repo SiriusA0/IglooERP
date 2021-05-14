@@ -39,17 +39,16 @@ public class StatusController {
 	@ResponseBody
 	public List<StatusResponse> add_API(@RequestParam(required = false) String id,@RequestParam String name){
 	    	
-			int idInt=Integer.valueOf(id);
+			
 			
 	    	if(id == null) {
 	    		
 	    		statusService.createStatus(name);
 	    	} else {
-	    		
+	    		int idInt=Integer.valueOf(id);
 	    		statusService.editStatus(idInt, name);	
 	    	}
 	
-	System.out.println(statusService.getAll());
 	return statusService.getAll();
 	}
 	

@@ -281,7 +281,7 @@ function showStatus() {
 function createStatus(){
 
   var statusName=document.querySelector("#statusName").value;
-  var urlFinal= server_url + '/api/status/add?'+"name="+ statusName;
+  var urlFinal= server_url + '/api/status/add?' + "name="+ statusName;
   
   fetch(urlFinal)
           .then(r => r.json())
@@ -350,9 +350,8 @@ function createPaymentStatus(){
   fetch(urlFinal)
           .then(r => r.json())
           .then(newpaymentStatus => {
-              console.log("Added status: " + newpaymentStatus.name);
               cleanTable("paymentStatusTable");
-              fillTable(newpaymentstatus,"payment", "paymentStatusTable", "Payment Status Name");
+              fillTable(newpaymentStatus,"payment", "paymentStatusTable", "Payment Status Name");
           });
   
   document.querySelector("#paymentStatusName").value = "";

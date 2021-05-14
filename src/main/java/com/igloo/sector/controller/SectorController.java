@@ -37,15 +37,15 @@ public class SectorController {
 	@ResponseBody
 	public List<SectorResponse> add_API(@RequestParam(required = false) String id,@RequestParam String name){
 	    	
-			int idInt=Integer.valueOf(id);
 			
-	    	if(id == null) {
+			
+	    	if(id == null ) {
 	    		
 	    		sectorService.createSector(name);
-	    	} else {
 	    		
-	    		sectorService.editSector(idInt, name);	
-	    	}
+	    	} else {
+	    		int idInt=Integer.valueOf(id);
+	    		sectorService.editSector(idInt, name);}	
 	
 	    	return sectorService.showSector();
 	}
