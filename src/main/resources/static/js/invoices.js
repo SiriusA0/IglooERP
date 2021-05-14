@@ -67,7 +67,7 @@ function createForm() {
     sectorId +
     "&statusId=" +
     statusId +
-    "&paymentStatusId=" +
+    "&paymentId=" +
     paymentStatusId;
 
   finalRequest = creationRequest;
@@ -135,7 +135,7 @@ function editInvoice() {
     sectorId +
     "&statusId=" +
     statusId +
-    "&paymentStatusId=" +
+    "&paymentId=" +
     paymentStatusId;
 
   finalRequest = editRequest;
@@ -175,7 +175,7 @@ function getInvoices(action, sortTerm, sortMethod) {
       // Search Definition.
       var searchRequest = request + "?action=search&";
       // Request Parameter.
-      var searchTerm = document.querySelector("#searchTermClient").value;
+      var searchTerm = document.querySelector("#searchTerm").value;
       finalRequest = searchRequest + "option=client&term=" + searchTerm;
       break;
 
@@ -239,14 +239,14 @@ function fillTable(invoices) {
 
     //  Creation Date Column
     var creationDateCol = document.createElement("td");
-    dateCol.className = "filterTextDark";
-    dateCol.innerHTML = invoices[i].creationDate;
+    creationDateCol.className = "filterTextDark";
+    creationDateCol.innerHTML = invoices[i].creationDate;
     row.appendChild(creationDateCol);
 
     //  Due Date Column
     var dueDateCol = document.createElement("td");
-    dateCol.className = "filterTextDark";
-    dateCol.innerHTML = invoices[i].dueDate;
+    dueDateCol.className = "filterTextDark";
+    dueDateCol.innerHTML = invoices[i].dueDate;
     row.appendChild(dueDateCol);
 
     //  Client Column
@@ -291,7 +291,7 @@ function fillTable(invoices) {
     var buttogroup = document.createElement("div");
     buttogroup.className = "btn-group";
     buttogroup.role = "group";
-    var modal = document.createElement(div);
+    var modal = document.createElement("div");
 
     var favbutton = document.createElement("button");
     favbutton.type = "button";

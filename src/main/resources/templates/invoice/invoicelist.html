@@ -24,7 +24,7 @@
     <!-- Libraries -->
     <link rel="stylesheet" th:href="@{'/css/igloo.css'}" href="/src/main/resources/static/css/igloo.css" />
     <!-- Scripts -->
-    <script th:src="@{'/js/orders.js'}" src="js/invoices.js"></script>
+    <script th:src="@{'/js/invoices.js'}" src="js/invoices.js"></script>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -85,7 +85,7 @@
               <div class="col">
                 <div class="input-group">
                   <input
-                    onkeyup="searchInvoiceByClient()"
+                    onkeyup="getInvoices('searchClient',null,null)"
                     type="text"
                     id="searchTerm"
                     class="form-control search filterText"
@@ -99,7 +99,7 @@
                 <button
                   type="button"
                   name="searchTerm"
-                  onclick="searchInvoiceByClient()"
+                  onclick="getInvoices('searchClient',null,null)"
                   class="btn btn-sm btn-search filterText"
                 >
                   Search
@@ -118,53 +118,53 @@
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="idInvoiceAsc()"
+                onclick="getInvoices('sort', 'afterTax', 'asc')"
                 id="idInvoiceAsc"
                 type="button"
                 class="fas fa-sort-numeric-up-alt filterIcons"
               ></i>
             </div>
             <div class="col-10">
-              <label for="idInvoiceAsc" class="filterText">Invoice by Ref (Asc)</label>
+              <label for="idInvoiceAsc" class="filterText">Invoice by Amount (Asc)</label>
             </div>
           </div>
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="idInvoiceDesc()"
+                onclick="getInvoices('sort', 'afterTax', 'desc')"
                 id="idInvoiceDesc"
                 type="button"
                 class="fas fa-sort-numeric-down-alt filterIcons"
               ></i>
             </div>
             <div class="col-10">
-              <label for="idInvoiceDesc" class="filterText">Invoice by Ref (Des)</label>
+              <label for="idInvoiceDesc" class="filterText">Invoice by Amount (Des)</label>
             </div>
           </div>
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="amountInvoiceAsc()"
+                onclick="getInvoices('sort', 'creationDate', 'asc')"
                 id="amountInvoiceAsc"
                 type="button"
                 class="fas fa-sort-alpha-up-alt filterIcons"
               ></i>
             </div>
             <div class="col-10">
-              <label for="amountInvoiceAsc" class="filterText">Invoice by Amount (Asc)</label>
+              <label for="amountInvoiceAsc" class="filterText">Invoice by Creation Date (Asc)</label>
             </div>
           </div>
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="amountInvoiceDesc()"
+                onclick="getInvoices('sort', 'creationDate', 'desc')"
                 id="amountInvoiceDesc"
                 type="button"
                 class="fas fa-sort-alpha-down-alt filterIcons"
               ></i>
             </div>
             <div class="col-10">
-              <label for="amountInvoiceDesc" class="filterText">Invoice by Amount (Des)</label>
+              <label for="amountInvoiceDesc" class="filterText">Invoice by Creation Date (Des)</label>
             </div>
           </div>
           <div class="row">
@@ -244,6 +244,8 @@
                     <th scope="col">Creation date</th>
                     <th scope="col">Due date</th>
                     <th scope="col">Sectors</th>
+                    <th scope="col">Client</th>
+
                     <th scope="col">Pre tax amount</th>
                     <th scope="col">Total amount</th>
                     <th scope="col">Status</th>
@@ -251,17 +253,20 @@
                     <th scope="col">Actions</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="invoiceList">
                   <tr th:each="invoice : ${invoices}">
                     <td><input type="checkbox" /></td>
-                    <td class="filterTextDark" th:text="${invoice.id}" scope="row">REF0000</td>
+                    <td class="filterTextDark idIndicator" th:text="${invoice.id}" scope="row">REF0000</td>
                     <td class="filterTextDark" th:text="${invoice.creationDate}">2021/5/20</td>
                     <td class="filterTextDark" th:text="${invoice.dueDate}">2021/5/21</td>
-                    <td class="filterTextDark" th:text="${invoice.sectorId}">0</td>
+                    <td class="filterTextDark" th:text="${invoice.sector.name}">0</td>
+                    <td class="filterTextDark" th:text="${invoice.client.firstName}+' '+${invoice.client.lastName}">
+                      0
+                    </td>
                     <td class="filterTextDark" th:text="${invoice.preTax}">10000</td>
                     <td class="filterTextDark" th:text="${invoice.afterTax}">12000</td>
-                    <td class="filterTextDark" th:text="${invoice.statusId}">0</td>
-                    <td class="filterTextDark" th:text="${invoice.paymentStatusId}">0</td>
+                    <td class="filterTextDark" th:text="${invoice.status.name}">0</td>
+                    <td class="filterTextDark" th:text="${invoice.payment.name}">0</td>
                     <td>
                       <div class="btn-group" role="group">
                         <button type="button" onclick="invoiceFav()" class="btn btn-secondary">
@@ -299,7 +304,7 @@
                                 </button>
                                 <button
                                   type="button"
-                                  onclick="deleteInvoide(event)"
+                                  onclick="deleteInvoice(event)"
                                   class="btn btn-add"
                                   data-dismiss="modal"
                                 >

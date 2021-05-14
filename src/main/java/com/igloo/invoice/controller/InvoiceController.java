@@ -42,16 +42,14 @@ public class InvoiceController {
 	    public String readInvoice(Model model) {
 
 	        List<InvoiceResponse> invoices = invoiceService.search(null, null, null);//TODO unificar nombres
-	        List<StatusResponse> statuses = statusService.getAll();//TODO unificar nombres
-	        List<SectorResponse> sectors = sectorService.showSector();//TODO unificar nombres
-	        List<ClientResponse> clients = clientService.get();//TODO unificar nombres
-	        
+//	        List<StatusResponse> statuses = statusService.getAll();//TODO unificar nombres
+//	        List<SectorResponse> sectors = sectorService.showSector();//TODO unificar nombres
+//	        List<ClientResponse> clients = clientService.get();//TODO unificar nombres
 
 	        model.addAttribute("invoices", invoices);
-	        model.addAttribute("statuses", statuses);
-	        model.addAttribute("sectors", sectors);
-	        model.addAttribute("clients", clients);
-	        
+//	        model.addAttribute("statuses", statuses);
+//	        model.addAttribute("sectors", sectors);
+//	        model.addAttribute("clients", clients);
 
 	        return "invoice/invoicelist";
 	    }
