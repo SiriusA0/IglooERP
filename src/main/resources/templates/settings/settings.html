@@ -17,6 +17,7 @@
     ></script>
     <!-- Libraries -->
     <link rel="stylesheet" th:href="@{'/css/igloo.css'}" href="/src/main/resources/static/css/igloo.css" />
+    <link rel="stylesheet" th:href="@{'/css/settings.css'}" href="/src/main/resources/static/css/settings.css" />
     <!-- Scripts -->
     <script  th:src="@{'/js/settings.js'}"src="/src/main/resources/static//js/settings.js"></script>
 
@@ -339,7 +340,7 @@
 
             <!-- EDIT TABLE  -->
 
-            <div class="row m-5" id="editForm" style="display: block">
+            <div class="row m-5 editForm" id="editForm" style="display: none">
               <div class="col-12">
                 <form>
                   <div class="row">
@@ -364,7 +365,7 @@
                       <div class="col-sm-3">
                         <button
                           type="button"
-                          onclick="CancelEdit()"
+                          onclick="cancelEdit()"
                           class="btn btn-block btn-outline-info btn-lg">
                           Cancel Edit
                         </button>
@@ -386,7 +387,7 @@
                     <div class="col-sm-3">
                       <button
                         type="button"
-                        onclick="edit()"
+                        onclick="editItem()"
                         class="btn btn-add btn-block btn-lg .filterText">
                         Edit
                       </button>
