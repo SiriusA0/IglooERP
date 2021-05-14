@@ -1,11 +1,4 @@
 /* Coded with love by Igloo team. */
-////////// Diary of a backend, frontend hater, developer  //////////
-// All orders / sort - request : /api/order/get
-// Variable "action":
-// if get -> bring all orders from server
-// if sort -> bring orders sorted by: "amount" or "date"
-// Create order - request : /api/order/add
-
 ////////// Server URL //////////
 var server_url = "http://localhost:8080";
 
@@ -57,6 +50,9 @@ function getOrders(action, sortTerm, sortMethod) {
 }
 ////////// Show CREATE form //////////
 function showCreateForm() {
+  if (document.querySelector("#orderEditForm").style.display != "none") {
+    document.querySelector("#orderEditForm").style.display = "none";
+  }
   if (document.querySelector("#orderForm").style.display == "none") {
     document.querySelector("#orderForm").style.display = "";
   } else {
@@ -70,8 +66,11 @@ function showEditForm(event) {
   var orderrow = event.currentTarget.closest("tr");
   selectedId = orderrow.querySelector(".id").innerHTML;
   var orderId = selectedId;
+  document.querySelector("#successAlert").style.display = "none";
+  document.querySelector("#orderForm").style.display = "none";
   if (document.querySelector("#orderEditForm").style.display == "none") {
     document.querySelector("#orderEditForm").style.display = "";
+    document.querySelector("#successAlert").style.display = "none";
     // Get order atributes.
 
     // Fetch request.
@@ -192,17 +191,21 @@ function deleteOrder(event) {
   var deleteRequest = request + "orderId=" + orderId;
 
   finalRequest = deleteRequest;
-
+  $(".toast").toast();
   fetch(finalRequest)
     .then((r) => r.json())
     .then((orders) => {
       cleanTable();
       console.log("Orders", orders);
       fillTable(orders);
+      $(document).ready(function () {
+        {
+          $("#deleteToast").toast("show");
+        }
+      });
     });
 }
 ////////// Utilities //////////
-
 function cleanTable() {
   document.querySelector("#orderList").innerHTML = "";
 }
@@ -266,6 +269,8 @@ function fillTable(orders) {
     var buttogroup = document.createElement("div");
     buttogroup.className = "btn-group";
     buttogroup.role = "group";
+    var modal = document.createElement(div);
+    
 
     var favbutton = document.createElement("button");
     favbutton.type = "button";

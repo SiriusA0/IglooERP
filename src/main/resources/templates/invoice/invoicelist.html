@@ -6,17 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Invoices</title>
     <!-- Bootstrap & Jquery -->
-
-    <script src="/src/main/resources/static/bootstrap/js/jquery-3.6.0.min.js"></script>
-    <script src="/src/main/resources/static/bootstrap/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/src/main/resources/static/bootstrap/css/bootstrap.min.css" />
+    <script
+      th:src="@{'/bootstrap/js/jquery-3.6.0.min.js'}"
+      src="/src/main/resources/static/bootstrap/js/jquery-3.6.0.min.js"
+    ></script>
+    <script
+      th:src="@{'/bootstrap/js/bootstrap.min.js'}"
+      src="/src/main/resources/static/bootstrap/js/bootstrap.min.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      th:href="@{'/bootstrap/css/bootstrap.min.css'}"
+      href="/src/main/resources/static/bootstrap/css/bootstrap.min.css"
+    />
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/e22ea825df.js" crossorigin="anonymous"></script>
     <!-- Libraries -->
-    <link rel="stylesheet" href="/src/main/resources/static/css/igloo.css" />
-
+    <link rel="stylesheet" th:href="@{'/css/igloo.css'}" href="/src/main/resources/static/css/igloo.css" />
     <!-- Scripts -->
-    <script src="js/invoices.js"></script>
+    <script th:src="@{'/js/orders.js'}" src="js/invoices.js"></script>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -262,9 +270,45 @@
                         <button type="button" onclick="invoiceEdit()" class="btn btn-secondary">
                           <i class="fas fa-edit"></i>
                         </button>
-                        <button type="button" onclick="invoiceDelete()" class="btn btn-secondary">
+                        <!-- Delete Modal trigger -->
+                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal">
                           <i class="fas fa-trash-alt"></i>
                         </button>
+                        <!-- Modal Delete -->
+                        <div
+                          class="modal fade"
+                          id="deleteModal"
+                          data-backdrop="static"
+                          data-keyboard="false"
+                          tabindex="-1"
+                          aria-labelledby="deleteModalLabel"
+                          aria-hidden="true"
+                        >
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="deleteModalLabel">Confirm deletion</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">We won't be able to recover the invoice. Are you sure?</div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                  No! Go back!
+                                </button>
+                                <button
+                                  type="button"
+                                  onclick="deleteInvoide(event)"
+                                  class="btn btn-add"
+                                  data-dismiss="modal"
+                                >
+                                  Understood, delete
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </td>
                   </tr>
