@@ -5,15 +5,26 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index</title>
+    <title>Home</title>
     <!-- Bootstrap & Jquery -->
-    <script src="bootstrap/js/jquery-3.6.0.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <script
+      th:src="@{'/bootstrap/js/jquery-3.6.0.min.js'}"
+      src="/src/main/resources/static/bootstrap/js/jquery-3.6.0.min.js"
+    ></script>
+    <script
+      th:src="@{'/bootstrap/js/bootstrap.min.js'}"
+      src="/src/main/resources/static/bootstrap/js/bootstrap.min.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      th:href="@{'/bootstrap/css/bootstrap.min.css'}"
+      href="/src/main/resources/static/bootstrap/css/bootstrap.min.css"
+    />
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/e22ea825df.js" crossorigin="anonymous"></script>
     <!-- Libraries -->
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" th:href="@{'/css/igloo.css'}" href="/src/main/resources/static/css/igloo.css" />
+    <link rel="stylesheet" th:href="@{'/css/home.css'}" href="/src/main/resources/static/css/home.css" />
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -21,35 +32,119 @@
       rel="stylesheet"
     />
   </head>
-  <body class="bg_index">
+  <body class="bg_home">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="/index"><i class="fas fa-igloo"></i></a>
+      <a class="navbar-brand" href="/home"><i class="fas fa-igloo"></i></a>
       <ul class="navbar-nav ml-auto">
         <i style="color: white" class="fas fa-snowman"></i>
       </ul>
     </nav>
-    <div class="container-fluid">
-      <div class="row ml-3 mt-5">
-        <div class="col mt-5">
-          <h1 class="display-3" style="font-family: 'Titillium Web', sans-serif">Get started with</h1>
-          <h1 class="display-1" style="font-family: 'Nunito', sans-serif">Igloo!</h1>
-          <div class="row pt-5">
-            <div class="col">
-              <button
-                type="button"
-                onclick="window.location.href='/signin'"
-                class="ml-3 mr-1 btn btn-lg btn-outline-dark"
-              >
-                Sign In
-              </button>
-              <button type="button" onclick="window.location.href='/signup'" class="btn btn-lg btn-dark">
-                Sign Up
-              </button>
+    <div class="container-fluid p-5 ml-5">
+
+  
+    <div class="row row-cols-1 row-cols-md-2 ml-5">
+      <div class="card mb-3 p-5 border-0 homeIconCard" style="max-width: 540px">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <i role="button" onclick="window.location.href='/agent'" class="homeIcon fas fa-user-tie fa-10x"></i>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Agents</h5>
+              <p class="card-text">Here you can browse agents, edit, add or delete them.</p>
             </div>
           </div>
         </div>
-        <div class="col"></div>
+      </div>
+
+      <div class="card mb-3 p-5 border-0 homeIconCard" style="max-width: 540px">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <i role="button" onclick="window.location.href='/client'" class="homeIcon fas fa-user fa-10x"></i>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Clients</h5>
+              <p class="card-text">Here you can browse clients, edit, add or delete them.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 p-5 border-0 homeIconCard" style="max-width: 640px">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <i role="button" onclick="window.location.href='/mail'" class="homeIcon fas fa-envelope fa-10x"></i>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body ml-2">
+              <h5 class="card-title">Igloo Mail</h5>
+              <p class="card-text">Check your inbox or start a conversation with your clients.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 p-5 border-0 homeIconCard" style="max-width: 540px">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <i role="button" onclick="window.location.href='/applications'" class="homeIcon fas fa-laptop-code fa-10x"></i>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body ml-4">
+              <h5 class="card-title">Applications</h5>
+              <p class="card-text">This section is under construction.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 p-5 border-0 homeIconCard" style="max-width: 540px">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <i
+              role="button"
+              onclick="window.location.href='/invoice'"
+              class="homeIcon fas fa-file-invoice-dollar fa-10x"
+            ></i>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body ml-4">
+              <h5 class="card-title">Invoices</h5>
+              <p class="card-text"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 p-5 border-0 homeIconCard" style="max-width: 640px">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <i role="button" onclick="window.location.href='/order'" class="homeIcon fas fa-box-open fa-10x"></i>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body ml-4">
+              <h5 class="card-title">Orders</h5>
+              <p class="card-text"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 p-5 border-0 homeIconCard" style="max-width: 640px">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <i role="button" onclick="window.location.href='/settings'" class="homeIcon fas fa-cogs fa-10x"></i>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body ml-4">
+              <h5 class="card-title">Settings</h5>
+              <p class="card-text"></p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
   </body>
 </html>

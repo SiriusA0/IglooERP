@@ -17,44 +17,48 @@ import com.igloo.order.response.OrderResponse;
 
 @Controller
 public class InvoiceController {
-	
-	@Autowired
-	InvoiceRepository invoiceRepository;
-	@Autowired
-	InvoiceService invoiceService;
-	
-	 @GetMapping("/api/invoice/add")
-	 @ResponseBody
-	 public List<InvoiceResponse> add_API(@RequestParam(required = false) Integer id, @RequestParam Integer clientId,@RequestParam Date dueDate,
-			 @RequestParam double preTax,@RequestParam double afterTax,@RequestParam Integer statusId,@RequestParam Integer paymentStatusId, 
-			 @RequestParam Integer sectorId) {
-		 
-		 if(id == null) {
-		 	invoiceService.createInvoice(clientId, dueDate, preTax, afterTax, statusId, paymentStatusId, sectorId);
-		 }else {
-			 
-			 invoiceService.editInvoice(id, clientId, dueDate, preTax, afterTax, statusId, paymentStatusId, sectorId);
-		 }
-		 
-		 	
-		 	
-		 	
-		 	return invoiceService.getAll(); 
-	    }
-	    
-	    @GetMapping("/api/invoice/delete")
-	    @ResponseBody
-	    public List<InvoiceResponse> delete_API(@RequestParam String id) {
 
-	    	invoiceService.deleteOrder(id);
-	        return invoiceService.getAll();
-	    }
-	    
-	    @GetMapping("api/invoice/find")
-	    @ResponseBody
-	    public InvoiceResponse find_API(@RequestParam Integer id) {
-	    	
-	    	
-	    	return invoiceService.findInvoice(id);
-	    }
+    @Autowired
+    InvoiceRepository invoiceRepository;
+    @Autowired
+    InvoiceService invoiceService;
+
+    @GetMapping("/invoice")
+    public String invoice() {
+        return "invoice/invoicelist";
+    }
+
+
+    @GetMapping("/api/invoice/add")
+    @ResponseBody
+    public List<InvoiceResponse> add_API(@RequestParam(required = false) Integer id, @RequestParam Integer clientId, @RequestParam Date dueDate,
+                                         @RequestParam double preTax, @RequestParam double afterTax, @RequestParam Integer statusId, @RequestParam Integer paymentStatusId,
+                                         @RequestParam Integer sectorId) {
+
+        if (id == null) {
+            invoiceService.createInvoice(clientId, dueDate, preTax, afterTax, statusId, paymentStatusId, sectorId);
+        } else {
+
+            invoiceService.editInvoice(id, clientId, dueDate, preTax, afterTax, statusId, paymentStatusId, sectorId);
+        }
+
+
+        return invoiceService.getAll();
+    }
+
+    @GetMapping("/api/invoice/delete")
+    @ResponseBody
+    public List<InvoiceResponse> delete_API(@RequestParam String id) {
+
+        invoiceService.deleteOrder(id);
+        return invoiceService.getAll();
+    }
+
+    @GetMapping("api/invoice/find")
+    @ResponseBody
+    public InvoiceResponse find_API(@RequestParam Integer id) {
+
+
+        return invoiceService.findInvoice(id);
+    }
 }
