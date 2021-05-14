@@ -7,6 +7,8 @@ import com.igloo.sector.model.Sector;
 import com.igloo.sector.service.SectorRepository;
 import com.igloo.sector.response.SectorResponse;
 import com.igloo.sector.service.SectorService;
+import com.igloo.status.response.StatusResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,32 +22,51 @@ public class SectorController {
     SectorRepository sectorrepository;
 	
 	@Autowired
-    SectorService sectorservice;
+    SectorService sectorService;
 	
-	@GetMapping("/api/sector/add")
-    @ResponseBody
-    public List<SectorResponse> add_API(@RequestParam String name) {
-		sectorservice.createSector(name);
-		 
-        return sectorservice.showSector();
-		  
-    }
+//	@GetMapping("/api/sector/add")
+//    @ResponseBody
+//    public List<SectorResponse> add_API(@RequestParam String name) {
+//		sectorservice.createSector(name);
+//		 
+//        return sectorservice.showSector();
+//		  
+//    }
+//	
+	@GetMapping("api/sector/add")
+	@ResponseBody
+	public List<SectorResponse> add_API(@RequestParam(required = false) String id,@RequestParam String name){
+	    	
+			int idInt=Integer.valueOf(id);
+			
+	    	if(id == null) {
+	    		
+	    		sectorService.createSector(name);
+	    	} else {
+	    		
+	    		sectorService.editSector(idInt, name);	
+	    	}
+	
+	    	return sectorService.showSector();
+	}
+	
 	
 	@GetMapping("/api/sector/show")
 	@ResponseBody
 	public List<SectorResponse> find_API() {
 		 
-	        return sectorservice.showSector();
+	        return sectorService.showSector();
 	}
 
 	@GetMapping("/api/sector/delete")
 	@ResponseBody
 	public List<SectorResponse> delete_API(@RequestParam String id) {
 		
-	  sectorservice.delete(id);
+	  sectorService.delete(id);
 	  
-	  return sectorservice.showSector();
+	  return sectorService.showSector();
 	}
+	
 	
 	
 	

@@ -5,6 +5,8 @@ import java.util.List;
 import com.igloo.sector.model.Sector;
 import com.igloo.sector.response.SectorAdapter;
 import com.igloo.sector.response.SectorResponse;
+import com.igloo.status.model.Status;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,5 +41,13 @@ public class SectorService {
 	            int idToDelete = Integer.valueOf(i);
 	            sectorRepository.deleteById(idToDelete);
 	        }
-		}	        
+		}	
+			
+			
+			public void editSector(Integer id, String name) {
+				
+				Sector sector = sectorRepository.findById(id).get();
+				sector.setName(name);
+				sectorRepository.save(sector);
+			}
 }

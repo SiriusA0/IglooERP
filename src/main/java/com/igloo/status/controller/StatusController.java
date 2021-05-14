@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.igloo.order.response.OrderResponse;
 import com.igloo.sector.response.SectorResponse;
 import com.igloo.status.model.Status;
 import com.igloo.status.response.StatusResponse;
@@ -25,14 +26,38 @@ public class StatusController {
     @Autowired
     private StatusService statusService;
 	
+//	
+//	@GetMapping("/api/status/add")
+//    @ResponseBody
+//    public List<StatusResponse> add_API(@RequestParam String name) {
+//		statusService.createStatus(name);
+//		
+//        return statusService.getAll();
+//    }
 	
-	@GetMapping("/api/status/add")
-    @ResponseBody
-    public List<StatusResponse> add_API(@RequestParam String name) {
-		statusService.createStatus(name);
-		
-        return statusService.getAll();
-    }
+	@GetMapping("api/status/add")
+	@ResponseBody
+	public List<StatusResponse> add_API(@RequestParam(required = false) String id,@RequestParam String name){
+	    	
+			int idInt=Integer.valueOf(id);
+			
+	    	if(id == null) {
+	    		
+	    		statusService.createStatus(name);
+	    	} else {
+	    		
+	    		statusService.editStatus(idInt, name);	
+	    	}
+	
+	System.out.println(statusService.getAll());
+	return statusService.getAll();
+	}
+	
+	
+	
+	
+	
+	
 	
 	@GetMapping("/api/status/get")
 	@ResponseBody
@@ -49,6 +74,7 @@ public class StatusController {
 	  return statusService.getAll();
 	}
 	
+
 	
 	
 }

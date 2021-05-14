@@ -118,7 +118,7 @@ function fillTable(settingName, settingStringName, tableId,settingHeadName ){
   
   // Delete Item from Table
 
-  function deleteItem(event, settingName, settingStringName, tableId, settingHeadName) {
+  function deleteItem(event, settingStringName, tableId, settingHeadName) {
 
     var rowToDelete=event.currentTarget.closest("tr");
     var columnIdToDelete=rowToDelete.querySelector(".idcolumn");
@@ -140,6 +140,9 @@ function fillTable(settingName, settingStringName, tableId,settingHeadName ){
 
 //Edit Item from table
 var urlToEdit="";
+var tableIdGlobal="";
+var settingNameGlobal="";
+var settingHeadNameGlobal="";
 function editItemForm(event,settingStringName, tableId, settingHeadName) {
 
   var rowToEdit=event.currentTarget.closest("tr");
@@ -155,12 +158,15 @@ function editItemForm(event,settingStringName, tableId, settingHeadName) {
   document.querySelector("#settingToEdit").value=rawName;
   
   //show edit Form  
-  var urlFinal = server_url + '/api/'+ settingStringName +'/edit?' + "id=" + idtoedit;
+  var urlFinal = server_url + '/api/'+ settingStringName +'/add?' + "id=" + idtoedit;
   urlToEdit=urlFinal;
+  tableIdGlobal=tableId;
+  settingNameGlobal=settingStringName;
+  settingHeadNameGlobal=settingHeadName;
   console.log(urlToEdit)
 }
 
-function editItem(settingStringName, tableId, settingHeadName){
+function editItem(){
     console.log(urlToEdit)
     var newname=document.querySelector("#editName").value;
     urlToEdit=urlToEdit +"&name="+ newname;
@@ -168,9 +174,11 @@ function editItem(settingStringName, tableId, settingHeadName){
     fetch(urlToEdit)
     .then(r => r.json()) 
     .then(ObjectToShow => {
-        cleanTable(tableId);
-        fillTable(ObjectToShow,settingStringName, tableId, settingHeadName)
+        cleanTable(tableIdGlobal);
+        fillTable(ObjectToShow,settingNameGlobal, tableIdGlobal, settingHeadNameGlobal)
     });
+    cancelEdit();
+    document.querySelector("#settingToEdit").value="";
   }
 
 
