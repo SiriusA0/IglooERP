@@ -44,7 +44,7 @@ public class InvoiceService {
 	@Autowired
 	private InvoiceAdapter invoiceAdapter;
 	
-	public List<InvoiceResponse> createInvoice(Integer clientId, Date dueDate, double preTax, double afterTax, Integer statusId,
+	public List<InvoiceResponse> createInvoice(Integer clientId, Date dueDate, double preTax, Integer statusId,
 			Integer paymentId, Integer sectorId) {
 		
 		////////////////////DATES////////////////////////////////////////////////////
@@ -132,13 +132,12 @@ public InvoiceResponse findInvoice(Integer id) {
 	return invoiceAdapter.of(invoice);
 }
 
-public void editInvoice(Integer id, Integer clientId, Date dueDate, double preTax, double afterTax, Integer statusId,
+public void editInvoice(Integer id, Integer clientId, double preTax, Integer statusId,
 		Integer paymentStatusId, Integer sectorId) {
 	
 	Invoice invoice = invoiceRepository.findById(id).get();
 	
 	invoice.setClient(clientRepository.findById(clientId).get());
-	invoice.setDueDate(dueDate);
 	invoice.setPreTax(preTax);
 	invoice.setAfterTax(preTax*1.21);
 	invoice.setStatus(statusRepository.findById(statusId).get());

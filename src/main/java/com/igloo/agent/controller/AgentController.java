@@ -65,16 +65,25 @@ public class AgentController {
 
     @GetMapping("/api/agent/add")
     @ResponseBody
-    public Agent add_API(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String profilePic) {
+    public List<AgentResponse> add_API(@RequestParam(required = false)Integer id,@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String profilePic) {
 
-        return agentServ.add(firstName, lastName, email, profilePic);
+    	if(id == null) {
+    		
+    		agentServ.createAgent(firstName, lastName, email, profilePic);	
+    	}else {
+    		
+    		agentServ.editAgent(id, firstName, lastName, email, profilePic);
+    		
+    	}
+    	
+        return agentServ.get();
     }
 
     @GetMapping("/api/agent/delete")
     @ResponseBody
     public List<AgentResponse> delete_API(@RequestParam String idtodelete) {
 
-        agentServ.delete(idtodelete);
+        agentServ.deleteAgent(idtodelete);
         return agentServ.get();
     }
 

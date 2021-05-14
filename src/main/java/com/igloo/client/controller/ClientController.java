@@ -21,6 +21,8 @@ public class ClientController {
 
     @Autowired
     private ClientService clientService;
+    
+    
 
     @GetMapping("/client")
     public String readAgent(Model model) {
@@ -64,13 +66,21 @@ public class ClientController {
 
     @GetMapping("/api/client/add")
     @ResponseBody
-    public Client add_API(@RequestParam char type, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String streetLine1,
+    public List<ClientResponse> add_API(@RequestParam(required = false) Integer id, @RequestParam char type, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String streetLine1,
     		@RequestParam String streetLine2, @RequestParam Integer cityId, @RequestParam Integer regionId, @RequestParam Integer zipCode,
     		@RequestParam Integer countryId, @RequestParam String idNumber, @RequestParam String phoneNumber1, @RequestParam String phoneNumber2, 
     		@RequestParam String email, @RequestParam String web, @RequestParam String profilePic,@RequestParam Integer categoryId) {
 
-        return clientService.add(type, firstName, lastName, streetLine1, streetLine2, cityId, regionId, zipCode, countryId, idNumber,
-        		phoneNumber1, phoneNumber2, email, web, profilePic,categoryId);
+    	 if(id == null) {
+    		 clientService.createClient(type, firstName, lastName, streetLine1, streetLine2, cityId, regionId, zipCode, countryId, idNumber, phoneNumber1, phoneNumber2,
+    				 email, web, profilePic, categoryId);
+ 		 }else {
+ 			 
+ 			clientService.editClient(id, type, firstName, lastName, streetLine1, streetLine2, cityId, regionId, zipCode, countryId, idNumber, phoneNumber1, phoneNumber2,
+   				 email, web, profilePic, categoryId);
+ 		 }
+    	 
+    	 return clientService.get();
     }
 
     /*

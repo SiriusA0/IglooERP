@@ -5,15 +5,23 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.igloo.agent.response.AgentResponse;
+import com.igloo.client.response.ClientResponse;
+import com.igloo.client.service.ClientService;
 import com.igloo.invoice.model.Invoice;
 import com.igloo.invoice.response.InvoiceResponse;
 import com.igloo.invoice.service.InvoiceRepository;
 import com.igloo.invoice.service.InvoiceService;
-import com.igloo.order.response.OrderResponse;
+
+import com.igloo.sector.response.SectorResponse;
+import com.igloo.sector.service.SectorService;
+import com.igloo.status.response.StatusResponse;
+import com.igloo.status.service.StatusService;
 
 @Controller
 public class InvoiceController {
@@ -22,18 +30,43 @@ public class InvoiceController {
 	InvoiceRepository invoiceRepository;
 	@Autowired
 	InvoiceService invoiceService;
+	@Autowired
+	StatusService statusService;
+	@Autowired
+	SectorService sectorService;
+	@Autowired
+	ClientService clientService;
+	
+	  @GetMapping("/invoice")
+	    public String readOrder(Model model) {
+
+	        List<InvoiceResponse> invoices = invoiceService.search(null, null, null);//TODO unificar nombres
+	        List<StatusResponse> statuses = statusService.getAll();//TODO unificar nombres
+	        List<SectorResponse> sectors = sectorService.showSector();//TODO unificar nombres
+	        List<ClientResponse> clients = clientService.get();//TODO unificar nombres
+	        
+
+	        model.addAttribute("invoices", invoices);
+	        model.addAttribute("statuses", statuses);
+	        model.addAttribute("sectors", sectors);
+	        model.addAttribute("clients", clients);
+	        
+
+	        return "invoice/invoicelist";
+	    }
+	
 	
 	 @GetMapping("/api/invoice/add")
 	 @ResponseBody
 	 public List<InvoiceResponse> add_API(@RequestParam(required = false) Integer id, @RequestParam Integer clientId,@RequestParam Date dueDate,
-			 @RequestParam double preTax,@RequestParam double afterTax,@RequestParam Integer statusId,@RequestParam Integer paymentStatusId, 
+			 @RequestParam double preTax,@RequestParam Integer statusId,@RequestParam Integer paymentStatusId, 
 			 @RequestParam Integer sectorId) {
 		 
 		 if(id == null) {
-		 	invoiceService.createInvoice(clientId, dueDate, preTax, afterTax, statusId, paymentStatusId, sectorId);
+		 	invoiceService.createInvoice(clientId, dueDate, preTax,  statusId, paymentStatusId, sectorId);
 		 }else {
 			 
-			 invoiceService.editInvoice(id, clientId, dueDate, preTax, afterTax, statusId, paymentStatusId, sectorId);
+			 invoiceService.editInvoice(id, clientId, preTax, statusId, paymentStatusId, sectorId);
 		 }
 		 
 		 	

@@ -51,7 +51,8 @@ public class AgentServices {
         return agentRepo.findAllByOrderByIdDesc();
     }
 
-    public Agent add(String firstName, String lastName, String email, String profilePic) {
+    public Agent createAgent(String firstName, String lastName, String email, String profilePic) {
+    	
         Agent agent = new Agent();
         agent.setFirstName(firstName);
         agent.setLastName(lastName);
@@ -61,7 +62,7 @@ public class AgentServices {
         return agent;
     }
 
-    public void delete(String idtodelete) {
+    public void deleteAgent(String idtodelete) {
 
         String idArray[] = idtodelete.split(",");
         for (String i : idArray) {
@@ -69,6 +70,20 @@ public class AgentServices {
             agentRepo.deleteById(id);
         }
 
+    }
+    
+    public void editAgent(Integer id, String firstName, String lastName, String email, String profilePic) {
+    	
+    	Agent agent = agentRepo.findById(id).get();
+    	
+    	agent.setFirstName(firstName);
+        agent.setLastName(lastName);
+        agent.setEmail(email);
+        agent.setProfilePic(profilePic);
+        agentRepo.save(agent);
+    	
+    	
+    	
     }
 
 }

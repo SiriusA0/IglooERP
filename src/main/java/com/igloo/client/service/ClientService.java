@@ -65,7 +65,7 @@ public class ClientService {
     	return clientadapter.of(clients);
     }
 
-    public Client add(char type, String firstName, String lastName, String streetLine1, String streetLine2, Integer cityId, Integer regionId, Integer zipCode,
+    public ClientResponse createClient(char type, String firstName, String lastName, String streetLine1, String streetLine2, Integer cityId, Integer regionId, Integer zipCode,
     		Integer countryId, String idNumber, String phoneNumber1, String phoneNumber2, String email, String web, String profilePic,Integer categoryId) {
         Client client = new Client();
         client.setType(type);
@@ -86,10 +86,10 @@ public class ClientService {
         client.setCategory(categoryRepository.findById(categoryId).get());
 
         clientRepository.save(client);
-        return client;
+        return clientadapter.of(client);
     }
 
-    public void delete(String idtodelete) {
+    public void deleteClient(String idtodelete) {
 
         String idArray[] = idtodelete.split(",");
         for (String i : idArray){
@@ -99,8 +99,33 @@ public class ClientService {
 
     }
     
-    
-    
+    public void editClient(Integer id, char type, String firstName, String lastName, String streetLine1, String streetLine2, Integer cityId, Integer regionId, Integer zipCode,
+    		Integer countryId, String idNumber, String phoneNumber1, String phoneNumber2, String email, String web, String profilePic,Integer categoryId) {
+    	
+    	
+        Client client = clientRepository.findById(id).get();
+        
+        client.setType(type);
+        client.setFirstName(firstName);
+        client.setLastName(lastName);
+        client.setStreetLine1(streetLine1);
+        client.setStreetLine2(streetLine2);
+        client.setCity(cityRepository.findById(cityId).get());
+        client.setRegion(regionRepository.findById(regionId).get());
+        client.setZipCode(zipCode);
+        client.setCountry(countryRepository.findById(countryId).get());
+        client.setIdNumber(idNumber);
+        client.setPhoneNumber1(phoneNumber1);
+        client.setPhoneNumber2(phoneNumber2);
+        client.setEmail(email);
+        client.setWeb(web);
+        client.setProfilePic(profilePic);
+        client.setCategory(categoryRepository.findById(categoryId).get());
+
+        clientRepository.save(client);
+        
+    }
+  
 }
 
 
