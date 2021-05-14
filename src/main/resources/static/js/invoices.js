@@ -36,7 +36,7 @@ function cleanTable() {
 ////////// CREATE form //////////
 function showCreateForm() {
   hideEditForm();
-  if (document.querySelector("#invoiceForm").style.display == "none") {
+  if (document.querySelector("#invoiceCreationForm").style.display == "none") {
     unHideCreationForm();
   } else {
     hideCreationForm();
@@ -233,7 +233,7 @@ function fillTable(invoices) {
 
     //  ID Column
     var idCol = document.createElement("td");
-    idCol.className = "filterTextDark  id";
+    idCol.className = "filterTextDark  idIndicator";
     idCol.innerHTML = invoices[i].id;
     row.appendChild(idCol);
 
@@ -339,14 +339,14 @@ function fillTable(invoices) {
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">We won't be able to recover the order. Are you sure?</div>
+          <div class="modal-body">We won't be able to recover the Invoice . Are you sure?</div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">
               No! Go back!
             </button>
             <button
               type="button"
-              onclick="deleteOrder(event)"
+              onclick="deleteInvoice(event)"
               class="btn btn-add"
               data-dismiss="modal"
             >

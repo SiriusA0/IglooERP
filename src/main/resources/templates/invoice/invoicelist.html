@@ -174,7 +174,7 @@
           </div>
           <div class="row pt-4">
             <div class="col">
-              <button type="button" onclick="addInvoice()" class="btn btn-add btn-lg btn-block filterText">
+              <button type="button" onclick="showCreateForm()" class="btn btn-add btn-lg btn-block filterText">
                 Add Invoice
               </button>
             </div>
@@ -188,52 +188,94 @@
           </div>
         </div>
         <div class="col-10" style="overflow: auto; height: 1000px; width: fit-content">
-          <!-- Invoice Form INI -->
-          <div class="row invoiceForm m-5" id="invoiceForm" style="display: none">
+          <!-- Invoice Creation Form INI -->
+          <div class="row invoiceCreationForm m-5" id="invoiceCreationForm" style="display: none">
             <div class="col">
               <form>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="firstName">First Name</label>
-                    <input type="text" class="form-control" name="firstName" id="firstName" />
+                    <label for="statusId">Status</label>
+                    <select class="form-control" name="statusId" id="statusId">
+                      <option th:each="status: ${statuses}" th:value="${status.id}" th:text="${status.name}"></option>
+                    </select>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" class="form-control" name="lastName" id="lastName" />
+                    <label for="paymentId">Status</label>
+                    <select class="form-control" name="paymentId" id="paymentId">
+                      <option
+                        th:each="payment: ${paymentes}"
+                        th:value="${payment.id}"
+                        th:text="${payment.name}"
+                      ></option>
+                    </select>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- Invoice Creation Form END -->
+          <!-- Invoice Edit INI -->
+          <div class="row invoiceEditForm m-5" id="invoiceEditForm" style="display: none">
+            <div class="col">
+              <form>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="totalAmount">Total Amount</label>
+                    <input type="text" class="form-control" name="totalEditAmount" />
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="statusId">Status</label>
+                    <select class="form-control" name="statusEditId">
+                      <option th:each="status: ${statuses}" th:value="${status.id}" th:text="${status.name}"></option>
+                    </select>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="email">Email</label>
-                    <input type="text" class="form-control" name="email" id="email" placeholder="snowman@igloo.com" />
+                    <label for="agentId">Agent</label>
+                    <select class="form-control" name="agentEditId">
+                      <option
+                        th:each="agent: ${agents}"
+                        th:value="${agent.id}"
+                        th:text="${agent.firstName}+' '+${agent.lastName}"
+                      ></option>
+                    </select>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="email">Profile Picture</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="profilePic"
-                      name="profilePic"
-                      placeholder="https://robohash.org/quoasdfsdffsdsendain.png?size=250x250&set=set1"
-                    />
+                    <label for="clientId">Client</label>
+                    <select class="form-control" name="clientEditId">
+                      <option
+                        th:each="client: ${clients}"
+                        th:value="${client.id}"
+                        th:text="${client.firstName}+' '+${client.lastName}"
+                      ></option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="sectorId">Sector</label>
+                    <select class="form-control" name="sectorEditId">
+                      <option th:each="sector: ${sectors}" th:value="${sector.id}" th:text="${sector.name}"></option>
+                    </select>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-2">
-                    <button type="button" onclick="createInvoice()" class="btn btn-block btn-addInvoice filterText">
-                      Create
+                    <button type="button" onclick="editInvoice(event)" class="btn btn-block btn-add filterText">
+                      Edit
                     </button>
                   </div>
                   <div class="form-group col-md-10">
-                    <div class="alert alert-info" role="alert" style="display: none" id="successAlert">
-                      Invoice successfully added
+                    <div class="alert alert-info" role="alert" style="display: none" id="editSuccessAlert">
+                      Invoice successfully edited
                     </div>
                   </div>
                 </div>
               </form>
             </div>
           </div>
-          <!-- Invoice Form END -->
+          <!-- Invoice Edit END -->
           <div class="row invoiceTable m-5" id="invoiceTable">
             <div class="col">
               <table class="table table-hover">
@@ -272,7 +314,7 @@
                         <button type="button" onclick="invoiceFav()" class="btn btn-secondary">
                           <i class="far fa-star"></i>
                         </button>
-                        <button type="button" onclick="invoiceEdit()" class="btn btn-secondary">
+                        <button type="button" onclick="showEditForm(event)" class="btn btn-secondary">
                           <i class="fas fa-edit"></i>
                         </button>
                         <!-- Delete Modal trigger -->
