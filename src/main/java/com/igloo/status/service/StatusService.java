@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.igloo.order.model.Order;
 import com.igloo.status.model.Status;
 import com.igloo.status.response.StatusAdapter;
 import com.igloo.status.response.StatusResponse;
@@ -41,5 +42,14 @@ public class StatusService {
             statusRepository.deleteById(idToDelete);
         }
 	}
+	
+	
+	public void editStatus(Integer id, String name) {
+		
+		Status status = statusRepository.findById(id).get();
+		status.setName(name);
+		statusRepository.save(status);
+	}
+	
 	
 }

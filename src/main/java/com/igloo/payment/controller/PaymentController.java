@@ -12,6 +12,7 @@ import com.igloo.payment.model.Payment;
 import com.igloo.payment.response.PaymentResponse;
 import com.igloo.payment.services.PaymentRepository;
 import com.igloo.payment.services.PaymentService;
+import com.igloo.sector.response.SectorResponse;
 import com.igloo.status.response.StatusResponse;
 
 
@@ -24,13 +25,32 @@ public class PaymentController {
 	@Autowired
 	PaymentService paymentService;
 	
-	@GetMapping("/api/payment/add")
-    @ResponseBody
-    public List<PaymentResponse> add_API(@RequestParam String name) {
-		paymentService.createPayment(name);
-        return paymentService.getAll();
-    }
+//	@GetMapping("/api/payment/add")
+//    @ResponseBody
+//    public List<PaymentResponse> add_API(@RequestParam String name) {
+//		paymentService.createPayment(name);
+//        return paymentService.getAll();
+//    }
 	
+	@GetMapping("api/payment/add")
+	@ResponseBody
+	public List<PaymentResponse> add_API(@RequestParam(required = false) String id,@RequestParam String name){
+	    	
+			int idInt=Integer.valueOf(id);
+			
+	    	if(id == null) {
+	    		
+	    		paymentService.createPayment(name);
+	    	} else {
+	    		
+	    		paymentService.editPayment(idInt, name);	
+	    	}
+	
+	
+	return paymentService.getAll();
+	}
+	
+
 	@GetMapping("/api/payment/get")
 	@ResponseBody
 	public List<PaymentResponse> getAll() {

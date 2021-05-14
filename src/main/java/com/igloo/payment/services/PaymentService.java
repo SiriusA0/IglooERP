@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.igloo.payment.model.Payment;
 import com.igloo.payment.response.PaymentAdapter;
 import com.igloo.payment.response.PaymentResponse;
+import com.igloo.sector.model.Sector;
 import com.igloo.status.model.Status;
 import com.igloo.status.response.StatusResponse;
 
@@ -40,5 +41,12 @@ public class PaymentService {
             int idToDelete = Integer.valueOf(i);
             paymentRepository.deleteById(idToDelete);
         }
+	}
+	
+	public void editPayment(Integer id, String name) {
+		
+		Payment payment = paymentRepository.findById(id).get();
+		payment.setName(name);
+		paymentRepository.save(payment);
 	}
 }

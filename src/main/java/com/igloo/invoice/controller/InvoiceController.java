@@ -25,6 +25,7 @@ import com.igloo.status.service.StatusService;
 
 @Controller
 public class InvoiceController {
+
 	
 	@Autowired
 	InvoiceRepository invoiceRepository;
@@ -38,7 +39,7 @@ public class InvoiceController {
 	ClientService clientService;
 	
 	  @GetMapping("/invoice")
-	    public String readOrder(Model model) {
+	    public String readInvoice(Model model) {
 
 	        List<InvoiceResponse> invoices = invoiceService.search(null, null, null);//TODO unificar nombres
 	        List<StatusResponse> statuses = statusService.getAll();//TODO unificar nombres
@@ -90,4 +91,8 @@ public class InvoiceController {
 	    	
 	    	return invoiceService.findInvoice(id);
 	    }
+
+
 }
+
+   

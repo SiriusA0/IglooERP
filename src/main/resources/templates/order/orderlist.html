@@ -34,7 +34,7 @@
   </head>
   <body class="bg_igloo" style="height: 100%; overflow: hidden">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="/"><i class="fas fa-igloo"></i></a>
+      <a class="navbar-brand" href="/home"><i class="fas fa-igloo"></i></a>
       <button
         class="navbar-toggler"
         type="button"
@@ -321,7 +321,7 @@
                     </select>
                   </div>
                 </div>
-                    <div class="form-row">
+                <div class="form-row">
                   <div class="form-group col-md-2">
                     <button type="button" onclick="editOrder(event)" class="btn btn-block btn-add filterText">
                       Edit
@@ -371,9 +371,45 @@
                         <button type="button" onclick="showEditForm(event)" class="btn btn-secondary">
                           <i class="fas fa-edit"></i>
                         </button>
-                        <button type="button" onclick="deleteOrder(event)" class="btn btn-secondary">
+                        <!-- Delete Modal trigger -->
+                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal">
                           <i class="fas fa-trash-alt"></i>
                         </button>
+                        <!-- Modal Delete -->
+                        <div
+                          class="modal fade"
+                          id="deleteModal"
+                          data-backdrop="static"
+                          data-keyboard="false"
+                          tabindex="-1"
+                          aria-labelledby="deleteModalLabel"
+                          aria-hidden="true"
+                        >
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="deleteModalLabel">Confirm deletion</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">We won't be able to recover the order. Are you sure?</div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                  No! Go back!
+                                </button>
+                                <button
+                                  type="button"
+                                  onclick="deleteOrder(event)"
+                                  class="btn btn-add"
+                                  data-dismiss="modal"
+                                >
+                                  Understood, delete
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </td>
                   </tr>
