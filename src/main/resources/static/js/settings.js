@@ -206,9 +206,11 @@ function showSector() {
     showSectorON();
     showStatusOFF();
     showPaymentStatusOFF();
+    document.querySelector("#settingBgImage").style.display="none";
     
   } else {
     showSectorOFF();
+    document.querySelector("#settingBgImage").style.display="";
   }
   cleanTable("sectorTable");
   showSectorsTable(); 
@@ -265,8 +267,10 @@ function showStatus() {
     showStatusON();
     showSectorOFF();
     showPaymentStatusOFF();
+    document.querySelector("#settingBgImage").style.display="none";
   } else {
     showStatusOFF();
+    document.querySelector("#settingBgImage").style.display="";
   }
   cleanTable("statusTable");
   showStatusTable();
@@ -325,11 +329,14 @@ function showPaymentStatus() {
     showPaymentStatusON();
     showSectorOFF();
     showStatusOFF();
+    document.querySelector("#settingBgImage").style.display="none";
   } else {
     showPaymentStatusOFF();
+    document.querySelector("#settingBgImage").style.display="";
   }
   cleanTable("paymentStatusTable");
   showPaymentStatusTable();
+  
 
 }
 
