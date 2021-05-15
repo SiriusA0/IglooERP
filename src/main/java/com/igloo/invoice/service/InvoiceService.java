@@ -89,19 +89,19 @@ public List<InvoiceResponse> search(String action, String option, String term){
     	List<Invoice> invoices = null;
     	
     	if(action == null || action.isEmpty()) {
-			Pageable pageable = PageRequest.of(0, 25);
+			Pageable pageable = PageRequest.of(0, 10);
 			Page<Invoice> lista = invoiceRepository.findAll(pageable);
 			invoices = lista.getContent();
 			
 		} else if(action.equals("sort")) {
 			Sort.Direction direction = Sort.Direction.fromString(option);
 			Sort sort = Sort.by(direction,term);
-			Pageable pageable = PageRequest.of(0, 25, sort);
+			Pageable pageable = PageRequest.of(0, 10, sort);
     		invoices = invoiceRepository.findAll(pageable).getContent();
     		
     	}else if(action.equals("search")) {
     		if(option.equals("client")) {
-				Pageable pageable = PageRequest.of(0, 25);
+				Pageable pageable = PageRequest.of(0, 10);
     			invoices = invoiceRepository.findByClientFirstNameContainingOrClientLastNameContaining(term, term, pageable);    			
        		}
   

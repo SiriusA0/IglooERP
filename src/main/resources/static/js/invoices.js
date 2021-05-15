@@ -2,6 +2,67 @@
 $(".toast").toast();
 ////////// Server URL //////////
 var server_url = "http://localhost:8080";
+var search_url = server_url + "/api/invoice/get?";
+var currentPage = 1;
+////////// Pagination //////////
+function nextPage(event) {
+  console.log("Next Page")
+  if (currentPage > 1) {
+    var nextPage = currentPage + 1;
+    finalRequest = search_url + "&page=" + nextPage;
+    fetchRequest(finalRequest, null);
+    search_url = server_url + "/api/invoice/get?";
+    currentPage = nextPage;
+    updatePages(event, currentPage);
+  }
+}
+function prevPage(event) {
+  console.log("Previous Page")
+  if (currentPage > 1) {
+    var prevPage = currentPage - 1;
+    finalRequest = search_url + "&page=" + prevPage;
+    fetchRequest(finalRequest, null);
+    search_url = server_url + "/api/invoice/get?";
+    currentPage = prevPage;
+    updatePages(event, currentPage);
+  }
+}
+function page(event) {
+  console.log("Page")
+  if (currentPage > 1) {
+    var page = event.currentTarget.innerHTML;
+    finalRequest = search_url + "&page=" + page;
+    fetchRequest(finalRequest, null);
+    search_url = server_url + "/api/invoice/get?";
+    currentPage = page;
+    updatePages(event, currentPage);
+  }
+}
+function updatePages(event, currentPage) {
+  currentPageInt = parseInt(currentPage);
+  var pageIndicators = event.currentTarget.closest("ul");
+  pageIndicators.querySelector("#pageItem1").innerHTML = currentPageInt - 1;
+  pageIndicators.querySelector("#pageItem2").innerHTML = currentPageInt;
+  pageIndicators.querySelector("#pageItem3").innerHTML = currentPageInt + 1;
+}
+////////// Fetch //////////
+function fetchRequest(finalRequest, toast) {
+  search_url = finalRequest;
+  console.log(search_url);
+  fetch(finalRequest)
+    .then((r) => r.json())
+    .then((invoices) => {
+      cleanTable();
+      fillTable(invoices);
+      if (toast != null) {
+        $(document).ready(function () {
+          {
+            $(toast).toast("show");
+          }
+        });
+      }
+    });
+}
 ////////// Utilities //////////
 function unHideCreationForm() {
   document.querySelector("#invoiceCreationForm").style.display = "";
@@ -42,7 +103,6 @@ function showCreateForm() {
     hideCreationForm();
   }
 }
-
 function createInvoice() {
   hideCreationForm();
   hideEditForm();
@@ -71,18 +131,7 @@ function createInvoice() {
     paymentStatusId;
 
   finalRequest = creationRequest;
-
-  fetch(finalRequest)
-    .then((r) => r.json())
-    .then((invoices) => {
-      cleanTable();
-      fillTable(invoices);
-      $(document).ready(function () {
-        {
-          $("#createToast").toast("show");
-        }
-      });
-    });
+  fetchRequest(finalRequest, "#createToast");
 
   clearCreationForm();
   hideCreationForm();
@@ -107,17 +156,17 @@ function showEditForm(event) {
       // Get invoice old atributes.
       document.querySelector("input[name=preTaxEdited]").value = invoiceToEdit.preTax;
       document.querySelector("select[name=clientIdEdited]").getElementsByTagName("option")[
-        invoiceToEdit.client.id-1
+        invoiceToEdit.client.id - 1
       ].selected = "selected";
       console.log(document.querySelector("select[name=statusIdEdited]").getElementsByTagName("option"));
       document.querySelector("select[name=statusIdEdited]").getElementsByTagName("option")[
-        invoiceToEdit.status.id-1
+        invoiceToEdit.status.id - 1
       ].selected = "selected";
       document.querySelector("select[name=paymentStatusIdEdited]").getElementsByTagName("option")[
-        invoiceToEdit.payment.id-1
+        invoiceToEdit.payment.id - 1
       ].selected = "selected";
       document.querySelector("select[name=sectorIdEdited]").getElementsByTagName("option")[
-        invoiceToEdit.sector.id-1
+        invoiceToEdit.sector.id - 1
       ].selected = "selected";
     });
 }
@@ -150,17 +199,7 @@ function editInvoice() {
   finalRequest = editRequest;
 
   // Fetch request.
-  fetch(finalRequest)
-    .then((r) => r.json())
-    .then((invoices) => {
-      cleanTable();
-      fillTable(invoices);
-      $(document).ready(function () {
-        {
-          $("#editToast").toast("show");
-        }
-      });
-    });
+  fetchRequest(finalRequest, "#editToast");
 
   clearEditForm();
   hideEditForm();
@@ -193,13 +232,7 @@ function getInvoices(action, sortTerm, sortMethod) {
       finalRequest = request;
   }
   // Fetch request.
-  fetch(finalRequest)
-    .then((r) => r.json())
-    .then((invoices) => {
-      cleanTable();
-      console.log("Invoices", invoices);
-      fillTable(invoices);
-    });
+  fetchRequest(finalRequest, null);
 }
 ///////////////////////////////////
 ////////// Method DELETE //////////
@@ -213,18 +246,7 @@ function deleteInvoice(event) {
   var deleteRequest = request + "id=" + selectedInvoiceId;
 
   finalRequest = deleteRequest;
-  fetch(finalRequest)
-    .then((r) => r.json())
-    .then((invoices) => {
-      cleanTable();
-      console.log("Invoices", invoices);
-      fillTable(invoices);
-      $(document).ready(function () {
-        {
-          $("#deleteToast").toast("show");
-        }
-      });
-    });
+  fetchRequest(finalRequest, "#deleteToast");
 }
 ///////////////////////////////////////
 ////////// Method Fill Table //////////

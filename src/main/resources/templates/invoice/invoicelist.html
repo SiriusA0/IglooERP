@@ -218,7 +218,11 @@
                   <div class="form-group col-md-6">
                     <label for="paymentStatusId">Payment Status</label>
                     <select class="form-control" name="paymentStatusId">
-                      <option th:each="paymentStatus: ${paymentStatuses}" th:value="${paymentStatus.id}" th:text="${paymentStatus.name}"></option>
+                      <option
+                        th:each="paymentStatus: ${paymentStatuses}"
+                        th:value="${paymentStatus.id}"
+                        th:text="${paymentStatus.name}"
+                      ></option>
                     </select>
                   </div>
                 </div>
@@ -304,7 +308,7 @@
             </div>
           </div>
           <!-- Invoice Edit END -->
-          <div class="row invoiceTable m-5" id="invoiceTable">
+          <div class="row invoiceTable ml-4 mr-4 mt-5" id="invoiceTable">
             <div class="col">
               <table class="table table-hover">
                 <thead class="thead-dark">
@@ -316,8 +320,8 @@
                     <th scope="col">Sectors</th>
                     <th scope="col">Client</th>
 
-                    <th scope="col">Pre tax amount</th>
-                    <th scope="col">Total amount</th>
+                    <th scope="col">Pre tax</th>
+                    <th scope="col">Total</th>
                     <th scope="col">Status</th>
                     <th scope="col">Payment status</th>
                     <th scope="col">Actions</th>
@@ -391,6 +395,25 @@
               </table>
             </div>
           </div>
+          <!-- Pagination INI -->
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <li class="page-item">
+                <button onclick="prevPage(event)" class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </button>
+              </li>
+              <li onclick="page(event)" class="page-item"><a id="pageItem1" class="page-link">1</a></li>
+              <li onclick="page(event)" class="page-item"><a id="pageItem2" class="page-link">2</a></li>
+              <li onclick="page(event)" class="page-item"><a id="pageItem3" class="page-link">3</a></li>
+              <li class="page-item">
+                <button onclick="nextPage(event)" class="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </button>
+              </li>
+            </ul>
+          </nav>
+          <!-- Pagination END -->
         </div>
       </div>
     </div>
