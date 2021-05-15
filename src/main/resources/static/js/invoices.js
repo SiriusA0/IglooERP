@@ -8,14 +8,16 @@ var selectedInvoiceId;
 ////////// Pagination //////////
 function nextPage(event) {
   var finalRequest = "";
-  search_url = search_url.split("&page")[0];
-  var auxUrl = search_url;
   currentPage = parseInt(currentPageGlobal);
   if (currentPage > 0) {
     var nextPage = currentPage + 1;
-    if (auxUrl.indexOf("&") != -1) {
+    if (search_url.indexOf("&") != -1) {
+      search_url = search_url.split("&page")[0];
+      var auxUrl = search_url;
       finalRequest = auxUrl + "&page=" + nextPage;
     } else {
+      search_url = search_url.split("page")[0];
+      var auxUrl = search_url;
       finalRequest = auxUrl + "page=" + nextPage;
     }
     fetchRequest(finalRequest, null);
@@ -25,25 +27,27 @@ function nextPage(event) {
 }
 function prevPage(event) {
   var finalRequest = "";
-  search_url = search_url.split("&page")[0];
-  var auxUrl = search_url;
   currentPage = parseInt(currentPageGlobal);
   if (currentPage > 0) {
     var prevPage = currentPage - 1;
     if (prevPage < 1) {
       var prevPage = currentPage;
-    } else {
-      if (auxUrl.indexOf("&") != -1) {
-        finalRequest = auxUrl + "&page=" + prevPage;
-      } else {
-        finalRequest = auxUrl + "page=" + prevPage;
-      }
-      fetchRequest(finalRequest, null);
-      currentPageGlobal = prevPage;
-      updatePages(event, prevPage);
     }
+    if (search_url.indexOf("&") != -1) {
+      search_url = search_url.split("&page")[0];
+      var auxUrl = search_url;
+      finalRequest = auxUrl + "&page=" + prevPage;
+    } else {
+      search_url = search_url.split("page")[0];
+      var auxUrl = search_url;
+      finalRequest = auxUrl + "page=" + prevPage;
+    }
+    fetchRequest(finalRequest, null);
+    currentPageGlobal = prevPage;
+    updatePages(event, prevPage);
   }
 }
+
 function updatePages(event, currentPage) {
   currentPageInt = parseInt(currentPage);
   var pageIndicators = event.currentTarget.closest("ul");
@@ -253,10 +257,11 @@ function deleteInvoice() {
     var request = server_url + "/api/invoice/delete?";
     var finalRequest = "";
     // Find selected Invoice ID
-
     var deleteRequest = request + "id=" + selectedInvoiceId;
 
     finalRequest = deleteRequest;
+
+    console.log(search_url);
     fetchRequest(finalRequest, "#deleteToast");
     selectedInvoiceId = null;
   }
