@@ -4,6 +4,7 @@ $(".toast").toast();
 var server_url = "http://localhost:8080";
 var search_url = server_url + "/api/invoice/get?";
 var currentPageGlobal = 1;
+var selectedInvoiceId;
 ////////// Pagination //////////
 function nextPage(event) {
   currentPage = parseInt(currentPageGlobal);
@@ -28,9 +29,9 @@ function prevPage(event) {
       var prevPage = currentPage;
     } else {
       if (search_url.indexOf("&") != -1) {
-        finalRequest = search_url + "&page=" + nextPage;
+        finalRequest = search_url + "&page=" + prevPage;
       } else {
-        finalRequest = search_url + "page=" + nextPage;
+        finalRequest = search_url + "page=" + prevPage;
       }
       fetchRequest(finalRequest, null);
       search_url = server_url + "/api/invoice/get?";
@@ -236,13 +237,16 @@ function getInvoices(action, sortTerm, sortMethod) {
 }
 ///////////////////////////////////
 ////////// Method DELETE //////////
-function deleteInvoice(event) {
+function markForDelete(event) {
+  var selectedInvoiceRow = event.currentTarget.closest("tr");
+  selectedInvoiceId = selectedInvoiceRow.querySelector(".idIndicator").innerHTML;
+}
+function deleteInvoice() {
   // Request Definition.
   var request = server_url + "/api/invoice/delete?";
   var finalRequest = "";
   // Find selected Invoice ID
-  var selectedInvoiceRow = event.currentTarget.closest("tr");
-  selectedInvoiceId = selectedInvoiceRow.querySelector(".idIndicator").innerHTML;
+
   var deleteRequest = request + "id=" + selectedInvoiceId;
 
   finalRequest = deleteRequest;
@@ -347,13 +351,16 @@ function fillTable(invoices) {
     buttogroup.appendChild(editbutton);
 
     var deleteButton = document.createElement("button");
-    deleteButton.class="btn btn-secondary";
-
-
-
-    <button type="button" onclick="markForDelete(event)" data-toggle="modal" data-target="#deleteModal">
-    <i class="fas fa-trash-alt"></i>
-  </button>
+    deleteButton.type = "button";
+    deleteButton.class = "btn btn-secondary deleteButton";
+    var deleteIcon = document.createElement("i");
+    deleteIcon.className = "fas fa-trash-alt";
+    $(".deleteButton").attr("data-toggle", "modal");
+    $(".data-target").attr("#deleteModal", "modal");
+    deleteIcon.addEventListener("click", function (event) {
+      markForDelete(event);
+    });
+    deleteButton.appendChild(deleteIcon);
     buttogroup.appendChild(deleteButton);
     actionsCol.appendChild(buttogroup);
     row.appendChild(actionsCol);
