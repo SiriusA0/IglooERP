@@ -3,47 +3,47 @@ $(".toast").toast();
 ////////// Server URL //////////
 var server_url = "http://localhost:8080";
 var search_url = server_url + "/api/invoice/get?";
-var currentPage = 1;
+var currentPageGlobal = 1;
 ////////// Pagination //////////
 function nextPage(event) {
-  console.log("Next Page")
-  if (currentPage > 1) {
+  currentPage = parseInt(currentPageGlobal);
+  if (currentPage > 0) {
     var nextPage = currentPage + 1;
-    finalRequest = search_url + "&page=" + nextPage;
+    if (search_url.indexOf("&") != -1) {
+      finalRequest = search_url + "&page=" + nextPage;
+    } else {
+      finalRequest = search_url + "page=" + nextPage;
+    }
     fetchRequest(finalRequest, null);
     search_url = server_url + "/api/invoice/get?";
-    currentPage = nextPage;
-    updatePages(event, currentPage);
+    currentPageGlobal = nextPage;
+    updatePages(event, nextPage);
   }
 }
 function prevPage(event) {
-  console.log("Previous Page")
-  if (currentPage > 1) {
+  currentPage = parseInt(currentPageGlobal);
+  if (currentPage > 0) {
     var prevPage = currentPage - 1;
-    finalRequest = search_url + "&page=" + prevPage;
-    fetchRequest(finalRequest, null);
-    search_url = server_url + "/api/invoice/get?";
-    currentPage = prevPage;
-    updatePages(event, currentPage);
-  }
-}
-function page(event) {
-  console.log("Page")
-  if (currentPage > 1) {
-    var page = event.currentTarget.innerHTML;
-    finalRequest = search_url + "&page=" + page;
-    fetchRequest(finalRequest, null);
-    search_url = server_url + "/api/invoice/get?";
-    currentPage = page;
-    updatePages(event, currentPage);
+    if (prevPage < 1) {
+      var prevPage = currentPage;
+    } else {
+      if (search_url.indexOf("&") != -1) {
+        finalRequest = search_url + "&page=" + nextPage;
+      } else {
+        finalRequest = search_url + "page=" + nextPage;
+      }
+      fetchRequest(finalRequest, null);
+      search_url = server_url + "/api/invoice/get?";
+      currentPageGlobal = prevPage;
+      updatePages(event, prevPage);
+    }
   }
 }
 function updatePages(event, currentPage) {
   currentPageInt = parseInt(currentPage);
   var pageIndicators = event.currentTarget.closest("ul");
-  pageIndicators.querySelector("#pageItem1").innerHTML = currentPageInt - 1;
-  pageIndicators.querySelector("#pageItem2").innerHTML = currentPageInt;
-  pageIndicators.querySelector("#pageItem3").innerHTML = currentPageInt + 1;
+  pageIndicators.querySelector("#currentPageItem").innerHTML = currentPageInt;
+  pageIndicators.querySelector("#currentPageItem").style.color = "#59bec9";
 }
 ////////// Fetch //////////
 function fetchRequest(finalRequest, toast) {
@@ -346,47 +346,14 @@ function fillTable(invoices) {
     editbutton.appendChild(editIcon);
     buttogroup.appendChild(editbutton);
 
-    var deleteButton = document.createElement("div");
-    deleteButton.innerHTML = `  
-    <!-- Delete Modal trigger -->
-    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal">
-      <i class="fas fa-trash-alt"></i>
-    </button>
-    <!-- Modal Delete -->
-    <div
-      class="modal fade"
-      id="deleteModal"
-      data-backdrop="static"
-      data-keyboard="false"
-      tabindex="-1"
-      aria-labelledby="deleteModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="deleteModalLabel">Confirm deletion</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">We won't be able to recover the Invoice . Are you sure?</div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">
-              No! Go back!
-            </button>
-            <button
-              type="button"
-              onclick="deleteInvoice(event)"
-              class="btn btn-add"
-              data-dismiss="modal"
-            >
-              Understood, delete
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>`;
+    var deleteButton = document.createElement("button");
+    deleteButton.class="btn btn-secondary";
+
+
+
+    <button type="button" onclick="markForDelete(event)" data-toggle="modal" data-target="#deleteModal">
+    <i class="fas fa-trash-alt"></i>
+  </button>
     buttogroup.appendChild(deleteButton);
     actionsCol.appendChild(buttogroup);
     row.appendChild(actionsCol);

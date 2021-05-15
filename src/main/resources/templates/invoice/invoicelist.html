@@ -350,44 +350,9 @@
                           <i class="fas fa-edit"></i>
                         </button>
                         <!-- Delete Modal trigger -->
-                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal">
+                        <button type="button" onclick="markForDelete(event)" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal">
                           <i class="fas fa-trash-alt"></i>
                         </button>
-                        <!-- Modal Delete -->
-                        <div
-                          class="modal fade"
-                          id="deleteModal"
-                          data-backdrop="static"
-                          data-keyboard="false"
-                          tabindex="-1"
-                          aria-labelledby="deleteModalLabel"
-                          aria-hidden="true"
-                        >
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="deleteModalLabel">Confirm deletion</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">We won't be able to recover the invoice. Are you sure?</div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                  No! Go back!
-                                </button>
-                                <button
-                                  type="button"
-                                  onclick="deleteInvoice(event)"
-                                  class="btn btn-add"
-                                  data-dismiss="modal"
-                                >
-                                  Understood, delete
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
                       </div>
                     </td>
                   </tr>
@@ -396,18 +361,18 @@
             </div>
           </div>
           <!-- Pagination INI -->
-          <nav aria-label="Page navigation example">
+          <nav>
             <ul class="pagination justify-content-center">
               <li class="page-item">
-                <button onclick="prevPage(event)" class="page-link" href="#" aria-label="Previous">
+                <button onclick="prevPage(event)" class="page-link" aria-label="Previous">
                   <span aria-hidden="true">&laquo;</span>
                 </button>
               </li>
-              <li onclick="page(event)" class="page-item"><a id="pageItem1" class="page-link">1</a></li>
-              <li onclick="page(event)" class="page-item"><a id="pageItem2" class="page-link">2</a></li>
-              <li onclick="page(event)" class="page-item"><a id="pageItem3" class="page-link">3</a></li>
               <li class="page-item">
-                <button onclick="nextPage(event)" class="page-link" href="#" aria-label="Next">
+                <a style="color: #59bec9" id="currentPageItem" class="page-link">1</a>
+              </li>
+              <li class="page-item">
+                <button onclick="nextPage(event)" class="page-link" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>
                 </button>
               </li>
@@ -448,6 +413,34 @@
           </button>
         </div>
         <div class="toast-body">The invoice was successfully edited.</div>
+      </div>
+    </div>
+    <!-- Modal Delete -->
+    <div
+      class="modal fade"
+      id="deleteModal"
+      data-backdrop="static"
+      data-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="deleteModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Confirm deletion</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">We won't be able to recover the invoice. Are you sure?</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No! Go back!</button>
+            <button type="button" onclick="deleteInvoice()" class="btn btn-add" data-dismiss="modal">
+              Understood, delete
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </body>
