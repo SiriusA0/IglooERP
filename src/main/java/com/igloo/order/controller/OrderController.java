@@ -51,7 +51,7 @@ public class OrderController {
     @GetMapping("/order")
     public String readOrder(Model model) {
 
-        List<OrderResponse> orders = orderServ.search(null, null, null);//TODO unificar nombres
+        List<OrderResponse> orders = orderServ.search(null, null, null, 0);//TODO unificar nombres
         List<StatusResponse> statuses = statusesService.getAll();//TODO unificar nombres
         List<SectorResponse> sectors = sectorsService.showSector();//TODO unificar nombres
         List<ClientResponse> clients = clientsService.get();//TODO unificar nombres
@@ -71,10 +71,10 @@ public class OrderController {
     @ResponseBody
     public List <OrderResponse> buscador(@RequestParam(required = false) String action,
     										@RequestParam(required = false) String option,
-    										@RequestParam(required = false) String term ){
+    										@RequestParam(required = false) String term, @RequestParam(required = false) Integer page){
     	
 
-    	List<OrderResponse> orders = orderServ.search(action, option, term);
+    	List<OrderResponse> orders = orderServ.search(action, option, term, page);
 
     	return orders;
     }

@@ -59,7 +59,7 @@ public class AgentController {
 
     @GetMapping("/api/agent/search")
     @ResponseBody
-    public List<Agent> find_API(@RequestParam String searchTerm) {
+    public List<AgentResponse> find_API(@RequestParam String searchTerm) {
         return agentServ.search(searchTerm);
     }
 
@@ -89,25 +89,25 @@ public class AgentController {
 
     @GetMapping("/api/agent/orderbylastnameasc")
     @ResponseBody
-    public List<Agent> ascLastName_API() {
+    public List<AgentResponse> ascLastName_API() {
         return agentServ.ascLastName();
     }
 
     @GetMapping("/api/agent/orderbylastnamedesc")
     @ResponseBody
-    public List<Agent> descLastName_API() {
+    public List<AgentResponse> descLastName_API() {
         return agentServ.descLastName();
     }
 
     @GetMapping("/api/agent/orderbyidasc")
     @ResponseBody
-    public List<Agent> ascId_API() {
+    public List<AgentResponse> ascId_API() {
         return agentServ.ascId();
     }
 
     @GetMapping("/api/agent/orderbyiddesc")
     @ResponseBody
-    public List<Agent> descId_API() {
+    public List<AgentResponse> descId_API() {
         return agentServ.descId();
     }
 

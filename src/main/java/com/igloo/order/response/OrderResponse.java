@@ -16,7 +16,7 @@ import com.igloo.status.response.StatusResponse;
 public class OrderResponse {
 
     private int id;
-    private Date creationDate;
+    private String creationDate;
     private Double totalAmount;
     private ClientResponse client;
     private AgentResponse agent;
@@ -31,15 +31,16 @@ public class OrderResponse {
         this.id = id;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
-    }
+ 
+    public String getCreationDate() {
+		return creationDate;
+	}
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
+	public void setCreationDate(String creationDate) {
+		this.creationDate = creationDate;
+	}
 
-    public Double getTotalAmount() {
+	public Double getTotalAmount() {
         return totalAmount;
     }
 

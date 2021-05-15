@@ -26,29 +26,34 @@ public class AgentServices {
 
     }
 
-    public List<Agent> search(String searchTerm) {
+    public List<AgentResponse> search(String searchTerm) {
 
-        return agentRepo.findByFirstNameContainingOrLastNameContaining(searchTerm, searchTerm);
+         List<Agent> agents = agentRepo.findByFirstNameContainingOrLastNameContaining(searchTerm, searchTerm);
+         return agentAdapter.of(agents);
     }
 
-    public List<Agent> ascLastName() {
+    public List<AgentResponse> ascLastName() {
 
-        return agentRepo.findAllByOrderByLastNameAsc();
+    	List<Agent> agents = agentRepo.findAllByOrderByLastNameAsc();
+        return agentAdapter.of(agents);
     }
 
-    public List<Agent> descLastName() {
+    public List<AgentResponse> descLastName() {
 
-        return agentRepo.findAllByOrderByLastNameDesc();
+    	List<Agent> agents = agentRepo.findAllByOrderByLastNameDesc();
+        return agentAdapter.of(agents);
     }
 
-    public List<Agent> ascId() {
+    public List<AgentResponse> ascId() {
 
-        return agentRepo.findAllByOrderByIdAsc();
+    	List<Agent> agents = agentRepo.findAllByOrderByIdAsc();
+        return agentAdapter.of(agents);
     }
 
-    public List<Agent> descId() {
+    public List<AgentResponse> descId() {
 
-        return agentRepo.findAllByOrderByIdDesc();
+    	List<Agent> agents = agentRepo.findAllByOrderByIdDesc();
+        return agentAdapter.of(agents);
     }
 
     public Agent createAgent(String firstName, String lastName, String email, String profilePic) {

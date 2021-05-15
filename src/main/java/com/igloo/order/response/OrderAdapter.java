@@ -35,7 +35,10 @@ public class OrderAdapter {
         OrderResponse response = new OrderResponse();
 
         response.setId(order.getId());
-        response.setCreationDate(order.getCreationDate());
+        
+        String date = order.getCreationDate().toString().split(" ")[0];
+        
+        response.setCreationDate(date);
 
         Agent agent = order.getAgent();
         response.setAgent(agentAdapter.of(agent));

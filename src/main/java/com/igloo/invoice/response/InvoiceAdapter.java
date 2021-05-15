@@ -34,10 +34,18 @@ public class InvoiceAdapter {
         response.setId(invoice.getId());
         Client client = invoice.getClient();
         response.setClient(clientAdapter.of(client));
-        response.setCreationDate(invoice.getCreationDate());
-        response.setDueDate(invoice.getDueDate());
-        response.setPreTax(invoice.getPreTax());
-        response.setAfterTax(invoice.getAfterTax());
+        
+        
+       response.setCreationDate(invoice.getCreationDate().toString().split(" ")[0]);
+       response.setDueDate(invoice.getDueDate().toString().split(" ")[0]);
+        
+        double preTax = Math.round(invoice.getPreTax()*100.0)/100.0;
+        response.setPreTax(preTax);
+        
+        double afterTax = Math.round(invoice.getAfterTax()*100.0)/100.0;
+        response.setAfterTax(afterTax);
+       
+       
         Status status = invoice.getStatus();
         response.setStatus(statusAdapter.of(status));
         Payment payment = invoice.getPayment();

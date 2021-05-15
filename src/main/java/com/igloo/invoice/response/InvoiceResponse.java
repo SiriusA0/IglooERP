@@ -19,8 +19,8 @@ public class InvoiceResponse {
 
     private int id;
     private ClientResponse client;
-    private Date creationDate;
-    private Date dueDate;
+    private String creationDate;
+    private String dueDate;
     private Double preTax;
     private Double afterTax;
     private StatusResponse status;
@@ -43,23 +43,23 @@ public class InvoiceResponse {
         this.client = client;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
-    }
+    public String getCreationDate() {
+		return creationDate;
+	}
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
+	public void setCreationDate(String creationDate) {
+		this.creationDate = creationDate;
+	}
 
-    public Date getDueDate() {
-        return dueDate;
-    }
+	public String getDueDate() {
+		return dueDate;
+	}
 
-    public void setDueDate(Date dueDate) {
-        this.dueDate = dueDate;
-    }
+	public void setDueDate(String dueDate) {
+		this.dueDate = dueDate;
+	}
 
-    public Double getPreTax() {
+	public Double getPreTax() {
         return preTax;
     }
 

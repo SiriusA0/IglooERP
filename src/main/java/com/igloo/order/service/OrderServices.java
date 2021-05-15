@@ -44,25 +44,25 @@ public class OrderServices {
    
     
     
-    public List<OrderResponse> search(String action, String option, String term){
+    public List<OrderResponse> search(String action, String option, String term, Integer page){
     	
     	List<Order> orders = null;
     	
     	if(action == null || action.isEmpty()) {
-			Pageable pageable = PageRequest.of(0, 25);
-			Page<Order> page = orderRepo.findAll(pageable);
-			orders = page.getContent();
+			Pageable pageable = PageRequest.of(page, 10);
+			Page<Order> pages = orderRepo.findAll(pageable);
+			orders = pages.getContent();
 
 		} else if(action.equals("sort")) {
 			Sort.Direction direction = Sort.Direction.fromString(option);
 			Sort sort = Sort.by(direction,term);
-			Pageable pageable = PageRequest.of(0, 25, sort);
+			Pageable pageable = PageRequest.of(page, 10, sort);
 
     		orders = orderRepo.findAll(pageable).getContent();
     		
     	}else if(action.equals("search")) {
     		if(option.equals("client")) {
-				Pageable pageable = PageRequest.of(0, 25);
+				Pageable pageable = PageRequest.of(page, 10);
     			orders = orderRepo.findByClientFirstNameContainingOrClientLastNameContaining(term, term, pageable);
     			
     			//List <Client> clients = clientRepository.findByFirstNameContainingOrLastNameContaining(term, term);
@@ -96,7 +96,7 @@ public class OrderServices {
     	}
     	
     	System.out.println("Orders: "+orders.size());
-    	
+    	System.out.println("Date: " + orders.get(0).getCreationDate());
     	return orderadapter.of(orders);
     }
     

@@ -45,7 +45,7 @@ public class InvoiceController {
     @GetMapping("/invoice")
     public String readInvoice(Model model) {
 
-        List<InvoiceResponse> invoices = invoiceService.search(null, null, null);//TODO unificar nombres
+        List<InvoiceResponse> invoices = invoiceService.search(null, null, null, 0);//TODO unificar nombres
         List<StatusResponse> statuses = statusService.getAll();//TODO unificar nombres
         List<PaymentResponse> paymentStatuses = paymentService.getAll();//TODO unificar nombres
         List<SectorResponse> sectors = sectorService.showSector();//TODO unificar nombres
@@ -99,10 +99,10 @@ public class InvoiceController {
     @ResponseBody
     public List<InvoiceResponse> buscador(@RequestParam(required = false) String action,
                                           @RequestParam(required = false) String option,
-                                          @RequestParam(required = false) String term) {
+                                          @RequestParam(required = false) String term, @RequestParam(required = false) Integer page ) {
 
 
-        List<InvoiceResponse> invoices = invoiceService.search(action, option, term);
+        List<InvoiceResponse> invoices = invoiceService.search(action, option, term, page);
 
         return invoices;
     }
