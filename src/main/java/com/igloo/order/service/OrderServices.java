@@ -50,8 +50,8 @@ public class OrderServices {
     	
     	if(action == null || action.isEmpty()) {
 			Pageable pageable = PageRequest.of(0, 25);
-			Page<Order> lista = orderRepo.findAll(pageable);
-			orders = lista.getContent();
+			Page<Order> page = orderRepo.findAll(pageable);
+			orders = page.getContent();
 
 		} else if(action.equals("sort")) {
 			Sort.Direction direction = Sort.Direction.fromString(option);
