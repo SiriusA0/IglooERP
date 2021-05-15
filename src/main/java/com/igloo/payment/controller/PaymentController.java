@@ -1,5 +1,6 @@
 package com.igloo.payment.controller;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,9 +63,15 @@ public class PaymentController {
 	@ResponseBody
 	public List<PaymentResponse> delete_API(@RequestParam String id) {
 		
-	  paymentService.delete(id);
+		Boolean correct= paymentService.delete(id);
+		List<PaymentResponse> payments;
+		  if(correct) {
+			  payments = paymentService.getAll();
+		  }else {
+			  payments = new LinkedList<PaymentResponse>();
+		  }  
 	  
-	  return paymentService.getAll();
+	  return payments;
 	}
 	
 	

@@ -34,12 +34,17 @@ public class PaymentService {
 		List<Payment> payments = paymentRepository.findAll();
 		return paymentAdapter.of(payments);
 	}
-		
-	public void delete(String id) {
 	
-            int idToDelete = Integer.valueOf(id);
-            paymentRepository.deleteById(idToDelete);
-        
+	public Boolean delete(String id) {
+		Boolean correct = false;
+		try {
+			int idToDelete = Integer.valueOf(id);
+			paymentRepository.deleteById(idToDelete);
+			correct = true;
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+        return correct;
 	}
 	
 	public void editPayment(Integer id, String name) {

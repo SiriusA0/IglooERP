@@ -1,5 +1,6 @@
 package com.igloo.sector.controller;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import com.igloo.agent.model.Agent;
@@ -61,10 +62,14 @@ public class SectorController {
 	@GetMapping("/api/sector/delete")
 	@ResponseBody
 	public List<SectorResponse> delete_API(@RequestParam String id) {
-		
-	  sectorService.delete(id);
-	  
-	  return sectorService.showSector();
+	  Boolean correct = sectorService.delete(id);
+	  List<SectorResponse> sectors;
+	  if(correct) {
+		  sectors = sectorService.showSector();
+	  }else {
+		  sectors = new LinkedList<SectorResponse>();
+	  }  
+	  return sectors;
 	}
 	
 	
