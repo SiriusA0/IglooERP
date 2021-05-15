@@ -80,10 +80,16 @@ public class InvoiceController {
 
     @GetMapping("/api/invoice/delete")
     @ResponseBody
-    public List<InvoiceResponse> delete_API(@RequestParam String id) {
-
+    public List<InvoiceResponse> delete_API(@RequestParam String id,
+								    		@RequestParam(required = false) String action,
+								            @RequestParam(required = false) String option,
+								            @RequestParam(required = false) String term, @RequestParam(required = false) Integer page) {
+    	
         invoiceService.deleteOrder(id);
-        return invoiceService.getAll();
+
+    	List<InvoiceResponse>invoices = invoiceService.search(action, option, term, page);
+
+        return invoices;
     }
 
     @GetMapping("api/invoice/find")
