@@ -135,7 +135,7 @@ function selectForDelete(event) {
 
   console.log(clientsSelected);
 }
-function deleteClients() {
+/* function deleteClients() {
   var urlFinal =
     server_url +
     "/api/client/delete?" +
@@ -149,6 +149,41 @@ function deleteClients() {
       fillList(clients);
       clientsSelected.splice(0, clientsSelected.length);
     });
+} */
+//////////////////////////////// delete Client /////////////////////////////////////
+
+
+var urlToDelete="";
+function deleteClientModal(event){
+  var clientInfo= event.currentTarget.closest(".clientInfo");
+  var clientId = clientInfo.id;
+  urlToDelete =
+    server_url +
+    "/api/client/delete?" +
+    "id=" +clientId;
+
+  
+}
+
+function deleteClient(){
+
+  fetch(urlToDelete)
+    .then((r) => r.json())
+    .then((clients) => {
+      cleanList();
+      fillList(clients);
+      
+    });
+
+}
+
+/////////////////////////////Edit Client ////////////////////////////
+function editClient(){
+
+
+
+
+  
 }
 ////////////////////////////////////// Search Client //////////////////////////////////////
 function searchClient() {
@@ -215,81 +250,99 @@ function cleanList(event) {
 ////////////////////////////////////// Fill Client //////////////////////////////////////
 function fillList(clients) {
 
-
-  /*
-<div class="card mb-3" style="max-width: 540px;">
-  <div class="row no-gutters">
-    <div class="col-md-4">
-      <img src="..." alt="...">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      </div>
-    </div>
-  </div>
-</div>
-*/
-
   var cardContainer=document.querySelector("#clientsContainer");
   for (i in clients){
-  var cardBox=document.createElement("div");
-  cardBox.className="card mb-3";
-  cardBox.style="max-width: 540px;"
-  cardContainer.appendChild(cardBox);
+      var cardBox=document.createElement("div");
+      cardBox.className="card mb-3";
+      cardBox.style="max-width: 540px;"
+      cardContainer.appendChild(cardBox);
 
-  var cardRow=document.createElement("div");
-  cardRow.className="row no-gutters";
-  cardBox.appendChild(cardRow);
+      var cardRow=document.createElement("div");
+      cardRow.className="row no-gutters";
+      cardBox.appendChild(cardRow);
 
-  var cardFirstCol=document.createElement("div");
-  cardFirstCol.className="col-md-4";
-  cardRow.appendChild(cardFirstCol);
+      var cardFirstCol=document.createElement("div");
+      cardFirstCol.className="col-md-4";
+      cardRow.appendChild(cardFirstCol);
 
-  var cardImg=document.createElement("img");
-  cardImg.src=clients[i].profilePic;
-  cardFirstCol.appendChild(cardImg);
+      var cardcheckrow = document.createElement("div");
+      cardcheckrow.className = "row pt-2 pl-4 pr-2";
+      cardFirstCol.appendChild(cardcheckrow);
+      var BodyCol1=document.createElement("div");
+      BodyCol1.className="col-1";
+      var col1Check=document.createElement("input");
+      col1Check.setAttribute("type", "checkbox");
+      cardcheckrow.appendChild(BodyCol1);
+      BodyCol1.appendChild(col1Check);
+      
+      var divImg=document.createElement("div");
+      divImg.className="clientProfilePic";
 
-  var cardSecondCol=document.createElement("div");
-  cardSecondCol.className="col-md-8";
-  cardRow.appendChild(cardSecondCol);
+      var cardImg=document.createElement("img");
+      cardImg.src=clients[i].profilePic;
+      divImg.appendChild(cardImg);
+      cardFirstCol.appendChild(divImg);
 
-  var cardBody=document.createElement("div");
-  cardBody.className="card-body";
-  cardSecondCol.appendChild(cardBody);   
+      var cardSecondCol=document.createElement("div");
+      cardSecondCol.className="col-md-8";
+      cardRow.appendChild(cardSecondCol);
 
-  var clientName=document.createElement("h5");
-  clientName.className="card-title"
-  clientName.innerHTML=clients[i].firstName + " " + clients[i].lastName
-  cardBody.appendChild(clientName)
+      // ---- card icons
+      // Icons
+
+      var cardIcons = document.createElement("div");
+      cardIcons.className = "row pt-2 pl-2 pr-2 clientInfo";
+      cardIcons.id=clients[i].id;
   
-  var clientEmail=document.createElement("p");
-  clientEmail.className="card-text";
-  clientEmail.innerHTML=clients[i].email;
-  cardBody.appendChild(clientEmail);
+      var favContainer = document.createElement("div");
+      favContainer.className = "col-1 offset-8";
+      cardIcons.appendChild(favContainer);
+      var favIcon = document.createElement("i");
+      favIcon.setAttribute("type", "button");
+      favIcon.className = "far fa-star cardIcon";
+      favContainer.appendChild(favIcon);
+      
+      var editContainer = document.createElement("div");
+      editContainer.className = "col-1";
+      cardIcons.appendChild(editContainer);
+      var editIcon = document.createElement("i");
+      editIcon.setAttribute("type", "button");
+      editIcon.className = "fas fa-edit  cardIcon";
+      editContainer.appendChild(editIcon);
 
-  var clientLocation=document.createElement("p");
-  clientLocation.className="card-text"
-  clientLocation.innerHTML=clients[i].city.name + ", " +  clients[i].country.name + "."
-  cardBody.appendChild(clientLocation);
+      
+      var binContainer = document.createElement("div");
+      binContainer.className = "col-1";
+      cardIcons.appendChild(binContainer);
+      var binIcon = document.createElement("i");
+      binIcon.id="deleteButton"
+      binIcon.setAttribute("type", "button");
+      binIcon.className = "fas fa-trash-alt cardIcon";
+      binContainer.appendChild(binIcon);
+      binIcon.addEventListener("click", function (event) {deleteClientModal(event)}); 
+      $("#deleteButton").attr("data-toggle", "modal");
+      $("#deleteButton").attr("data-target", "#deleteModal");
+      cardSecondCol.appendChild(cardIcons);
+      ////
+
+
+      var cardBody=document.createElement("div");
+      cardBody.className="card-body";
+      cardSecondCol.appendChild(cardBody);   
+
+      var clientName=document.createElement("h5");
+      clientName.className="card-title"
+      clientName.innerHTML=clients[i].firstName + " " + clients[i].lastName
+      cardBody.appendChild(clientName)
+      
+      var clientEmail=document.createElement("p");
+      clientEmail.className="card-text";
+      clientEmail.innerHTML=clients[i].email;
+      cardBody.appendChild(clientEmail);
+
+      var clientLocation=document.createElement("p");
+      clientLocation.className="card-text"
+      clientLocation.innerHTML=clients[i].city.name + ", " +  clients[i].country.name + "."
+      cardBody.appendChild(clientLocation);
   }
 }
-
-/*
-<div class="card mb-3" style="max-width: 540px;">
-  <div class="row no-gutters">
-    <div class="col-md-4">
-      <img src="..." alt="...">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      </div>
-    </div>
-  </div>
-</div>
-*/
