@@ -249,12 +249,14 @@ function getInvoices(action, sortTerm, sortMethod) {
 ///////////////////////////////////
 ////////// Method DELETE //////////
 function markForDelete(event) {
+  console.log("Selecting invoice")
   var selectedInvoiceRow = event.currentTarget.closest("tr");
   selectedInvoiceId = selectedInvoiceRow.querySelector(".idIndicator").innerHTML;
   console.log("Selected order: " + selectedInvoiceId);
 }
 function deleteInvoice() {
   if (selectedInvoiceId == null) {
+    console.log("Error");
   } else {
     // Request Definition.
     var request = server_url + "/api/invoice/delete?";
@@ -270,7 +272,6 @@ function deleteInvoice() {
     } else {
       finalRequest = finalRequest + "&page=" + currentPageGlobal;
     }
-
     console.log(finalRequest);
     fetchRequest(finalRequest, "#deleteToast", false);
     selectedInvoiceId = null;
@@ -379,11 +380,11 @@ function fillTable(invoices) {
     deleteButton.className = "btn btn-secondary deleteButton";
     var deleteIcon = document.createElement("i");
     deleteIcon.className = "fas fa-trash-alt";
-    $(".deleteButton").attr("data-toggle", "modal");
-    $(".deleteButton").attr("data-target", "#deleteModal");
-    deleteIcon.addEventListener("click", function (event) {
+    deleteButton.addEventListener("click", function (event) {
       markForDelete(event);
     });
+    $(".deleteButton").attr("data-toggle", "modal");
+    $(".deleteButton").attr("data-target", "#deleteModal");
     deleteButton.appendChild(deleteIcon);
     buttogroup.appendChild(deleteButton);
     actionsCol.appendChild(buttogroup);
