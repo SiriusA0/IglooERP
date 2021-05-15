@@ -49,40 +49,19 @@ public class UserController {
     public String register(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String userName, @RequestParam String email,
                            @RequestParam String telNumber, @RequestParam String jobs, @RequestParam String password, Model model, Boolean error ) {
         System.out.println("Register Attempt");
-
-        User user = new User();
         
-        try {
-        	
-        		String emailToCheck = userRepository.findByEmail(email).getEmail();
-        		System.out.println(emailToCheck);
-        		String userNameToCheck = userRepository.findByUserName(userName).getUserName();
-        		System.out.println(userNameToCheck);
+
+        	if(userService.createUser(firstName,lastName,userName, email, telNumber, jobs, password )) {
         		
-	        	if(emailToCheck == null && userNameToCheck == null) {
-	
-					 	user.setFirstName(firstName);
-		    	        user.setLastName(lastName);
-		    	        user.setUserName(userName);
-		    	        user.setEmail(email);
-		    	        user.setPhoneNumber(telNumber);
-		    	        user.setJob(jobs);
-		    	        user.setPassword(password);
-		    	        userRepository.save(user);
-		    	        System.out.println("usuario creado");
-	        	}
-	    	        
-			}catch (Exception e){
-				
-				model.addAttribute("error", error);
-				return "redirect:/register";
-			}
-			
-        
+        		
+        		return "redirect:/login?success=true";
+        		
+        	}else {
+        		
+        		model.addAttribute("error", error);
+    			return "redirect:/register";
+        	}
  
-        System.out.println("Register Success: " + "-" + user.getFirstName() + "-" + user.getLastName() + "-" + user.getUserName() + "-" + user.getEmail() + "-" + user.getPhoneNumber() + "-" + user.getJob() + "-" + user.getPassword());
-
-        return "redirect:/login?success=true";
     }
 
 }

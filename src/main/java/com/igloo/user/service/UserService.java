@@ -1,11 +1,13 @@
 package com.igloo.user.service;
 
+import com.igloo.order.model.Order;
 import com.igloo.user.model.User;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 public class UserService {
@@ -13,23 +15,59 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
-
-    public User createUser(String firstName, String lastName, String userName, String email,
-                           String telNumber, String jobs, String password) {
+    
+    public boolean createUser(String firstName,  String lastName, String userName,  String email,
+             String telNumber,  String jobs, String password) {
     	
+    	 User user = new User();
     	
-    	return null;
+    	if ( userRepository.findByUserName(userName).isEmpty()  &&  userRepository.findByEmail(email).isEmpty()) {
+    		
+    		user.setFirstName(firstName);
+	        user.setLastName(lastName);
+	        user.setUserName(userName);
+	        user.setEmail(email);
+	        user.setPhoneNumber(telNumber);
+	        user.setJob(jobs);
+	        user.setPassword(password);
+	        userRepository.save(user);
+	        System.out.println("usuario creado");
+	        
+	        return true;
     	}
+    	
+    	
+    	return false;
+    }
 
+ 
 
     public boolean logUserIn(String userName, String password) {
 
-        User user = userRepository.findByUserName(userName);
-        if (user.getPassword().equals(password)) {
+    	/*
+        List<User> user = userRepository.findByUserName(userName);
+        
+        if (user.contains(password)) {
             System.out.println("Login Success - User: " + userName + " - Password: " + password);
             return true;
+        }else {
+        	
+        	return false;
         }
-        return false;
+        */
+    	
+    	List<User> users = userRepository.findAll();
+    	
+    	for (User user : users){
+    		
+    		if(user.getUserName().contains(userName) && user.getPassword().contains(password)  ) {
+    			
+    			return true;
+    		}
+    	}
+    	
+    	return false;
+  
     }
 
 }
