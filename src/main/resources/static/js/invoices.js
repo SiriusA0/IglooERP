@@ -55,9 +55,12 @@ function updatePages(event, currentPage) {
   pageIndicators.querySelector("#currentPageItem").style.color = "#59bec9";
 }
 ////////// Fetch //////////
-function fetchRequest(finalRequest, toast) {
-  search_url = finalRequest;
-  console.log("Fetch request to: " + search_url);
+function fetchRequest(finalRequest, toast, globalSearch) {
+  if (globalSearch) {
+    search_url = finalRequest;
+    console.log("Search url:" + search_url);
+  }
+  console.log("Fetch request to: " + finalRequest);
   fetch(finalRequest)
     .then((r) => r.json())
     .then((invoices) => {
@@ -241,7 +244,7 @@ function getInvoices(action, sortTerm, sortMethod) {
       finalRequest = request;
   }
   // Fetch request.
-  fetchRequest(finalRequest, null);
+  fetchRequest(finalRequest, null, true);
 }
 ///////////////////////////////////
 ////////// Method DELETE //////////
@@ -258,11 +261,18 @@ function deleteInvoice() {
     var finalRequest = "";
     // Find selected Invoice ID
     var deleteRequest = request + "id=" + selectedInvoiceId;
-
     finalRequest = deleteRequest;
+    var auxUrl = search_url;
+    auxUrl = auxUrl.split("?");
+    console.log("AuxURL:" + auxUrl[1]);
+    if (auxUrl[1].length > 0) {
+      finalRequest = finalRequest + "&page=" + currentPageGlobal + "&" + auxUrl[1];
+    } else {
+      finalRequest = finalRequest + "&page=" + currentPageGlobal;
+    }
 
-    console.log(search_url);
-    fetchRequest(finalRequest, "#deleteToast");
+    console.log(finalRequest);
+    fetchRequest(finalRequest, "#deleteToast", false);
     selectedInvoiceId = null;
   }
 }
