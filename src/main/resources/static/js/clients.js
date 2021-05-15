@@ -315,13 +315,12 @@ function fillList(clients) {
       binContainer.className = "col-1";
       cardIcons.appendChild(binContainer);
       var binIcon = document.createElement("i");
-      binIcon.id="deleteButton"
       binIcon.setAttribute("type", "button");
-      binIcon.className = "fas fa-trash-alt cardIcon";
+      binIcon.className = "fas fa-trash-alt cardIcon deleteButton";
       binContainer.appendChild(binIcon);
       binIcon.addEventListener("click", function (event) {deleteClientModal(event)}); 
-      $("#deleteButton").attr("data-toggle", "modal");
-      $("#deleteButton").attr("data-target", "#deleteModal");
+      $(".deleteButton").attr("data-toggle", "modal");
+      $(".deleteButton").attr("data-target", "#deleteModal");
       cardSecondCol.appendChild(cardIcons);
       ////
 
