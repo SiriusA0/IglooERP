@@ -35,10 +35,16 @@ public class StatusService {
    }
 	
 	
-	public void delete(String id) {
-            int idToDelete = Integer.valueOf(id);
-            statusRepository.deleteById(idToDelete);
-       
+	public Boolean delete(String id) {
+		Boolean correct = false;
+		try {
+			int idToDelete = Integer.valueOf(id);
+			statusRepository.deleteById(idToDelete);
+			correct = true;
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+        return correct;
 	}
 	
 	

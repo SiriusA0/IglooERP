@@ -1,5 +1,6 @@
 package com.igloo.status.controller;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,6 @@ import com.igloo.status.service.StatusService;
 
 @Controller
 public class StatusController {
-	
-	
-	@Autowired
-    private StatusRepository statusRepository;
 
     @Autowired
     private StatusService statusService;
@@ -52,12 +49,6 @@ public class StatusController {
 	return statusService.getAll();
 	}
 	
-	
-	
-	
-	
-	
-	
 	@GetMapping("/api/status/get")
 	@ResponseBody
 	public List<StatusResponse> getAll() {
@@ -66,11 +57,15 @@ public class StatusController {
 	
 	@GetMapping("/api/status/delete")
 	@ResponseBody
-	public List<StatusResponse> delete_API(@RequestParam String id) {
-		
-	  statusService.delete(id);
-	  
-	  return statusService.getAll();
+	public List<StatusResponse> delete_API(@RequestParam String id/**, Model model**/) {	
+	  Boolean correct = statusService.delete(id);
+	  List<StatusResponse> statuses;
+	  if(correct) {
+		  statuses = statusService.getAll();
+	  }else {
+		  statuses = new LinkedList<StatusResponse>();
+	  }  
+	  return statuses;
 	}
 	
 
