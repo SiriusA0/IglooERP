@@ -21,7 +21,7 @@ public class UserService {
     	
     	 User user = new User();
     	
-    	if ( userRepository.findByUserName(userName).isEmpty()  &&  userRepository.findByEmail(email).isEmpty()) {
+    	if ( userRepository.findByUserName(userName) == null  &&  userRepository.findByEmail(email) == null) {
     		
     		user.setFirstName(firstName);
 	        user.setLastName(lastName);
@@ -56,15 +56,11 @@ public class UserService {
         }
         */
     	
-    	List<User> users = userRepository.findAll();
-    	
-    	for (User user : users){
-    		
-    		if(user.getUserName().contains(userName) && user.getPassword().contains(password)  ) {
-    			
-    			return true;
-    		}
-    	}
+    	User user = userRepository.findByUserName(userName);
+		if(user.getUserName().contains(userName) && user.getPassword().contains(password)  ) {
+			return true;
+		}
+
     	
     	return false;
   
