@@ -7,34 +7,38 @@ var currentPageGlobal = 1;
 var selectedInvoiceId;
 ////////// Pagination //////////
 function nextPage(event) {
+  var finalRequest = "";
+  search_url = search_url.split("&page")[0];
+  var auxUrl = search_url;
   currentPage = parseInt(currentPageGlobal);
   if (currentPage > 0) {
     var nextPage = currentPage + 1;
-    if (search_url.indexOf("&") != -1) {
-      finalRequest = search_url + "&page=" + nextPage;
+    if (auxUrl.indexOf("&") != -1) {
+      finalRequest = auxUrl + "&page=" + nextPage;
     } else {
-      finalRequest = search_url + "page=" + nextPage;
+      finalRequest = auxUrl + "page=" + nextPage;
     }
     fetchRequest(finalRequest, null);
-    search_url = server_url + "/api/invoice/get?";
     currentPageGlobal = nextPage;
     updatePages(event, nextPage);
   }
 }
 function prevPage(event) {
+  var finalRequest = "";
+  search_url = search_url.split("&page")[0];
+  var auxUrl = search_url;
   currentPage = parseInt(currentPageGlobal);
   if (currentPage > 0) {
     var prevPage = currentPage - 1;
     if (prevPage < 1) {
       var prevPage = currentPage;
     } else {
-      if (search_url.indexOf("&") != -1) {
-        finalRequest = search_url + "&page=" + prevPage;
+      if (auxUrl.indexOf("&") != -1) {
+        finalRequest = auxUrl + "&page=" + prevPage;
       } else {
-        finalRequest = search_url + "page=" + prevPage;
+        finalRequest = auxUrl + "page=" + prevPage;
       }
       fetchRequest(finalRequest, null);
-      search_url = server_url + "/api/invoice/get?";
       currentPageGlobal = prevPage;
       updatePages(event, prevPage);
     }
@@ -49,7 +53,7 @@ function updatePages(event, currentPage) {
 ////////// Fetch //////////
 function fetchRequest(finalRequest, toast) {
   search_url = finalRequest;
-  console.log(search_url);
+  console.log("Fetch request to: " + search_url);
   fetch(finalRequest)
     .then((r) => r.json())
     .then((invoices) => {

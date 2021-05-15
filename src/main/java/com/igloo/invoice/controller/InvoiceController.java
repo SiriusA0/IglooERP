@@ -45,7 +45,7 @@ public class InvoiceController {
     @GetMapping("/invoice")
     public String readInvoice(Model model) {
 
-        List<InvoiceResponse> invoices = invoiceService.search(null, null, null, 0);//TODO unificar nombres
+        List<InvoiceResponse> invoices = invoiceService.search(null, null, null, 1);//TODO unificar nombres
         List<StatusResponse> statuses = statusService.getAll();//TODO unificar nombres
         List<PaymentResponse> paymentStatuses = paymentService.getAll();//TODO unificar nombres
         List<SectorResponse> sectors = sectorService.showSector();//TODO unificar nombres
