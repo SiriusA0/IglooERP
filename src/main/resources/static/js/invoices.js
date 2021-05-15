@@ -240,17 +240,22 @@ function getInvoices(action, sortTerm, sortMethod) {
 function markForDelete(event) {
   var selectedInvoiceRow = event.currentTarget.closest("tr");
   selectedInvoiceId = selectedInvoiceRow.querySelector(".idIndicator").innerHTML;
+  console.log("Selected order: " + selectedInvoiceId);
 }
 function deleteInvoice() {
-  // Request Definition.
-  var request = server_url + "/api/invoice/delete?";
-  var finalRequest = "";
-  // Find selected Invoice ID
+  if (selectedInvoiceId == null) {
+  } else {
+    // Request Definition.
+    var request = server_url + "/api/invoice/delete?";
+    var finalRequest = "";
+    // Find selected Invoice ID
 
-  var deleteRequest = request + "id=" + selectedInvoiceId;
+    var deleteRequest = request + "id=" + selectedInvoiceId;
 
-  finalRequest = deleteRequest;
-  fetchRequest(finalRequest, "#deleteToast");
+    finalRequest = deleteRequest;
+    fetchRequest(finalRequest, "#deleteToast");
+    selectedInvoiceId = null;
+  }
 }
 ///////////////////////////////////////
 ////////// Method Fill Table //////////
@@ -352,11 +357,11 @@ function fillTable(invoices) {
 
     var deleteButton = document.createElement("button");
     deleteButton.type = "button";
-    deleteButton.class = "btn btn-secondary deleteButton";
+    deleteButton.className = "btn btn-secondary deleteButton";
     var deleteIcon = document.createElement("i");
     deleteIcon.className = "fas fa-trash-alt";
     $(".deleteButton").attr("data-toggle", "modal");
-    $(".data-target").attr("#deleteModal", "modal");
+    $(".deleteButton").attr("data-target", "#deleteModal");
     deleteIcon.addEventListener("click", function (event) {
       markForDelete(event);
     });
