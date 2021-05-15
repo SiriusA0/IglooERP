@@ -1,3 +1,6 @@
+/* Coded with love by Igloo team. */
+$(".toast").toast();
+
 //url inicial
 var server_url = 'http://localhost:8080/';
 
@@ -131,8 +134,24 @@ function fillTable(settingName, settingStringName, tableId,settingHeadName ){
     fetch(urlFinal)
         .then(r => r.json())
         .then(ObjectToShow => {
-            cleanTable(tableId);
-            fillTable(ObjectToShow,settingStringName, tableId, settingHeadName)
+            console.log(ObjectToShow);
+            if (ObjectToShow.length==0)
+                  {
+                    $(document).ready(function () {
+                      {
+                        $("#deleteToastFail").toast("show");
+                      }});
+                  }
+            else{
+              cleanTable(tableId);
+              fillTable(ObjectToShow,settingStringName, tableId, settingHeadName);
+              $(document).ready(function () {
+                {
+                  $("#deleteToast").toast("show");
+                }});
+
+            }
+
         });
   }
 
@@ -175,7 +194,11 @@ function editItem(){
     .then(r => r.json()) 
     .then(ObjectToShow => {
         cleanTable(tableIdGlobal);
-        fillTable(ObjectToShow,settingNameGlobal, tableIdGlobal, settingHeadNameGlobal)
+        fillTable(ObjectToShow,settingNameGlobal, tableIdGlobal, settingHeadNameGlobal);
+        $(document).ready(function () {
+          {
+            $("#editToast").toast("show");
+          }});
     });
     cancelEdit();
     document.querySelector("#settingToEdit").value="";
@@ -228,6 +251,10 @@ fetch(urlFinal)
             console.log("Added sector: " + newsector.name);
             cleanTable("sectorTable");
             fillTable(newsector , "sector", "sectorTable", "Sector Name");
+            $(document).ready(function () {
+              {
+                $("#createStatus").toast("show");
+              }});
         });
 
 document.querySelector("#sectorName").value = "";
@@ -245,6 +272,7 @@ function showSectorsTable() {
       .then(sectors => {
           cleanTable("sectorTable");
           fillTable(sectors , "sector", "sectorTable", "Sector Name");
+          
       });
 }
 
@@ -289,7 +317,14 @@ function createStatus(){
               console.log("Added status: " + newStatus.name);
               cleanTable("statusTable");
               fillTable(newStatus,"status","statusTable","Status Name" );
+              $(document).ready(function () {
+                {
+                  $("#createStatus").toast("show");
+                }});
           });
+
+
+         
   
   document.querySelector("#statusName").value = "";
   //document.querySelector("#successAlertStatus").style.display = "";        
@@ -352,7 +387,13 @@ function createPaymentStatus(){
           .then(newpaymentStatus => {
               cleanTable("paymentStatusTable");
               fillTable(newpaymentStatus,"payment", "paymentStatusTable", "Payment Status Name");
-          });
+              $(document).ready(function () {
+                {
+                  $("#createStatus").toast("show");
+                }});
+          
+          
+            });
   
   document.querySelector("#paymentStatusName").value = "";
   //document.querySelector("#successAlertPaymentStatus").style.display = "";  
