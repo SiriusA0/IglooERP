@@ -58,7 +58,7 @@ public class OrderServices {
             orders = pages.getContent();
 
         } else if (action.equals("sort")) {
-            
+
             Sort.Direction direction = Sort.Direction.fromString(option);
             Sort sort = Sort.by(direction, term);
             Pageable pageable = PageRequest.of(page - 1, 10, sort);
@@ -95,8 +95,6 @@ public class OrderServices {
 
         }
 
-        System.out.println("Orders: " + orders.size());
-        System.out.println("Date: " + orders.get(0).getCreationDate());
         return orderadapter.of(orders);
     }
 

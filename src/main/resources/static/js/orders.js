@@ -148,6 +148,10 @@ function createOrder() {
   var finalRequest;
   // Get order atributes.
   var totalAmount = document.querySelector("input[name=totalAmount]").value;
+  if (totalAmount > 0) {
+  } else {
+    totalAmount = 0;
+  }
   var clientId = document.querySelector("select[name=clientId]").value;
   var agentId = document.querySelector("select[name=agentId]").value;
   var statusId = document.querySelector("select[name=statusId]").value;
@@ -221,6 +225,10 @@ function editOrder() {
   var finalRequest;
   // Get order new atributes.
   var totalAmount = document.querySelector("input[name=totalAmountEdited]").value;
+  if (totalAmount > 0) {
+  } else {
+    totalAmount = 0;
+  }
   var clientId = document.querySelector("select[name=clientIdEdited]").value;
   var agentId = document.querySelector("select[name=agentIdEdited]").value;
   var statusId = document.querySelector("select[name=statusIdEdited]").value;
@@ -361,7 +369,8 @@ function fillTable(orders) {
   if (orders.length == 0) {
     currentPageGlobal = currentPageGlobal - 1;
     document.querySelector("#nextPage").disabled = true;
-
+    var afterTableContainer = document.querySelector("#afterTableContainer");
+    afterTableContainer.innerHTML = "";
     var afterTableContainer = document.querySelector("#afterTableContainer");
     var noMoreResultAlert = document.createElement("div");
     noMoreResultAlert.className = "alert alert-dark";

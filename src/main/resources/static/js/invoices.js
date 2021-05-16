@@ -148,6 +148,10 @@ function createInvoice() {
   var finalRequest;
   // Get invoice atributes.
   var preTax = document.querySelector("input[name=preTax]").value;
+  if (preTax > 0) {
+  } else {
+    preTax = 0;
+  }
   var clientId = document.querySelector("select[name=clientId]").value;
   var statusId = document.querySelector("select[name=statusId]").value;
   var paymentStatusId = document.querySelector("select[name=paymentStatusId]").value;
@@ -173,7 +177,7 @@ function createInvoice() {
   if (auxUrl[1].length > 0) {
     finalRequest = finalRequest + "&page=" + currentPageGlobal + "&" + auxUrl[1];
   } else {
-    finalRequest = finalRequest + "page=" + currentPageGlobal;
+    finalRequest = finalRequest + "&page=" + currentPageGlobal;
   }
 
   fetchRequest(finalRequest, "#createToast");
@@ -222,6 +226,10 @@ function editInvoice() {
 
   // Get invoice new atributes.
   var preTax = document.querySelector("input[name=preTaxEdited]").value;
+  if (preTax > 0) {
+  } else {
+    preTax = 0;
+  }
   var clientId = document.querySelector("select[name=clientIdEdited]").value;
   var statusId = document.querySelector("select[name=statusIdEdited]").value;
   var paymentStatusId = document.querySelector("select[name=paymentStatusIdEdited]").value;
@@ -354,7 +362,8 @@ function fillTable(invoices) {
   if (invoices.length == 0) {
     currentPageGlobal = currentPageGlobal - 1;
     document.querySelector("#nextPage").disabled = true;
-
+    var afterTableContainer = document.querySelector("#afterTableContainer");
+    afterTableContainer.innerHTML = "";
     var afterTableContainer = document.querySelector("#afterTableContainer");
     var noMoreResultAlert = document.createElement("div");
     noMoreResultAlert.className = "alert alert-dark";
