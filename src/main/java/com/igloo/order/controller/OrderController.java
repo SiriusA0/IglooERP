@@ -6,6 +6,7 @@ import com.igloo.agent.service.AgentServices;
 import com.igloo.client.model.Client;
 import com.igloo.client.response.ClientResponse;
 import com.igloo.client.service.ClientService;
+import com.igloo.invoice.response.InvoiceResponse;
 import com.igloo.order.model.Order;
 import com.igloo.order.response.OrderResponse;
 import com.igloo.order.service.OrderRepository;
@@ -82,7 +83,8 @@ public class OrderController {
     @GetMapping("api/order/add")
     @ResponseBody
     public List<OrderResponse> add_API(@RequestParam(required = false) Integer id,@RequestParam double totalAmount,@RequestParam Integer statusId, 
-    		@RequestParam Integer agentId, @RequestParam Integer clientId, @RequestParam Integer sectorId){
+    		@RequestParam Integer agentId, @RequestParam Integer clientId, @RequestParam Integer sectorId, @RequestParam(required = false) String action,
+    		@RequestParam(required = false) String option, @RequestParam(required = false) String term, @RequestParam(required = false) Integer page){
     	
     	if(id == null) {
     		
@@ -94,15 +96,18 @@ public class OrderController {
     	
     	
     	
-    	return orderServ.getAll();
+    	return orderServ.search(action, option, term, page);
     }
     
     @GetMapping("/api/order/delete")
     @ResponseBody
-    public List<OrderResponse> delete_API(@RequestParam String orderId) {
+    public List<OrderResponse> delete_API(@RequestParam String orderId, @RequestParam(required = false) String action, @RequestParam(required = false) String option, 
+    		@RequestParam(required = false) String term, @RequestParam(required = false) Integer page) {
 
     	orderServ.deleteOrder(orderId);
-        return orderServ.getAll();
+    	List<OrderResponse>orders = orderServ.search(action, option, term, page);
+
+        return orders;
     }
     
     @GetMapping("api/order/find")
