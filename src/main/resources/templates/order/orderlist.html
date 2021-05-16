@@ -24,7 +24,7 @@
     <!-- Libraries -->
     <link rel="stylesheet" th:href="@{'/css/igloo.css'}" href="/src/main/resources/static/css/igloo.css" />
     <!-- Scripts -->
-    <script th:src="@{'/js/orders.js'}" src="/js/orders.js"></script>
+    <script th:src="@{'/js/orders.js'}" src="js/orders.js"></script>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -32,7 +32,7 @@
       rel="stylesheet"
     />
   </head>
-  <body class="bg_igloo" style="height: 100%; overflow: hidden">
+  <body class="bg_igloo" style="height: 100%">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="/home"><i class="fas fa-igloo"></i></a>
       <button
@@ -49,7 +49,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <label class="nav-brand mr-5 mt-2" style="color: white; font-family: 'Titillium Web', sans-serif"
-            ><b>Orders / Budgets</b></label
+            ><b>Billing / Orders</b></label
           >
           <li role="button" onclick="window.location.href='/agent'" class="nav-item">
             <span class="nav-link">Agents</span>
@@ -85,7 +85,7 @@
               <div class="col">
                 <div class="input-group">
                   <input
-                    onkeyup="getOrders('searchClient',null,null)"
+                    onkeyup="getOrders('searchClient',null,null,true)"
                     type="text"
                     id="searchTermClient"
                     class="form-control search filterText"
@@ -99,7 +99,7 @@
                 <button
                   type="button"
                   name="searchTermClient"
-                  onclick="getOrders('searchClient',null,null)"
+                  onclick="getOrders('searchClient',null,null,true)"
                   class="btn btn-sm btn-search filterText"
                 >
                   Search
@@ -107,29 +107,31 @@
               </div>
             </div>
           </div>
-          <div class="row mt-4">
-            <div class="col">
-              <div class="input-group">
-                <input
-                  onkeyup="getOrders('searchAgent',null,null)"
-                  type="text"
-                  id="searchTermAgent"
-                  class="form-control search filterText"
-                />
+          <div>
+            <div class="row mt-4">
+              <div class="col">
+                <div class="input-group">
+                  <input
+                    onkeyup="getOrders('searchAgent',null,null,true)"
+                    type="text"
+                    id="searchTermAgent"
+                    class="form-control search filterText"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          <div class="row mt-2">
-            <div class="col d-flex justify-content-between">
-              <small class="filterText ml-1">Find Orders by agent</small>
-              <button
-                type="button"
-                name="searchTermAgent"
-                onclick="getOrders('searchAgent',null,null)"
-                class="btn btn-sm btn-search filterText"
-              >
-                Search
-              </button>
+            <div class="row mt-2">
+              <div class="col d-flex justify-content-between">
+                <small class="filterText ml-1">Find Orders by agents</small>
+                <button
+                  type="button"
+                  name="searchTermAgent"
+                  onclick="getOrders('searchAgent',null,null,true)"
+                  class="btn btn-sm btn-search filterText"
+                >
+                  Search
+                </button>
+              </div>
             </div>
           </div>
           <div class="row mt-3 mb-3 pl-3">
@@ -143,53 +145,53 @@
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="getOrders('sort', 'totalAmount', 'asc')"
-                id="totalAmountOrderAsc"
+                onclick="getOrders('sort', 'totalAmount', 'asc',true)"
+                id="idOrderAsc"
                 type="button"
                 class="fas fa-sort-numeric-up-alt filterIcons"
               ></i>
             </div>
             <div class="col-10">
-              <label for="totalAmountOrderAsc" class="filterText">Order by Total Amount (Asc)</label>
+              <label for="idOrderAsc" class="filterText">Order by Amount (Asc)</label>
             </div>
           </div>
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="getOrders('sort', 'totalAmount', 'desc')"
-                id="totalAmountOrderDes"
+                onclick="getOrders('sort', 'totalAmount', 'desc',true)"
+                id="idOrderDesc"
                 type="button"
                 class="fas fa-sort-numeric-down-alt filterIcons"
               ></i>
             </div>
             <div class="col-10">
-              <label for="totalAmountOrderDes" class="filterText">Order by Total Amount (Des)</label>
+              <label for="idOrderDesc" class="filterText">Order by Amount (Des)</label>
             </div>
           </div>
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="getOrders('sort', 'creationDate', 'asc')"
-                id="datOrderAsc"
+                onclick="getOrders('sort', 'creationDate', 'asc',true)"
+                id="creationDateOrderAsc"
                 type="button"
                 class="fas fa-sort-alpha-up-alt filterIcons"
               ></i>
             </div>
             <div class="col-10">
-              <label for="datOrderAsc" class="filterText">Order by Date (Asc)</label>
+              <label for="creationDateOrderAsc" class="filterText">Order by Creation Date (Asc)</label>
             </div>
           </div>
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="getOrders('sort', 'creationDate', 'desc')"
-                id="dateOrderDes"
+                onclick="getOrders('sort', 'creationDate', 'desc',true)"
+                id="creationDateOrderDesc"
                 type="button"
                 class="fas fa-sort-alpha-down-alt filterIcons"
               ></i>
             </div>
             <div class="col-10">
-              <label for="dateOrderDes" class="filterText">Order by Date (Des)</label>
+              <label for="creationDateOrderDesc" class="filterText">Order by Creation Date (Des)</label>
             </div>
           </div>
           <div class="row">
@@ -206,16 +208,25 @@
           </div>
           <div class="row pt-4">
             <div class="col">
-              <button type="button" onclick="batchDeleteOrders()" class="btn btn-del btn-lg btn-block filterText">
+              <button
+                id="batchDeleteButton"
+                type="button"
+                class="btn btn-del btn-lg btn-block filterText"
+                data-toggle="modal"
+                data-target="#batchDeleteModal"
+                disabled="true"
+                ;
+              >
                 Delete Selected Orders
               </button>
             </div>
           </div>
         </div>
-        <div class="col-10" style="overflow: auto; height: 1000px; width: fit-content">
+        <div class="col-10" style="height: 1000px; width: fit-content">
           <!-- Order Creation Form INI -->
-          <div class="row orderForm m-5" id="orderForm" style="display: none">
+          <div class="row orderCreationForm m-5" id="creationForm" style="display: none">
             <div class="col">
+              <!-- TODO  -->
               <form>
                 <div class="form-row">
                   <div class="form-group col-md-6">
@@ -276,17 +287,18 @@
           </div>
           <!-- Order Creation Form END -->
           <!-- Order Edit INI -->
-          <div class="row orderEditForm m-5" id="orderEditForm" style="display: none">
+          <div class="row orderEditForm m-5" id="editForm" style="display: none">
             <div class="col">
+              <!-- TODO  -->
               <form>
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="totalAmount">Total Amount</label>
-                    <input type="text" class="form-control" name="totalEditAmount" />
+                    <input type="text" class="form-control" name="totalAmountEdited" id="totalAmountEdited" />
                   </div>
                   <div class="form-group col-md-6">
                     <label for="statusId">Status</label>
-                    <select class="form-control" name="statusEditId">
+                    <select class="form-control" name="statusIdEdited" id="statusIdEdited">
                       <option th:each="status: ${statuses}" th:value="${status.id}" th:text="${status.name}"></option>
                     </select>
                   </div>
@@ -294,7 +306,7 @@
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="agentId">Agent</label>
-                    <select class="form-control" name="agentEditId">
+                    <select class="form-control" name="agentIdEdited" id="agentIdEdited">
                       <option
                         th:each="agent: ${agents}"
                         th:value="${agent.id}"
@@ -304,7 +316,7 @@
                   </div>
                   <div class="form-group col-md-6">
                     <label for="clientId">Client</label>
-                    <select class="form-control" name="clientEditId">
+                    <select class="form-control" name="clientIdEdited" id="clientIdEdited">
                       <option
                         th:each="client: ${clients}"
                         th:value="${client.id}"
@@ -316,28 +328,23 @@
                 <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="sectorId">Sector</label>
-                    <select class="form-control" name="sectorEditId">
+                    <select class="form-control" name="sectorIdEdited" id="sectorIdEdited">
                       <option th:each="sector: ${sectors}" th:value="${sector.id}" th:text="${sector.name}"></option>
                     </select>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-2">
-                    <button type="button" onclick="editOrder(event)" class="btn btn-block btn-add filterText">
-                      Edit
+                    <button type="button" onclick="createOrder()" class="btn btn-block btn-add filterText">
+                      Create
                     </button>
-                  </div>
-                  <div class="form-group col-md-10">
-                    <div class="alert alert-info" role="alert" style="display: none" id="editSuccessAlert">
-                      Order successfully edited
-                    </div>
                   </div>
                 </div>
               </form>
             </div>
           </div>
           <!-- Order Edit END -->
-          <div class="row orderTable m-5" id="orderTable">
+          <div class="row orderTable ml-4 mr-4 mt-5" id="orderTable">
             <div class="col">
               <table class="table table-hover">
                 <thead class="thead-dark">
@@ -355,8 +362,8 @@
                 </thead>
                 <tbody id="orderList">
                   <tr th:each="order : ${orders}">
-                    <td><input type="checkbox" /></td>
-                    <td class="filterTextDark id" th:text="${order.id}"></td>
+                    <td><input onchange="addToSelected(event)" type="checkbox" /></td>
+                    <td class="filterTextDark idIndicator" th:text="${order.id}"></td>
                     <td class="filterTextDark" th:text="${order.creationDate}">2021/5/21</td>
                     <td class="filterTextDark" th:text="${order.client.firstName}+' '+${order.client.lastName}">0</td>
                     <td class="filterTextDark" th:text="${order.agent.firstName}+' '+${order.agent.lastName}">0</td>
@@ -365,59 +372,61 @@
                     <td class="filterTextDark" th:text="${order.sector.name}">0</td>
                     <td>
                       <div class="btn-group" role="group">
-                        <button type="button" onclick="orderFav(event)" class="btn btn-secondary">
+                        <button type="button" onclick="orderFav()" class="btn btn-secondary">
                           <i class="far fa-star"></i>
                         </button>
                         <button type="button" onclick="showEditForm(event)" class="btn btn-secondary">
                           <i class="fas fa-edit"></i>
                         </button>
                         <!-- Delete Modal trigger -->
-                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal">
+                        <button
+                          type="button"
+                          onclick="markForDelete(event)"
+                          class="btn btn-secondary deleteButton"
+                          data-toggle="modal"
+                          data-target="#deleteModal"
+                        >
                           <i class="fas fa-trash-alt"></i>
                         </button>
-                        <!-- Modal Delete -->
-                        <div
-                          class="modal fade"
-                          id="deleteModal"
-                          data-backdrop="static"
-                          data-keyboard="false"
-                          tabindex="-1"
-                          aria-labelledby="deleteModalLabel"
-                          aria-hidden="true"
-                        >
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="deleteModalLabel">Confirm deletion</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">We won't be able to recover the order. Are you sure?</div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                  No! Go back!
-                                </button>
-                                <button
-                                  type="button"
-                                  onclick="deleteOrder(event)"
-                                  class="btn btn-add"
-                                  data-dismiss="modal"
-                                >
-                                  Understood, delete
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
                       </div>
                     </td>
                   </tr>
                 </tbody>
               </table>
+              <div id="afterTableContainer"></div>
             </div>
           </div>
+          <!-- Pagination INI -->
+          <nav>
+            <ul class="pagination justify-content-center" id="paginationControls">
+              <li class="page-item">
+                <button id="prevPage" onclick="prevPage(event)" class="page-link" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </button>
+              </li>
+              <li class="page-item">
+                <a style="color: #59bec9" id="currentPageItem" class="page-link">1</a>
+              </li>
+              <li class="page-item">
+                <button id="nextPage" onclick="nextPage(event)" class="page-link" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </button>
+              </li>
+            </ul>
+          </nav>
+          <!-- Pagination END -->
         </div>
+      </div>
+    </div>
+    <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0">
+      <div id="createToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+        <div class="toast-header">
+          <strong class="mr-auto">Igloo</strong>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="toast-body">The order was successfully created.</div>
       </div>
     </div>
     <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0">
@@ -429,6 +438,73 @@
           </button>
         </div>
         <div class="toast-body">The order was successfully deleted.</div>
+      </div>
+    </div>
+    <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0">
+      <div id="editToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+        <div class="toast-header">
+          <strong class="mr-auto">Igloo</strong>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="toast-body">The order was successfully edited.</div>
+      </div>
+    </div>
+    <!-- Modal Delete -->
+    <div
+      class="modal fade"
+      id="deleteModal"
+      data-backdrop="static"
+      data-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="deleteModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Confirm deletion</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">We won't be able to recover the order. Are you sure?</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No! Go back!</button>
+            <button type="button" onclick="deleteOrder()" class="btn btn-add" data-dismiss="modal">
+              Understood, delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Batch Delete -->
+    <div
+      class="modal fade"
+      id="batchDeleteModal"
+      data-backdrop="static"
+      data-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="batchDeleteModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="batchDeleteModalLabel">Confirm batch deletion</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">We won't be able to recover the selected orders. Are you sure?</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No! Go back!</button>
+            <button type="button" onclick="batchDelete()" class="btn btn-add" data-dismiss="modal">
+              Understood, delete
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </body>

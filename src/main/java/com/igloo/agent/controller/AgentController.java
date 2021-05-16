@@ -57,11 +57,11 @@ public class AgentController {
 //    }
 
 
-    @GetMapping("/api/agent/search")
-    @ResponseBody
-    public List<AgentResponse> find_API(@RequestParam String searchTerm) {
-        return agentServ.search(searchTerm);
-    }
+//    @GetMapping("/api/agent/search")
+//    @ResponseBody
+//    public List<AgentResponse> find_API(@RequestParam String searchTerm) {
+//        return agentServ.search(searchTerm);
+//    }
 
     @GetMapping("/api/agent/add")
     @ResponseBody

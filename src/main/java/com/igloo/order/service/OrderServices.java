@@ -41,121 +41,118 @@ public class OrderServices {
     private StatusRepository statusRepository;
     @Autowired
     private SectorRepository sectorRepository;
-   
-    
-    
-    public List<OrderResponse> search(String action, String option, String term, Integer page){
-    	
-    	List<Order> orders = null;
-    	
-    	if(action == null || action.isEmpty()) {
-			Pageable pageable = PageRequest.of(page, 10);
-			Page<Order> pages = orderRepo.findAll(pageable);
-			orders = pages.getContent();
 
-		} else if(action.equals("sort")) {
-			Sort.Direction direction = Sort.Direction.fromString(option);
-			Sort sort = Sort.by(direction,term);
-			Pageable pageable = PageRequest.of(page, 10, sort);
 
-    		orders = orderRepo.findAll(pageable).getContent();
-    		
-    	}else if(action.equals("search")) {
-    		if(option.equals("client")) {
-				Pageable pageable = PageRequest.of(page, 10);
-    			orders = orderRepo.findByClientFirstNameContainingOrClientLastNameContaining(term, term, pageable);
-    			
-    			//List <Client> clients = clientRepository.findByFirstNameContainingOrLastNameContaining(term, term);
-    			
-    			// SELECT * FROM order O 
-    			// Left join CLIENT c ON (o.client = c.id_client)
-    			// WHERE c.firstName LIKE '%'param'%'´
-    		
-    			
-    			//orders = new LinkedList<>();
-    			//System.out.println(clients.size());
-    			//for(Client client : clients) {
-    				
-    			//	for(Order order : client.getOrders()) {
-    					
-    			//		orders.add(order);
-    			//	}
-    			//}
-    			
-    			
-    		}else if(option.equals("agent")) {
-    			List <Agent> agents = agentRepository.findByFirstNameContainingOrLastNameContaining(term, term);
-    			orders = new LinkedList<>();
-    			for(Agent agent : agents) {
-    				for(Order order : agent.getOrders()) {
-    					orders.add(order);
-    				}
-    			}	
-    		}
-  
-    	}
-    	
-    	System.out.println("Orders: "+orders.size());
-    	System.out.println("Date: " + orders.get(0).getCreationDate());
-    	return orderadapter.of(orders);
+    public List<OrderResponse> search(String action, String option, String term, Integer page) {
+
+        List<Order> orders = null;
+        if (page == null) {
+            page = 1;
+        }
+
+        if (action == null || action.isEmpty()) {
+            Pageable pageable = PageRequest.of(page - 1, 10);
+            Page<Order> pages = orderRepo.findAll(pageable);
+            orders = pages.getContent();
+
+        } else if (action.equals("sort")) {
+            Sort.Direction direction = Sort.Direction.fromString(option);
+            Sort sort = Sort.by(direction, term);
+            Pageable pageable = PageRequest.of(page - 1, 10, sort);
+
+            orders = orderRepo.findAll(pageable).getContent();
+
+        } else if (action.equals("search")) {
+            if (option.equals("client")) {
+                Pageable pageable = PageRequest.of(page - 1, 10);
+                orders = orderRepo.findByClientFirstNameContainingOrClientLastNameContaining(term, term, pageable);
+
+                //List <Client> clients = clientRepository.findByFirstNameContainingOrLastNameContaining(term, term);
+
+                // SELECT * FROM order O
+                // Left join CLIENT c ON (o.client = c.id_client)
+                // WHERE c.firstName LIKE '%'param'%'´
+
+
+                //orders = new LinkedList<>();
+                //System.out.println(clients.size());
+                //for(Client client : clients) {
+
+                //	for(Order order : client.getOrders()) {
+
+                //		orders.add(order);
+                //	}
+                //}
+
+
+            } else if (option.equals("agent")) {
+                Pageable pageable = PageRequest.of(page - 1, 10);
+                orders = orderRepo.findByAgentFirstNameContainingOrAgentLastNameContaining(term, term, pageable);
+            }
+
+        }
+
+        System.out.println("Orders: " + orders.size());
+        System.out.println("Date: " + orders.get(0).getCreationDate());
+        return orderadapter.of(orders);
     }
-    
-    
-	public List<OrderResponse>createOrder(double totalAmount,Integer statusId, Integer agentId, Integer clientId, Integer sectorId){ 
-    	
-		List<Order> orders = new LinkedList<>();
-		Order order_ = new Order();
-		
-		order_.setTotalAmount(totalAmount);
-		order_.setStatus(statusRepository.findById(statusId).get());
-		order_.setAgent(agentRepository.findById(agentId).get());
-		order_.setClient(clientRepository.findById(clientId).get());
-		order_.setSector(sectorRepository.findById(sectorId).get());
-		
-		orderRepo.save(order_);
-		orders.add(order_);
-		
 
-    	return orderadapter.of(orders);
+
+    public List<OrderResponse> createOrder(double totalAmount, Integer statusId, Integer agentId, Integer clientId, Integer sectorId) {
+
+        List<Order> orders = new LinkedList<>();
+        Order order_ = new Order();
+
+        order_.setTotalAmount(totalAmount);
+        order_.setStatus(statusRepository.findById(statusId).get());
+        order_.setAgent(agentRepository.findById(agentId).get());
+        order_.setClient(clientRepository.findById(clientId).get());
+        order_.setSector(sectorRepository.findById(sectorId).get());
+
+        orderRepo.save(order_);
+        orders.add(order_);
+
+
+        return orderadapter.of(orders);
     }
-	
-	public List<OrderResponse> getAll(){
-		
-		return orderadapter.of(orderRepo.findAll());
-		
-	}
-	
-	public void deleteOrder(String idtodelete) {
+
+    public List<OrderResponse> getAll() {
+
+        return orderadapter.of(orderRepo.findAll());
+
+    }
+
+    public void deleteOrder(String idtodelete) {
 
         String idArray[] = idtodelete.split(",");
-        for (String i : idArray){
+        for (String i : idArray) {
             int id = Integer.valueOf(i);
             orderRepo.deleteById(id);
         }
 
     }
-	
-	public OrderResponse findOrder(Integer id) {
-		
-		Order order = new Order();
-		
-		order=orderRepo.findById(id).get();
-		orderRepo.save(order);
-		return orderadapter.of(order);
-	}
-	
-	public void editOrder(Integer id, double totalAmount, Integer statusId, Integer agentId, Integer clientId,
-			Integer sectorId) {
-		
-			Order order = orderRepo.findById(id).get();
-			
-			order.setTotalAmount(totalAmount);
-			order.setStatus(statusRepository.findById(statusId).get());
-			order.setAgent(agentRepository.findById(agentId).get());
-			order.setClient(clientRepository.findById(clientId).get());
-			order.setSector(sectorRepository.findById(sectorId).get());
-			
-			orderRepo.save(order);
-		
-	}
+
+    public OrderResponse findOrder(Integer id) {
+
+        Order order = new Order();
+
+        order = orderRepo.findById(id).get();
+        orderRepo.save(order);
+        return orderadapter.of(order);
+    }
+
+    public void editOrder(Integer id, double totalAmount, Integer statusId, Integer agentId, Integer clientId,
+                          Integer sectorId) {
+
+        Order order = orderRepo.findById(id).get();
+
+        order.setTotalAmount(totalAmount);
+        order.setStatus(statusRepository.findById(statusId).get());
+        order.setAgent(agentRepository.findById(agentId).get());
+        order.setClient(clientRepository.findById(clientId).get());
+        order.setSector(sectorRepository.findById(sectorId).get());
+
+        orderRepo.save(order);
+
+    }
 }

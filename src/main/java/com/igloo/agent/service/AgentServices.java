@@ -66,11 +66,11 @@ public class AgentServices {
     }
 	*/
     
-    public List<AgentResponse> search(String searchTerm) {
-
-         List<Agent> agents = agentRepo.findByFirstNameContainingOrLastNameContaining(searchTerm, searchTerm);
-         return agentAdapter.of(agents);
-    }
+//    public List<AgentResponse> search(String searchTerm) {
+//
+//         List<Agent> agents = agentRepo.findByFirstNameContainingOrLastNameContaining(searchTerm, searchTerm, pageable);
+//         return agentAdapter.of(agents);
+//    }
 
     public List<AgentResponse> ascLastName() {
 

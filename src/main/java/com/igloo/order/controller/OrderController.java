@@ -52,7 +52,7 @@ public class OrderController {
     @GetMapping("/order")
     public String readOrder(Model model) {
 
-        List<OrderResponse> orders = orderServ.search(null, null, null, 0);//TODO unificar nombres
+        List<OrderResponse> orders = orderServ.search(null, null, null, 1);//TODO unificar nombres
         List<StatusResponse> statuses = statusesService.getAll();//TODO unificar nombres
         List<SectorResponse> sectors = sectorsService.showSector();//TODO unificar nombres
         List<ClientResponse> clients = clientsService.get();//TODO unificar nombres
@@ -70,52 +70,51 @@ public class OrderController {
 
     @GetMapping("api/order/get")
     @ResponseBody
-    public List <OrderResponse> buscador(@RequestParam(required = false) String action,
-    										@RequestParam(required = false) String option,
-    										@RequestParam(required = false) String term, @RequestParam(required = false) Integer page){
-    	
+    public List<OrderResponse> buscador(@RequestParam(required = false) String action,
+                                        @RequestParam(required = false) String option,
+                                        @RequestParam(required = false) String term, @RequestParam(required = false) Integer page) {
 
-    	List<OrderResponse> orders = orderServ.search(action, option, term, page);
 
-    	return orders;
-    }
-    
-    @GetMapping("api/order/add")
-    @ResponseBody
-    public List<OrderResponse> add_API(@RequestParam(required = false) Integer id,@RequestParam double totalAmount,@RequestParam Integer statusId, 
-    		@RequestParam Integer agentId, @RequestParam Integer clientId, @RequestParam Integer sectorId, @RequestParam(required = false) String action,
-    		@RequestParam(required = false) String option, @RequestParam(required = false) String term, @RequestParam(required = false) Integer page){
-    	
-    	if(id == null) {
-    		
-    		orderServ.createOrder(totalAmount, statusId, agentId, clientId, sectorId);
-    	} else {
-    		
-    		orderServ.editOrder(id, totalAmount, statusId, agentId, clientId, sectorId);	
-    	}
-    	
-    	
-    	
-    	return orderServ.search(action, option, term, page);
-    }
-    
-    @GetMapping("/api/order/delete")
-    @ResponseBody
-    public List<OrderResponse> delete_API(@RequestParam String orderId, @RequestParam(required = false) String action, @RequestParam(required = false) String option, 
-    		@RequestParam(required = false) String term, @RequestParam(required = false) Integer page) {
-
-    	orderServ.deleteOrder(orderId);
-    	List<OrderResponse>orders = orderServ.search(action, option, term, page);
+        List<OrderResponse> orders = orderServ.search(action, option, term, page);
 
         return orders;
     }
-    
+
+    @GetMapping("api/order/add")
+    @ResponseBody
+    public List<OrderResponse> add_API(@RequestParam(required = false) Integer id, @RequestParam double totalAmount, @RequestParam Integer statusId,
+                                       @RequestParam Integer agentId, @RequestParam Integer clientId, @RequestParam Integer sectorId, @RequestParam(required = false) String action,
+                                       @RequestParam(required = false) String option, @RequestParam(required = false) String term, @RequestParam(required = false) Integer page) {
+
+        if (id == null) {
+
+            orderServ.createOrder(totalAmount, statusId, agentId, clientId, sectorId);
+        } else {
+
+            orderServ.editOrder(id, totalAmount, statusId, agentId, clientId, sectorId);
+        }
+
+
+        return orderServ.search(action, option, term, page);
+    }
+
+    @GetMapping("/api/order/delete")
+    @ResponseBody
+    public List<OrderResponse> delete_API(@RequestParam String id, @RequestParam(required = false) String action, @RequestParam(required = false) String option,
+                                          @RequestParam(required = false) String term, @RequestParam(required = false) Integer page) {
+
+        orderServ.deleteOrder(id);
+        List<OrderResponse> orders = orderServ.search(action, option, term, page);
+
+        return orders;
+    }
+
     @GetMapping("api/order/find")
     @ResponseBody
     public OrderResponse find_API(@RequestParam Integer id) {
-    	
-    	
-    	return orderServ.findOrder(id);
+
+
+        return orderServ.findOrder(id);
     }
 }
 

@@ -18,5 +18,6 @@ public interface OrderRepository  extends JpaRepository<Order, Integer> {
     List<Order> findAllByOrderByIdDesc();
     List<Order> findByClient(Client client);
 	List<Order> findByClientFirstNameContainingOrClientLastNameContaining(String term, String term2, Pageable page);
+	List<Order> findByAgentFirstNameContainingOrAgentLastNameContaining(String term, String term2, Pageable page);
 
 }
