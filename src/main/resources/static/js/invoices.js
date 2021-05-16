@@ -3,8 +3,9 @@ $(".toast").toast();
 ////////// Server URL //////////
 var server_url = "http://localhost:8080";
 var search_url = server_url + "/api/invoice/get?";
-var currentPageGlobal = 1;
-var selectedInvoiceId;
+var currentPageGlobal = 1; // Current invoices page
+var selectedInvoiceId; // Selected invoice
+var selectedInvoicesIds; // Selected invoices array
 ////////// Pagination //////////
 function nextPage(event) {
   var finalRequest = "";
@@ -22,7 +23,7 @@ function nextPage(event) {
     }
     fetchRequest(finalRequest, null);
     currentPageGlobal = nextPage;
-    updatePages(event, nextPage);
+    updatePages(nextPage);
   }
 }
 function prevPage(event) {
@@ -44,13 +45,13 @@ function prevPage(event) {
     }
     fetchRequest(finalRequest, null);
     currentPageGlobal = prevPage;
-    updatePages(event, prevPage);
+    updatePages(prevPage);
   }
 }
 
-function updatePages(event, currentPage) {
+function updatePages(currentPage) {
   currentPageInt = parseInt(currentPage);
-  var pageIndicators = event.currentTarget.closest("ul");
+  var pageIndicators = document.querySelector("#paginationControls");
   pageIndicators.querySelector("#currentPageItem").innerHTML = currentPageInt;
   pageIndicators.querySelector("#currentPageItem").style.color = "#59bec9";
 }
@@ -149,7 +150,7 @@ function createInvoice() {
   if (auxUrl[1].length > 0) {
     finalRequest = finalRequest + "&page=" + currentPageGlobal + "&" + auxUrl[1];
   } else {
-    finalRequest = finalRequest + "&page=" + currentPageGlobal;
+    finalRequest = finalRequest + "page=" + currentPageGlobal;
   }
 
   fetchRequest(finalRequest, "#createToast");
@@ -234,7 +235,12 @@ function editInvoice() {
 }
 ////////////////////////////////
 ////////// Method GET //////////
-function getInvoices(action, sortTerm, sortMethod) {
+function getInvoices(action, sortTerm, sortMethod, resetPage) {
+  if (resetPage) {
+    currentPageGlobal = 1;
+    let currentPage = currentPageGlobal;
+    updatePages(currentPage);
+  }
   // Request Definition.
   var request = server_url + "/api/invoice/get";
   var finalRequest;
@@ -282,7 +288,7 @@ function deleteInvoice() {
     finalRequest = deleteRequest;
     var auxUrl = search_url;
     auxUrl = auxUrl.split("?");
-    
+
     if (auxUrl[1].length > 0) {
       finalRequest = finalRequest + "&page=" + currentPageGlobal + "&" + auxUrl[1];
     } else {
@@ -372,22 +378,22 @@ function fillTable(invoices) {
     var favbutton = document.createElement("button");
     favbutton.type = "button";
     favbutton.className = "btn btn-secondary";
-    var favIcon = document.createElement("i");
-    favIcon.className = "far fa-star";
-    favIcon.addEventListener("click", function (event) {
+    favbutton.addEventListener("click", function (event) {
       favoriteinvoice(event);
     });
+    var favIcon = document.createElement("i");
+    favIcon.className = "far fa-star";
     favbutton.appendChild(favIcon);
     buttogroup.appendChild(favbutton);
 
     var editbutton = document.createElement("button");
     editbutton.type = "button";
     editbutton.className = "btn btn-secondary";
-    var editIcon = document.createElement("i");
-    editIcon.className = "fas fa-edit";
-    editIcon.addEventListener("click", function (event) {
+    editbutton.addEventListener("click", function (event) {
       showEditForm(event);
     });
+    var editIcon = document.createElement("i");
+    editIcon.className = "fas fa-edit";
     editbutton.appendChild(editIcon);
     buttogroup.appendChild(editbutton);
 

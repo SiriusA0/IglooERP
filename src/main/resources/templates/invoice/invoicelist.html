@@ -32,7 +32,7 @@
       rel="stylesheet"
     />
   </head>
-  <body class="bg_igloo" style="height: 100%; overflow: hidden">
+  <body class="bg_igloo" style="height: 100%">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="/home"><i class="fas fa-igloo"></i></a>
       <button
@@ -118,7 +118,7 @@
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="getInvoices('sort', 'afterTax', 'asc')"
+                onclick="getInvoices('sort', 'afterTax', 'asc',true)"
                 id="idInvoiceAsc"
                 type="button"
                 class="fas fa-sort-numeric-up-alt filterIcons"
@@ -131,7 +131,7 @@
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="getInvoices('sort', 'afterTax', 'desc')"
+                onclick="getInvoices('sort', 'afterTax', 'desc',true)"
                 id="idInvoiceDesc"
                 type="button"
                 class="fas fa-sort-numeric-down-alt filterIcons"
@@ -144,27 +144,27 @@
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="getInvoices('sort', 'creationDate', 'asc')"
-                id="amountInvoiceAsc"
+                onclick="getInvoices('sort', 'creationDate', 'asc',true)"
+                id="creationDateInvoiceAsc"
                 type="button"
                 class="fas fa-sort-alpha-up-alt filterIcons"
               ></i>
             </div>
             <div class="col-10">
-              <label for="amountInvoiceAsc" class="filterText">Invoice by Creation Date (Asc)</label>
+              <label for="creationDateInvoiceAsc" class="filterText">Invoice by Creation Date (Asc)</label>
             </div>
           </div>
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="getInvoices('sort', 'creationDate', 'desc')"
-                id="amountInvoiceDesc"
+                onclick="getInvoices('sort', 'creationDate', 'desc',true)"
+                id="creationDateInvoiceDesc"
                 type="button"
                 class="fas fa-sort-alpha-down-alt filterIcons"
               ></i>
             </div>
             <div class="col-10">
-              <label for="amountInvoiceDesc" class="filterText">Invoice by Creation Date (Des)</label>
+              <label for="creationDateInvoiceDesc" class="filterText">Invoice by Creation Date (Des)</label>
             </div>
           </div>
           <div class="row">
@@ -187,7 +187,7 @@
             </div>
           </div>
         </div>
-        <div class="col-10" style="overflow: auto; height: 1000px; width: fit-content">
+        <div class="col-10" style="height: 1000px; width: fit-content">
           <!-- Invoice Creation Form INI -->
           <div class="row invoiceCreationForm m-5" id="invoiceCreationForm" style="display: none">
             <div class="col">
@@ -350,7 +350,13 @@
                           <i class="fas fa-edit"></i>
                         </button>
                         <!-- Delete Modal trigger -->
-                        <button type="button" onclick="markForDelete(event)" class="btn btn-secondary deleteButton" data-toggle="modal" data-target="#deleteModal">
+                        <button
+                          type="button"
+                          onclick="markForDelete(event)"
+                          class="btn btn-secondary deleteButton"
+                          data-toggle="modal"
+                          data-target="#deleteModal"
+                        >
                           <i class="fas fa-trash-alt"></i>
                         </button>
                       </div>
@@ -362,7 +368,7 @@
           </div>
           <!-- Pagination INI -->
           <nav>
-            <ul class="pagination justify-content-center">
+            <ul class="pagination justify-content-center" id="paginationControls">
               <li class="page-item">
                 <button onclick="prevPage(event)" class="page-link" aria-label="Previous">
                   <span aria-hidden="true">&laquo;</span>
