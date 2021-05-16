@@ -276,10 +276,10 @@
                       Create
                     </button>
                   </div>
-                  <div class="form-group col-md-10">
-                    <div class="alert alert-info" role="alert" style="display: none" id="successAlert">
-                      Order successfully added
-                    </div>
+                  <div class="form-group col-md-2">
+                    <button type="button" onclick="hideCreationForm()" class="btn btn-block btn-secondary filterText">
+                      Cancel creation.
+                    </button>
                   </div>
                 </div>
               </form>
@@ -335,8 +335,11 @@
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-2">
-                    <button type="button" onclick="createOrder()" class="btn btn-block btn-add filterText">
-                      Create
+                    <button type="button" onclick="editOrder()" class="btn btn-block btn-add filterText">Edit</button>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <button type="button" onclick="hideEditForm()" class="btn btn-block btn-secondary filterText">
+                      Cancel edit.
                     </button>
                   </div>
                 </div>

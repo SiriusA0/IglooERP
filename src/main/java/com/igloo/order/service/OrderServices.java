@@ -21,6 +21,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -56,6 +58,7 @@ public class OrderServices {
             orders = pages.getContent();
 
         } else if (action.equals("sort")) {
+            
             Sort.Direction direction = Sort.Direction.fromString(option);
             Sort sort = Sort.by(direction, term);
             Pageable pageable = PageRequest.of(page - 1, 10, sort);
@@ -100,10 +103,19 @@ public class OrderServices {
 
     public List<OrderResponse> createOrder(double totalAmount, Integer statusId, Integer agentId, Integer clientId, Integer sectorId) {
 
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        Date date = calendar.getTime();
+
         List<Order> orders = new LinkedList<>();
         Order order_ = new Order();
 
         order_.setTotalAmount(totalAmount);
+        order_.setCreationDate(date);
         order_.setStatus(statusRepository.findById(statusId).get());
         order_.setAgent(agentRepository.findById(agentId).get());
         order_.setClient(clientRepository.findById(clientId).get());
@@ -143,6 +155,7 @@ public class OrderServices {
 
     public void editOrder(Integer id, double totalAmount, Integer statusId, Integer agentId, Integer clientId,
                           Integer sectorId) {
+
 
         Order order = orderRepo.findById(id).get();
 

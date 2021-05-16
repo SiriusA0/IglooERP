@@ -113,17 +113,17 @@ function hideEditForm() {
   document.querySelector("#editForm").style.display = "none";
 }
 function clearEditForm() {
-  document.querySelector("input[name=preTaxEdited]").value = "";
+  document.querySelector("input[name=totalAmountEdited]").value = "";
   document.querySelector("select[name=clientIdEdited]").value = "1";
+  document.querySelector("select[name=agentIdEdited]").value = "1";
   document.querySelector("select[name=statusIdEdited]").value = "1";
-  document.querySelector("select[name=paymentStatusIdEdited]").value = "1";
   document.querySelector("select[name=sectorIdEdited]").value = "1";
 }
 function clearCreationForm() {
-  document.querySelector("input[name=preTax]").value = "";
+  document.querySelector("input[name=totalAmount]").value = "";
   document.querySelector("select[name=clientId]").value = "1";
+  document.querySelector("select[name=agentId]").value = "1";
   document.querySelector("select[name=statusId]").value = "1";
-  document.querySelector("select[name=paymentStatusId]").value = "1";
   document.querySelector("select[name=sectorId]").value = "1";
 }
 function cleanTable() {
@@ -147,24 +147,24 @@ function createOrder() {
   var request = server_url + "/api/order/add?";
   var finalRequest;
   // Get order atributes.
-  var preTax = document.querySelector("input[name=preTax]").value;
+  var totalAmount = document.querySelector("input[name=totalAmount]").value;
   var clientId = document.querySelector("select[name=clientId]").value;
+  var agentId = document.querySelector("select[name=agentId]").value;
   var statusId = document.querySelector("select[name=statusId]").value;
-  var paymentStatusId = document.querySelector("select[name=paymentStatusId]").value;
   var sectorId = document.querySelector("select[name=sectorId]").value;
 
   var creationRequest =
     request +
-    "preTax=" +
-    preTax +
+    "totalAmount=" +
+    totalAmount +
     "&clientId=" +
     clientId +
     "&sectorId=" +
     sectorId +
     "&statusId=" +
     statusId +
-    "&paymentStatusId=" +
-    paymentStatusId;
+    "&agentId=" +
+    agentId;
   finalRequest = creationRequest;
 
   var auxUrl = search_url;
@@ -173,7 +173,7 @@ function createOrder() {
   if (auxUrl[1].length > 0) {
     finalRequest = finalRequest + "&page=" + currentPageGlobal + "&" + auxUrl[1];
   } else {
-    finalRequest = finalRequest + "page=" + currentPageGlobal;
+    finalRequest = finalRequest + "&page=" + currentPageGlobal;
   }
 
   fetchRequest(finalRequest, "#createToast");
@@ -198,7 +198,7 @@ function showEditForm(event) {
     .then((orderToEdit) => {
       console.log("Selected order: ", orderToEdit);
       // Get order old atributes.
-      document.querySelector("input[name=preTaxEdited]").value = orderToEdit.preTax;
+      document.querySelector("input[name=totalAmountEdited]").value = orderToEdit.totalAmount;
       document.querySelector("select[name=clientIdEdited]").getElementsByTagName("option")[
         orderToEdit.client.id - 1
       ].selected = "selected";
@@ -206,8 +206,8 @@ function showEditForm(event) {
       document.querySelector("select[name=statusIdEdited]").getElementsByTagName("option")[
         orderToEdit.status.id - 1
       ].selected = "selected";
-      document.querySelector("select[name=paymentStatusIdEdited]").getElementsByTagName("option")[
-        orderToEdit.payment.id - 1
+      document.querySelector("select[name=agentIdEdited]").getElementsByTagName("option")[
+        orderToEdit.agent.id - 1
       ].selected = "selected";
       document.querySelector("select[name=sectorIdEdited]").getElementsByTagName("option")[
         orderToEdit.sector.id - 1
@@ -219,26 +219,25 @@ function editOrder() {
   // Request Definition.
   var request = server_url + "/api/order/add?id=" + selectedOrderRow + "&";
   var finalRequest;
-
   // Get order new atributes.
-  var preTax = document.querySelector("input[name=preTaxEdited]").value;
+  var totalAmount = document.querySelector("input[name=totalAmountEdited]").value;
   var clientId = document.querySelector("select[name=clientIdEdited]").value;
+  var agentId = document.querySelector("select[name=agentIdEdited]").value;
   var statusId = document.querySelector("select[name=statusIdEdited]").value;
-  var paymentStatusId = document.querySelector("select[name=paymentStatusIdEdited]").value;
   var sectorId = document.querySelector("select[name=sectorIdEdited]").value;
 
   var editRequest =
     request +
-    "preTax=" +
-    preTax +
+    "totalAmount=" +
+    totalAmount +
     "&clientId=" +
     clientId +
     "&sectorId=" +
     sectorId +
     "&statusId=" +
     statusId +
-    "&paymentStatusId=" +
-    paymentStatusId;
+    "&agentId=" +
+    agentId;
   finalRequest = editRequest;
 
   var auxUrl = search_url;
