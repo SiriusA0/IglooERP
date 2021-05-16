@@ -88,8 +88,12 @@ function fetchRequest(finalRequest, toast, globalSearch) {
         });
       }
     });
+  resetSelectedList();
 }
 ////////// Utilities //////////
+function resetSelectedList() {
+  selectedInvoicesIds = [];
+}
 function unHideCreationForm() {
   document.querySelector("#creationForm").style.display = "";
 }
@@ -337,8 +341,11 @@ function fillTable(invoices) {
     var selectionCol = document.createElement("td");
     var checkbox = document.createElement("input");
     checkbox.type = "checkbox";
+    checkbox.addEventListener("change", function (event) {
+      addToSelected(event);
+    });
     selectionCol.appendChild(checkbox);
-    row.appendChild(selectionCol);onchange="addToSelected(event)"
+    row.appendChild(selectionCol);
 
     //  ID Column
     var idCol = document.createElement("td");
