@@ -141,8 +141,17 @@ function createInvoice() {
     statusId +
     "&paymentStatusId=" +
     paymentStatusId;
-
   finalRequest = creationRequest;
+
+  var auxUrl = search_url;
+  auxUrl = auxUrl.split("?");
+
+  if (auxUrl[1].length > 0) {
+    finalRequest = finalRequest + "&page=" + currentPageGlobal + "&" + auxUrl[1];
+  } else {
+    finalRequest = finalRequest + "&page=" + currentPageGlobal;
+  }
+
   fetchRequest(finalRequest, "#createToast");
 
   clearCreationForm();
@@ -207,11 +216,18 @@ function editInvoice() {
     statusId +
     "&paymentStatusId=" +
     paymentStatusId;
-
   finalRequest = editRequest;
 
+  var auxUrl = search_url;
+  auxUrl = auxUrl.split("?");
+  if (auxUrl[1].length > 0) {
+    finalRequest = finalRequest + "&page=" + currentPageGlobal + "&" + auxUrl[1];
+  } else {
+    finalRequest = finalRequest + "&page=" + currentPageGlobal;
+  }
   // Fetch request.
-  fetchRequest(finalRequest, "#editToast");
+  console.log(finalRequest);
+  fetchRequest(finalRequest, "#editToast", false);
 
   clearEditForm();
   hideEditForm();
@@ -249,7 +265,7 @@ function getInvoices(action, sortTerm, sortMethod) {
 ///////////////////////////////////
 ////////// Method DELETE //////////
 function markForDelete(event) {
-  console.log("Selecting invoice")
+  console.log("Selecting invoice");
   var selectedInvoiceRow = event.currentTarget.closest("tr");
   selectedInvoiceId = selectedInvoiceRow.querySelector(".idIndicator").innerHTML;
   console.log("Selected order: " + selectedInvoiceId);
@@ -266,7 +282,7 @@ function deleteInvoice() {
     finalRequest = deleteRequest;
     var auxUrl = search_url;
     auxUrl = auxUrl.split("?");
-    console.log("AuxURL:" + auxUrl[1]);
+    
     if (auxUrl[1].length > 0) {
       finalRequest = finalRequest + "&page=" + currentPageGlobal + "&" + auxUrl[1];
     } else {
