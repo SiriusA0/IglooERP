@@ -39,8 +39,8 @@ public class ClientService {
 	        return clientadapter.of(clients);
 	    }
 	  
-	  /*
-	    public List<ClientResponse> searchClient(String action, String option, String term, Integer page) {
+	  
+	    public List<ClientResponse> search(String action, String option, String term, Integer page) {
 
 
 	        List<Client> clients = null;
@@ -63,7 +63,7 @@ public class ClientService {
 	        } else if (action.equals("search")) {
 	            if (option.equals("firstName") || option.equals("lastName") ) {
 	                Pageable pageable = PageRequest.of(page - 1, 6);
-	                clients = clientRepository.findByFirstNameContainingOrLastNameContaining(term, term);
+	                clients = clientRepository.findByFirstNameContainingOrLastNameContaining(term, term, pageable);
 	            }
 
 	        }
@@ -71,37 +71,30 @@ public class ClientService {
 	       
 	        return clientadapter.of(clients);
 	    }
-		*/
 
-    public List<ClientResponse> search(String searchTerm) {
-
-    	List<Client> clients = clientRepository.findByFirstNameContainingOrLastNameContaining(searchTerm, searchTerm);
-    	return clientadapter.of(clients);
-    }
-
-    public List<ClientResponse> ascLastName() {
-
-    	List<Client> clients = clientRepository.findAllByOrderByLastNameAsc();
-    	return clientadapter.of(clients);
-    }
-
-    public List<ClientResponse> descLastName() {
-
-    	List<Client> clients = clientRepository.findAllByOrderByLastNameDesc();
-    	return clientadapter.of(clients);
-    }
-
-    public List<ClientResponse> ascId() {
-
-    	List<Client> clients = clientRepository.findAllByOrderByIdAsc();
-    	return clientadapter.of(clients);
-    }
-
-    public List<ClientResponse> descId() {
-
-    	List<Client> clients = clientRepository.findAllByOrderByIdDesc();
-    	return clientadapter.of(clients);
-    }
+//    public List<ClientResponse> ascLastName() {
+//
+//    	List<Client> clients = clientRepository.findAllByOrderByLastNameAsc();
+//    	return clientadapter.of(clients);
+//    }
+//
+//    public List<ClientResponse> descLastName() {
+//
+//    	List<Client> clients = clientRepository.findAllByOrderByLastNameDesc();
+//    	return clientadapter.of(clients);
+//    }
+//
+//    public List<ClientResponse> ascId() {
+//
+//    	List<Client> clients = clientRepository.findAllByOrderByIdAsc();
+//    	return clientadapter.of(clients);
+//    }
+//
+//    public List<ClientResponse> descId() {
+//
+//    	List<Client> clients = clientRepository.findAllByOrderByIdDesc();
+//    	return clientadapter.of(clients);
+//    }
 
     public ClientResponse createClient(char type, String firstName, String lastName, String streetLine1, String streetLine2, Integer cityId, Integer regionId, Integer zipCode,
     		Integer countryId, String idNumber, String phoneNumber1, String phoneNumber2, String email, String web, String profilePic,Integer categoryId) {
