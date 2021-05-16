@@ -2,6 +2,10 @@ package com.igloo.client.service;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.igloo.category.service.CategoryRepository;
@@ -34,6 +38,40 @@ public class ClientService {
 	         
 	        return clientadapter.of(clients);
 	    }
+	  
+	  /*
+	    public List<ClientResponse> searchClient(String action, String option, String term, Integer page) {
+
+
+	        List<Client> clients = null;
+
+	        if (page == null) {
+	            page = 1;
+	        }
+
+	        if (action == null || action.isEmpty()) {
+	            Pageable pageable = PageRequest.of(page - 1, 6);
+	            Page<Client> lista = clientRepository.findAll(pageable);
+	            clients = lista.getContent();
+
+	        } else if (action.equals("sort")) {
+	            Sort.Direction direction = Sort.Direction.fromString(option);
+	            Sort sort = Sort.by(direction, term);
+	            Pageable pageable = PageRequest.of(page - 1, 6, sort);
+	            clients = clientRepository.findAll(pageable).getContent();
+
+	        } else if (action.equals("search")) {
+	            if (option.equals("firstName") || option.equals("lastName") ) {
+	                Pageable pageable = PageRequest.of(page - 1, 6);
+	                clients = clientRepository.findByFirstNameContainingOrLastNameContaining(term, term);
+	            }
+
+	        }
+
+	       
+	        return clientadapter.of(clients);
+	    }
+		*/
 
     public List<ClientResponse> search(String searchTerm) {
 
