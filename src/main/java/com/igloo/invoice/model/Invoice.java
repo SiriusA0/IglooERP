@@ -19,47 +19,45 @@ import com.igloo.sector.model.Sector;
 import com.igloo.status.model.Status;
 
 @Entity
-@Table(name="invoices")
+@Table(name = "invoices")
 public class Invoice {
-	
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    
-    @ManyToOne
-    @JoinColumn(name="client_id")
-    private Client client;
-    
-    @Column(name = "creation_date", columnDefinition = "DATE")
-    @DateTimeFormat(pattern = "yyyy/MM/dd")
-    private Date creationDate;
-    
-    @Column(name = "due_date", columnDefinition = "DATE")
-    @DateTimeFormat(pattern = "yyyy/MM/dd")
-    private Date dueDate;
-    
-    @Column(name = "pre_tax")
-    private Double preTax;
-    
-    @Column(name = "after_tax")
-    private Double afterTax;
-    
-    @ManyToOne
-    @JoinColumn(name="status_id")
-    private Status status;
-    
-    @ManyToOne
-    @JoinColumn(name="payment_status_id")
-    private Payment payment;
-    
-    @ManyToOne
-    @JoinColumn(name = "sector_id")
-    private Sector sector;
-    
-    
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+
+	@ManyToOne
+	@JoinColumn(name = "client_id")
+	private Client client;
+
+	@Column(name = "creation_date", columnDefinition = "DATE")
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private Date creationDate;
+
+	@Column(name = "due_date", columnDefinition = "DATE")
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private Date dueDate;
+
+	@Column(name = "pre_tax")
+	private Double preTax;
+
+	@Column(name = "after_tax")
+	private Double afterTax;
+
+	@ManyToOne
+	@JoinColumn(name = "status_id")
+	private Status status;
+
+	@ManyToOne
+	@JoinColumn(name = "payment_status_id")
+	private Payment payment;
+
+	@ManyToOne
+	@JoinColumn(name = "sector_id")
+	private Sector sector;
 
 	public Invoice() {
-	
+
 	}
 
 	public Invoice(Client client, Date creationDate, Date dueDate, Double preTax, Double afterTax, Status status,
@@ -73,7 +71,7 @@ public class Invoice {
 		this.payment = payment;
 		this.sector = sector;
 	}
-	
+
 	public Invoice(int id, Client client, Date creationDate, Date dueDate, Double preTax, Double afterTax,
 			Status status, Payment payment, Sector sector) {
 		super();
@@ -87,8 +85,6 @@ public class Invoice {
 		this.payment = payment;
 		this.sector = sector;
 	}
-
-
 
 	public int getId() {
 		return id;
@@ -161,7 +157,5 @@ public class Invoice {
 	public void setSector(Sector sector) {
 		this.sector = sector;
 	}
-    
-	
-    
+
 }

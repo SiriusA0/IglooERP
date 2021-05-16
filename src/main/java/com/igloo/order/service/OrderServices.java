@@ -36,6 +36,33 @@ public class OrderServices {
 	@Autowired
 	private SectorRepository sectorRepository;
 
+	public List<OrderResponse> createOrder(double totalAmount, Integer statusId, Integer agentId, Integer clientId,
+			Integer sectorId) {
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		Date date = calendar.getTime();
+
+		List<Order> orders = new LinkedList<>();
+		Order order = new Order();
+
+		order.setTotalAmount(totalAmount);
+		order.setCreationDate(date);
+		order.setStatus(statusRepository.findById(statusId).get());
+		order.setAgent(agentRepository.findById(agentId).get());
+		order.setClient(clientRepository.findById(clientId).get());
+		order.setSector(sectorRepository.findById(sectorId).get());
+
+		orderRepository.save(order);
+		orders.add(order);
+
+		return orderAdapter.of(orders);
+	}
+
 	public List<OrderResponse> search(String action, String option, String term, Integer page) {
 
 		List<Order> orders = null;
@@ -67,39 +94,6 @@ public class OrderServices {
 			}
 		}
 		return orderAdapter.of(orders);
-	}
-
-	public List<OrderResponse> createOrder(double totalAmount, Integer statusId, Integer agentId, Integer clientId,
-			Integer sectorId) {
-
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);
-		calendar.set(Calendar.MILLISECOND, 0);
-		Date date = calendar.getTime();
-
-		List<Order> orders = new LinkedList<>();
-		Order order = new Order();
-
-		order.setTotalAmount(totalAmount);
-		order.setCreationDate(date);
-		order.setStatus(statusRepository.findById(statusId).get());
-		order.setAgent(agentRepository.findById(agentId).get());
-		order.setClient(clientRepository.findById(clientId).get());
-		order.setSector(sectorRepository.findById(sectorId).get());
-
-		orderRepository.save(order);
-		orders.add(order);
-
-		return orderAdapter.of(orders);
-	}
-
-	public List<OrderResponse> getAll() {
-
-		return orderAdapter.of(orderRepository.findAll());
-
 	}
 
 	public void deleteOrder(String idtodelete) {

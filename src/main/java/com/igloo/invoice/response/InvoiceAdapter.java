@@ -19,49 +19,47 @@ import com.igloo.sector.response.SectorAdapter;
 @Component
 public class InvoiceAdapter {
 
-    @Autowired
-    ClientAdapter clientAdapter;
-    @Autowired
-    PaymentAdapter paymentAdapter;
-    @Autowired
-    SectorAdapter sectorAdapter;
-    @Autowired
-    StatusAdapter statusAdapter;
+	@Autowired
+	ClientAdapter clientAdapter;
+	@Autowired
+	PaymentAdapter paymentAdapter;
+	@Autowired
+	SectorAdapter sectorAdapter;
+	@Autowired
+	StatusAdapter statusAdapter;
 
-    public InvoiceResponse of(Invoice invoice) {
-        InvoiceResponse response = new InvoiceResponse();
+	public InvoiceResponse of(Invoice invoice) {
+		InvoiceResponse response = new InvoiceResponse();
 
-        response.setId(invoice.getId());
-        Client client = invoice.getClient();
-        response.setClient(clientAdapter.of(client));
-        
-        
-       response.setCreationDate(invoice.getCreationDate().toString().split(" ")[0]);
-       response.setDueDate(invoice.getDueDate().toString().split(" ")[0]);
-        
-        double preTax = Math.round(invoice.getPreTax()*100.0)/100.0;
-        response.setPreTax(preTax);
-        
-        double afterTax = Math.round(invoice.getAfterTax()*100.0)/100.0;
-        response.setAfterTax(afterTax);
-       
-       
-        Status status = invoice.getStatus();
-        response.setStatus(statusAdapter.of(status));
-        Payment payment = invoice.getPayment();
-        response.setPayment(paymentAdapter.of(payment));
-        Sector sector = invoice.getSector();
-        response.setSector(sectorAdapter.of(sector));
+		response.setId(invoice.getId());
+		Client client = invoice.getClient();
+		response.setClient(clientAdapter.of(client));
 
-        return response;
-    }
+		response.setCreationDate(invoice.getCreationDate().toString().split(" ")[0]);
+		response.setDueDate(invoice.getDueDate().toString().split(" ")[0]);
 
-    public List<InvoiceResponse> of(List<Invoice> invoices) {
+		double preTax = Math.round(invoice.getPreTax() * 100.0) / 100.0;
+		response.setPreTax(preTax);
 
-        List<InvoiceResponse> responses = new ArrayList<>();
-        for (Invoice invoice : invoices) {
-            responses.add(of(invoice));
-        }
-        return responses;
-    }
+		double afterTax = Math.round(invoice.getAfterTax() * 100.0) / 100.0;
+		response.setAfterTax(afterTax);
+
+		Status status = invoice.getStatus();
+		response.setStatus(statusAdapter.of(status));
+		Payment payment = invoice.getPayment();
+		response.setPayment(paymentAdapter.of(payment));
+		Sector sector = invoice.getSector();
+		response.setSector(sectorAdapter.of(sector));
+
+		return response;
+	}
+
+	public List<InvoiceResponse> of(List<Invoice> invoices) {
+
+		List<InvoiceResponse> responses = new ArrayList<>();
+		for (Invoice invoice : invoices) {
+			responses.add(of(invoice));
+		}
+		return responses;
+	}
 }

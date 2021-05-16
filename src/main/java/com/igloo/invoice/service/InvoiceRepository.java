@@ -7,9 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.igloo.invoice.model.Invoice;
-import com.igloo.order.model.Order;
-
-
 
 @Repository
 public interface InvoiceRepository extends JpaRepository<Invoice, Integer> {
@@ -17,8 +14,4 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Integer> {
 	List<Invoice> findByClientFirstNameContainingOrClientLastNameContaining(String term, String term2,
 			Pageable pageable);
 
-
-
 }
-
-
