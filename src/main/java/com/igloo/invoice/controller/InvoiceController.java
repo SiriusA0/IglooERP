@@ -65,7 +65,8 @@ public class InvoiceController {
     @ResponseBody
     public List<InvoiceResponse> add_API(@RequestParam(required = false) Integer id, @RequestParam Integer clientId, /*@RequestParam Date dueDate,*/
                                          @RequestParam double preTax, @RequestParam Integer statusId, @RequestParam Integer paymentStatusId,
-                                         @RequestParam Integer sectorId) {
+                                         @RequestParam Integer sectorId, @RequestParam(required = false) String action, @RequestParam(required = false) String option,
+								         @RequestParam(required = false) String term, @RequestParam(required = false) Integer page) {
 
         if (id == null) {
             invoiceService.createInvoice(clientId, null /*dueDate*//*TODO*/, preTax, statusId, paymentStatusId, sectorId);
@@ -75,7 +76,7 @@ public class InvoiceController {
         }
 
 
-        return invoiceService.getAll();
+        return invoiceService.search(action, option, term, page);
     }
 
     @GetMapping("/api/invoice/delete")
