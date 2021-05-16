@@ -44,20 +44,9 @@ public class UserService {
 
     public boolean logUserIn(String userName, String password) {
 
-    	/*
-        List<User> user = userRepository.findByUserName(userName);
-        
-        if (user.contains(password)) {
-            System.out.println("Login Success - User: " + userName + " - Password: " + password);
-            return true;
-        }else {
-        	
-        	return false;
-        }
-        */
     	
     	User user = userRepository.findByUserName(userName);
-		if(user.getUserName().contains(userName) && user.getPassword().contains(password)  ) {
+		if(user.getPassword().equals(password)  ) {
 			return true;
 		}
 
