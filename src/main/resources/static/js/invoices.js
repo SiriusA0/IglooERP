@@ -3,9 +3,22 @@ $(".toast").toast();
 ////////// Server URL //////////
 var server_url = "http://localhost:8080";
 var search_url = server_url + "/api/invoice/get?";
+////////// Global VARs //////////
 var currentPageGlobal = 1; // Current invoices page
 var selectedInvoiceId; // Selected invoice
 var selectedInvoicesIds = []; // Selected invoices array
+var selectedId; // Used on edit method
+////////// Selection ///////////
+function addToSelected(event) {
+  var row = event.currentTarget.closest("tr");
+  var id = row.querySelector(".idIndicator").innerHTML;
+  if (selectedInvoicesIds.includes(id)) {
+    selectedInvoicesIds.splice(selectedInvoicesIds.indexOf(id), 1);
+  } else {
+    selectedInvoicesIds.push(id);
+  }
+  console.log(selectedInvoicesIds);
+}
 ////////// Pagination //////////
 function nextPage() {
   var finalRequest = "";
@@ -160,7 +173,6 @@ function createInvoice() {
 }
 ///////////////////////////////
 ////////// EDIT form //////////
-var selectedId;
 function showEditForm(event) {
   hideCreationForm();
   hideEditForm();
@@ -302,6 +314,21 @@ function deleteInvoice() {
 ///////////////////////////////////////
 ////////// Method Fill Table //////////
 function fillTable(invoices) {
+  if (invoices.length == 0) {
+    currentPageGlobal = currentPageGlobal - 1;
+    document.querySelector("#nextPage").disabled = true;
+
+    var afterTableContainer = document.querySelector("#afterTableContainer");
+    var noMoreResultAlert = document.createElement("div");
+    noMoreResultAlert.className = "alert alert-dark";
+    noMoreResultAlert.role = "alert alert";
+    noMoreResultAlert.innerHTML = "No more results to show";
+    afterTableContainer.appendChild(noMoreResultAlert);
+  } else {
+    var afterTableContainer = document.querySelector("#afterTableContainer");
+    afterTableContainer.innerHTML = "";
+    document.querySelector("#nextPage").disabled = false;
+  }
   for (i in invoices) {
     // Row
     var row = document.createElement("tr");
@@ -311,7 +338,7 @@ function fillTable(invoices) {
     var checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     selectionCol.appendChild(checkbox);
-    row.appendChild(selectionCol);
+    row.appendChild(selectionCol);onchange="addToSelected(event)"
 
     //  ID Column
     var idCol = document.createElement("td");
@@ -373,7 +400,6 @@ function fillTable(invoices) {
     var buttogroup = document.createElement("div");
     buttogroup.className = "btn-group";
     buttogroup.role = "group";
-    var modal = document.createElement("div");
 
     var favbutton = document.createElement("button");
     favbutton.type = "button";
