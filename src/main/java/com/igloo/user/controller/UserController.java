@@ -29,7 +29,9 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public String register() {
+    public String register(Model model, @RequestParam(required = false) Boolean error) {
+    	
+    	model.addAttribute("error", error);
         return "user/signup";
     }
 
@@ -58,8 +60,8 @@ public class UserController {
         		
         	}else {
         		
-        		model.addAttribute("error", error);
-    			return "redirect:/register";
+        		
+    			return "redirect:/register?error=false";
         	}
  
     }
