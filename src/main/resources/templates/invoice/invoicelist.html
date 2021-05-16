@@ -85,7 +85,7 @@
               <div class="col">
                 <div class="input-group">
                   <input
-                    onkeyup="getInvoices('searchClient',null,null)"
+                    onkeyup="getInvoices('searchClient',null,null,true)"
                     type="text"
                     id="searchTerm"
                     class="form-control search filterText"
@@ -99,7 +99,7 @@
                 <button
                   type="button"
                   name="searchTerm"
-                  onclick="getInvoices('searchClient',null,null)"
+                  onclick="getInvoices('searchClient',null,null,true)"
                   class="btn btn-sm btn-search filterText"
                 >
                   Search
@@ -319,7 +319,6 @@
                     <th scope="col">Due date</th>
                     <th scope="col">Sectors</th>
                     <th scope="col">Client</th>
-
                     <th scope="col">Pre tax</th>
                     <th scope="col">Total</th>
                     <th scope="col">Status</th>
@@ -329,7 +328,7 @@
                 </thead>
                 <tbody id="invoiceList">
                   <tr th:each="invoice : ${invoices}">
-                    <td><input type="checkbox" /></td>
+                    <td><input type="checkbox" onchange="addToSelected(event)" /></td>
                     <td class="filterTextDark idIndicator" th:text="${invoice.id}" scope="row">REF0000</td>
                     <td class="filterTextDark" th:text="${invoice.creationDate}">2021/5/20</td>
                     <td class="filterTextDark" th:text="${invoice.dueDate}">2021/5/21</td>
@@ -364,13 +363,16 @@
                   </tr>
                 </tbody>
               </table>
+              <div id="afterTableContainer">
+
+              </div>
             </div>
           </div>
           <!-- Pagination INI -->
           <nav>
             <ul class="pagination justify-content-center" id="paginationControls">
               <li class="page-item">
-                <button onclick="prevPage(event)" class="page-link" aria-label="Previous">
+                <button id="prevPage" onclick="prevPage(event)" class="page-link" aria-label="Previous">
                   <span aria-hidden="true">&laquo;</span>
                 </button>
               </li>
@@ -378,7 +380,7 @@
                 <a style="color: #59bec9" id="currentPageItem" class="page-link">1</a>
               </li>
               <li class="page-item">
-                <button onclick="nextPage(event)" class="page-link" aria-label="Next">
+                <button id="nextPage" onclick="nextPage(event)" class="page-link" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>
                 </button>
               </li>
