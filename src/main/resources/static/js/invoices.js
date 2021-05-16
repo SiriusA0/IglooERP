@@ -5,9 +5,9 @@ var server_url = "http://localhost:8080";
 var search_url = server_url + "/api/invoice/get?";
 var currentPageGlobal = 1; // Current invoices page
 var selectedInvoiceId; // Selected invoice
-var selectedInvoicesIds; // Selected invoices array
+var selectedInvoicesIds = []; // Selected invoices array
 ////////// Pagination //////////
-function nextPage(event) {
+function nextPage() {
   var finalRequest = "";
   currentPage = parseInt(currentPageGlobal);
   if (currentPage > 0) {
@@ -26,7 +26,7 @@ function nextPage(event) {
     updatePages(nextPage);
   }
 }
-function prevPage(event) {
+function prevPage() {
   var finalRequest = "";
   currentPage = parseInt(currentPageGlobal);
   if (currentPage > 0) {
@@ -78,16 +78,16 @@ function fetchRequest(finalRequest, toast, globalSearch) {
 }
 ////////// Utilities //////////
 function unHideCreationForm() {
-  document.querySelector("#invoiceCreationForm").style.display = "";
+  document.querySelector("#creationForm").style.display = "";
 }
 function hideCreationForm() {
-  document.querySelector("#invoiceCreationForm").style.display = "none";
+  document.querySelector("#creationForm").style.display = "none";
 }
 function unHideEditForm() {
-  document.querySelector("#invoiceEditForm").style.display = "";
+  document.querySelector("#editForm").style.display = "";
 }
 function hideEditForm() {
-  document.querySelector("#invoiceEditForm").style.display = "none";
+  document.querySelector("#editForm").style.display = "none";
 }
 function clearEditForm() {
   document.querySelector("input[name=preTaxEdited]").value = "";
@@ -110,7 +110,7 @@ function cleanTable() {
 ////////// CREATE form //////////
 function showCreateForm() {
   hideEditForm();
-  if (document.querySelector("#invoiceCreationForm").style.display == "none") {
+  if (document.querySelector("#creationForm").style.display == "none") {
     unHideCreationForm();
   } else {
     hideCreationForm();
