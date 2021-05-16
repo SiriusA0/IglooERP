@@ -2,6 +2,7 @@
 $(".toast").toast();
 // Server
 var server_url = "http://localhost:8080/";
+var search_url = server_url + "/api/client/get?";
 ////////// Global VARs //////////
 var currentPageGlobal = 1; // Current invoices page
 
@@ -55,7 +56,7 @@ function updatePages(currentPage) {
   pageIndicators.querySelector("#currentPageItem").style.color = "#59bec9";
 }
 ////////// Fetch //////////
-function fetchRequest(finalRequest, toast, globalSearch) {
+function fetchRequest(finalRequest, globalSearch) { //toast
   if (globalSearch) {
     search_url = finalRequest;
     console.log("Search url:" + search_url);
@@ -99,13 +100,13 @@ function addClient() {
 ////////////////////////////////////// Create Client //////////////////////////////////////
 function createClient() {
   // Getting the values of the form.
-  var type = document.querySelector("input[name=typeOfClient").value;
-  var clientName = document.querySelector("input[name=clientName").value;
+  var type = document.querySelector("input[name=typeOfClient]").value;
+  var clientName = document.querySelector("input[name=clientName]").value;
   clientName = clientName.split(" ");
   var firstName = clientName[0];
   var lastName = clientName[1];
-  var streetLine1 = document.querySelector("input[name=companyAdress1").value;
-  var streetLine2 = document.querySelector("input[name=companyAdress2").value;
+  var streetLine1 = document.querySelector("input[name=companyAdress1]").value;
+  var streetLine2 = document.querySelector("input[name=companyAdress2]").value;
   var phoneNumber1 = document.querySelector("input[name=phoneNumber1]").value;
   var phoneNumber2 = document.querySelector("input[name=phoneNumber2]").value;
   var cityId = document.querySelector("select[name=city]").value;
@@ -190,11 +191,14 @@ function createClient() {
     .then((r) => r.json())
     .then((newClient) => {
       console.log("Added client: ", newClient);
+      cleanList();
+      fillList(newClient);
       $(document).ready(function () {
         {
           $("#createToast").toast("show");
         }});
     });
+    document.querySelector("#clientForm").style.display="none";
 
 
 
@@ -340,22 +344,6 @@ function deleteInvoice() {
     selectedInvoiceId = null;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ////////////////////////////////////// Clean Client //////////////////////////////////////
 function cleanList(event) {

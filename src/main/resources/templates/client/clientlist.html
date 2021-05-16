@@ -180,7 +180,7 @@
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="getClients('sort', 'lastName', 'asc',true)"
+                onclick="getClients('sort', 'lastName', 'desc',true)"
                 id="lastNameClientDesc"
                 type="button"
                 class="fas fa-sort-alpha-down-alt filterIcons"
@@ -223,7 +223,7 @@
         </div>
         <div
           class="col-10"
-          style="overflow: auto; height: 1000px; width: fit-content"
+          style=" height: 1000px; width: fit-content"
         >
           <div
             class="row createForm mt-5 ml-5 mr-5"
@@ -247,6 +247,7 @@
                         id="individualOption"
                         value="I"
                         checked
+                        required
                       />
                       <label class="form-check-label" for="individualOption">
                         Individual
@@ -259,6 +260,7 @@
                         name="typeOfClient"
                         id="companyOption"
                         value="C"
+                        required
                       />
                       <label class="form-check-label" for="companyOption">
                         Company
@@ -270,6 +272,7 @@
                       id="clientName"
                       type="text"
                       class="mt-3 mb-4 newClientFormInput inputBox form-control"
+                      required
                     />
                   </div>
                   <div class="col-sm-8 d-flex justify-content-end"></div>
@@ -284,6 +287,7 @@
                       type="text"
                       class="newClientFormInput inputBox form-control"
                       placeholder="Street"
+                      required
                     />
                   </div>
                   <label for="phoneNumber1" class="col-sm-2 col-form-label"
@@ -295,6 +299,7 @@
                       type="tel"
                       class="newClientFormInput inputBox form-control"
                       placeholder="999999999"
+                      required
                     />
                   </div>
                 </div>
@@ -310,6 +315,7 @@
                       type="text"
                       class="newClientFormInput inputBox form-control"
                       placeholder="Street 2"
+                      required
                     />
                   </div>
                   <label for="phoneNumber2" class="col-sm-2 col-form-label"
@@ -321,6 +327,7 @@
                       type="tel"
                       class="newClientFormInput inputBox form-control"
                       placeholder="666666666"
+                      required
                     />
                   </div>
                 </div>
@@ -383,6 +390,7 @@
                       type="text"
                       class="newClientFormInput inputBox form-control"
                       placeholder="ZIP"
+                      required
                     />
                   </div>
                   <label for="email" class="col-sm-2 col-form-label"
@@ -394,6 +402,7 @@
                       type="email"
                       class="newClientFormInput inputBox form-control"
                       placeholder="example@erp.com"
+                      required
                     />
                   </div>
                 </div>
@@ -419,6 +428,7 @@
                       type="url"
                       class="newClientFormInput inputBox form-control"
                       placeholder="www.example.com"
+                      required
                     />
                   </div>
                 </div>
@@ -433,6 +443,7 @@
                       type="text"
                       class="newClientFormInput inputBox form-control"
                       placeholder="00000000X or X0000000"
+                      required
                     />
                   </div>
                   <label for="category" class="col-sm-2 col-form-label"
@@ -462,6 +473,7 @@
                       type="text"
                       class="newClientFormInput inputBox form-control"
                       placeholder="https://robohash.org/helloworld.png?size=200x200&set=set2"
+                      required
                     />
                   </div>
                 </div>
@@ -476,14 +488,14 @@
                       <b>Create Client</b>
                     </button>
                   </div>
-                  <div
+                  <!-- <div
                     class="col-11 alert alert-info"
                     role="alert"
                     style="display: none"
                     id="successAlert"
                   >
                     Client successfully added
-                  </div>
+                  </div> -->
                 </div>
               </form>
             </div>
@@ -525,29 +537,30 @@
               </div>
             </div>
             </div>
+            <!-- Pagination INI -->
+          <nav>
+            <ul class="pagination justify-content-center" id="paginationControls">
+              <li class="page-item">
+                <button onclick="prevPage(event)" class="page-link" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </button>
+              </li>
+              <li class="page-item">
+                <a style="color: #59bec9" id="currentPageItem" class="page-link">1</a>
+              </li>
+              <li class="page-item">
+                <button onclick="nextPage(event)" class="page-link" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </button>
+              </li>
+            </ul>
+          </nav>
+<!-- Pagination END --> 
           </div>
         </div>
       </div>
     </div>
-    <!-- Pagination INI -->
-    <nav>
-      <ul class="pagination justify-content-center" id="paginationControls">
-        <li class="page-item">
-          <button onclick="prevPage(event)" class="page-link" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </button>
-        </li>
-        <li class="page-item">
-          <a style="color: #59bec9" id="currentPageItem" class="page-link">1</a>
-        </li>
-        <li class="page-item">
-          <button onclick="nextPage(event)" class="page-link" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </button>
-        </li>
-      </ul>
-    </nav>
-    <!-- Pagination END -->
+    
       <!-- Toast -->
       <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0">
         <div id="createToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
