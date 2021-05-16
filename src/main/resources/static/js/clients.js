@@ -1,14 +1,90 @@
+/* Coded with love by Igloo team. */
+$(".toast").toast();
 // Server
 var server_url = "http://localhost:8080/";
+////////// Global VARs //////////
+var currentPageGlobal = 1; // Current invoices page
+
+////////// Pagination //////////
+function nextPage() {
+  var finalRequest = "";
+  currentPage = parseInt(currentPageGlobal);
+  if (currentPage > 0) {
+    var nextPage = currentPage + 1;
+    if (search_url.indexOf("&") != -1) {
+      search_url = search_url.split("&page")[0];
+      var auxUrl = search_url;
+      finalRequest = auxUrl + "&page=" + nextPage;
+    } else {
+      search_url = search_url.split("page")[0];
+      var auxUrl = search_url;
+      finalRequest = auxUrl + "page=" + nextPage;
+    }
+    fetchRequest(finalRequest, null);
+    currentPageGlobal = nextPage;
+    updatePages(nextPage);
+  }
+}
+function prevPage() {
+  var finalRequest = "";
+  currentPage = parseInt(currentPageGlobal);
+  if (currentPage > 0) {
+    var prevPage = currentPage - 1;
+    if (prevPage < 1) {
+      var prevPage = currentPage;
+    }
+    if (search_url.indexOf("&") != -1) {
+      search_url = search_url.split("&page")[0];
+      var auxUrl = search_url;
+      finalRequest = auxUrl + "&page=" + prevPage;
+    } else {
+      search_url = search_url.split("page")[0];
+      var auxUrl = search_url;
+      finalRequest = auxUrl + "page=" + prevPage;
+    }
+    fetchRequest(finalRequest, null);
+    currentPageGlobal = prevPage;
+    updatePages(prevPage);
+  }
+}
+
+function updatePages(currentPage) {
+  currentPageInt = parseInt(currentPage);
+  var pageIndicators = document.querySelector("#paginationControls");
+  pageIndicators.querySelector("#currentPageItem").innerHTML = currentPageInt;
+  pageIndicators.querySelector("#currentPageItem").style.color = "#59bec9";
+}
+////////// Fetch //////////
+function fetchRequest(finalRequest, toast, globalSearch) {
+  if (globalSearch) {
+    search_url = finalRequest;
+    console.log("Search url:" + search_url);
+  }
+  console.log("Fetch request to: " + finalRequest);
+  fetch(finalRequest)
+    .then((r) => r.json())
+    .then((clients) => {
+      cleanList();
+      fillList(clients);
+    /*   if (toast != null) {
+        $(document).ready(function () {
+          {
+            $(toast).toast("show");
+          } 
+        });
+      }*/
+    });
+  //resetSelectedList();
+}
 ////////////////////////////////////// Load all clients //////////////////////////////////////
-function showClients() {
+/* function showClients() {
   fetch("http://localhost:8080/api/client/show")
     .then((r) => r.json())
     .then((clients) => {
       cleanList();
       fillList(clients);
     });
-}
+} */
 
 ////////////////////////////////////// Show client form //////////////////////////////////////
 function addClient() {
@@ -114,7 +190,14 @@ function createClient() {
     .then((r) => r.json())
     .then((newClient) => {
       console.log("Added client: ", newClient);
+      $(document).ready(function () {
+        {
+          $("#createToast").toast("show");
+        }});
     });
+
+
+
 }
 ////////////////////////////////////// Selection //////////////////////////////////////
 var clientsSelected = [];
@@ -175,6 +258,8 @@ function deleteClient(){
       
     });
 
+
+
 }
 
 /////////////////////////////Edit Client ////////////////////////////
@@ -185,64 +270,93 @@ function editClient(){
 
   
 }
-////////////////////////////////////// Search Client //////////////////////////////////////
-function searchClient() {
-  var searchTerm = document.querySelector("#searchTerm").value;
-  var urlFinal = server_url + "/api/client/search?" + getQueryVars(searchTerm);
+////////////////////////////////////// Get Client //////////////////////////////////////
 
-  fetch(urlFinal)
-    .then((r) => r.json())
-    .then((clients) => {
-      cleanList();
-      fillList(clients);
-    });
-}
-// Query Vars
-function getQueryVars(searchTerm) {
-  return "searchTerm=" + searchTerm;
-}
-////////////////////////////////////// Order by Last Name //////////////////////////////////////
-function lastNameClientAsc() {
-  var urlFinal = server_url + "/api/client/orderbylastnameasc";
+function getClients(action, sortTerm, sortMethod, resetPage) {
+  if (resetPage) {
+    currentPageGlobal = 1;
+    let currentPage = currentPageGlobal;
+    updatePages(currentPage);
+  }
+  // Request Definition.
+  var request = server_url + "/api/client/get";
+  var finalRequest;
+  // Action selector
+  switch (action) {
+    case "sort": // Sort request
+      // Sort Definition.
+      sortRequest = request + "?action=sort&";
+      // Request Parameters.
+      finalRequest = sortRequest + "option=" + sortMethod + "&" + "term=" + sortTerm;
+      break;
 
-  fetch(urlFinal)
-    .then((r) => r.json())
-    .then((clients) => {
-      cleanList();
-      fillList(clients);
-    });
-}
-function lastNameClientDesc() {
-  var urlFinal = server_url + "/api/client/orderbylastnamedesc";
+    case "searchClient": // Search by request client
+      // Search Definition.
+      var searchRequest = request + "?action=search&";
+      // Request Parameter.
+      var searchTerm = document.querySelector("#searchTerm").value;
+      finalRequest = searchRequest + "option=client&term=" + searchTerm;
+      break;
 
-  fetch(urlFinal)
-    .then((r) => r.json())
-    .then((clients) => {
-      cleanList();
-      fillList(clients);
-    });
+    default:
+      // Simple get all request
+      finalRequest = request;
+  }
+  // Fetch request.
+  console.log(finalRequest);
+  fetchRequest(finalRequest, null, true);
 }
-////////////////////////////////////// Order by ID //////////////////////////////////////
-function idClientAsc() {
-  var urlFinal = server_url + "/api/client/orderbyidasc";
 
-  fetch(urlFinal)
-    .then((r) => r.json())
-    .then((clients) => {
-      cleanList();
-      fillList(clients);
-    });
-}
-function idClientDesc() {
-  var urlFinal = server_url + "/api/client/orderbyiddesc";
 
-  fetch(urlFinal)
-    .then((r) => r.json())
-    .then((clients) => {
-      cleanList();
-      fillList(clients);
-    });
+
+///////////////////////////////////
+////////// Method DELETE //////////
+function markForDelete(event) {
+  console.log("Selecting invoice");
+  var selectedInvoiceRow = event.currentTarget.closest("tr");
+  selectedInvoiceId = selectedInvoiceRow.querySelector(".idIndicator").innerHTML;
+  console.log("Selected order: " + selectedInvoiceId);
 }
+function deleteInvoice() {
+  if (selectedInvoiceId == null) {
+    console.log("Error");
+  } else {
+    // Request Definition.
+    var request = server_url + "/api/invoice/delete?";
+    var finalRequest = "";
+    // Find selected Invoice ID
+    var deleteRequest = request + "id=" + selectedInvoiceId;
+    finalRequest = deleteRequest;
+    var auxUrl = search_url;
+    auxUrl = auxUrl.split("?");
+
+    if (auxUrl[1].length > 0) {
+      finalRequest = finalRequest + "&page=" + currentPageGlobal + "&" + auxUrl[1];
+    } else {
+      finalRequest = finalRequest + "&page=" + currentPageGlobal;
+    }
+    console.log(finalRequest);
+    fetchRequest(finalRequest, "#deleteToast", false);
+    selectedInvoiceId = null;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ////////////////////////////////////// Clean Client //////////////////////////////////////
 function cleanList(event) {
   document.querySelector("#clientsContainer").innerHTML = "";

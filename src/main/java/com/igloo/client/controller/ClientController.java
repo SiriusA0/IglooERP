@@ -28,7 +28,7 @@ public class ClientController {
     @GetMapping("/client")
     public String readAgent(Model model) {
 
-        List<ClientResponse> clients = clientService.get();
+        List<ClientResponse> clients = clientService.search(null,null,null,1);
 
         model.addAttribute("clients", clients);
 

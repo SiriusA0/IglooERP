@@ -1,5 +1,6 @@
 package com.igloo.client.service;
 
+import java.util.LinkedList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -43,7 +44,7 @@ public class ClientService {
 	    public List<ClientResponse> search(String action, String option, String term, Integer page) {
 
 
-	        List<Client> clients = null;
+	        List<Client> clients = new LinkedList<>();
 
 	        if (page == null) {
 	            page = 1;
@@ -61,7 +62,7 @@ public class ClientService {
 	            clients = clientRepository.findAll(pageable).getContent();
 
 	        } else if (action.equals("search")) {
-	            if (option.equals("firstName") || option.equals("lastName") ) {
+	            if (option.equals("client")) {
 	                Pageable pageable = PageRequest.of(page - 1, 6);
 	                clients = clientRepository.findByFirstNameContainingOrLastNameContaining(term, term, pageable);
 	            }

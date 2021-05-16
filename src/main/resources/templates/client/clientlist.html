@@ -27,7 +27,7 @@
       rel="stylesheet"
     />
   </head>
-  <body class="bg_igloo" style="height: 100%; overflow: hidden">
+  <body class="bg_igloo" style="height: 100%">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="/home"><i class="fas fa-igloo"></i></a>
       <button
@@ -103,7 +103,7 @@
             <div class="col">
               <div class="input-group">
                 <input
-                  onkeyup="searchClient()"
+                  onkeyup="getClients('searchClient',null,null,true)"
                   type="text"
                   id="searchTerm"
                   class="form-control search filterText"
@@ -117,7 +117,7 @@
               <button
                 type="button"
                 name="searchTerm"
-                onclick="searchClient()"
+                onclick="getClients('searchClient',null,null,true)"
                 class="btn btn-sm btn-search filterText"
               >
                 Search
@@ -135,7 +135,7 @@
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="idClientAsc()"
+                onclick="getClients('sort', 'id', 'asc',true)"
                 id="idClientAsc"
                 type="button"
                 class="fas fa-sort-numeric-up-alt filterIcons"
@@ -150,7 +150,7 @@
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="idClientDesc()"
+                onclick="getClients('sort', 'id', 'desc',true)"
                 id="idClientDesc"
                 type="button"
                 class="fas fa-sort-numeric-down-alt filterIcons"
@@ -165,7 +165,7 @@
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="lastNameClientAsc()"
+                onclick="getClients('sort', 'lastName', 'asc',true)"
                 id="lastNameClientAsc"
                 type="button"
                 class="fas fa-sort-alpha-up-alt filterIcons"
@@ -180,7 +180,7 @@
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
               <i
-                onclick="lastNameClientDesc()"
+                onclick="getClients('sort', 'lastName', 'asc',true)"
                 id="lastNameClientDesc"
                 type="button"
                 class="fas fa-sort-alpha-down-alt filterIcons"
@@ -492,7 +492,6 @@
             class="row row-cols-md-2 m-2 "  
             id="clientsContainer"
           ><!-- (linea 491)row-cols-md-2 mb-5 ------ style="max-width: 1080px;" -->
-
             <div th:each="client:${clients}" style="max-width: 540px;" class="card mb-3" >
               <div class="row">
                 <div class="col-md-4">
@@ -530,6 +529,72 @@
         </div>
       </div>
     </div>
+    <!-- Pagination INI -->
+    <nav>
+      <ul class="pagination justify-content-center" id="paginationControls">
+        <li class="page-item">
+          <button onclick="prevPage(event)" class="page-link" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </button>
+        </li>
+        <li class="page-item">
+          <a style="color: #59bec9" id="currentPageItem" class="page-link">1</a>
+        </li>
+        <li class="page-item">
+          <button onclick="nextPage(event)" class="page-link" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+    <!-- Pagination END -->
+      <!-- Toast -->
+      <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0">
+        <div id="createToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+          <div class="toast-header">
+            <strong class="mr-auto">Igloo</strong>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="toast-body">The client was successfully created.</div>
+        </div>
+      </div>
+      <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0">
+        <div id="deleteToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+          <div class="toast-header">
+            <strong class="mr-auto">Igloo</strong>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="toast-body">The client was successfully deleted.</div>
+        </div>
+      </div>
+      <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0">
+        <div id="deleteToastFail" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+          <div class="toast-header">
+            <strong class="mr-auto">Igloo</strong>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="toast-body">This client can not be deleted because it has open orders</div>
+        </div>
+      </div>
+      <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0">
+        <div id="editToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+          <div class="toast-header">
+            <strong class="mr-auto">Igloo</strong>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="toast-body">The client was successfully edited.</div>
+        </div>
+      </div>
+      <!-- Toast end -->
+    <!-- Modal -->
     <div
       class="modal fade"
       id="deleteModal"
@@ -556,5 +621,6 @@
         </div>
       </div>
     </div>
+    <!-- Modal End -->
   </body>
 </html>

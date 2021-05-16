@@ -249,8 +249,8 @@ fetch(urlFinal)
         .then(r => r.json())
         .then(newsector => {
             console.log("Added sector: " + newsector.name);
-            cleanTable("sectorTable");
-            fillTable(newsector , "sector", "sectorTable", "Sector Name");
+            /* cleanTable("sectorTable");
+            fillTable(newsector , "sector", "sectorTable", "Sector Name"); */
             $(document).ready(function () {
               {
                 $("#createStatus").toast("show");
