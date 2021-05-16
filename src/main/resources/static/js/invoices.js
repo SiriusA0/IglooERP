@@ -17,7 +17,13 @@ function addToSelected(event) {
   } else {
     selectedInvoicesIds.push(id);
   }
-  console.log(selectedInvoicesIds);
+  if (selectedInvoicesIds.length > 0) {
+    document.querySelector("#batchDeleteButton").disabled = false;
+    document.querySelector("#batchDeleteButton").className = "btn btn-add btn-lg btn-block filterText ";
+  } else {
+    document.querySelector("#batchDeleteButton").disabled = true;
+    document.querySelector("#batchDeleteButton").className = "btn btn-del btn-lg btn-block filterText ";
+  }
 }
 ////////// Pagination //////////
 function nextPage() {
@@ -315,6 +321,33 @@ function deleteInvoice() {
     selectedInvoiceId = null;
   }
 }
+/////////////////////////////////////////
+////////// Method Batch DELETE //////////
+function batchDelete() {
+  if (selectedInvoicesIds.length > 0) {
+    // Request Definition.
+    var request = server_url + "/api/invoice/delete?";
+    var finalRequest = "";
+
+    // Find selected Invoice ID
+    var deleteRequest = request + "id=" + selectedInvoicesIds.join(",");
+    finalRequest = deleteRequest;
+    var auxUrl = search_url;
+    auxUrl = auxUrl.split("?");
+
+    if (auxUrl[1].length > 0) {
+      finalRequest = finalRequest + "&page=" + currentPageGlobal + "&" + auxUrl[1];
+    } else {
+      finalRequest = finalRequest + "&page=" + currentPageGlobal;
+    }
+    console.log("Batch delete " + finalRequest);
+    fetchRequest(finalRequest, "#deleteToast", false);
+    selectedInvoicesIds = [];
+    document.querySelector("#batchDeleteButton").disabled = true;
+    document.querySelector("#batchDeleteButton").className = "btn btn-del btn-lg btn-block filterText ";
+  }
+}
+
 ///////////////////////////////////////
 ////////// Method Fill Table //////////
 function fillTable(invoices) {

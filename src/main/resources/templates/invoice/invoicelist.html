@@ -181,7 +181,14 @@
           </div>
           <div class="row pt-4">
             <div class="col">
-              <button type="button" onclick="deleteInvoices()" class="btn btn-del btn-lg btn-block filterText">
+              <button
+                id="batchDeleteButton"
+                type="button"
+                class="btn btn-del btn-lg btn-block filterText"
+                data-toggle="modal"
+                data-target="#batchDeleteModal"
+                disabled="true";
+              >
                 Delete Selected Invoices
               </button>
             </div>
@@ -363,9 +370,7 @@
                   </tr>
                 </tbody>
               </table>
-              <div id="afterTableContainer">
-
-              </div>
+              <div id="afterTableContainer"></div>
             </div>
           </div>
           <!-- Pagination INI -->
@@ -445,6 +450,34 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">No! Go back!</button>
             <button type="button" onclick="deleteInvoice()" class="btn btn-add" data-dismiss="modal">
+              Understood, delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Batch Delete -->
+    <div
+      class="modal fade"
+      id="batchDeleteModal"
+      data-backdrop="static"
+      data-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="batchDeleteModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="batchDeleteModalLabel">Confirm batch deletion</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">We won't be able to recover the selected invoices. Are you sure?</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No! Go back!</button>
+            <button type="button" onclick="batchDelete()" class="btn btn-add" data-dismiss="modal">
               Understood, delete
             </button>
           </div>
