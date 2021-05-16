@@ -225,6 +225,7 @@
           class="col-10"
           style=" height: 1000px; width: fit-content"
         >
+        <!-- Client creation Form -->
           <div
             class="row createForm mt-5 ml-5 mr-5"
             id="clientForm"
@@ -479,7 +480,7 @@
                 </div>
 
                 <div class="row ml-3 mr-3 pt-5 pl-1 pb-5">
-                  <div class="col-1">
+                  <div class="col-3">
                     <button
                       type="button"
                       onclick="createClient()"
@@ -500,6 +501,295 @@
               </form>
             </div>
           </div>
+          <!-- Client Edit Form -->
+          <div
+            class="row createForm mt-5 ml-5 mr-5"
+            id="editForm"
+            style="display: none">
+            <div class="col">
+              <form>
+                <div class="row">
+                  <div class="col">
+                    <h2 class="filterTextDark">Client Edit  Form</h2>
+                  </div>
+                </div>
+                <div class="form-group row d-flex justify-content-between mt-3">
+                  <div class="col-sm-4">
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input inputBox"
+                        type="radio"
+                        name="typeOfClientEdit"
+                        id="individualOptionEdit"
+                        value="I"
+                        checked
+                        required
+                      />
+                      <label class="form-check-label" for="individualOption">
+                        Individual
+                      </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input inputBox"
+                        type="radio"
+                        name="typeOfClientEdit"
+                        id="companyOptionEdit"
+                        value="C"
+                        required
+                      />
+                      <label class="form-check-label" for="companyOption">
+                        Company
+                      </label>
+                    </div>
+                    <input
+                      name="clientNameEdit"
+                      id="clientNameEdit"
+                      type="text"
+                      class="mt-3 mb-4 newClientFormInput inputBox form-control"
+                      required
+                    />
+                  </div>
+                  <div class="col-sm-8 d-flex justify-content-end"></div>
+                </div>
+                <div class="form-group row">
+                  <label for="companyAdress1" class="col-sm-2 col-form-label"
+                    >Company Address</label
+                  >
+                  <div class="col-sm-4">
+                    <input
+                      name="companyAdress1Edit"
+                      type="text"
+                      class="newClientFormInput inputBox form-control"
+                      required
+                    />
+                  </div>
+                  <label for="phoneNumber1" class="col-sm-2 col-form-label"
+                    >Phone number</label
+                  >
+                  <div class="col-sm-4">
+                    <input
+                      name="phoneNumber1Edit"
+                      type="tel"
+                      class="newClientFormInput inputBox form-control"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label
+                    for="companyAdress2"
+                    class="col-sm-2 col-form-label"
+                  ></label>
+                  <div class="col-sm-4">
+                    <input
+                      name="companyAdress2Edit"
+                      type="text"
+                      class="newClientFormInput inputBox form-control"
+                      required
+                    />
+                  </div>
+                  <label for="phoneNumber2" class="col-sm-2 col-form-label"
+                    >Mobile number</label
+                  >
+                  <div class="col-sm-4">
+                    <input
+                      name="phoneNumber2Edit"
+                      type="tel"
+                      class="newClientFormInput inputBox form-control"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="city" class="col-sm-2 col-form-label"></label>
+                  <div class="col-sm">
+                    <select
+                      name="cityEdit"
+                      class="newClientFormInput inputBox form-control"
+                    >
+                      <option value="1">Badajoz</option>
+                      <option value="2">Getafe</option>
+                      <option value="3">Setubal</option>
+                      <option value="4">Cordoba</option>
+                      <option value="5">Beja</option>
+                      <option value="6">Evora</option>
+                      <option value="7">Granada</option>
+                      <option value="8">Eure</option>
+                      <option value="9">Calvados</option>
+                      <option value="10">Valencia</option>
+                      <option value="11">Fuenlabrada</option>
+                      <option value="12">Castellon</option>
+                      <option value="13">Madrid</option>
+                      <option value="14">Manche</option>
+                      <option value="15">Faro</option>
+                      <option value="16">Lisboa</option>
+                      <option value="17">Leganes</option>
+                      <option value="18">Sevilla</option>
+                      <option value="19">Pozuelos</option>
+                      <option value="20">Vienne</option>
+                      <option value="21">Creusea</option>
+                      <option value="22">Alicante</option>
+                      <option value="23">Jaen</option>
+                      <option value="24">Huelva</option>
+                      <option value="25">Benidorm</option>
+                      <option value="26">Caceres</option>
+                      <option value="27">Malaga</option>
+                    </select>
+                  </div>
+                  <div class="col-sm">
+                    <select
+                      name="regionEdit"
+                      class="newClientFormInput inputBox form-control"
+                    >
+                      <option value="1">Normandia</option>
+                      <option value="2">Extremadura</option>
+                      <option value="3">Madrid</option>
+                      <option value="4">Algarve</option>
+                      <option value="5 ">Comunidad Valencia</option>
+                      <option value="6">Aquitania</option>
+                      <option value="7">Alentejo</option>
+                      <option value="8">Region de Lisboa</option>
+                      <option value="9">Andalucia</option>
+                    </select>
+                  </div>
+                  <div class="col-sm">
+                    <input
+                      name="ZIPCodeEdit"
+                      type="text"
+                      class="newClientFormInput inputBox form-control"
+                      required
+                    />
+                  </div>
+                  <label for="email" class="col-sm-2 col-form-label"
+                    >E-mail</label
+                  >
+                  <div class="col-sm-4">
+                    <input
+                      name="emailEdit"
+                      type="email"
+                      class="newClientFormInput inputBox form-control"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="country" class="col-sm-2 col-form-label"></label>
+                  <div class="col-sm-4">
+                    <select
+                      name="countryEdit"
+                      class="newClientFormInput inputBox form-control"
+                    >
+                      <option value="1">España</option>
+                      <option value="2">Francia</option>
+                      <option value="3">Portugal</option>
+                    </select>
+                  </div>
+                  <label for="webPage" class="col-sm-2 col-form-label"
+                    >Web page</label
+                  >
+                  <div class="col-sm-4">
+                    <input
+                      name="webPageEdit"
+                      type="url"
+                      class="newClientFormInput inputBox form-control"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="nif" class="col-sm-2 col-form-label"
+                    >Ident. Number (NIF)</label
+                  >
+                  <div class="col-sm-4">
+                    <input
+                      name="nifEdit"
+                      type="text"
+                      class="newClientFormInput inputBox form-control"
+                      required
+                    />
+                  </div>
+                  <label for="category" class="col-sm-2 col-form-label"
+                    >Category</label
+                  >
+                  <div class="col-sm-4">
+                    <select
+                      name="categoryEdit"
+                      class="newClientFormInput inputBox form-control"
+                    >
+                      <option>Labels</option>
+                      <option value="1">1A</option>
+                      <option value="2">1B</option>
+                      <option value="3">2A</option>
+                      <option value="4">2B</option>
+                      <option value="5">3B</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="profilePic" class="col-sm-2 col-form-label"
+                    >Profile Picture URL</label
+                  >
+                  <div class="col-sm-10">
+                    <input
+                      name="profilePicEdit"
+                      type="text"
+                      class="newClientFormInput inputBox form-control"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="row ml-3 mr-3 pt-5 pl-1 pb-5">
+                  <div class="col-3">
+                    <button
+                      type="button"
+                      onclick="editClient()"
+                      class="btn btn-block btn-add"
+                    >
+                      <b>Edit Client</b>
+                    </button>
+                  </div>
+                  <!-- <div
+                    class="col-11 alert alert-info"
+                    role="alert"
+                    style="display: none"
+                    id="successAlert"
+                  >
+                    Client successfully added
+                  </div> -->
+                </div>
+              </form>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           <div
             class="row row-cols-md-2 m-2 "  
             id="clientsContainer"
@@ -522,7 +812,7 @@
                         <i type="button" class="far fa-star cardIcon"> </i>
                       </div>
                       <div class="col-1 ">
-                        <i type="button" onclick="editClient()" class="fas fa-edit cardIcon"> </i>
+                        <i type="button" onclick="editClientForm(event)" class="fas fa-edit cardIcon"> </i>
                       </div>
                       <div class="col-1" >
                         <i type="button" onclick="deleteClientModal(event)" class="fas fa-trash-alt cardIcon deleteButton" data-toggle="modal" data-target="#deleteModal"> </i>

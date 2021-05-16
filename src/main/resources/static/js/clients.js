@@ -239,7 +239,6 @@ function selectForDelete(event) {
 } */
 //////////////////////////////// delete Client /////////////////////////////////////
 
-
 var urlToDelete="";
 function deleteClientModal(event){
   var clientInfo= event.currentTarget.closest(".clientInfo");
@@ -267,6 +266,17 @@ function deleteClient(){
 }
 
 /////////////////////////////Edit Client ////////////////////////////
+function editClientForm(){
+
+  document.querySelector("#editForm").style.display="";
+  document.querySelector("#clientForm").style.display="none";
+  
+
+
+}
+
+
+
 function editClient(){
 
 
@@ -409,6 +419,7 @@ function fillList(clients) {
       cardIcons.appendChild(editContainer);
       var editIcon = document.createElement("i");
       editIcon.setAttribute("type", "button");
+      editIcon.addEventListener("click", function (event) {editClientForm(event)}); 
       editIcon.className = "fas fa-edit  cardIcon";
       editContainer.appendChild(editIcon);
 
