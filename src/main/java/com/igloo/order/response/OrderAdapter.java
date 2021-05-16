@@ -1,7 +1,6 @@
 package com.igloo.order.response;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import com.igloo.agent.response.AgentAdapter;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Component;
 import com.igloo.agent.model.Agent;
 import com.igloo.client.model.Client;
 import com.igloo.client.response.ClientAdapter;
-import com.igloo.client.response.ClientResponse;
 import com.igloo.order.model.Order;
 import com.igloo.sector.model.Sector;
 import com.igloo.sector.response.SectorAdapter;
@@ -21,51 +19,51 @@ import com.igloo.status.response.StatusAdapter;
 @Component
 public class OrderAdapter {
 
-    @Autowired
-    ClientAdapter clientAdapter;
-    @Autowired
-    StatusAdapter statusAdapter;
-    @Autowired
-    SectorAdapter sectorAdapter;
-    @Autowired
-    AgentAdapter agentAdapter;
+	@Autowired
+	ClientAdapter clientAdapter;
+	@Autowired
+	StatusAdapter statusAdapter;
+	@Autowired
+	SectorAdapter sectorAdapter;
+	@Autowired
+	AgentAdapter agentAdapter;
 
-    public OrderResponse of(Order order) {
+	public OrderResponse of(Order order) {
 
-        OrderResponse response = new OrderResponse();
+		OrderResponse response = new OrderResponse();
 
-        response.setId(order.getId());
-        
-        String date = order.getCreationDate().toString().split(" ")[0];
-        
-        response.setCreationDate(date);
+		response.setId(order.getId());
 
-        Agent agent = order.getAgent();
-        response.setAgent(agentAdapter.of(agent));
+		String date = order.getCreationDate().toString().split(" ")[0];
 
-        Client client = order.getClient();
-        response.setClient(clientAdapter.of(client));
+		response.setCreationDate(date);
 
-        Status status = order.getStatus();
-        response.setStatus(statusAdapter.of(status));
+		Agent agent = order.getAgent();
+		response.setAgent(agentAdapter.of(agent));
 
-        Sector sector = order.getSector();
-        response.setSector(sectorAdapter.of(sector));
+		Client client = order.getClient();
+		response.setClient(clientAdapter.of(client));
 
-        response.setTotalAmount(order.getTotalAmount());
+		Status status = order.getStatus();
+		response.setStatus(statusAdapter.of(status));
 
-        return response;
+		Sector sector = order.getSector();
+		response.setSector(sectorAdapter.of(sector));
 
-    }
+		response.setTotalAmount(order.getTotalAmount());
 
-    public List<OrderResponse> of(List<Order> orders) {
+		return response;
 
-        List<OrderResponse> responses = new ArrayList<>();
+	}
 
-        for (Order order : orders) {
-            responses.add(of(order));
-        }
-        return responses;
-    }
+	public List<OrderResponse> of(List<Order> orders) {
+
+		List<OrderResponse> responses = new ArrayList<>();
+
+		for (Order order : orders) {
+			responses.add(of(order));
+		}
+		return responses;
+	}
 
 }
