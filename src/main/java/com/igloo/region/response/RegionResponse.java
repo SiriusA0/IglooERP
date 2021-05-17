@@ -10,7 +10,6 @@ public class RegionResponse {
 
 	private int id;
 	private String name;
-	private List<CityResponse> cities = new LinkedList<>();
 	private CountryResponse country;
 
 	public int getId() {
@@ -27,14 +26,6 @@ public class RegionResponse {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public List<CityResponse> getCities() {
-		return cities;
-	}
-
-	public void setCities(List<CityResponse> cities) {
-		this.cities = cities;
 	}
 
 	public CountryResponse getCountry() {

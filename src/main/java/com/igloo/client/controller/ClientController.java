@@ -10,22 +10,37 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.igloo.city.response.CityResponse;
+import com.igloo.city.service.CityServices;
 import com.igloo.client.model.Client;
 import com.igloo.client.response.ClientResponse;
 import com.igloo.client.service.ClientService;
+import com.igloo.country.response.CountryResponse;
 import com.igloo.country.service.CountryRepository;
+import com.igloo.country.service.CountryService;
 import com.igloo.invoice.response.InvoiceResponse;
+import com.igloo.region.response.RegionResponse;
+import com.igloo.region.service.RegionService;
 
 @Controller
 public class ClientController {
 
 	@Autowired
 	private ClientService clientService;
+	@Autowired
+	private CountryService countryService;
+	@Autowired
+	private RegionService regionService;
+	@Autowired
+	private CityServices cityService;
 
 	@GetMapping("/client")
 	public String read(Model model, Boolean favorite) {
 
 		List<ClientResponse> clients = clientService.search(null, null, null, 1);
+		List<CountryResponse> countries = countryService.search();
+		List<RegionResponse> regions = regionService.search();
+		List<CityResponse> cities = cityService.search();
 
 		model.addAttribute("clients", clients);
 		model.addAttribute("favorite", favorite);
