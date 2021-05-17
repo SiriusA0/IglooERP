@@ -320,12 +320,11 @@ function getClients(action, sortTerm, sortMethod, resetPage) {
       finalRequest = searchRequest + "option=client&term=" + searchTerm;
       break;
 
-    case "searhFavorites": // Search favorite clients
+    case "searchFavorites": // Search favorite clients
     // Search Definition.
     var searchRequest = request + "?action=search&";
      // Request Parameter.
-     var searchTerm = document.querySelector("#searchTerm").value;
-     finalRequest = searchRequest + "option=favorite";
+     finalRequest = searchRequest + "&option=favorite";
     
 
     default:
