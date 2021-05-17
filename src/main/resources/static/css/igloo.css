@@ -1,3 +1,9 @@
+/* Navbar */
+.nav-location-font {
+  color: rgb(89, 190, 201);
+  font-family: "Titillium Web", sans-serif;
+}
+
 /* Fixed menus */
 .igloo-container {
   margin-top: 56px;
@@ -9,6 +15,25 @@
 /* Background */
 .bg_igloo {
   background-color: whitesmoke;
+}
+/* Home icons */
+.homeImg {
+  height: 200px;
+  width: 200px;
+
+}
+.homeButton {
+  padding: 4rem;
+}
+.homeButton:hover {
+  background-color: rgb(53, 58, 64, 0.1);
+  border-radius: 1rem;
+}
+.iconTitle {
+  text-align: center;
+  font-size: 2rem;
+  font-family: "Titillium Web", sans-serif;
+  color: rgb(53, 58, 64);
 }
 /* Filter Icons */
 .filterIcons {

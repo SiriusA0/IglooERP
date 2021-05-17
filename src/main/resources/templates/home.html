@@ -42,112 +42,45 @@
         <li><i style="color: white" class="fas fa-snowman"></i></li>
       </ul>
     </nav>
-    <div class="container-fluid p-5 ml-5 igloo-container">
-      <div class="row row-cols-1 row-cols-md-2 ml-5">
-        <div class="card mb-3 p-5 border-0 homeIconCard" style="max-width: 540px">
-          <div class="row no-gutters">
-            <div class="col-md-4">
-              <i role="button" onclick="window.location.href='/agent'" class="homeIcon fas fa-user-tie fa-10x"></i>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">Agents</h5>
-                <p class="card-text">Here you can browse agents, edit, add or delete them.</p>
-              </div>
-            </div>
-          </div>
+    <div class="container-fluid igloo-container ">
+      <div class="row d-flex justify-content-center pt-3">
+        <div class="col-md-4 col-sm-12 d-flex justify-content-center">
+          <figure role="button" class="homeButton" onclick="window.location.href='/agent'">
+            <img src="/img/icons/user-tie-solid.svg" class="card-img-top homeImg" />
+            <figcaption class="iconTitle pt-3">Agents</figcaption>
+          </figure>
         </div>
-
-        <div class="card mb-3 p-5 border-0 homeIconCard" style="max-width: 540px">
-          <div class="row no-gutters">
-            <div class="col-md-4">
-              <i role="button" onclick="window.location.href='/client'" class="homeIcon fas fa-user fa-10x"></i>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">Clients</h5>
-                <p class="card-text">Here you can browse clients, edit, add or delete them.</p>
-              </div>
-            </div>
-          </div>
+        <div class="col-md-4 col-sm-12 d-flex justify-content-center">
+          <figure role="button" class="homeButton" onclick="window.location.href='/client'">
+            <img src="/img/icons/user-solid.svg" class="card-img-top homeImg" />
+            <figcaption class="iconTitle pt-3">Clients</figcaption>
+          </figure>
         </div>
-
-        <div class="card mb-3 p-5 border-0 homeIconCard" style="max-width: 640px">
-          <div class="row no-gutters">
-            <div class="col-md-4">
-              <i role="button" onclick="window.location.href='/mail'" class="homeIcon fas fa-envelope fa-10x"></i>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body ml-2">
-                <h5 class="card-title">Igloo Mail</h5>
-                <p class="card-text">Check your inbox or start a conversation with your clients.</p>
-              </div>
-            </div>
-          </div>
+        <div class="col-md-4 col-sm-12 d-flex justify-content-center">
+          <figure role="button" class="homeButton" onclick="window.location.href='/settings'">
+            <img src="/img/icons/cog-solid.svg" class="card-img-top homeImg" />
+            <figcaption class="iconTitle pt-3">Settings</figcaption>
+          </figure>
         </div>
-
-        <div class="card mb-3 p-5 border-0 homeIconCard" style="max-width: 540px">
-          <div class="row no-gutters">
-            <div class="col-md-4">
-              <i
-                role="button"
-                onclick="window.location.href='/applications'"
-                class="homeIcon fas fa-laptop-code fa-10x"
-              ></i>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body ml-4">
-                <h5 class="card-title">Applications</h5>
-                <p class="card-text">This section is under construction.</p>
-              </div>
-            </div>
-          </div>
+      </div>
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-4 col-sm-12 d-flex justify-content-center">
+          <figure role="button" class="homeButton" onclick="window.location.href='/order'">
+            <img src="/img/icons/box-solid.svg" class="card-img-top homeImg" />
+            <figcaption class="iconTitle pt-3">Orders</figcaption>
+          </figure>
         </div>
-
-        <div class="card mb-3 p-5 border-0 homeIconCard" style="max-width: 540px">
-          <div class="row no-gutters">
-            <div class="col-md-4">
-              <i
-                role="button"
-                onclick="window.location.href='/invoice'"
-                class="homeIcon fas fa-file-invoice-dollar fa-10x"
-              ></i>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body ml-4">
-                <h5 class="card-title">Invoices</h5>
-                <p class="card-text"></p>
-              </div>
-            </div>
-          </div>
+        <div class="col-md-4 col-sm-12 d-flex justify-content-center">
+          <figure role="button" class="homeButton" onclick="window.location.href='/invoice'">
+            <img src="/img/icons/file-invoice-dollar-solid.svg" class="card-img-top homeImg" />
+            <figcaption class="iconTitle pt-3">Invoices</figcaption>
+          </figure>
         </div>
-
-        <div class="card mb-3 p-5 border-0 homeIconCard" style="max-width: 640px">
-          <div class="row no-gutters">
-            <div class="col-md-4">
-              <i role="button" onclick="window.location.href='/order'" class="homeIcon fas fa-box-open fa-10x"></i>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body ml-4">
-                <h5 class="card-title">Orders</h5>
-                <p class="card-text"></p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card mb-3 p-5 border-0 homeIconCard" style="max-width: 640px">
-          <div class="row no-gutters">
-            <div class="col-md-4">
-              <i role="button" onclick="window.location.href='/settings'" class="homeIcon fas fa-cogs fa-10x"></i>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body ml-4">
-                <h5 class="card-title">Settings</h5>
-                <p class="card-text"></p>
-              </div>
-            </div>
-          </div>
+        <div class="col-md-4 col-sm-12 d-flex justify-content-center">
+          <figure role="button" class="homeButton" onclick="window.location.href='/mail'">
+            <img src="/img/icons/envelope-square-solid.svg" class="card-img-top homeImg" />
+            <figcaption class="iconTitle pt-3">Igloo Mail</figcaption>
+          </figure>
         </div>
       </div>
     </div>
