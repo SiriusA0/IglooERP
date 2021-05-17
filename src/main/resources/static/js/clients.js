@@ -289,19 +289,47 @@ function favClient(event){
 
 
 /////////////////////////////Edit Client ////////////////////////////
-/* function editClientForm(event){
-  document.querySelector("#editForm").style.display="";
+
+function editClientForm(event){
   document.querySelector("#clientForm").style.display="none";
-  var clientInfo=event.currentTarget.closest(".clientInfo")
+  document.querySelector("#clientEdit").style.display="";
+  var clientInfo=event.currentTarget.closest(".clientInfo");
   var clientId=clientInfo.id;
-  urledit=
 
-} */
+  // Fetch request.
+  fetch("/api/client/find?id=" + clientId)
+    .then((r) => r.json())
+    .then((clientToEdit) => {
+      console.log("Selected client: ", clientToEdit);
+      // Get invoice old atributes.
+    /*   document.querySelector("input[name=clientName]").value = clientToEdit.firstname + "" + clientToEdit.lastname;
+      document.querySelector("input[name=companyAdress1Edit]").value =  clientToEdit.companyAdress1;
+      document.querySelector("input[name=phoneNumber1Edit]").value = clientToEdit.phoneNumber1
+      document.querySelector("input[name=companyAdress2Edit]").value = clientToEdit.companyAdress2;
+      document.querySelector("input[name=phoneNumber2Edit]").value = clientToEdit.phoneNumber2;
+      document.querySelector("input[name=ZIPCodeEdit]").value =
+      document.querySelector("input[name=emailEdit]").value =
+      document.querySelector("input[name=webPageEdit]").value =
+      document.querySelector("input[name=nifEdit]").value =
+      document.querySelector("input[name=profilePicEdit]").value =
+ */ 
+      /*  document.querySelector("select[name=clientIdEdited]").getElementsByTagName("option")[
+        invoiceToEdit.client.id - 1
+      ].selected = "selected";
+      console.log(document.querySelector("select[name=statusIdEdited]").getElementsByTagName("option"));
+      document.querySelector("select[name=statusIdEdited]").getElementsByTagName("option")[
+        invoiceToEdit.status.id - 1
+      ].selected = "selected"; */
+    });
+}
 
 
-function editClient(){
 
-  
+}
+
+function cancelEditClient(){
+  document.querySelector("#clientEdit").style.display="none";
+
 }
 ////////////////////////////////////// Get Client //////////////////////////////////////
 
@@ -351,10 +379,7 @@ function getClients(action, sortTerm, sortMethod, resetPage) {
   fetchRequest(finalRequest, null, true);
 }
 
-
-
-///////////////////////////////////
-////////// Method DELETE //////////
+///////////////////////////////////////////// Method DELETE //////////
 function markForDelete(event) {
   console.log("Selecting invoice");
   var selectedInvoiceRow = event.currentTarget.closest("tr");
