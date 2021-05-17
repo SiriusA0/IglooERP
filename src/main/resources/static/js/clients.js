@@ -260,10 +260,25 @@ function deleteClient(){
       fillList(clients);
       
     });
-
-
-
 }
+
+function favClient(event){
+  //document.querySelector["#editIcon"].className=<i class="fas fa-star"></i>;
+  var clientInfo= event.currentTarget.closest(".clientInfo");
+  var clientId = clientInfo.id;
+  var urlToFav = server_url +
+  "/api/client/favorite?" +
+  "id=" +clientId;
+  console.log(urlToFav);
+  fetch(urlToFav)
+  .then((r) => r.json())
+  .then((clients) => {
+    cleanList();
+    fillList(clients);
+    
+  });
+}
+
 
 /////////////////////////////Edit Client ////////////////////////////
 function editClientForm(){
@@ -410,6 +425,7 @@ function fillList(clients) {
       favContainer.className = "col-1 offset-8";
       cardIcons.appendChild(favContainer);
       var favIcon = document.createElement("i");
+      favIcon.id="editIcon";
       favIcon.setAttribute("type", "button");
       favIcon.className = "far fa-star cardIcon";
       favContainer.appendChild(favIcon);

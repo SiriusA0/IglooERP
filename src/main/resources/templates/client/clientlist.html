@@ -809,7 +809,7 @@
                 <div class="col-md-8">
                     <div class="row pt-2 pl-2 pr-2 clientInfo" th:id="${client.id}">
                       <div class="col-1 offset-8">
-                        <i type="button" class="far fa-star cardIcon"> </i>
+                        <i type="button"  onclick="favClient(event)" id="editIcon" class="far fa-star cardIcon"> </i>
                       </div>
                       <div class="col-1 ">
                         <i type="button" onclick="editClientForm(event)" class="fas fa-edit cardIcon"> </i>
