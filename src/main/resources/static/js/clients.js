@@ -263,6 +263,14 @@ function deleteClient(){
 }
 
 function favClient(event){
+
+  if (event.currentTarget.className=="fas fa-star cardIcon"){
+    event.currentTarget.className="far fa-star cardIcon"
+
+  }
+  else {
+    event.currentTarget.className="fas fa-star cardIcon"
+  }
   
   var clientInfo= event.currentTarget.closest(".clientInfo");
   var clientId = clientInfo.id;
@@ -271,10 +279,10 @@ function favClient(event){
   "id=" +clientId;
   console.log(urlToFav);
   fetch(urlToFav)
-  .then((r) => r.json())
-  .then((clients) => {
-    cleanList();
-    fillList(clients);
+  //.then((r) => r.json())
+  .then(() => {
+    //cleanList();
+    //fillList(clients);
 
   });
 }
