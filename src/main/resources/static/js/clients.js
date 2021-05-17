@@ -324,9 +324,6 @@ function editClientForm(event){
 }
 
 
-
-}
-
 function cancelEditClient(){
   document.querySelector("#clientEdit").style.display="none";
 
