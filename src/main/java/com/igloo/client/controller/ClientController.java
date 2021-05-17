@@ -26,11 +26,12 @@ public class ClientController {
     
 
     @GetMapping("/client")
-    public String readAgent(Model model) {
+    public String readAgent(Model model, Boolean favorite) {
 
         List<ClientResponse> clients = clientService.search(null,null,null,1);
 
         model.addAttribute("clients", clients);
+        model.addAttribute("favorite", favorite);
 
 
         return "client/clientlist";
@@ -108,35 +109,14 @@ public class ClientController {
     @ResponseBody
     public void favorite_API(@RequestParam Integer id){
     	
-    	clientService.addFavorite(id);
+    	
+    	 clientService.addFavorite(id);
     	
     	
     }
 
 
-//    @GetMapping("/api/client/orderbylastnameasc")
-//    @ResponseBody
-//    public List<ClientResponse> ascLastName_API() {
-//        return clientService.ascLastName();
-//    }
-//
-//    @GetMapping("/api/client/orderbylastnamedesc")
-//    @ResponseBody
-//    public List<ClientResponse> descLastName_API() {
-//        return clientService.descLastName();
-//    }
-//
-//    @GetMapping("/api/client/orderbyidasc")
-//    @ResponseBody
-//    public List<ClientResponse> ascId_API() {
-//        return clientService.ascId();
-//    }
-//
-//    @GetMapping("/api/client/orderbyiddesc")
-//    @ResponseBody
-//    public List<ClientResponse> descId_API() {
-//        return clientService.descId();
-//    }
+
 	
 	    
 }

@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.igloo.agent.response.AgentAdapter;
 import com.igloo.agent.response.AgentResponse;
+import com.igloo.client.model.Client;
+import com.igloo.client.response.ClientResponse;
 import com.igloo.invoice.model.Invoice;
 import com.igloo.invoice.response.InvoiceResponse;
 
@@ -32,8 +34,10 @@ public class AgentServices {
 
 
     }
-    /*
-    public List<AgentResponse> searchAgent(String action, String option, String term, Integer page) {
+    
+    
+    
+    public List<AgentResponse> search(String action, String option, String term, Integer page) {
 
 
         List<Agent> agents = null;
@@ -43,20 +47,24 @@ public class AgentServices {
         }
 
         if (action == null || action.isEmpty()) {
-            Pageable pageable = PageRequest.of(page - 1, 6);
+            Pageable pageable = PageRequest.of(page - 1, 8);
             Page<Agent> lista = agentRepo.findAll(pageable);
             agents = lista.getContent();
 
         } else if (action.equals("sort")) {
             Sort.Direction direction = Sort.Direction.fromString(option);
             Sort sort = Sort.by(direction, term);
-            Pageable pageable = PageRequest.of(page - 1, 6, sort);
+            Pageable pageable = PageRequest.of(page - 1, 8, sort);
             agents = agentRepo.findAll(pageable).getContent();
 
         } else if (action.equals("search")) {
-            if (option.equals("firstName") || option.equals("lastName") ) {
-                Pageable pageable = PageRequest.of(page - 1, 6);
+            if (option.equals("agent") ) {
+                Pageable pageable = PageRequest.of(page - 1, 8);
                 agents = agentRepo.findByFirstNameContainingOrLastNameContaining(term, term, pageable);
+            }else if(option.equals("favorite")) {
+            	
+            	Pageable pageable = PageRequest.of(page - 1, 8);
+            	agents = agentRepo.findByFavoriteIs(true, pageable);
             }
 
         }
@@ -64,38 +72,8 @@ public class AgentServices {
        
         return agentAdapter.of(agents);
     }
-	*/
-    
-//    public List<AgentResponse> search(String searchTerm) {
-//
-//         List<Agent> agents = agentRepo.findByFirstNameContainingOrLastNameContaining(searchTerm, searchTerm, pageable);
-//         return agentAdapter.of(agents);
-//    }
-
-    public List<AgentResponse> ascLastName() {
-
-    	List<Agent> agents = agentRepo.findAllByOrderByLastNameAsc();
-        return agentAdapter.of(agents);
-    }
-
-    public List<AgentResponse> descLastName() {
-
-    	List<Agent> agents = agentRepo.findAllByOrderByLastNameDesc();
-        return agentAdapter.of(agents);
-    }
-
-    public List<AgentResponse> ascId() {
-
-    	List<Agent> agents = agentRepo.findAllByOrderByIdAsc();
-        return agentAdapter.of(agents);
-    }
-
-    public List<AgentResponse> descId() {
-
-    	List<Agent> agents = agentRepo.findAllByOrderByIdDesc();
-        return agentAdapter.of(agents);
-    }
 	
+
     public Agent createAgent(String firstName, String lastName, String email, String profilePic) {
     	
         Agent agent = new Agent();
@@ -114,6 +92,24 @@ public class AgentServices {
             int id = Integer.valueOf(i);
             agentRepo.deleteById(id);
         }
+
+    }
+    
+ public void addFavorite(Integer id){
+    	
+	 	Agent agent = agentRepo.findById(id).get();
+    	
+    	
+    	if(agent.getFavorite() == false || agent.getFavorite() == null) {
+    		
+    		agent.setFavorite(true);
+    	}else {
+    		
+    		agent.setFavorite(false);
+    	}
+    	
+    	
+    	agentRepo.save(agent);
 
     }
     

@@ -19,6 +19,7 @@ public class AgentAdapter {
 		response.setFirstName(agent.getFirstName());
 		response.setLastName(agent.getLastName());
 		response.setEmail(agent.getEmail());
+		response.setFavorite(agent.getFavorite());
 		response.setProfilePic(agent.getProfilePic());
 
 		return response;

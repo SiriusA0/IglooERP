@@ -23,8 +23,11 @@ public class Agent {
 
     @Column
     private String email;
+    
+    @Column
+    private Boolean favorite;
 
-    @Column(name = "profile_pic")
+	@Column(name = "profile_pic")
     private String profilePic;
 
     @OneToMany(mappedBy = "agent"/**, fetch = FetchType.EAGER**/)
@@ -83,6 +86,14 @@ public class Agent {
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    public Boolean getFavorite() {
+		return favorite;
+	}
+
+	public void setFavorite(Boolean favorite) {
+		this.favorite = favorite;
+	}
 
     public String getProfilePic() {
         return profilePic;

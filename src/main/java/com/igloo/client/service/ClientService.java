@@ -142,10 +142,18 @@ public class ClientService {
     	
     	Client client = clientRepository.findById(id).get();
     	
-    	client.setFavorite(true);
+    	
+    	if(client.getFavorite() == false || client.getFavorite() == null) {
+    		
+    		client.setFavorite(true);
+    	}else {
+    		
+    		client.setFavorite(false);
+    	}
+    	
+    	
     	clientRepository.save(client);
-    	
-    	
+	
     }
     
     public void editClient(Integer id, char type, String firstName, String lastName, String streetLine1, String streetLine2, Integer cityId, Integer regionId, Integer zipCode,

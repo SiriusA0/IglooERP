@@ -8,6 +8,7 @@ public class AgentResponse {
     private String firstName;
     private String lastName;
     private String email;
+    private Boolean favorite;
     private String profilePic;
     
     public int getId() {
@@ -30,6 +31,13 @@ public class AgentResponse {
 	}
 	public String getEmail() {
 		return email;
+	}
+	
+	public Boolean getFavorite() {
+		return favorite;
+	}
+	public void setFavorite(Boolean favorite) {
+		this.favorite = favorite;
 	}
 	public void setEmail(String email) {
 		this.email = email;

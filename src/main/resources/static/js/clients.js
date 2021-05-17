@@ -433,6 +433,7 @@ function fillList(clients) {
       favIcon.setAttribute("type", "button");
       //favIcon.className = "far fa-star cardIcon";
       //change color of favorites clients...
+      
       if (clients[i].favorite==true){
         favIcon.className= "fas fa-star cardIcon"
       }

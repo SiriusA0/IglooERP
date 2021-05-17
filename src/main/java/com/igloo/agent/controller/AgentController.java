@@ -4,6 +4,7 @@ import com.igloo.agent.model.Agent;
 import com.igloo.agent.response.AgentResponse;
 import com.igloo.agent.service.AgentRepository;
 import com.igloo.agent.service.AgentServices;
+import com.igloo.client.response.ClientResponse;
 
 import java.util.List;
 
@@ -41,31 +42,27 @@ public class AgentController {
 
         return "redirect:/agent";
     }
-
-    // Option API
-
-//    @GetMapping("/agent")
-//    public String find() {
-//
-//        return "agent/list";
-//    }
-//
-//    @GetMapping("agent/{agent_id}")
-//    public String findById(@PathVariable int agent_id) {
-//
-//        return "agent/detail";
-//    }
+    
+    @GetMapping("api/agent/get")
+    @ResponseBody
+    public List<AgentResponse> buscador(@RequestParam(required = false) String action,
+                                          @RequestParam(required = false) String option,
+                                          @RequestParam(required = false) String term, @RequestParam(required = false) Integer page ) {
 
 
-//    @GetMapping("/api/agent/search")
-//    @ResponseBody
-//    public List<AgentResponse> find_API(@RequestParam String searchTerm) {
-//        return agentServ.search(searchTerm);
-//    }
+        List<AgentResponse> agents = agentServ.search(action, option, term, page);
+
+        return agents;
+    }
+
+
 
     @GetMapping("/api/agent/add")
     @ResponseBody
-    public List<AgentResponse> add_API(@RequestParam(required = false)Integer id,@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String profilePic) {
+    public List<AgentResponse> add_API(@RequestParam(required = false)Integer id,
+    		@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String profilePic,
+    		@RequestParam(required = false) String action,
+    		@RequestParam(required = false) String option, @RequestParam(required = false) String term, @RequestParam(required = false) Integer page) {
 
     	if(id == null) {
     		
@@ -76,40 +73,27 @@ public class AgentController {
     		
     	}
     	
-        return agentServ.get();
+        return agentServ.search(action, option,term,page);
+    }
+    
+    @GetMapping("/api/agent/favorite")
+    @ResponseBody
+    public void favorite_API(@RequestParam Integer id){
+    	
+    	 agentServ.addFavorite(id);
+    	
+    	
     }
 
     @GetMapping("/api/agent/delete")
     @ResponseBody
-    public List<AgentResponse> delete_API(@RequestParam String idtodelete) {
+    public List<AgentResponse> delete_API(@RequestParam String id, @RequestParam(required = false) String action,
+    		@RequestParam(required = false) String option, @RequestParam(required = false) String term, @RequestParam(required = false) Integer page) {
 
-        agentServ.deleteAgent(idtodelete);
-        return agentServ.get();
+        agentServ.deleteAgent(id);
+        return agentServ.search(action, option,term,page);
     }
 
-    @GetMapping("/api/agent/orderbylastnameasc")
-    @ResponseBody
-    public List<AgentResponse> ascLastName_API() {
-        return agentServ.ascLastName();
-    }
-
-    @GetMapping("/api/agent/orderbylastnamedesc")
-    @ResponseBody
-    public List<AgentResponse> descLastName_API() {
-        return agentServ.descLastName();
-    }
-
-    @GetMapping("/api/agent/orderbyidasc")
-    @ResponseBody
-    public List<AgentResponse> ascId_API() {
-        return agentServ.ascId();
-    }
-
-    @GetMapping("/api/agent/orderbyiddesc")
-    @ResponseBody
-    public List<AgentResponse> descId_API() {
-        return agentServ.descId();
-    }
 
 
 }
