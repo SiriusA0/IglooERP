@@ -1,55 +1,44 @@
 package com.igloo.user.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "users")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    
-    @Column(name="first_name")
-    private String firstName;
-    
-    @Column(name="last_name")
-    private String lastName;
-    
-    @Column(name="user_name")
-    private String userName;
-    
-    @Column
-    private String email;
-    
-    @Column(name="phone_number")
-    private String phoneNumber;
-    
-    @Column
-    private String job;
-    
-    @Column
-    private String password;
-    
-    @Column(name="profile_pic")
-    private String profilePic;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
-    // Favorites
+	@Column(name = "first_name")
+	private String firstName;
 
-    @Column(name="fav_agents")
-    private String favAgents;
+	@Column(name = "last_name")
+	private String lastName;
 
-    @Column(name="fav_clients")
-    private String favClients;
-    
-    
-    
+	@Column(name = "user_name")
+	private String userName;
+
+	@Column
+	private String email;
+
+	@Column(name = "phone_number")
+	private String phoneNumber;
+
+	@Column
+	private String job;
+
+	@Column
+	private String password;
+
+	@Column(name = "profile_pic")
+	private String profilePic;
+
 	public User() {
 	}
 
 	public User(String firstName, String lastName, String userName, String email, String phoneNumber, String job,
-			String password, String profilePic, String favAgents, String favClients) {
+			String password, String profilePic) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.userName = userName;
@@ -58,8 +47,6 @@ public class User {
 		this.job = job;
 		this.password = password;
 		this.profilePic = profilePic;
-		this.favAgents = favAgents;
-		this.favClients = favClients;
 	}
 
 	public User(int id, String firstName, String lastName, String userName, String email, String phoneNumber,
@@ -73,8 +60,6 @@ public class User {
 		this.job = job;
 		this.password = password;
 		this.profilePic = profilePic;
-		this.favAgents = favAgents;
-		this.favClients = favClients;
 	}
 
 	public int getId() {
@@ -149,21 +134,4 @@ public class User {
 		this.profilePic = profilePic;
 	}
 
-	public String getFavAgents() {
-		return favAgents;
-	}
-
-	public void setFavAgents(String favAgents) {
-		this.favAgents = favAgents;
-	}
-
-	public String getFavClients() {
-		return favClients;
-	}
-
-	public void setFavClients(String favClients) {
-		this.favClients = favClients;
-	}
-    
-    
 }

@@ -9,27 +9,27 @@ import org.springframework.stereotype.Component;
 @Component
 public class SectorAdapter {
 
-    public SectorResponse of(Sector sector) {
+	public SectorResponse of(Sector sector) {
 
-        SectorResponse response = new SectorResponse();
+		SectorResponse response = new SectorResponse();
 
-        response.setId(sector.getId());
-        response.setName(sector.getName());
+		response.setId(sector.getId());
+		response.setName(sector.getName());
 
-        return response;
+		return response;
 
-    }
+	}
 
-    public List<SectorResponse> of(List<Sector> sectors) {
+	public List<SectorResponse> of(List<Sector> sectors) {
 
-        List<SectorResponse> responses = new ArrayList<>();
+		List<SectorResponse> responses = new ArrayList<>();
 
-        for (Sector sector : sectors) {
-            responses.add(of(sector));
-        }
+		for (Sector sector : sectors) {
+			responses.add(of(sector));
+		}
 
-        return responses;
+		return responses;
 
-    }
+	}
 
 }

@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.igloo.status.model.Status;
 
 @Repository
-public interface StatusRepository extends JpaRepository<Status, Integer> { 
+public interface StatusRepository extends JpaRepository<Status, Integer> {
 
 }

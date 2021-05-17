@@ -8,6 +8,6 @@ import com.igloo.region.service.RegionService;
 @Controller
 public class RegionController {
 	@Autowired
-    private RegionService regionService;
-	
+	private RegionService regionService;
+
 }

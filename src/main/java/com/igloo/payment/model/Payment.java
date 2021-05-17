@@ -14,24 +14,21 @@ import javax.persistence.Table;
 import com.igloo.invoice.model.Invoice;
 
 @Entity
-@Table(name="payments_status")
+@Table(name = "payments_status")
 public class Payment {
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+
 	@Column
 	private String name;
-	
-	@OneToMany(mappedBy="payment"/**, fetch = FetchType.EAGER**/)
-    private List<Invoice> invoices = new LinkedList<Invoice>();
-	
-	
-	
+
+	@OneToMany(mappedBy = "payment")
+	private List<Invoice> invoices = new LinkedList<Invoice>();
 
 	public Payment() {
-		
+
 	}
 
 	public Payment(String name, List<Invoice> invoices) {
@@ -68,7 +65,5 @@ public class Payment {
 	public void setInvoices(List<Invoice> invoices) {
 		this.invoices = invoices;
 	}
-	
-	
-	
+
 }

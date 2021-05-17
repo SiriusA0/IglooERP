@@ -10,25 +10,24 @@ import com.igloo.payment.model.Payment;
 @Component
 public class PaymentAdapter {
 
-		
-		public PaymentResponse of(Payment payment) {
-			
-			PaymentResponse response=new PaymentResponse();
-			
-			response.setId(payment.getId());
-			response.setName(payment.getName());
-			
-			return response;
-		}
-		
-		public List<PaymentResponse> of(List<Payment> payments) {
-	        
-	        List<PaymentResponse> responses = new ArrayList<>();
-	        for(Payment payment : payments) {
-	            responses.add(of(payment));
-	        }
-	        
-	        return responses;      
-	    
+	public PaymentResponse of(Payment payment) {
 
-}}
+		PaymentResponse response = new PaymentResponse();
+
+		response.setId(payment.getId());
+		response.setName(payment.getName());
+
+		return response;
+	}
+
+	public List<PaymentResponse> of(List<Payment> payments) {
+
+		List<PaymentResponse> responses = new ArrayList<>();
+		for (Payment payment : payments) {
+			responses.add(of(payment));
+		}
+
+		return responses;
+
+	}
+}

@@ -1,10 +1,7 @@
 package com.igloo.region.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.igloo.city.model.City;
-import com.igloo.client.model.Client;
 import com.igloo.country.model.Country;
-import com.igloo.invoice.model.Invoice;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -14,26 +11,22 @@ import javax.persistence.*;
 @Entity
 @Table(name = "regions")
 public class Region {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
-    @Column
-    private String name;
+	@Column
+	private String name;
 
-	@JsonIgnore
-    @OneToMany(mappedBy="region", fetch = FetchType.LAZY)
-    private List<City> cities = new LinkedList<City>();
+	@OneToMany(mappedBy = "region", fetch = FetchType.LAZY)
+	private List<City> cities = new LinkedList<City>();
 
-	@JsonIgnore
-    @ManyToOne
-    @JoinColumn(name="country_id")
-    private Country country;
-    
-    
-    
+	@ManyToOne
+	@JoinColumn(name = "country_id")
+	private Country country;
+
 	public Region() {
-	
+
 	}
 
 	public Region(String name, List<City> cities, Country country) {
@@ -80,5 +73,5 @@ public class Region {
 	public void setCountry(Country country) {
 		this.country = country;
 	}
- 
+
 }

@@ -21,6 +21,4 @@ public class PaymentResponse {
 		this.name = name;
 	}
 
-
-
 }

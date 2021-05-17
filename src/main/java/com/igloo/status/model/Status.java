@@ -15,25 +15,21 @@ import com.igloo.invoice.model.Invoice;
 import com.igloo.order.model.Order;
 
 @Entity
-@Table(name="statuses")
+@Table(name = "statuses")
 public class Status {
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+
 	@Column
 	private String name;
-	
-	//TODO
-	@OneToMany(mappedBy="status"/**, fetch = FetchType.EAGER**/)
-    private List<Order> orders = new LinkedList<Order>();
-	
-	//TODO
-	@OneToMany(mappedBy="status"/**, fetch = FetchType.EAGER**/)
-    private List<Invoice> invoices = new LinkedList<Invoice>();
-	
-	
+
+	@OneToMany(mappedBy = "status")
+	private List<Order> orders = new LinkedList<Order>();
+
+	@OneToMany(mappedBy = "status")
+	private List<Invoice> invoices = new LinkedList<Invoice>();
 
 	public Status() {
 	}
@@ -82,6 +78,5 @@ public class Status {
 	public void setInvoices(List<Invoice> invoices) {
 		this.invoices = invoices;
 	}
-	
-	
+
 }

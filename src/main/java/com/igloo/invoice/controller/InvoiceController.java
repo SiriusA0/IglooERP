@@ -42,9 +42,9 @@ public class InvoiceController {
 	public String readInvoice(Model model) {
 
 		List<InvoiceResponse> invoices = invoiceService.search(null, null, null, 1);
-		List<StatusResponse> statuses = statusService.getAll();
-		List<PaymentResponse> paymentStatuses = paymentService.getAll();
-		List<SectorResponse> sectors = sectorService.showSector();
+		List<StatusResponse> statuses = statusService.search();
+		List<PaymentResponse> paymentStatuses = paymentService.search();
+		List<SectorResponse> sectors = sectorService.search();
 		List<ClientResponse> clients = clientService.get();
 
 		model.addAttribute("invoices", invoices);

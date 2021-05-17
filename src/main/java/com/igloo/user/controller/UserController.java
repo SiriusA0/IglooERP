@@ -1,6 +1,5 @@
 package com.igloo.user.controller;
 
-import com.igloo.user.model.User;
 import com.igloo.user.service.UserRepository;
 import com.igloo.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +52,7 @@ public class UserController {
         System.out.println("Register Attempt");
         
 
-        	if(userService.createUser(firstName,lastName,userName, email, telNumber, jobs, password )) {
+        	if(userService.create(firstName,lastName,userName, email, telNumber, jobs, password )) {
         		
         		
         		return "redirect:/login?success=true";

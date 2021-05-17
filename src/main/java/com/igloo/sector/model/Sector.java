@@ -11,24 +11,23 @@ import java.util.List;
 @Table(name = "sectors")
 public class Sector {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
-    @Column
-    private String name;
+	@Column
+	private String name;
 
-    //TODO
-    @OneToMany(mappedBy = "sector"/**, fetch = FetchType.EAGER**/)
-    private List<Order> orders = new LinkedList<Order>();
-    
-    @OneToMany(mappedBy = "sector"/**, fetch = FetchType.EAGER**/)
-    private List<Invoice> invoices = new LinkedList<Invoice>();
+	@OneToMany(mappedBy = "sector")
+	private List<Order> orders = new LinkedList<Order>();
 
-    public Sector() {
-    }
+	@OneToMany(mappedBy = "sector")
+	private List<Invoice> invoices = new LinkedList<Invoice>();
 
-    public Sector(String name, List<Order> orders, List<Invoice> invoices) {
+	public Sector() {
+	}
+
+	public Sector(String name, List<Order> orders, List<Invoice> invoices) {
 		this.name = name;
 		this.orders = orders;
 		this.invoices = invoices;
@@ -42,28 +41,28 @@ public class Sector {
 	}
 
 	public int getId() {
-        return id;
-    }
+		return id;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public List<Order> getOrders() {
-        return orders;
-    }
+	public List<Order> getOrders() {
+		return orders;
+	}
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
 
 	public List<Invoice> getInvoices() {
 		return invoices;

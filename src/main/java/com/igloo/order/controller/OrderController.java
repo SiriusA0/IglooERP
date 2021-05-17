@@ -41,8 +41,8 @@ public class OrderController {
 	public String read(Model model) {
 
 		List<OrderResponse> orders = orderService.search(null, null, null, 1);
-		List<StatusResponse> statuses = statusesService.getAll();
-		List<SectorResponse> sectors = sectorsService.showSector();
+		List<StatusResponse> statuses = statusesService.search();
+		List<SectorResponse> sectors = sectorsService.search();
 		List<ClientResponse> clients = clientsService.get();
 		List<AgentResponse> agents = agentsService.get();
 
