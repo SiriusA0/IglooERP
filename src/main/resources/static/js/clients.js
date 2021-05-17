@@ -448,6 +448,7 @@ function fillList(clients) {
       else {
         favIcon.className= "far fa-star cardIcon"
       }
+      favIcon.addEventListener("click", function (event) {favClient(event)});
       favContainer.appendChild(favIcon);
 
       var editContainer = document.createElement("div");

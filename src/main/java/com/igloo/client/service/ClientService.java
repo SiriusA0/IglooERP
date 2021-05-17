@@ -143,7 +143,7 @@ public class ClientService {
     	Client client = clientRepository.findById(id).get();
     	
     	
-    	if(client.getFavorite() == false || client.getFavorite() == null) {
+    	if(!client.getFavorite() || client.getFavorite() == null) {
     		
     		client.setFavorite(true);
     	}else {

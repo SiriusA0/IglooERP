@@ -22,7 +22,7 @@ public class ClientResponse {
     private char type;
     private String email;
     private String web;
-    private Boolean favorite;
+    private Boolean favorite = false;
 
 	private String streetLine1;
     private String streetLine2;
