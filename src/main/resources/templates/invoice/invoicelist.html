@@ -109,14 +109,6 @@
           </div>
           <div class="row mt-3 mb-3 pl-3">
             <div class="col-2">
-              <i type="button" class="fas fa-star filterIcons"></i>
-            </div>
-            <div class="col-10">
-              <label class="filterText">Favorites</label>
-            </div>
-          </div>
-          <div class="row mt-3 mb-3 pl-3">
-            <div class="col-2">
               <i
                 onclick="getInvoices('sort', 'afterTax', 'asc',true)"
                 id="idInvoiceAsc"
@@ -354,9 +346,6 @@
                     <td class="filterTextDark" th:text="${invoice.payment.name}">0</td>
                     <td>
                       <div class="btn-group" role="group">
-                        <button type="button" onclick="invoiceFav()" class="btn btn-secondary">
-                          <i class="far fa-star"></i>
-                        </button>
                         <button type="button" onclick="showEditForm(event)" class="btn btn-secondary">
                           <i class="fas fa-edit"></i>
                         </button>

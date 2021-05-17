@@ -450,17 +450,6 @@ function fillTable(invoices) {
     buttogroup.className = "btn-group";
     buttogroup.role = "group";
 
-    var favbutton = document.createElement("button");
-    favbutton.type = "button";
-    favbutton.className = "btn btn-secondary";
-    favbutton.addEventListener("click", function (event) {
-      favoriteinvoice(event);
-    });
-    var favIcon = document.createElement("i");
-    favIcon.className = "far fa-star";
-    favbutton.appendChild(favIcon);
-    buttogroup.appendChild(favbutton);
-
     var editbutton = document.createElement("button");
     editbutton.type = "button";
     editbutton.className = "btn btn-secondary";

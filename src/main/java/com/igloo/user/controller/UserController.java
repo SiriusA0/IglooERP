@@ -1,5 +1,7 @@
 package com.igloo.user.controller;
 
+import com.igloo.sector.response.SectorResponse;
+import com.igloo.sector.service.SectorService;
 import com.igloo.user.service.UserRepository;
 import com.igloo.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 
 @Controller
@@ -19,6 +23,8 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    SectorService sectorService;
 
     @GetMapping("/login")
     public String login(Model model, @RequestParam(required = false) Boolean success) {
@@ -29,7 +35,9 @@ public class UserController {
 
     @GetMapping("/register")
     public String register(Model model, @RequestParam(required = false) Boolean error) {
-    	
+
+        List<SectorResponse> sectors = sectorService.search();
+        model.addAttribute("sectors", sectors);
     	model.addAttribute("error", error);
         return "user/signup";
     }
