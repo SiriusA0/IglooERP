@@ -20,6 +20,8 @@ public interface ClientRepository extends JpaRepository<Client, Integer> {
 
     List<Client> findAllByOrderByIdAsc();
     List<Client> findAllByOrderByIdDesc();
+    
+    List<Client> findByFavoriteIs(Boolean favorite, Pageable pageable);
 
 	
 }

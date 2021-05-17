@@ -24,6 +24,7 @@ public class ClientAdapter {
 		response.setPhoneNumber1(client.getPhoneNumber1());
 		response.setPhoneNumber2(client.getPhoneNumber2());
 		response.setEmail(client.getEmail());
+		response.setFavorite(client.getFavorite());
 		response.setWeb(client.getWeb());
 		response.setProfilePic(client.getProfilePic());
 		response.setZipCode(client.getZipCode());

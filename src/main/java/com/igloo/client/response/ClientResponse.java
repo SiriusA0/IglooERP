@@ -22,7 +22,9 @@ public class ClientResponse {
     private char type;
     private String email;
     private String web;
-    private String streetLine1;
+    private Boolean favorite;
+
+	private String streetLine1;
     private String streetLine2;
     private String phoneNumber1;
     private String phoneNumber2; 
@@ -69,6 +71,13 @@ public class ClientResponse {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+    public Boolean getFavorite() {
+		return favorite;
+	}
+	public void setFavorite(Boolean favorite) {
+		this.favorite = favorite;
 	}
 	public String getWeb() {
 		return web;

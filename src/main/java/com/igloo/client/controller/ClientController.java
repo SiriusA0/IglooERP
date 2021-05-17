@@ -103,6 +103,15 @@ public class ClientController {
         List<ClientResponse>clients = clientService.search(action, option, term, page);
         return clients;
     }
+    
+    @GetMapping("/api/client/favorite")
+    @ResponseBody
+    public void favorite_API(@RequestParam Integer id){
+    	
+    	clientService.addFavorite(id);
+    	
+    	
+    }
 
 
 //    @GetMapping("/api/client/orderbylastnameasc")

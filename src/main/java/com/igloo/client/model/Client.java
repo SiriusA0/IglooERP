@@ -38,8 +38,12 @@ public class Client {
 
     @Column
     private String web;
+    
+    @Column
+    private Boolean favorite = false;
 
-    @Column(name = "street_line_1")
+    
+	@Column(name = "street_line_1")
     private String streetLine1;
 
     @Column(name = "street_line_2")
@@ -175,6 +179,15 @@ public class Client {
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    public Boolean getFavorite() {
+		return favorite;
+	}
+
+	public void setFavorite(Boolean favorite) {
+		this.favorite = favorite;
+	}
+
 
     public String getWeb() {
         return web;

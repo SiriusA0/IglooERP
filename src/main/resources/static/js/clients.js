@@ -272,8 +272,8 @@ function favClient(event){
   "id=" +clientId;
   console.log(urlToFav);
   fetch(urlToFav)
-  .then((r) => r.json())
-  .then((clients) => {
+ // .then((r) => r.json())
+  .then(() => {
     //cleanList();
     //fillList(clients);
   });

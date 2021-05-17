@@ -65,7 +65,14 @@ public class ClientService {
 	            if (option.equals("client")) {
 	                Pageable pageable = PageRequest.of(page - 1, 6);
 	                clients = clientRepository.findByFirstNameContainingOrLastNameContaining(term, term, pageable);
+	                
+	            }else if(option.equals("favorite")){
+	            	
+	            	Pageable pageable = PageRequest.of(page - 1, 6);
+	            	clients = clientRepository.findByFavoriteIs(true, pageable);
+	            	
 	            }
+	            
 
 	        }
 
@@ -129,6 +136,16 @@ public class ClientService {
             clientRepository.deleteById(id);
         }
 
+    }
+    
+    public void addFavorite(Integer id){
+    	
+    	Client client = clientRepository.findById(id).get();
+    	
+    	client.setFavorite(true);
+    	clientRepository.save(client);
+    	
+    	
     }
     
     public void editClient(Integer id, char type, String firstName, String lastName, String streetLine1, String streetLine2, Integer cityId, Integer regionId, Integer zipCode,
