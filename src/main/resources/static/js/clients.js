@@ -263,8 +263,7 @@ function deleteClient(){
 }
 
 function favClient(event){
-  /* var editIcon= document.querySelector["#editIcon"];
-  editIcon.className="fas fa-star cardIcon"; */
+  
   var clientInfo= event.currentTarget.closest(".clientInfo");
   var clientId = clientInfo.id;
   var urlToFav = server_url +
@@ -272,10 +271,11 @@ function favClient(event){
   "id=" +clientId;
   console.log(urlToFav);
   fetch(urlToFav)
- // .then((r) => r.json())
-  .then(() => {
-    //cleanList();
-    //fillList(clients);
+  .then((r) => r.json())
+  .then((clients) => {
+    cleanList();
+    fillList(clients);
+
   });
 }
 
@@ -431,9 +431,16 @@ function fillList(clients) {
       var favIcon = document.createElement("i");
       favIcon.id="editIcon";
       favIcon.setAttribute("type", "button");
-      favIcon.className = "far fa-star cardIcon";
+      //favIcon.className = "far fa-star cardIcon";
+      //change color of favorites clients...
+      if (clients[i].favorite==true){
+        favIcon.className= "fas fa-star cardIcon"
+      }
+      else {
+        favIcon.className= "far fa-star cardIcon"
+      }
       favContainer.appendChild(favIcon);
-      
+
       var editContainer = document.createElement("div");
       editContainer.className = "col-1";
       cardIcons.appendChild(editContainer);
@@ -450,14 +457,13 @@ function fillList(clients) {
       var binIcon = document.createElement("i");
       binIcon.setAttribute("type", "button");
       binIcon.className = "fas fa-trash-alt cardIcon deleteButton";
+      binIcon.setAttribute("data-toggle", "modal");
+      binIcon.setAttribute("data-target", "#deleteModal");
+      binIcon.addEventListener("click", function (event) {deleteClientModal(event)});
       binContainer.appendChild(binIcon);
-      binIcon.addEventListener("click", function (event) {deleteClientModal(event)}); 
-      $(".deleteButton").attr("data-toggle", "modal");
-      $(".deleteButton").attr("data-target", "#deleteModal");
       cardSecondCol.appendChild(cardIcons);
-      ////
 
-
+    
       var cardBody=document.createElement("div");
       cardBody.className="card-body";
       cardSecondCol.appendChild(cardBody);   
