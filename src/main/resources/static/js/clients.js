@@ -304,7 +304,9 @@ function getClients(action, sortTerm, sortMethod, resetPage) {
   var request = server_url + "/api/client/get";
   var finalRequest;
   // Action selector
+  debugger
   switch (action) {
+	
     case "sort": // Sort request
       // Sort Definition.
       sortRequest = request + "?action=sort&";
@@ -320,12 +322,14 @@ function getClients(action, sortTerm, sortMethod, resetPage) {
       finalRequest = searchRequest + "option=client&term=" + searchTerm;
       break;
 
-    case "searchFavorites": // Search favorite clients
-    // Search Definition.
-    var searchRequest = request + "?action=search&";
-     // Request Parameter.
-     finalRequest = searchRequest + "&option=favorite";
-    
+    case "searchFavorites": {
+ 		// Search favorite clients
+	    // Search Definition.
+	    var searchRequest = request + "?action=search&";
+	     // Request Parameter.
+	     finalRequest = searchRequest + "&option=favorite";
+   		 break;
+   	}
 
     default:
       // Simple get all request
