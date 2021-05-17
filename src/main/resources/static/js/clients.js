@@ -263,7 +263,8 @@ function deleteClient(){
 }
 
 function favClient(event){
-  //document.querySelector["#editIcon"].className=<i class="fas fa-star"></i>;
+  /* var editIcon= document.querySelector["#editIcon"];
+  editIcon.className="fas fa-star cardIcon"; */
   var clientInfo= event.currentTarget.closest(".clientInfo");
   var clientId = clientInfo.id;
   var urlToFav = server_url +
@@ -273,29 +274,21 @@ function favClient(event){
   fetch(urlToFav)
   .then((r) => r.json())
   .then((clients) => {
-    cleanList();
-    fillList(clients);
-    
+    //cleanList();
+    //fillList(clients);
   });
 }
 
 
 /////////////////////////////Edit Client ////////////////////////////
 function editClientForm(){
-
   document.querySelector("#editForm").style.display="";
   document.querySelector("#clientForm").style.display="none";
-  
-
 
 }
 
 
-
 function editClient(){
-
-
-
 
   
 }
@@ -326,6 +319,14 @@ function getClients(action, sortTerm, sortMethod, resetPage) {
       var searchTerm = document.querySelector("#searchTerm").value;
       finalRequest = searchRequest + "option=client&term=" + searchTerm;
       break;
+
+    case "searhFavorites": // Search favorite clients
+    // Search Definition.
+    var searchRequest = request + "?action=search&";
+     // Request Parameter.
+     var searchTerm = document.querySelector("#searchTerm").value;
+     finalRequest = searchRequest + "option=favorite";
+    
 
     default:
       // Simple get all request
