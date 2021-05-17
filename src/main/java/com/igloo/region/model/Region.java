@@ -1,5 +1,6 @@
 package com.igloo.region.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.igloo.city.model.City;
 import com.igloo.country.model.Country;
 
@@ -18,9 +19,11 @@ public class Region {
 	@Column
 	private String name;
 
+	@JsonIgnore //TODO
 	@OneToMany(mappedBy = "region", fetch = FetchType.LAZY)
 	private List<City> cities = new LinkedList<City>();
 
+	@JsonIgnore //TODO
 	@ManyToOne
 	@JoinColumn(name = "country_id")
 	private Country country;

@@ -12,6 +12,16 @@ public class RegionResponse {
 	private String name;
 	private CountryResponse country;
 
+	private List<CityResponse> cities;
+
+	public List<CityResponse> getCities() {
+		return cities;
+	}
+
+	public void setCities(List<CityResponse> cities) {
+		this.cities = cities;
+	}
+
 	public int getId() {
 		return id;
 	}
