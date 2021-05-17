@@ -36,7 +36,7 @@ public class InvoiceService {
 	@Autowired
 	private InvoiceAdapter invoiceAdapter;
 
-	public List<InvoiceResponse> createInvoice(Integer clientId, Date dueDate, double preTax, Integer statusId,
+	public List<InvoiceResponse> create(Integer clientId, Date dueDate, double preTax, Integer statusId,
 			Integer paymentId, Integer sectorId) {
 
 		//////////////////// DATES////////////////////////////////////////////////////
@@ -76,6 +76,29 @@ public class InvoiceService {
 		return invoiceAdapter.of(invoices);
 	}
 
+	public void edit(Integer id, Integer clientId, double preTax, Integer statusId, Integer paymentStatusId,
+			Integer sectorId) {
+
+		Invoice invoice = invoiceRepository.findById(id).get();
+
+		invoice.setClient(clientRepository.findById(clientId).get());
+		invoice.setPreTax(preTax);
+		invoice.setAfterTax(preTax * 1.21);
+		invoice.setStatus(statusRepository.findById(statusId).get());
+		invoice.setPayment(paymentRepository.findById(paymentStatusId).get());
+		invoice.setSector(sectorRepository.findById(sectorId).get());
+
+		invoiceRepository.save(invoice);
+
+	}
+
+	public InvoiceResponse find(Integer id) {
+		Invoice invoice = new Invoice();
+		invoice = invoiceRepository.findById(id).get();
+
+		return invoiceAdapter.of(invoice);
+	}
+
 	public List<InvoiceResponse> search(String action, String option, String term, Integer page) {
 
 		List<Invoice> invoices = null;
@@ -108,35 +131,12 @@ public class InvoiceService {
 		return invoiceAdapter.of(invoices);
 	}
 
-	public void deleteOrder(String id) {
+	public void delete(String id) {
 		String idArray[] = id.split(",");
 		for (String i : idArray) {
 			int newId = Integer.valueOf(i);
 			invoiceRepository.deleteById(newId);
 		}
-
-	}
-
-	public InvoiceResponse findInvoice(Integer id) {
-		Invoice invoice = new Invoice();
-		invoice = invoiceRepository.findById(id).get();
-
-		return invoiceAdapter.of(invoice);
-	}
-
-	public void editInvoice(Integer id, Integer clientId, double preTax, Integer statusId, Integer paymentStatusId,
-			Integer sectorId) {
-
-		Invoice invoice = invoiceRepository.findById(id).get();
-
-		invoice.setClient(clientRepository.findById(clientId).get());
-		invoice.setPreTax(preTax);
-		invoice.setAfterTax(preTax * 1.21);
-		invoice.setStatus(statusRepository.findById(statusId).get());
-		invoice.setPayment(paymentRepository.findById(paymentStatusId).get());
-		invoice.setSector(sectorRepository.findById(sectorId).get());
-
-		invoiceRepository.save(invoice);
 
 	}
 

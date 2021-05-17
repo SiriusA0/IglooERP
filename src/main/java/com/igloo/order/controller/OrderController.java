@@ -38,7 +38,7 @@ public class OrderController {
 	private AgentServices agentsService;
 
 	@GetMapping("/order")
-	public String readOrder(Model model) {
+	public String read(Model model) {
 
 		List<OrderResponse> orders = orderService.search(null, null, null, 1);
 		List<StatusResponse> statuses = statusesService.getAll();
@@ -65,10 +65,10 @@ public class OrderController {
 
 		if (id == null) {
 
-			orderService.createOrder(totalAmount, statusId, agentId, clientId, sectorId);
+			orderService.create(totalAmount, statusId, agentId, clientId, sectorId);
 		} else {
 
-			orderService.editOrder(id, totalAmount, statusId, agentId, clientId, sectorId);
+			orderService.edit(id, totalAmount, statusId, agentId, clientId, sectorId);
 		}
 		return orderService.search(action, option, term, page);
 	}
@@ -76,12 +76,12 @@ public class OrderController {
 	@GetMapping("api/order/find")
 	@ResponseBody
 	public OrderResponse find_API(@RequestParam Integer id) {
-		return orderService.findOrder(id);
+		return orderService.find(id);
 	}
 
 	@GetMapping("api/order/get")
 	@ResponseBody
-	public List<OrderResponse> buscador(@RequestParam(required = false) String action,
+	public List<OrderResponse> search_API(@RequestParam(required = false) String action,
 			@RequestParam(required = false) String option, @RequestParam(required = false) String term,
 			@RequestParam(required = false) Integer page) {
 
@@ -95,7 +95,7 @@ public class OrderController {
 			@RequestParam(required = false) String option, @RequestParam(required = false) String term,
 			@RequestParam(required = false) Integer page) {
 
-		orderService.deleteOrder(id);
+		orderService.delete(id);
 		List<OrderResponse> orders = orderService.search(action, option, term, page);
 		return orders;
 	}

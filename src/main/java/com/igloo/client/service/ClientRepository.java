@@ -15,12 +15,7 @@ public interface ClientRepository extends JpaRepository<Client, Integer> {
 
     List<Client> findByFirstNameContainingOrLastNameContaining(String searchTerm1,String searchTerm2, Pageable pageable);
 
-    List<Client> findAllByOrderByLastNameAsc();
-    List<Client> findAllByOrderByLastNameDesc();
-
-    List<Client> findAllByOrderByIdAsc();
-    List<Client> findAllByOrderByIdDesc();
-    
+  
     List<Client> findByFavoriteIs(Boolean favorite, Pageable pageable);
 
 	

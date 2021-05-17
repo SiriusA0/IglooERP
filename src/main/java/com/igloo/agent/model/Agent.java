@@ -11,83 +11,84 @@ import com.igloo.order.model.Order;
 @Table(name = "agents")
 public class Agent {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
-    @Column(name = "first_name")
-    private String firstName;
+	@Column(name = "first_name")
+	private String firstName;
 
-    @Column(name = "last_name")
-    private String lastName;
+	@Column(name = "last_name")
+	private String lastName;
 
-    @Column
-    private String email;
-    
-    @Column
-    private Boolean favorite;
+	@Column
+	private String email;
+
+	@Column
+	private Boolean favorite;
 
 	@Column(name = "profile_pic")
-    private String profilePic;
+	private String profilePic;
 
-    @OneToMany(mappedBy = "agent"/**, fetch = FetchType.EAGER**/)
-    private List<Order> orders = new LinkedList<Order>();
+	@OneToMany(mappedBy = "agent"/** , fetch = FetchType.EAGER **/
+	)
+	private List<Order> orders = new LinkedList<Order>();
 
-    public Agent() {
+	public Agent() {
 
-    }
+	}
 
-    public Agent(String firstName, String lastName, String email, String profilePic, List<Order> orders) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.profilePic = profilePic;
-        this.orders = orders;
+	public Agent(String firstName, String lastName, String email, String profilePic, List<Order> orders) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.profilePic = profilePic;
+		this.orders = orders;
 
-    }
+	}
 
-    public Agent(int id, String firstName, String lastName, String email, String profilePic, List<Order> orders) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.profilePic = profilePic;
-        this.orders = orders;
-    }
+	public Agent(int id, String firstName, String lastName, String email, String profilePic, List<Order> orders) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.profilePic = profilePic;
+		this.orders = orders;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getFirstName() {
-        return firstName;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    
-    public Boolean getFavorite() {
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Boolean getFavorite() {
 		return favorite;
 	}
 
@@ -95,21 +96,20 @@ public class Agent {
 		this.favorite = favorite;
 	}
 
-    public String getProfilePic() {
-        return profilePic;
-    }
+	public String getProfilePic() {
+		return profilePic;
+	}
 
-    public void setProfilePic(String profilePic) {
-        this.profilePic = profilePic;
-    }
+	public void setProfilePic(String profilePic) {
+		this.profilePic = profilePic;
+	}
 
-    public List<Order> getOrders() {
-        return orders;
-    }
+	public List<Order> getOrders() {
+		return orders;
+	}
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
-
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
 
 }

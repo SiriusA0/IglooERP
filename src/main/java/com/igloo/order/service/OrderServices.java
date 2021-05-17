@@ -36,7 +36,7 @@ public class OrderServices {
 	@Autowired
 	private SectorRepository sectorRepository;
 
-	public List<OrderResponse> createOrder(double totalAmount, Integer statusId, Integer agentId, Integer clientId,
+	public List<OrderResponse> create(double totalAmount, Integer statusId, Integer agentId, Integer clientId,
 			Integer sectorId) {
 
 		Calendar calendar = Calendar.getInstance();
@@ -61,6 +61,29 @@ public class OrderServices {
 		orders.add(order);
 
 		return orderAdapter.of(orders);
+	}
+
+	public void edit(Integer id, double totalAmount, Integer statusId, Integer agentId, Integer clientId,
+			Integer sectorId) {
+		Order order = orderRepository.findById(id).get();
+
+		order.setTotalAmount(totalAmount);
+		order.setStatus(statusRepository.findById(statusId).get());
+		order.setAgent(agentRepository.findById(agentId).get());
+		order.setClient(clientRepository.findById(clientId).get());
+		order.setSector(sectorRepository.findById(sectorId).get());
+
+		orderRepository.save(order);
+
+	}
+
+	public OrderResponse find(Integer id) {
+
+		Order order = new Order();
+
+		order = orderRepository.findById(id).get();
+		orderRepository.save(order);
+		return orderAdapter.of(order);
 	}
 
 	public List<OrderResponse> search(String action, String option, String term, Integer page) {
@@ -96,7 +119,7 @@ public class OrderServices {
 		return orderAdapter.of(orders);
 	}
 
-	public void deleteOrder(String idtodelete) {
+	public void delete(String idtodelete) {
 
 		String idArray[] = idtodelete.split(",");
 		for (String i : idArray) {
@@ -106,26 +129,4 @@ public class OrderServices {
 
 	}
 
-	public OrderResponse findOrder(Integer id) {
-
-		Order order = new Order();
-
-		order = orderRepository.findById(id).get();
-		orderRepository.save(order);
-		return orderAdapter.of(order);
-	}
-
-	public void editOrder(Integer id, double totalAmount, Integer statusId, Integer agentId, Integer clientId,
-			Integer sectorId) {
-		Order order = orderRepository.findById(id).get();
-
-		order.setTotalAmount(totalAmount);
-		order.setStatus(statusRepository.findById(statusId).get());
-		order.setAgent(agentRepository.findById(agentId).get());
-		order.setClient(clientRepository.findById(clientId).get());
-		order.setSector(sectorRepository.findById(sectorId).get());
-
-		orderRepository.save(order);
-
-	}
 }

@@ -11,12 +11,9 @@ import java.util.List;
 @Repository
 public interface AgentRepository extends JpaRepository<Agent, Integer> {
 
-    List<Agent> findByFirstNameContainingOrLastNameContaining(String searchTerm1,String searchTerm2, Pageable pageable);
+	List<Agent> findByFirstNameContainingOrLastNameContaining(String searchTerm1, String searchTerm2,
+			Pageable pageable);
 
-  
-    List<Agent> findByFavoriteIs(Boolean favorite, Pageable pageable);
+	List<Agent> findByFavoriteIs(Boolean favorite, Pageable pageable);
 
 }
-
-
-

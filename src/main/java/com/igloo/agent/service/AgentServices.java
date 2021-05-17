@@ -21,110 +21,100 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Service
 public class AgentServices {
 
-    @Autowired
-    private AgentRepository agentRepo;
+	@Autowired
+	private AgentRepository agentRepository;
 
-    @Autowired
-    private AgentAdapter agentAdapter;
+	@Autowired
+	private AgentAdapter agentAdapter;
 
-    public List<AgentResponse> get() {
+	public List<AgentResponse> get() {
 
-        List<Agent> agents = agentRepo.findAll();
-        return agentAdapter.of(agents);
+		List<Agent> agents = agentRepository.findAll();
+		return agentAdapter.of(agents);
 
+	}
 
-    }
-    
-    
-    
-    public List<AgentResponse> search(String action, String option, String term, Integer page) {
+	public Agent create(String firstName, String lastName, String email, String profilePic) {
 
+		Agent agent = new Agent();
+		agent.setFirstName(firstName);
+		agent.setLastName(lastName);
+		agent.setEmail(email);
+		agent.setProfilePic(profilePic);
+		agentRepository.save(agent);
+		return agent;
+	}
 
-        List<Agent> agents = null;
+	public void edit(Integer id, String firstName, String lastName, String email, String profilePic) {
 
-        if (page == null) {
-            page = 1;
-        }
+		Agent agent = agentRepository.findById(id).get();
 
-        if (action == null || action.isEmpty()) {
-            Pageable pageable = PageRequest.of(page - 1, 8);
-            Page<Agent> lista = agentRepo.findAll(pageable);
-            agents = lista.getContent();
+		agent.setFirstName(firstName);
+		agent.setLastName(lastName);
+		agent.setEmail(email);
+		agent.setProfilePic(profilePic);
+		agentRepository.save(agent);
 
-        } else if (action.equals("sort")) {
-            Sort.Direction direction = Sort.Direction.fromString(option);
-            Sort sort = Sort.by(direction, term);
-            Pageable pageable = PageRequest.of(page - 1, 8, sort);
-            agents = agentRepo.findAll(pageable).getContent();
+	}
 
-        } else if (action.equals("search")) {
-            if (option.equals("agent") ) {
-                Pageable pageable = PageRequest.of(page - 1, 8);
-                agents = agentRepo.findByFirstNameContainingOrLastNameContaining(term, term, pageable);
-            }else if(option.equals("favorite")) {
-            	
-            	Pageable pageable = PageRequest.of(page - 1, 8);
-            	agents = agentRepo.findByFavoriteIs(true, pageable);
-            }
+	public List<AgentResponse> search(String action, String option, String term, Integer page) {
 
-        }
+		List<Agent> agents = null;
 
-       
-        return agentAdapter.of(agents);
-    }
-	
+		if (page == null) {
+			page = 1;
+		}
 
-    public Agent createAgent(String firstName, String lastName, String email, String profilePic) {
-    	
-        Agent agent = new Agent();
-        agent.setFirstName(firstName);
-        agent.setLastName(lastName);
-        agent.setEmail(email);
-        agent.setProfilePic(profilePic);
-        agentRepo.save(agent);
-        return agent;
-    }
+		if (action == null || action.isEmpty()) {
+			Pageable pageable = PageRequest.of(page - 1, 8);
+			Page<Agent> lista = agentRepository.findAll(pageable);
+			agents = lista.getContent();
 
-    public void deleteAgent(String idtodelete) {
+		} else if (action.equals("sort")) {
+			Sort.Direction direction = Sort.Direction.fromString(option);
+			Sort sort = Sort.by(direction, term);
+			Pageable pageable = PageRequest.of(page - 1, 8, sort);
+			agents = agentRepository.findAll(pageable).getContent();
 
-        String idArray[] = idtodelete.split(",");
-        for (String i : idArray) {
-            int id = Integer.valueOf(i);
-            agentRepo.deleteById(id);
-        }
+		} else if (action.equals("search")) {
+			if (option.equals("agent")) {
+				Pageable pageable = PageRequest.of(page - 1, 8);
+				agents = agentRepository.findByFirstNameContainingOrLastNameContaining(term, term, pageable);
+			} else if (option.equals("favorite")) {
 
-    }
-    
- public void addFavorite(Integer id){
-    	
-	 	Agent agent = agentRepo.findById(id).get();
-    	
-    	
-    	if(agent.getFavorite() == false || agent.getFavorite() == null) {
-    		
-    		agent.setFavorite(true);
-    	}else {
-    		
-    		agent.setFavorite(false);
-    	}
-    	
-    	
-    	agentRepo.save(agent);
+				Pageable pageable = PageRequest.of(page - 1, 8);
+				agents = agentRepository.findByFavoriteIs(true, pageable);
+			}
 
-    }
-    
-    public void editAgent(Integer id, String firstName, String lastName, String email, String profilePic) {
-    	
-    	Agent agent = agentRepo.findById(id).get();
-    	
-    	agent.setFirstName(firstName);
-        agent.setLastName(lastName);
-        agent.setEmail(email);
-        agent.setProfilePic(profilePic);
-        agentRepo.save(agent);
-    	
-    	
-    	
-    }
+		}
+
+		return agentAdapter.of(agents);
+	}
+
+	public void delete(String idtodelete) {
+
+		String idArray[] = idtodelete.split(",");
+		for (String i : idArray) {
+			int id = Integer.valueOf(i);
+			agentRepository.deleteById(id);
+		}
+
+	}
+
+	public void addFavorite(Integer id) {
+
+		Agent agent = agentRepository.findById(id).get();
+
+		if (agent.getFavorite() == false || agent.getFavorite() == null) {
+
+			agent.setFavorite(true);
+		} else {
+
+			agent.setFavorite(false);
+		}
+
+		agentRepository.save(agent);
+
+	}
 
 }

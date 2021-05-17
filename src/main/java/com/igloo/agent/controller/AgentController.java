@@ -16,85 +16,76 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class AgentController {
 
+	@Autowired
+	private AgentRepository agentRepository;
 
-    @Autowired
-    private AgentRepository agentRepo;
+	@Autowired
+	private AgentServices agentService;
 
-    @Autowired
-    private AgentServices agentServ;
+	@GetMapping("/agent")
+	public String read(Model model) {
 
+		List<AgentResponse> agents = agentService.get();
 
-    @GetMapping("/agent")
-    public String readAgent(Model model) {
+		model.addAttribute("agents", agents);
 
-        List<AgentResponse> agents = agentServ.get();
+		return "agent/list";
+	}
 
-        model.addAttribute("agents", agents);
+//    @PostMapping("/agent")
+//    public String readAgent_form(String lastName, String firstName) {
+//
+//        //agentServ.create(lastName,firstName);
+//
+//        return "redirect:/agent";
+//    }
 
+	@GetMapping("/api/agent/add")
+	@ResponseBody
+	public List<AgentResponse> add_API(@RequestParam(required = false) Integer id, @RequestParam String firstName,
+			@RequestParam String lastName, @RequestParam String email, @RequestParam String profilePic,
+			@RequestParam(required = false) String action, @RequestParam(required = false) String option,
+			@RequestParam(required = false) String term, @RequestParam(required = false) Integer page) {
 
-        return "agent/list";
-    }
+		if (id == null) {
 
-    @PostMapping("/agent")
-    public String readAgent_form(String lastName, String firstName) {
+			agentService.create(firstName, lastName, email, profilePic);
+		} else {
 
-        //agentServ.create(lastName,firstName);
+			agentService.edit(id, firstName, lastName, email, profilePic);
 
-        return "redirect:/agent";
-    }
-    
-    @GetMapping("api/agent/get")
-    @ResponseBody
-    public List<AgentResponse> buscador(@RequestParam(required = false) String action,
-                                          @RequestParam(required = false) String option,
-                                          @RequestParam(required = false) String term, @RequestParam(required = false) Integer page ) {
+		}
 
+		return agentService.search(action, option, term, page);
+	}
 
-        List<AgentResponse> agents = agentServ.search(action, option, term, page);
+	@GetMapping("api/agent/get")
+	@ResponseBody
+	public List<AgentResponse> search_API(@RequestParam(required = false) String action,
+			@RequestParam(required = false) String option, @RequestParam(required = false) String term,
+			@RequestParam(required = false) Integer page) {
 
-        return agents;
-    }
+		List<AgentResponse> agents = agentService.search(action, option, term, page);
 
+		return agents;
+	}
 
+	@GetMapping("/api/agent/delete")
+	@ResponseBody
+	public List<AgentResponse> delete_API(@RequestParam String id, @RequestParam(required = false) String action,
+			@RequestParam(required = false) String option, @RequestParam(required = false) String term,
+			@RequestParam(required = false) Integer page) {
 
-    @GetMapping("/api/agent/add")
-    @ResponseBody
-    public List<AgentResponse> add_API(@RequestParam(required = false)Integer id,
-    		@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String profilePic,
-    		@RequestParam(required = false) String action,
-    		@RequestParam(required = false) String option, @RequestParam(required = false) String term, @RequestParam(required = false) Integer page) {
+		agentService.delete(id);
+		return agentService.search(action, option, term, page);
+	}
 
-    	if(id == null) {
-    		
-    		agentServ.createAgent(firstName, lastName, email, profilePic);	
-    	}else {
-    		
-    		agentServ.editAgent(id, firstName, lastName, email, profilePic);
-    		
-    	}
-    	
-        return agentServ.search(action, option,term,page);
-    }
-    
-    @GetMapping("/api/agent/favorite")
-    @ResponseBody
-    public void favorite_API(@RequestParam Integer id){
-    	
-    	 agentServ.addFavorite(id);
-    	
-    	
-    }
+	@GetMapping("/api/agent/favorite")
+	@ResponseBody
+	public void favorite_API(@RequestParam Integer id) {
 
-    @GetMapping("/api/agent/delete")
-    @ResponseBody
-    public List<AgentResponse> delete_API(@RequestParam String id, @RequestParam(required = false) String action,
-    		@RequestParam(required = false) String option, @RequestParam(required = false) String term, @RequestParam(required = false) Integer page) {
+		agentService.addFavorite(id);
 
-        agentServ.deleteAgent(id);
-        return agentServ.search(action, option,term,page);
-    }
-
-
+	}
 
 }
-

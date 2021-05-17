@@ -66,9 +66,9 @@ public class InvoiceController {
 			@RequestParam(required = false) Integer page) {
 
 		if (id == null) {
-			invoiceService.createInvoice(clientId, null, preTax, statusId, paymentStatusId, sectorId);
+			invoiceService.create(clientId, null, preTax, statusId, paymentStatusId, sectorId);
 		} else {
-			invoiceService.editInvoice(id, clientId, preTax, statusId, paymentStatusId, sectorId);
+			invoiceService.edit(id, clientId, preTax, statusId, paymentStatusId, sectorId);
 		}
 		return invoiceService.search(action, option, term, page);
 	}
@@ -76,7 +76,7 @@ public class InvoiceController {
 	@GetMapping("api/invoice/find")
 	@ResponseBody
 	public InvoiceResponse find_API(@RequestParam Integer id) {
-		return invoiceService.findInvoice(id);
+		return invoiceService.find(id);
 	}
 
 	@GetMapping("api/invoice/get")
@@ -96,7 +96,7 @@ public class InvoiceController {
 			@RequestParam(required = false) String option, @RequestParam(required = false) String term,
 			@RequestParam(required = false) Integer page) {
 
-		invoiceService.deleteOrder(id);
+		invoiceService.delete(id);
 
 		List<InvoiceResponse> invoices = invoiceService.search(action, option, term, page);
 
