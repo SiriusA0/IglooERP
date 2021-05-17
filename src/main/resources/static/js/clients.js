@@ -56,7 +56,7 @@ function updatePages(currentPage) {
   pageIndicators.querySelector("#currentPageItem").style.color = "#59bec9";
 }
 ////////// Fetch //////////
-function fetchRequest(finalRequest, globalSearch) { //toast
+function fetchRequest(finalRequest,toast, globalSearch) { //toast
   if (globalSearch) {
     search_url = finalRequest;
     console.log("Search url:" + search_url);
@@ -67,13 +67,13 @@ function fetchRequest(finalRequest, globalSearch) { //toast
     .then((clients) => {
       cleanList();
       fillList(clients);
-    /*   if (toast != null) {
+    /*  if (toast != null) {
         $(document).ready(function () {
           {
             $(toast).toast("show");
           } 
         });
-      }*/
+      } */
     });
   //resetSelectedList();
 }
@@ -289,11 +289,14 @@ function favClient(event){
 
 
 /////////////////////////////Edit Client ////////////////////////////
-function editClientForm(){
+/* function editClientForm(event){
   document.querySelector("#editForm").style.display="";
   document.querySelector("#clientForm").style.display="none";
+  var clientInfo=event.currentTarget.closest(".clientInfo")
+  var clientId=clientInfo.id;
+  urledit=
 
-}
+} */
 
 
 function editClient(){
@@ -312,7 +315,7 @@ function getClients(action, sortTerm, sortMethod, resetPage) {
   var request = server_url + "/api/client/get";
   var finalRequest;
   // Action selector
-  debugger
+
   switch (action) {
 	
     case "sort": // Sort request
@@ -333,7 +336,7 @@ function getClients(action, sortTerm, sortMethod, resetPage) {
     case "searchFavorites": {
  		// Search favorite clients
 	    // Search Definition.
-	    var searchRequest = request + "?action=search&";
+	    var searchRequest = request + "?action=search";
 	     // Request Parameter.
 	     finalRequest = searchRequest + "&option=favorite";
    		 break;
@@ -388,6 +391,24 @@ function cleanList(event) {
 }
 ////////////////////////////////////// Fill Client //////////////////////////////////////
 function fillList(clients) {
+
+   if (clients.length == 0) {
+    currentPageGlobal = currentPageGlobal - 1;
+    document.querySelector("#nextPage").disabled = true;
+    var afterTableContainer = document.querySelector("#afterTableContainer");
+    afterTableContainer.innerHTML = "";
+    var afterTableContainer = document.querySelector("#afterTableContainer");
+    var noMoreResultAlert = document.createElement("div");
+    noMoreResultAlert.className = "alert alert-dark";
+    noMoreResultAlert.role = "alert alert";
+    noMoreResultAlert.innerHTML = "No more results to show";
+    afterTableContainer.appendChild(noMoreResultAlert);
+  } else {
+    var afterTableContainer = document.querySelector("#afterTableContainer");
+    afterTableContainer.innerHTML = "";
+    document.querySelector("#nextPage").disabled = false;
+  } 
+
 
   var cardContainer=document.querySelector("#clientsContainer");
   for (i in clients){

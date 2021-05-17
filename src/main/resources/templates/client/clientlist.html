@@ -543,23 +543,23 @@
             </div>
             <div id="afterTableContainer"></div>
             <!-- Pagination INI -->
-          <nav>
-            <ul class="pagination justify-content-center" id="paginationControls">
-              <li class="page-item">
-                <button onclick="prevPage(event)" class="page-link" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </button>
-              </li>
-              <li class="page-item">
-                <a style="color: #59bec9" id="currentPageItem" class="page-link">1</a>
-              </li>
-              <li class="page-item">
-                <button onclick="nextPage(event)" class="page-link" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </button>
-              </li>
-            </ul>
-          </nav>
+            <nav>
+              <ul class="pagination justify-content-center" id="paginationControls">
+                <li class="page-item">
+                  <button id="prevPage" onclick="prevPage(event)" class="page-link" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                  </button>
+                </li>
+                <li class="page-item">
+                  <a style="color: #59bec9" id="currentPageItem" class="page-link">1</a>
+                </li>
+                <li class="page-item">
+                  <button id="nextPage" onclick="nextPage(event)" class="page-link" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                  </button>
+                </li>
+              </ul>
+            </nav>
 <!-- Pagination END --> 
           </div>
         </div>
