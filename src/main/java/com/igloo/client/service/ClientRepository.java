@@ -8,15 +8,12 @@ import org.springframework.stereotype.Repository;
 
 import com.igloo.client.model.Client;
 
-
-
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Integer> {
 
-    List<Client> findByFirstNameContainingOrLastNameContaining(String searchTerm1,String searchTerm2, Pageable pageable);
+	List<Client> findByFirstNameContainingOrLastNameContaining(String searchTerm1, String searchTerm2,
+			Pageable pageable);
 
-  
-    List<Client> findByFavoriteIs(Boolean favorite, Pageable pageable);
+	List<Client> findByFavoriteIs(Boolean favorite, Pageable pageable);
 
-	
 }

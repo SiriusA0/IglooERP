@@ -32,7 +32,6 @@ public class ClientService {
 	@Autowired
 	private ClientAdapter clientadapter;
 
-
 	public List<ClientResponse> get() {
 
 		List<Client> clients = clientRepository.findAll();
