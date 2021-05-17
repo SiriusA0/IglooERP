@@ -1,3 +1,7 @@
+/* Fixed menus */
+.igloo-container {
+  margin-top: 56px;
+}
 /* Lateral Menu */
 .lateralMenu {
   background-color: rgb(53, 58, 64, 0.6);
@@ -23,7 +27,6 @@
   color: black;
   font-family: "Titillium Web", sans-serif;
 }
-
 /* Input Search */
 .search {
   background-color: rgb(53, 58, 64, 0.2);
