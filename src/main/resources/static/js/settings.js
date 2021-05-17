@@ -267,7 +267,7 @@ document.querySelector("#sectorForm").style.display = "none";
 
 function showSectorsTable() {
 
-  fetch("http://localhost:8080/api/sector/show")
+  fetch("http://localhost:8080/api/sector/get")
       .then(r => r.json())
       .then(sectors => {
           cleanTable("sectorTable");
