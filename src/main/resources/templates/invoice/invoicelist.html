@@ -61,7 +61,7 @@
             <span class="nav-link">Orders</span>
           </li>
           <li role="button" onclick="window.location.href='/invoice'" class="nav-item">
-            <span class="nav-link">Billing</span>
+            <span class="nav-link"><b class="nav-location-font"> Billing</b> </span>
           </li>
           <li role="button" onclick="window.location.href='/settings'" class="nav-item">
             <span class="nav-link">Settings</span>
@@ -74,7 +74,7 @@
     </nav>
     <div class="container-fluid igloo-container">
       <div class="row">
-        <div class="col-2 lateralMenu  border-top">
+        <div class="col-2 lateralMenu border-top">
           <div class="row mt-5">
             <div class="col">
               <h3 class="filterText pl-1">Invoices</h3>
@@ -187,7 +187,8 @@
                 class="btn btn-del btn-lg btn-block filterText"
                 data-toggle="modal"
                 data-target="#batchDeleteModal"
-                disabled="true";
+                disabled="true"
+                ;
               >
                 Delete Selected Invoices
               </button>
@@ -202,7 +203,7 @@
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="preTax">Pre Tax Amount</label>
-                    <input type="number" class="form-control" name="preTax" min="0"/>
+                    <input type="number" class="form-control" name="preTax" min="0" />
                   </div>
                   <div class="form-group col-md-6">
                     <label for="clientId">Client</label>
@@ -287,7 +288,11 @@
                   <div class="form-group col-md-6">
                     <label for="paymentStatusIdEdited">Payment Status</label>
                     <select class="form-control" name="paymentStatusIdEdited">
-                      <option th:each="paymentStatus: ${paymentStatuses}" th:value="${paymentStatus.id}" th:text="${paymentStatus.name}"></option>
+                      <option
+                        th:each="paymentStatus: ${paymentStatuses}"
+                        th:value="${paymentStatus.id}"
+                        th:text="${paymentStatus.name}"
+                      ></option>
                     </select>
                   </div>
                 </div>
