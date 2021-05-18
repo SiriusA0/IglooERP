@@ -59,6 +59,8 @@ public class ClientController {
 		model.addAttribute("regions", regions);
 		model.addAttribute("categories", categories);
 
+		model.addAttribute("title_section", 2);
+
 		return "client/clientlist";
 	}
 
@@ -133,7 +135,7 @@ public class ClientController {
 		Boolean correct = clientService.delete(id);
 		List<ClientResponse> clients;
 		if (correct) {
-			clients = clientService.search(action,option,term,page);
+			clients = clientService.search(action, option, term, page);
 		} else {
 			clients = new LinkedList<ClientResponse>();
 		}

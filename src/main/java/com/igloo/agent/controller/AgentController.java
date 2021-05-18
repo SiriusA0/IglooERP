@@ -29,6 +29,7 @@ public class AgentController {
 		List<AgentResponse> agents = agentService.get();
 
 		model.addAttribute("agents", agents);
+		model.addAttribute("title_section", 1);
 
 		return "agent/list";
 	}

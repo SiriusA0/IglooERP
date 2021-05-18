@@ -52,6 +52,8 @@ public class InvoiceController {
 		model.addAttribute("sectors", sectors);
 		model.addAttribute("clients", clients);
 		model.addAttribute("paymentStatuses", paymentStatuses);
+		
+		model.addAttribute("title_section", 4);
 
 		return "invoice/invoicelist";
 	}

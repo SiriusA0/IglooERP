@@ -14,9 +14,9 @@ public class SettingsController {
 	
 	
 	@GetMapping("/settings")
-    public String settings() {
+    public String settings(Model model) {
 
-       
+		model.addAttribute("title_section", 5);
 
         return "settings/settings";
     }
