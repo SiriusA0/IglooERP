@@ -425,12 +425,10 @@
                       name="category"
                       class="newClientFormInput inputBox form-control"
                     >
-                      <option>Labels</option>
-                      <option value="1">1A</option>
-                      <option value="2">1B</option>
-                      <option value="3">2A</option>
-                      <option value="4">2B</option>
-                      <option value="5">3B</option>
+                    <option>Labels</option>
+                    <option th:each="category: ${categories}"
+                    th:value="${category.id}"
+                    th:text="${category.name}"></option>
                     </select>
                   </div>
                 </div>
@@ -465,7 +463,7 @@
             </div>
           </div>
           <!-- create form end -->
-          <!-- Edit from -->
+          <!-- Edit form -->
           <div
             class="row createForm mt-5 ml-5 mr-5"
             id="clientEdit"
@@ -670,11 +668,9 @@
                       class="newClientFormInput inputBox form-control"
                     >
                       <option>Labels</option>
-                      <option value="1">1A</option>
-                      <option value="2">1B</option>
-                      <option value="3">2A</option>
-                      <option value="4">2B</option>
-                      <option value="5">3B</option>
+                      <option th:each="category: ${categories}"
+                              th:value="${category.id}"
+                              th:text="${category.name}"></option>
                     </select>
                   </div>
                 </div>
