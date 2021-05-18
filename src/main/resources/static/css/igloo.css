@@ -35,20 +35,23 @@
   color: rgb(53, 58, 64);
 }
 /* Filter Icons */
+.optionRow {
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+.optionRow:hover {
+  background-color: rgb(255, 255, 255, 0.1);
+}
 .filterIcons {
   color: whitesmoke;
   font-size: 1.5rem;
 }
-.filterIcons:hover {
-  color: #59bec9;
-}
 /* Filter Text */
 .filterText {
-  color: whitesmoke;
   font-family: "Titillium Web", sans-serif;
-}
-.filterText:hover {
-  color: #59bec9;
+  color: whitesmoke;
 }
 .filterTextDark {
   color: black;

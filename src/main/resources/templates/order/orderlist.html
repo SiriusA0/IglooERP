@@ -49,7 +49,7 @@
               <div class="col">
                 <div class="input-group">
                   <input
-                    onkeyup="getOrders('searchClient',null,null,true)"
+                    onkeyup="buttonFn(null,'searchClient',null,null,true)"
                     type="text"
                     id="searchTermClient"
                     class="form-control search filterText"
@@ -63,7 +63,7 @@
                 <button
                   type="button"
                   name="searchTermClient"
-                  onclick="getOrders('searchClient',null,null,true)"
+                  onclick="buttonFn(null,'searchClient',null,null,true)"
                   class="btn btn-sm btn-search filterText"
                 >
                   Search
@@ -76,7 +76,7 @@
               <div class="col">
                 <div class="input-group">
                   <input
-                    onkeyup="getOrders('searchAgent',null,null,true)"
+                    onkeyup="buttonFn(null,'searchAgent',null,null,true)"
                     type="text"
                     id="searchTermAgent"
                     class="form-control search filterText"
@@ -90,64 +90,85 @@
                 <button
                   type="button"
                   name="searchTermAgent"
-                  onclick="getOrders('searchAgent',null,null,true)"
-                  class="btn btn-sm btn-search filterText"
+                  onclick="buttonFn(null,'searchAgent',null,null,true)"
+                  class="btn btn-sm btn-search filterText lateralMenuAux"
+                  style="color: rgb(255, 255, 255)"
                 >
                   Search
                 </button>
               </div>
             </div>
           </div>
-          <div class="row mt-3 mb-3 pl-3">
+          <div
+            class="row mt-3 mb-3 pl-3 optionRow"
+            type="button"
+            onclick="buttonFn(event,'sort', 'totalAmount', 'asc',true)"
+          >
             <div class="col-2">
               <i
-                onclick="getOrders('sort', 'totalAmount', 'asc',true)"
                 id="idOrderAsc"
-                type="button"
-                class="fas fa-sort-numeric-up-alt filterIcons"
+                class="fas fa-sort-numeric-up-alt filterIcons lateralMenuAux"
+                style="color: rgb(255, 255, 255)"
               ></i>
             </div>
-            <div class="col-10">
-              <label for="idOrderAsc" class="filterText">Order by Amount (Asc)</label>
+            <div  class="col-10">
+              <label type="button" for="idOrderAsc" class="filterText lateralMenuAux" style="color: rgb(255, 255, 255)"
+                >Order by Amount (Asc)</label
+              >
             </div>
           </div>
-          <div class="row mt-3 mb-3 pl-3">
+          <div
+            type="button"
+            class="row mt-3 mb-3 pl-3 optionRow"
+            onclick="buttonFn(event,'sort', 'totalAmount', 'desc',true)"
+          >
             <div class="col-2">
               <i
-                onclick="getOrders('sort', 'totalAmount', 'desc',true)"
                 id="idOrderDesc"
-                type="button"
-                class="fas fa-sort-numeric-down-alt filterIcons"
+                class="fas fa-sort-numeric-down-alt filterIcons lateralMenuAux"
+                style="color: rgb(255, 255, 255)"
               ></i>
             </div>
-            <div class="col-10">
-              <label for="idOrderDesc" class="filterText">Order by Amount (Des)</label>
+            <div  class="col-10">
+              <label type="button" for="idOrderDesc" class="filterText lateralMenuAux" style="color: rgb(255, 255, 255)"
+                >Order by Amount (Des)</label
+              >
             </div>
           </div>
-          <div class="row mt-3 mb-3 pl-3">
+          <div
+            type="button"
+            class="row mt-3 mb-3 pl-3 optionRow"
+            onclick="buttonFn(event,'sort', 'creationDate', 'asc',true)"
+          >
             <div class="col-2">
               <i
-                onclick="getOrders('sort', 'creationDate', 'asc',true)"
                 id="creationDateOrderAsc"
-                type="button"
-                class="fas fa-sort-alpha-up-alt filterIcons"
+                class="fas fa-sort-alpha-up-alt filterIcons lateralMenuAux"
+                style="color: rgb(255, 255, 255)"
               ></i>
             </div>
-            <div class="col-10">
-              <label for="creationDateOrderAsc" class="filterText">Order by Creation Date (Asc)</label>
+            <div  class="col-10">
+              <label type="button" for="creationDateOrderAsc" class="filterText lateralMenuAux" style="color: rgb(255, 255, 255)"
+                >Order by Creation Date (Asc)</label
+              >
             </div>
           </div>
-          <div class="row mt-3 mb-3 pl-3">
+          <div
+            type="button"
+            class="row mt-3 mb-3 pl-3 optionRow"
+            onclick="buttonFn(event,'sort', 'creationDate', 'desc',true)"
+          >
             <div class="col-2">
               <i
-                onclick="getOrders('sort', 'creationDate', 'desc',true)"
                 id="creationDateOrderDesc"
-                type="button"
-                class="fas fa-sort-alpha-down-alt filterIcons"
+                class="fas fa-sort-alpha-down-alt filterIcons lateralMenuAux"
+                style="color: rgb(255, 255, 255)"
               ></i>
             </div>
-            <div class="col-10">
-              <label for="creationDateOrderDesc" class="filterText">Order by Creation Date (Des)</label>
+            <div  class="col-10">
+              <label type="button" for="creationDateOrderDesc" class="filterText lateralMenuAux" style="color: rgb(255, 255, 255)"
+                >Order by Creation Date (Des)</label
+              >
             </div>
           </div>
           <div class="row">

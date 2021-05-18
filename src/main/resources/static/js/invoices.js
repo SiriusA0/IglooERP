@@ -97,6 +97,27 @@ function fetchRequest(finalRequest, toast, globalSearch) {
   resetSelectedList();
 }
 ////////// Utilities //////////
+function buttonFn(event, action, sortTerm, sortMethod, resetPage) {
+  var aux = document.querySelectorAll(".lateralMenuAux");
+  console.log(aux);
+  for (var i = 0; i < aux.length; i++) {
+    console.log(aux[i].style.color);
+    aux[i].style.color = "rgb(255, 255, 255)";
+  }
+
+  if (event != null) {
+    var rowButton = event.currentTarget.closest(".row");
+    var ico = rowButton.querySelector("i");
+    var lab = rowButton.querySelector("label");
+    if (ico.style.color == "rgb(89, 190, 201)" && lab.style.color == "rgb(89, 190, 201)") {
+    } else if (ico.style.color == "rgb(255, 255, 255)" && lab.style.color == "rgb(255, 255, 255)") {
+      ico.style.color = "rgb(89, 190, 201)";
+      lab.style.color = "rgb(89, 190, 201)";
+    }
+  }
+
+  getInvoices(action, sortTerm, sortMethod, resetPage);
+}
 function resetSelectedList() {
   selectedInvoicesIds = [];
 }

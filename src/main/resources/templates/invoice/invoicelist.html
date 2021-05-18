@@ -49,7 +49,7 @@
               <div class="col">
                 <div class="input-group">
                   <input
-                    onkeyup="getInvoices('searchClient',null,null,true)"
+                    onkeyup="buttonFn(null,'searchClient',null,null,true)"
                     type="text"
                     id="searchTerm"
                     class="form-control search filterText"
@@ -63,7 +63,7 @@
                 <button
                   type="button"
                   name="searchTerm"
-                  onclick="getInvoices('searchClient',null,null,true)"
+                  onclick="buttonFn(event,'searchClient',null,null,true)"
                   class="btn btn-sm btn-search filterText"
                 >
                   Search
@@ -71,56 +71,76 @@
               </div>
             </div>
           </div>
-          <div class="row mt-3 mb-3 pl-3">
+          <div
+            class="row mt-3 mb-3 pl-3 optionRow"
+            type="button"
+            onclick="buttonFn(event,'sort', 'afterTax', 'asc',true)"
+          >
             <div class="col-2">
               <i
-                onclick="getInvoices('sort', 'afterTax', 'asc',true)"
                 id="idInvoiceAsc"
-                type="button"
-                class="fas fa-sort-numeric-up-alt filterIcons"
+                class="fas fa-sort-numeric-up-alt filterIcons lateralMenuAux"
+                style="color: rgb(255, 255, 255)"
               ></i>
             </div>
             <div class="col-10">
-              <label for="idInvoiceAsc" class="filterText">Invoice by Amount (Asc)</label>
+              <label type="button" for="idInvoiceAsc" class="filterText lateralMenuAux" style="color: rgb(255, 255, 255)"
+                >Invoice by Amount (Asc)</label
+              >
             </div>
           </div>
-          <div class="row mt-3 mb-3 pl-3">
+          <div
+            type="button"
+            class="row mt-3 mb-3 pl-3 optionRow"
+            onclick="buttonFn(event,'sort', 'afterTax', 'desc',true)"
+          >
             <div class="col-2">
               <i
-                onclick="getInvoices('sort', 'afterTax', 'desc',true)"
                 id="idInvoiceDesc"
-                type="button"
-                class="fas fa-sort-numeric-down-alt filterIcons"
+                class="fas fa-sort-numeric-down-alt filterIcons lateralMenuAux"
+                style="color: rgb(255, 255, 255)"
               ></i>
             </div>
             <div class="col-10">
-              <label for="idInvoiceDesc" class="filterText">Invoice by Amount (Des)</label>
+              <label type="button" for="idInvoiceDesc" class="filterText lateralMenuAux" style="color: rgb(255, 255, 255)"
+                >Invoice by Amount (Des)</label
+              >
             </div>
           </div>
-          <div class="row mt-3 mb-3 pl-3">
+          <div
+            type="button"
+            class="row mt-3 mb-3 pl-3 optionRow"
+            onclick="buttonFn(event,'sort', 'creationDate', 'asc',true)"
+          >
             <div class="col-2">
               <i
-                onclick="getInvoices('sort', 'creationDate', 'asc',true)"
                 id="creationDateInvoiceAsc"
-                type="button"
-                class="fas fa-sort-alpha-up-alt filterIcons"
+                class="fas fa-sort-alpha-up-alt filterIcons lateralMenuAux"
+                style="color: rgb(255, 255, 255)"
               ></i>
             </div>
             <div class="col-10">
-              <label for="creationDateInvoiceAsc" class="filterText">Invoice by Creation Date (Asc)</label>
+              <label type="button" for="creationDateInvoiceAsc" class="filterText lateralMenuAux" style="color: rgb(255, 255, 255)"
+                >Invoice by Creation Date (Asc)</label
+              >
             </div>
           </div>
-          <div class="row mt-3 mb-3 pl-3">
+          <div
+            class="row mt-3 mb-3 pl-3 optionRow"
+            type="button"
+            onclick="buttonFn(event,'sort', 'creationDate', 'desc',true)"
+          >
             <div class="col-2">
               <i
-                onclick="getInvoices('sort', 'creationDate', 'desc',true)"
                 id="creationDateInvoiceDesc"
-                type="button"
-                class="fas fa-sort-alpha-down-alt filterIcons"
+                class="fas fa-sort-alpha-down-alt filterIcons lateralMenuAux"
+                style="color: rgb(255, 255, 255)"
               ></i>
             </div>
             <div class="col-10">
-              <label for="creationDateInvoiceDesc" class="filterText">Invoice by Creation Date (Des)</label>
+              <label type="button" for="creationDateInvoiceDesc" class="filterText lateralMenuAux" style="color: rgb(255, 255, 255)"
+                >Invoice by Creation Date (Des)</label
+              >
             </div>
           </div>
           <div class="row">
