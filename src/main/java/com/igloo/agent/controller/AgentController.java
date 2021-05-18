@@ -26,7 +26,7 @@ public class AgentController {
 	@GetMapping("/agent")
 	public String read(Model model) {
 
-		List<AgentResponse> agents = agentService.get();
+		List<AgentResponse> agents = agentService.search(null, null, null, 1);
 
 		model.addAttribute("agents", agents);
 		model.addAttribute("title_section", 1);

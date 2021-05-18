@@ -118,7 +118,7 @@ public class AgentServices {
 
 		Agent agent = agentRepository.findById(id).get();
 
-		if (agent.getFavorite() == false || agent.getFavorite() == null) {
+		if (agent.getFavorite() == null || !agent.getFavorite()) {
 
 			agent.setFavorite(true);
 		} else {
