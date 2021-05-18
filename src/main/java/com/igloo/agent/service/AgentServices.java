@@ -100,13 +100,17 @@ public class AgentServices {
 		return agentAdapter.of(agents);
 	}
 
-	public void delete(String idtodelete) {
+	public Boolean delete(String id) {
 
-		String idArray[] = idtodelete.split(",");
-		for (String i : idArray) {
-			int id = Integer.valueOf(i);
-			agentRepository.deleteById(id);
+		Boolean correct = false;
+		try {
+			int idToDelete = Integer.valueOf(id);
+			agentRepository.deleteById(idToDelete);
+			correct = true;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
+		return correct;
 
 	}
 

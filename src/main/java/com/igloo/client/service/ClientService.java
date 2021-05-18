@@ -140,13 +140,17 @@ public class ClientService {
         return clientadapter.of(clients);
     }
 
-    public void delete(String idtodelete) {
+    public Boolean delete(String id) {
 
-        String idArray[] = idtodelete.split(",");
-        for (String i : idArray) {
-            int id = Integer.valueOf(i);
-            clientRepository.deleteById(id);
-        }
+    	Boolean correct = false;
+		try {
+			int idToDelete = Integer.valueOf(id);
+			clientRepository.deleteById(idToDelete);
+			correct = true;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return correct;
 
     }
 

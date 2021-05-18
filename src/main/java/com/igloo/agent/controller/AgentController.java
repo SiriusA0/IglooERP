@@ -6,6 +6,7 @@ import com.igloo.agent.service.AgentRepository;
 import com.igloo.agent.service.AgentServices;
 import com.igloo.client.response.ClientResponse;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,8 +83,14 @@ public class AgentController {
 			@RequestParam(required = false) String option, @RequestParam(required = false) String term,
 			@RequestParam(required = false) Integer page) {
 
-		agentService.delete(id);
-		return agentService.search(action, option, term, page);
+		Boolean correct = agentService.delete(id);
+		List<AgentResponse> agents;
+		if (correct) {
+			agents = agentService.search(action,option,term,page);
+		} else {
+			agents = new LinkedList<AgentResponse>();
+		}
+		return agents;
 	}
 
 	@GetMapping("/api/agent/favorite")

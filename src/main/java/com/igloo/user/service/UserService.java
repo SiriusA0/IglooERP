@@ -36,12 +36,20 @@ public class UserService {
 
 	public boolean logUserIn(String userName, String password) {
 
-		User user = userRepository.findByUserName(userName);
-		if (user.getPassword().equals(password)) {
-			return true;
-		}
+		Boolean correct = false;
 
-		return false;
+		try {
+
+			User user = userRepository.findByUserName(userName);
+			if (user.getPassword().equals(password)) {
+				correct = true;
+			}
+
+		} catch (Exception e) {
+
+			System.out.println(e.getMessage());
+		}
+		return correct;
 
 	}
 

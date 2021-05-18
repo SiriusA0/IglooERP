@@ -1,5 +1,6 @@
 package com.igloo.client.controller;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import com.igloo.invoice.response.InvoiceResponse;
 import com.igloo.order.response.OrderResponse;
 import com.igloo.region.response.RegionResponse;
 import com.igloo.region.service.RegionService;
+import com.igloo.status.response.StatusResponse;
 
 @Controller
 public class ClientController {
@@ -128,9 +130,13 @@ public class ClientController {
 			@RequestParam(required = false) String option, @RequestParam(required = false) String term,
 			@RequestParam(required = false) Integer page) {
 
-		clientService.delete(id);
-
-		List<ClientResponse> clients = clientService.search(action, option, term, page);
+		Boolean correct = clientService.delete(id);
+		List<ClientResponse> clients;
+		if (correct) {
+			clients = clientService.search(action,option,term,page);
+		} else {
+			clients = new LinkedList<ClientResponse>();
+		}
 		return clients;
 	}
 
