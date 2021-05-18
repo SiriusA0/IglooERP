@@ -517,7 +517,7 @@ function fillList(clients) {
     cardContainer.appendChild(cardBox);
 
     var cardRow = document.createElement("div");
-    cardRow.className = "row no-gutters";
+    cardRow.className = "row";
     cardBox.appendChild(cardRow);
 
     var cardFirstCol = document.createElement("div");
