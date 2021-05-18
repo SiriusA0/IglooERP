@@ -410,6 +410,7 @@ function cancelEditClient() {
 }
 ////////////////////////////////////// Get Client //////////////////////////////////////
 
+
 function getClients(action, sortTerm, sortMethod, resetPage) {
   if (resetPage) {
     currentPageGlobal = 1;
@@ -485,7 +486,26 @@ function deleteInvoice() {
     selectedInvoiceId = null;
   }
 }
+////////// Utilities //////////
+function buttonFn(event, action, sortTerm, sortMethod, resetPage) {
+  var aux = document.querySelectorAll(".lateralMenuAux");
+  console.log(aux);
+  for (var i = 0; i < aux.length; i++) {
+    aux[i].style.color = "rgb(255, 255, 255)";
+  }
 
+  if (event != null) {
+    var rowButton = event.currentTarget.closest(".row");
+    var ico = rowButton.querySelector("i");
+    var lab = rowButton.querySelector("label");
+    if (ico.style.color == "rgb(89, 190, 201)" && lab.style.color == "rgb(89, 190, 201)") {
+    } else if (ico.style.color == "rgb(255, 255, 255)" && lab.style.color == "rgb(255, 255, 255)") {
+      ico.style.color = "rgb(89, 190, 201)";
+      lab.style.color = "rgb(89, 190, 201)";
+    }
+  }
+  getClients(action, sortTerm, sortMethod, resetPage);
+}
 ////////////////////////////////////// Clean Client //////////////////////////////////////
 function cleanList(event) {
   document.querySelector("#clientsContainer").innerHTML = "";
