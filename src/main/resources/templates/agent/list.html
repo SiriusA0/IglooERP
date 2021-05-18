@@ -169,6 +169,50 @@
             </form>
           <div class="4"></div>
         </div>
+        <div class="row createForm m-5" id="agentEditForm" style="display: none">
+          <div class="col-8">
+            <form>
+              <div class="row">
+                <div class="col">
+                  <h2 class="filterTextDark">Edit Agent Form</h2>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="firstName">First Name</label>
+                  <input type="text" class="form-control" name="firstName" id="firstNameEdit" />
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="lastName">Last Name</label>
+                  <input type="text" class="form-control" name="lastName" id="lastNameEdit" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="email">Email</label>
+                  <input type="text" class="form-control" name="email" id="emailEdit" placeholder="snowman@igloo.com" />
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="email">Profile Picture</label>
+                  <input type="text" class="form-control" id="profilePicEdit" name="profilePic"
+                    placeholder="https://robohash.org/quoasdfsdffsdsendain.png?size=250x250&set=set1" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-2">
+                  <button type="button" onclick="editAgentConfirm()" class="btn btn-block btn-addAgent filterText">
+                    Edit
+                  </button>
+                </div>
+                <div class="form-group col-md-3">
+                  <button type="button" onclick="cancelEditAgent()" class="btn btn-block btn-addAgent filterText">
+                    Cancel Edit
+                  </button>
+                </div>
+            </div>
+            </div>
+          </form>
+        </div>
         <div class="row row-cols-1 row-cols-md-4 mr-5 mb-5 p-5" id="agentsContainer">
           <div th:each="agent:${agents}" class="col mb-4">
             <div class="card h-90 w-80">
@@ -177,11 +221,11 @@
                   <i type="button" onclick="favAgent(event)" class="far fa-star cardIcon"></i>
                 </div>
                 <div class="col-2 offset-6 d-flex justify-content-end">
-                  <i type="button" onclick="editAgentForm(event)" class="fas fa-edit cardIcon"></i>
+                  <i type="button" onclick="editAgent(event)" class="fas fa-edit cardIcon"></i>
                 </div>
                 <div class="col-2 d-flex justify-content-end">
                   <i type="button" onclick="deleteAgentModal(event)"
-                    class="fas fa-trash-alt cardIcon" data-toggle="modal" data-target="#deleteModal"></i></i>
+                    class="fas fa-trash-alt cardIcon" data-toggle="modal" data-target="#deleteModal"></i>
                 </div>
               </div>
               <div class="row" id="infernalRow">

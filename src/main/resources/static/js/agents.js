@@ -127,38 +127,71 @@ function cancelCreateAgent() {
 
 /////////////////////////////Edit Client ////////////////////////////
 var selectedAgentID = "";
-function editAgentForm(event) {
-
+function editAgent(event) {
+        console.log("hola")
         document.querySelector("#agentEditForm").style.display="";
         document.querySelector("#agentForm").style.display = "none";
         var agentCard = event.currentTarget.closest(".card");
         var h5Id = agentCard.querySelector(".cardId");
         var rawId = h5Id.innerHTML;
         var processedId = rawId.replace("#00", "");
-    
+        selectedAgentID= processedId;
 
   // Fetch request.
-  fetch("/api/agent/find?id=" + processedId)
+   fetch("/api/agent/find?id=" + processedId)
     .then((r) => r.json())
-    .then((agentToEdit) => {
-      // Get invoice old atributes.
-      document.querySelector("#firstNameEdit").value = agenToEdit.firstName;
+    .then((agentToEdit) => { 
+      // Get agent old atributes. 
+       document.querySelector("#firstNameEdit").value = agentToEdit.firstName;
       document.querySelector("#lastNameEdit").value = agentToEdit.lastName;
       document.querySelector("#emailEdit").value = agentToEdit.email;
-      document.querySelector("#profilePicEdit").value = agentToEdit.profilePic;
-       
-    }); 
+      document.querySelector("#profilePicEdit").value = agentToEdit.profilePic;  
+    });
 
-    var urlFinal = server_url + '/api/agent/add?id=" + agentId + "&"; + "firstName=" + firstName + "&" + "lastName=" + lastName + "&" + "email=" + email + "&" + "profilePic=" + profilePic;
+    //var urlFinal = server_url + '/api/agent/add?id=" + agentId + "&"; + "firstName=" + firstName + "&" + "lastName=" + lastName + "&" + "email=" + email + "&" + "profilePic=" + profilePic;
 }
 
-function editAgent() {
-  //var agentId = selectedAgentID;
-  // Request Definition.
-   var request = server_url + "/api/client/add?id=" + agentId + "&";
-    var urlFinal = server_url + '/api/agent/add?id=" + agentId + "&"; + "firstName=" + firstName + "&" + "lastName=" + lastName + "&" + "email=" + email + "&" + "profilePic=" + profilePic;
-  var finalRequest;
+function editAgentConfirm() {
+
+  var firstName=document.querySelector("#firstNameEdit").value ;
+  var lastName=document.querySelector("#lastNameEdit").value;
+  var email=document.querySelector("#emailEdit").value;
+  var profilePic=document.querySelector("#profilePicEdit").value ;
+
+  var agentId = selectedAgentID;
+ //Request Definition.
+   var request = server_url + "/api/agent/add?id=" + agentId + "&";
+    var editData = request + "firstName=" + firstName +
+     "&" + "lastName=" + 
+     lastName + "&" + 
+     "email=" + 
+     email + "&" + 
+     "profilePic=" + 
+     profilePic;
+  
+     finalRequest = editData;
+
+     var auxUrl = search_url;
+  auxUrl = auxUrl.split("?");
+  if (auxUrl[1].length > 0) {
+    finalRequest = finalRequest + "&page=" + currentPageGlobal + "&" + auxUrl[1];
+  } else {
+    finalRequest = finalRequest + "&page=" + currentPageGlobal;
+  }
+
+  fetchRequest(finalRequest, "#editToast");
+
+  document.querySelector("#agentEditForm").style.display = "none";
+
+
+
 }
+
+function cancelEditAgent() {
+  document.querySelector("#agentEditForm").style.display="none";
+
+} 
+
 
 //////////////////////////////// delete Agents /////////////////////////////////////
 
@@ -324,7 +357,7 @@ function fillList(agents) {
         var editIcon = document.createElement("i");
         editIcon.setAttribute("type", "button");
         editIcon.className = "fas fa-edit cardIcon";
-        editIcon.addEventListener("click", function (event) {editAgentForm(event)});
+        editIcon.addEventListener("click", function (event) {editAgent(event)});
     
 
         var binContainer = document.createElement("div");
