@@ -289,38 +289,155 @@ function favClient(event){
 
 
 /////////////////////////////Edit Client ////////////////////////////
-
+var selectedClientID=""
 function editClientForm(event){
   document.querySelector("#clientForm").style.display="none";
   document.querySelector("#clientEdit").style.display="";
   var clientInfo=event.currentTarget.closest(".clientInfo");
-  var clientId=clientInfo.id;
-
+  clientId=clientInfo.id;
+  selectedClientID=clientId
   // Fetch request.
   fetch("/api/client/find?id=" + clientId)
     .then((r) => r.json())
     .then((clientToEdit) => {
       console.log("Selected client: ", clientToEdit);
       // Get invoice old atributes.
-    /*   document.querySelector("input[name=clientName]").value = clientToEdit.firstname + "" + clientToEdit.lastname;
-      document.querySelector("input[name=companyAdress1Edit]").value =  clientToEdit.companyAdress1;
-      document.querySelector("input[name=phoneNumber1Edit]").value = clientToEdit.phoneNumber1
-      document.querySelector("input[name=companyAdress2Edit]").value = clientToEdit.companyAdress2;
+      document.querySelector("input[name=clientNameEdit]").value = clientToEdit.firstName + "" + clientToEdit.lastName;
+      document.querySelector("input[name=companyAdress1Edit]").value =  clientToEdit.streetLine1;
+      document.querySelector("input[name=phoneNumber1Edit]").value = clientToEdit.phoneNumber1;
+      document.querySelector("input[name=companyAdress2Edit]").value = clientToEdit.streetLine2;
       document.querySelector("input[name=phoneNumber2Edit]").value = clientToEdit.phoneNumber2;
-      document.querySelector("input[name=ZIPCodeEdit]").value =
-      document.querySelector("input[name=emailEdit]").value =
-      document.querySelector("input[name=webPageEdit]").value =
-      document.querySelector("input[name=nifEdit]").value =
-      document.querySelector("input[name=profilePicEdit]").value =
- */ 
-      /*  document.querySelector("select[name=clientIdEdited]").getElementsByTagName("option")[
-        invoiceToEdit.client.id - 1
+      document.querySelector("input[name=ZIPCodeEdit]").value = clientToEdit.zipCode;
+      document.querySelector("input[name=emailEdit]").value = clientToEdit.email;
+      document.querySelector("input[name=webPageEdit]").value = clientToEdit.web;
+      document.querySelector("input[name=nifEdit]").value = clientToEdit.idNumber;
+      document.querySelector("input[name=profilePicEdit]").value = clientToEdit.profilePic;
+
+      document.querySelector("select[name=cityEdit]").getElementsByTagName("option")[
+        clientToEdit.city.id - 1].selected = "selected";
+        document.querySelector("select[name=regionEdit]").getElementsByTagName("option")[
+          clientToEdit.region.id - 1
       ].selected = "selected";
-      console.log(document.querySelector("select[name=statusIdEdited]").getElementsByTagName("option"));
-      document.querySelector("select[name=statusIdEdited]").getElementsByTagName("option")[
-        invoiceToEdit.status.id - 1
-      ].selected = "selected"; */
+      document.querySelector("select[name=countryEdit]").getElementsByTagName("option")[
+        clientToEdit.country.id - 1
+      ].selected = "selected"; 
+      document.querySelector("select[name=categoryEdit]").getElementsByTagName("option")[
+        clientToEdit.category.id - 1
+      ].selected = "selected"; 
+    /*   document.querySelector("input[name=typeOfClientEdit]")[clientToEdit.type.id - 1
+      ].checked = "selected";  */
     });
+}
+
+
+function editClient(){
+    var clientId=selectedClientID;
+      // Request Definition.
+  var request = server_url + "/api/client/add?id=" + clientId+ "&";
+  var finalRequest;
+
+  // Get client new atributes.
+  var type = document.querySelector("input[name=typeOfClientEdit]").value;
+  var clientName = document.querySelector("input[name=clientNameEdit]").value;
+  clientName = clientName.split(" ");
+  var firstName = clientName[0];
+  var lastName = clientName[1];
+  var streetLine1 = document.querySelector("input[name=companyAdress1Edit]").value;
+  var streetLine2 = document.querySelector("input[name=companyAdress2Edit]").value;
+  var phoneNumber1 = document.querySelector("input[name=phoneNumber1Edit]").value;
+  var phoneNumber2 = document.querySelector("input[name=phoneNumber2Edit]").value;
+  var cityId = document.querySelector("select[name=cityEdit]").value;
+  var regionId = document.querySelector("select[name=regionEdit]").value;
+  var zipCode = document.querySelector("input[name=ZIPCodeEdit]").value;
+  var email = document.querySelector("input[name=emailEdit]").value;
+  var countryId = document.querySelector("select[name=countryEdit]").value;
+  var web = document.querySelector("input[name=webPageEdit]").value;
+  var idNumber = document.querySelector("input[name=nifEdit]").value;
+  var categoryId = document.querySelector("select[name=categoryEdit]").value;
+  var profilePic = document.querySelector("input[name=profilePicEdit]").value;
+
+  // Making the URL.
+  var editData = request +
+    "type" +
+    "=" +
+    type +
+    "&" +
+    "firstName" +
+    "=" +
+    firstName +
+    "&" +
+    "lastName" +
+    "=" +
+    lastName +
+    "&" +
+    "streetLine1" +
+    "=" +
+    streetLine1 +
+    "&" +
+    "streetLine2" +
+    "=" +
+    streetLine2 +
+    "&" +
+    "cityId" +
+    "=" +
+    cityId +
+    "&" +
+    "regionId" +
+    "=" +
+    regionId +
+    "&" +
+    "zipCode" +
+    "=" +
+    zipCode +
+    "&" +
+    "countryId" +
+    "=" +
+    countryId +
+    "&" +
+    "idNumber" +
+    "=" +
+    idNumber +
+    "&" +
+    "phoneNumber1" +
+    "=" +
+    phoneNumber1 +
+    "&" +
+    "phoneNumber2" +
+    "=" +
+    phoneNumber2 +
+    "&" +
+    "email" +
+    "=" +
+    email +
+    "&" +
+    "web" +
+    "=" +
+    web +
+    "&" +
+    "profilePic" +
+    "=" +
+    profilePic +
+    "&" +
+    "categoryId" +
+    "=" +
+    categoryId;
+
+    finalRequest = editData;
+
+    var auxUrl = search_url;
+    auxUrl = auxUrl.split("?");
+    if (auxUrl[1].length > 0) {
+    finalRequest = finalRequest + "&page=" + currentPageGlobal + "&" + auxUrl[1];
+    } else {
+    finalRequest = finalRequest + "&page=" + currentPageGlobal;
+     }
+
+     // Fetch request.
+  console.log(finalRequest);
+  fetchRequest(finalRequest, "#editToast", false);
+
+  document.querySelector("#clientEdit").style.display="none";
+
 }
 
 
