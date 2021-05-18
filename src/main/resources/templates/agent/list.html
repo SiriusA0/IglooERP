@@ -9,6 +9,8 @@
     <script src="bootstrap/js/jquery-3.6.0.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <!-- Script -->
+    <script src="js/igloo.js"></script>
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/e22ea825df.js" crossorigin="anonymous"></script>
     <!-- Libraries -->
@@ -16,7 +18,7 @@
     <link rel="stylesheet" href="css/igloo.css" />
     <!-- Scripts -->
     <script src="js/agents.js"></script>
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -24,7 +26,7 @@
       rel="stylesheet"
     />
   </head>
-  <body class="bg_igloo" style="height: 100%;">
+  <body class="bg_igloo" style="height: 100%">
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
       <a class="navbar-brand" href="/home"><i class="fas fa-igloo"></i></a>
       <button
@@ -60,9 +62,16 @@
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
+          <li class="mr-2 filterText" id="navBarUserName">Please log in</li>
           <li class="nav-item"><i style="color: white" class="fas fa-snowman"></i></li>
         </ul>
       </div>
+      <script>
+        var username = document.querySelector("#navBarUserName").innerHTML;
+        if (username == "Please log in") {
+          window.location.href = "/login?error=pleaselogin";
+        }
+      </script>
     </nav>
     <div class="container-fluid igloo-container">
       <div class="row">
@@ -169,7 +178,7 @@
           </div>
         </div>
 
-        <div class="col-10" style=" height: 1000px; width: fit-content">
+        <div class="col-10" style="height: 1000px; width: fit-content">
           <div class="row createForm m-5" id="agentForm" style="display: none">
             <div class="col-8">
               <form>
@@ -257,8 +266,10 @@
             </div>
           </div>
         </div>
-        
       </div>
     </div>
+    <script>
+      getCookie();
+    </script>
   </body>
 </html>

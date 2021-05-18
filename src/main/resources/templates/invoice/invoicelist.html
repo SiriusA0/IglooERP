@@ -19,6 +19,8 @@
       th:href="@{'/bootstrap/css/bootstrap.min.css'}"
       href="/src/main/resources/static/bootstrap/css/bootstrap.min.css"
     />
+    <!-- Script -->
+    <script src="js/igloo.js"></script>
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/e22ea825df.js" crossorigin="anonymous"></script>
     <!-- Libraries -->
@@ -68,9 +70,16 @@
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
+          <li class="mr-2 filterText" id="navBarUserName">Please log in</li>
           <li class="nav-item"><i style="color: white" class="fas fa-snowman"></i></li>
         </ul>
       </div>
+      <script>
+        var username = document.querySelector("#navBarUserName").innerHTML;
+        if (username == "Please log in") {
+          window.location.href = "/login?error=pleaselogin";
+        }
+      </script>
     </nav>
     <div class="container-fluid igloo-container">
       <div class="row">
@@ -478,5 +487,8 @@
         </div>
       </div>
     </div>
+    <script>
+      getCookie();
+    </script>
   </body>
 </html>

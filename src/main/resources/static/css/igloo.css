@@ -20,7 +20,6 @@
 .homeImg {
   height: 200px;
   width: 200px;
-
 }
 .homeButton {
   padding: 4rem;
@@ -47,6 +46,9 @@
 .filterText {
   color: whitesmoke;
   font-family: "Titillium Web", sans-serif;
+}
+.filterText:hover {
+  color: #59bec9;
 }
 .filterTextDark {
   color: black;
