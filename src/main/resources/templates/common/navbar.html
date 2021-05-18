@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" th:fragment="navbar">
+      <a class="navbar-brand" href="/home"><i class="fas fa-igloo"></i></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <label class="nav-brand mr-5 mt-2" style="color: white; font-family: 'Titillium Web', sans-serif"
+            ><b>Igloo</b></label
+          >
+          <li role="button" onclick="window.location.href='/agent'" class="nav-item">
+            <span class="nav-link">
+              <span th:class="${title_section == '1'} ? 'nav-location-font' : ''">Agents</span>
+            </span>
+          </li>
+          <li role="button" onclick="window.location.href='/client'" class="nav-item">
+            <span class="nav-link">
+              <span th:class="${title_section == '2'} ? 'nav-location-font' : ''">Clients</span>
+            </span>
+          </li>
+          <li role="button" onclick="window.location.href='/order'" class="nav-item">
+            <span class="nav-link">
+              <span th:class="${title_section == '3'} ? 'nav-location-font' : ''">Orders</span>
+            </span>
+          </li>
+          <li role="button" onclick="window.location.href='/invoice'" class="nav-item">
+            <span class="nav-link">
+              <span th:class="${title_section == '4'} ? 'nav-location-font' : ''">Invoices</span>
+            </span>
+          </li>
+          <li role="button" onclick="window.location.href='/settings'" class="nav-item">
+            <span class="nav-link">
+              <span th:class="${title_section == '5'} ? 'nav-location-font' : ''">Settings</span>
+            </span>
+          </li>
+          <li role="button" onclick="window.location.href='/mail'" class="nav-item">
+            <span class="nav-link">
+              <span th:class="${title_section == '6'} ? 'nav-location-font' : ''">Igloo Mail</span>
+            </span>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="mr-2 filterText" id="navBarUserName">Please log in</li>
+          <li class="nav-item"><i style="color: white" class="fas fa-snowman"></i></li>
+        </ul>
+      </div>
+      <script>
+        getCookie();
+        var username = document.querySelector("#navBarUserName").innerHTML;
+        if (username == "Please log in") {
+          window.location.href = "/login?error=pleaselogin";
+        }
+      </script>
+    </nav>
+
+    <div th:fragment="footer"></div>
+  </body>
+</html>

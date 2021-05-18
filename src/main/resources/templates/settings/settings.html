@@ -37,55 +37,7 @@
     />
   </head>
   <body class="bg_igloo" style="height: 100%">
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="/home"><i class="fas fa-igloo"></i></a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <label class="nav-brand mr-5 mt-2" style="color: white; font-family: 'Titillium Web', sans-serif"
-            ><b>Settings</b></label
-          >
-          <li role="button" onclick="window.location.href='/agent'" class="nav-item">
-            <span class="nav-link">Agents</span>
-          </li>
-          <li role="button" onclick="window.location.href='/client'" class="nav-item">
-            <span class="nav-link">Clients</span>
-          </li>
-          <li role="button" onclick="window.location.href='/order'" class="nav-item">
-            <span class="nav-link">Orders</span>
-          </li>
-          <li role="button" onclick="window.location.href='/invoice'" class="nav-item">
-            <span class="nav-link">Billing</span>
-          </li>
-          <li role="button" onclick="window.location.href='/settings'" class="nav-item">
-            <span class="nav-link"><b class="nav-location-font">Settings</b> </span>
-          </li>
-        </ul>
-        <ul class="navbar-nav ml-auto">
-          <li class="mr-2 filterText" id="navBarUserName">Please log in</li>
-          <li class="nav-item">
-            <i style="color: white" class="fas fa-snowman"></i>
-          </li>
-        </ul>
-      </div>
-      <script>
-        getCookie();
-        var username = document.querySelector("#navBarUserName").innerHTML;
-        if (username == "Please log in") {
-          window.location.href = "/login?error=pleaselogin";
-        }
-      </script>
-    </nav>
+    <nav th:replace="common/navbar::navbar"></nav>
     <div class="container-fluid igloo-container">
       <div class="row">
         <div class="col-2 lateralMenu border-top pb-5">
