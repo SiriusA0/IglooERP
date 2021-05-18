@@ -1,17 +1,94 @@
+/* Coded with love by Igloo team. */
+$(".toast").toast();
 // Server
-var server_url = 'http://localhost:8080/';
-// Add Agent Button
+var server_url = "http://localhost:8080/";
+var search_url = server_url + "/api/agent/get?";
+////////// Global VARs //////////
+var currentPageGlobal = 1; // Current invoices page
+function nextPage() {
+    var finalRequest = "";
+    currentPage = parseInt(currentPageGlobal);
+    if (currentPage > 0) {
+      var nextPage = currentPage + 1;
+      if (search_url.indexOf("&") != -1) {
+        search_url = search_url.split("&page")[0];
+        var auxUrl = search_url;
+        finalRequest = auxUrl + "&page=" + nextPage;
+      } else {
+        search_url = search_url.split("page")[0];
+        var auxUrl = search_url;
+        finalRequest = auxUrl + "page=" + nextPage;
+      }
+      fetchRequest(finalRequest, null);
+      currentPageGlobal = nextPage;
+      updatePages(nextPage);
+    }
+  }
+  function prevPage() {
+    var finalRequest = "";
+    currentPage = parseInt(currentPageGlobal);
+    if (currentPage > 0) {
+      var prevPage = currentPage - 1;
+      if (prevPage < 1) {
+        var prevPage = currentPage;
+      }
+      if (search_url.indexOf("&") != -1) {
+        search_url = search_url.split("&page")[0];
+        var auxUrl = search_url;
+        finalRequest = auxUrl + "&page=" + prevPage;
+      } else {
+        search_url = search_url.split("page")[0];
+        var auxUrl = search_url;
+        finalRequest = auxUrl + "page=" + prevPage;
+      }
+      fetchRequest(finalRequest, null);
+      currentPageGlobal = prevPage;
+      updatePages(prevPage);
+    }
+  }
+
+ 
+function updatePages(currentPage) {
+    currentPageInt = parseInt(currentPage);
+    var pageIndicators = document.querySelector("#paginationControls");
+    pageIndicators.querySelector("#currentPageItem").innerHTML = currentPageInt;
+    pageIndicators.querySelector("#currentPageItem").style.color = "#59bec9";
+  } 
+
+////////// Fetch //////////
+function fetchRequest(finalRequest, toast, globalSearch) {
+    //toast
+    if (globalSearch) {
+      search_url = finalRequest;
+      console.log("Search url:" + search_url);
+    }
+    console.log("Fetch request to: " + finalRequest);
+    fetch(finalRequest)
+      .then((r) => r.json())
+      .then((agents) => {
+        cleanList();
+        fillList(agents);
+        /*  if (toast != null) {
+          $(document).ready(function () {
+            {
+              $(toast).toast("show");
+            } 
+          });
+        } */
+      });
+    //resetSelectedList();
+  }
+////////////////////////////////////// Show Agent form //////////////////////////////////////
 function addAgent() {
 
     if (document.querySelector("#agentForm").style.display == "none") {
         document.querySelector("#agentForm").style.display = "";
     } else {
-        document.querySelector("#successAlert").style.display = "none";
         document.querySelector("#agentForm").style.display = "none";
     }
 
 }
-// FindAll agents
+
 function showAgents() {
 
     fetch("http://localhost:8080/api/agent/show")
@@ -22,7 +99,7 @@ function showAgents() {
         });
 }
 
-// Create Agent, Confirm agent button
+/////////////////////////////////////// Create Agent ////////////////////
 function createAgent() {
     var firstName = document.querySelector("#firstName").value;
     var lastName = document.querySelector("#lastName").value;
@@ -42,122 +119,180 @@ function createAgent() {
     document.querySelector("#lastName").value = "";
     document.querySelector("#email").value = "";
     document.querySelector("#profilePic").value = "";
-    document.querySelector("#successAlert").style.display = "";
-
+    
 }
-// Selection
-var agentsSelected = [];
-function selectForDelete(event) {
+function cancelCreateAgent() {
+    document.querySelector("#agentForm").style.display = "none";
+  }
+
+/////////////////////////////Edit Client ////////////////////////////
+var selectedAgentID = "";
+function editAgentForm(event) {
+
+        document.querySelector("#agentEditForm").style.display="";
+        document.querySelector("#agentForm").style.display = "none";
+        var agentCard = event.currentTarget.closest(".card");
+        var h5Id = agentCard.querySelector(".cardId");
+        var rawId = h5Id.innerHTML;
+        var processedId = rawId.replace("#00", "");
+    
+
+  // Fetch request.
+  fetch("/api/agent/find?id=" + processedId)
+    .then((r) => r.json())
+    .then((agentToEdit) => {
+      // Get invoice old atributes.
+      document.querySelector("#firstNameEdit").value = agenToEdit.firstName;
+      document.querySelector("#lastNameEdit").value = agentToEdit.lastName;
+      document.querySelector("#emailEdit").value = agentToEdit.email;
+      document.querySelector("#profilePicEdit").value = agentToEdit.profilePic;
+       
+    }); 
+
+    var urlFinal = server_url + '/api/agent/add?id=" + agentId + "&"; + "firstName=" + firstName + "&" + "lastName=" + lastName + "&" + "email=" + email + "&" + "profilePic=" + profilePic;
+}
+
+function editAgent() {
+  //var agentId = selectedAgentID;
+  // Request Definition.
+   var request = server_url + "/api/client/add?id=" + agentId + "&";
+    var urlFinal = server_url + '/api/agent/add?id=" + agentId + "&"; + "firstName=" + firstName + "&" + "lastName=" + lastName + "&" + "email=" + email + "&" + "profilePic=" + profilePic;
+  var finalRequest;
+}
+
+//////////////////////////////// delete Agents /////////////////////////////////////
+
+var urlToDelete = "";
+function deleteAgentModal(event) {
 
     var agentCard = event.currentTarget.closest(".card");
     var h5Id = agentCard.querySelector(".cardId");
     var rawId = h5Id.innerHTML;
     var processedId = rawId.replace("#00", "");
 
-    var idIndex = agentsSelected.indexOf(processedId);
-    if (idIndex != -1) {
-        agentsSelected.splice(idIndex);
-        event.currentTarget.style.color = "";
+  urlToDelete = server_url + "/api/agent/delete?" + "id=" + processedId;
+}
+
+function deleteAgent() {
+  var toDelete = urlToDelete;
+  console.log(toDelete)
+  fetch(toDelete)
+    .then((r) => r.json())
+    .then((agents) => {
+      if (agents.length == 0) {
+        $(document).ready(function () {
+          {
+            $("#deleteToastFail").toast("show");
+          }
+        });
+      } else {
+        cleanList();
+        fillList(agents);
+        $(document).ready(function () {
+          {
+            $("#deleteToast").toast("show");
+          }
+        });
+      }
+    });
+}
+///////////////////////////////////////// FAV Agent ////////////////////////////////////////////////////////////////////////////
+function favAgent(event) {
+    if (event.currentTarget.className == "fas fa-star cardIcon") {
+      event.currentTarget.className = "far fa-star cardIcon";
+    } else {
+      event.currentTarget.className = "fas fa-star cardIcon";
     }
-    else {
-        agentsSelected.push(processedId);
-        event.currentTarget.style.color = "red";
+  
+    var agentCard = event.currentTarget.closest(".card");
+    var h5Id = agentCard.querySelector(".cardId");
+    var rawId = h5Id.innerHTML;
+    var processedId = rawId.replace("#00", "");
+    var urlToFav = server_url + "/api/agent/favorite?" + "id=" + processedId;
+    
+    fetch(urlToFav)
+      //.then((r) => r.json())
+      .then(() => {
+        //cleanList();
+        //fillList(clients);
+      });
+  }
+
+////////////////////////////////////// Get Agent //////////////////////////////////////
+
+function getAgents(action, sortTerm, sortMethod, resetPage) {
+    if (resetPage) {
+      currentPageGlobal = 1;
+      let currentPage = currentPageGlobal;
+      updatePages(currentPage);
     }
+    // Request Definition.
+    var request = server_url + "/api/agent/get";
+    var finalRequest;
+    // Action selector
+  
+    switch (action) {
+      case "sort": // Sort request
+        // Sort Definition.
+        sortRequest = request + "?action=sort&";
+        // Request Parameters.
+        finalRequest = sortRequest + "option=" + sortMethod + "&" + "term=" + sortTerm;
+        break;
+  
+      case "searchAgent": // Search by request agent
+        // Search Definition.
+        var searchRequest = request + "?action=search&";
+        // Request Parameter.
+        var searchTerm = document.querySelector("#searchTerm").value;
+        finalRequest = searchRequest + "option=agent&term=" + searchTerm;
+        break;
+  
+      case "searchFavorites": {
+        // Search favorite Agents
+        // Search Definition.
+        var searchRequest = request + "?action=search";
+        // Request Parameter.
+        finalRequest = searchRequest + "&option=favorite";
+        break;
+      }
+  
+      default:
+        // Simple get all request
+        finalRequest = request;
+    }
+    // Fetch request.
+    fetchRequest(finalRequest, null, true);
+  }
 
-    console.log(agentsSelected);
-
-}
-function deleteAgents() {
-
-    var urlFinal = server_url + '/api/agent/delete?' + "idtodelete=" + agentsSelected.join(',');
-
-    fetch(urlFinal)
-        .then(r => r.json())
-        .then(agents => {
-            cleanList();
-            fillList(agents);
-            agentsSelected.splice(0, agentsSelected.length);
-        });
-}
-// Search Agent Button
-function searchAgent() {
-
-    var searchTerm = document.querySelector("#searchTerm").value;
-    var urlFinal = server_url + '/api/agent/search?' + getQueryVars(searchTerm);
-
-    fetch(urlFinal)
-        .then(r => r.json())
-        .then(agents => {
-            cleanList();
-            fillList(agents);
-        });
-
-}
-// Order by Last Name
-function lastNameAgentAsc() {
-
-    var urlFinal = server_url + '/api/agent/orderbylastnameasc';
-
-    fetch(urlFinal)
-        .then(r => r.json())
-        .then(agents => {
-            cleanList();
-            fillList(agents);
-        });
-
-}
-function lastNameAgentDesc() {
-
-    var urlFinal = server_url + '/api/agent/orderbylastnamedesc';
-
-    fetch(urlFinal)
-        .then(r => r.json())
-        .then(agents => {
-            cleanList();
-            fillList(agents);
-        });
-
-}
-// Order by ID
-function idAgentAsc() {
-
-    var urlFinal = server_url + '/api/agent/orderbyidasc';
-
-    fetch(urlFinal)
-        .then(r => r.json())
-        .then(agents => {
-            cleanList();
-            fillList(agents);
-        });
-
-}
-function idAgentDesc() {
-
-    var urlFinal = server_url + '/api/agent/orderbyiddesc';
-
-    fetch(urlFinal)
-        .then(r => r.json())
-        .then(agents => {
-            cleanList();
-            fillList(agents);
-        });
-
-}
-// Clean Agent
-function cleanList(event) {
-
+//////////////////////////////// Clean  Agents Cards /////////////////////////////////////////
+function cleanList() {
     document.querySelector("#agentsContainer").innerHTML = "";
 
 }
-// Fill Agent
+//////////////////////////////// Fill Agents Cards /////////////////////////////////////////
 function fillList(agents) {
 
+    if (agents.length == 0) {
+        currentPageGlobal = currentPageGlobal - 1;
+        document.querySelector("#nextPage").disabled = true;
+        var afterTableContainer = document.querySelector("#afterTableContainer");
+        afterTableContainer.innerHTML = "";
+        var afterTableContainer = document.querySelector("#afterTableContainer");
+        var noMoreResultAlert = document.createElement("div");
+        noMoreResultAlert.className = "alert alert-dark";
+        noMoreResultAlert.role = "alert alert";
+        noMoreResultAlert.innerHTML = "No more results to show";
+        afterTableContainer.appendChild(noMoreResultAlert);
+      } else {
+        var afterTableContainer = document.querySelector("#afterTableContainer");
+        afterTableContainer.innerHTML = "";
+        document.querySelector("#nextPage").disabled = false;
+      }    
+    
     var agentsContainer = document.querySelector("#agentsContainer");
-
     for (i in agents) {
 
         // Agent Card
-
         var agentCol = document.createElement("div");
         agentCol.className = "col mb-4";
 
@@ -172,25 +307,42 @@ function fillList(agents) {
         cardIcons.className = "row pt-2 pl-2 pr-2 d-flex justify-content-between";
 
         var favContainer = document.createElement("div");
-        favContainer.className = "col-3";
-
+        favContainer.className = "col-2 d-flex justify-content-start";
         var favIcon = document.createElement("i");
         favIcon.setAttribute("type", "button");
-        favIcon.className = "far fa-star cardIcon";
+        if (agents[i].favorite == true) {
+            favIcon.className = "fas fa-star cardIcon";
+          } else {
+            favIcon.className = "far fa-star cardIcon";
+          }
+          favIcon.addEventListener("click", function (event) {
+            favAgent(event);
+          });
+        
+        var editContainer = document.createElement("div");
+        editContainer.className ="col-2 offset-6 d-flex justify-content-end";
+        var editIcon = document.createElement("i");
+        editIcon.setAttribute("type", "button");
+        editIcon.className = "fas fa-edit cardIcon";
+        editIcon.addEventListener("click", function (event) {editAgentForm(event)});
+    
 
         var binContainer = document.createElement("div");
-        binContainer.className = "col-3";
-
+        binContainer.className = "col-2 d-flex justify-content-end";
         var binIcon = document.createElement("i");
         binIcon.setAttribute("type", "button");
-        binIcon.className = "fas fa-trash-alt d-flex justify-content-end cardIcon";
-        binIcon.addEventListener("click", function (event) { selectForDelete(event) });
+        binIcon.className = "fas fa-trash-alt cardIcon";
+        binIcon.addEventListener("click", function (event) {deleteAgentModal(event)});
+        binIcon.setAttribute("data-toggle", "modal");
+        binIcon.setAttribute("data-target", "#deleteModal");
 
         // Appends
 
         favContainer.appendChild(favIcon);
+        editContainer.appendChild(editIcon);
         binContainer.appendChild(binIcon);
         cardIcons.appendChild(favContainer);
+        cardIcons.appendChild(editContainer);
         cardIcons.appendChild(binContainer);
 
         // Img and text
@@ -262,6 +414,8 @@ function fillList(agents) {
     }
 
 }
+
+
 // Query Vars
 function getQueryVars(searchTerm) {
 

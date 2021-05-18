@@ -1,228 +1,303 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index</title>
-    <!-- Bootstrap & Jquery -->
-    <script src="bootstrap/js/jquery-3.6.0.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
-    <!-- Script -->
-    <script src="js/igloo.js"></script>
-    <!-- Fontawesome -->
-    <script src="https://kit.fontawesome.com/e22ea825df.js" crossorigin="anonymous"></script>
-    <!-- Libraries -->
-    <link rel="stylesheet" href="css/agent.css" />
-    <link rel="stylesheet" href="css/igloo.css" />
-    <!-- Scripts -->
-    <script src="js/agents.js"></script>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Titillium+Web:wght@600&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body class="bg_igloo" style="height: 100%">
-    <nav th:replace="common/navbar::navbar"></nav>
-    <div class="container-fluid igloo-container">
-      <div class="row">
-        <div class="col-md-2 col-sm-12 lateralMenu border-top">
-          <div class="row mt-5">
-            <div class="col">
-              <h3 class="filterText pl-1">Sales Agents</h3>
-            </div>
-          </div>
-          <div class="row mt-4">
-            <div class="col">
-              <div class="input-group">
-                <input onkeyup="searchAgent()" type="text" id="searchTerm" class="form-control search filterText" />
-              </div>
-            </div>
-          </div>
-          <div class="row mt-2">
-            <div class="col d-flex justify-content-between">
-              <small class="filterText ml-1">Find agents by name</small>
-              <button type="button" name="searchTerm" onclick="searchAgent()" class="btn btn-sm btn-search filterText">
-                Search
-              </button>
-            </div>
-          </div>
-          <div class="row mt-3 mb-3 pl-3">
-            <div class="col-2">
-              <i type="button" class="fas fa-star filterIcons"></i>
-            </div>
-            <div class="col-10">
-              <label class="filterText">Favorites</label>
-            </div>
-          </div>
-          <div class="row mt-3 mb-3 pl-3">
-            <div class="col-2">
-              <i
-                onclick="idAgentAsc()"
-                id="idAgentAsc"
-                type="button"
-                class="fas fa-sort-numeric-up-alt filterIcons"
-              ></i>
-            </div>
-            <div class="col-10">
-              <label for="idAgentAsc" class="filterText">Order by ID (Asc)</label>
-            </div>
-          </div>
-          <div class="row mt-3 mb-3 pl-3">
-            <div class="col-2">
-              <i
-                onclick="idAgentDesc()"
-                id="idAgentDesc"
-                type="button"
-                class="fas fa-sort-numeric-down-alt filterIcons"
-              ></i>
-            </div>
-            <div class="col-10">
-              <label for="idAgentDesc" class="filterText">Order by ID (Des)</label>
-            </div>
-          </div>
-          <div class="row mt-3 mb-3 pl-3">
-            <div class="col-2">
-              <i
-                onclick="lastNameAgentAsc()"
-                id="lastNameAgentAsc"
-                type="button"
-                class="fas fa-sort-alpha-up-alt filterIcons"
-              ></i>
-            </div>
-            <div class="col-10">
-              <label for="lastNameAgentAsc" class="filterText">Order by Last Name (Asc)</label>
-            </div>
-          </div>
-          <div class="row mt-3 mb-3 pl-3">
-            <div class="col-2">
-              <i
-                onclick="lastNameAgentDesc()"
-                id="lastNameAgentDesc"
-                type="button"
-                class="fas fa-sort-alpha-down-alt filterIcons"
-              ></i>
-            </div>
-            <div class="col-10">
-              <label for="lastNameAgentDesc" class="filterText">Order by Last Name (Des)</label>
-            </div>
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Index</title>
+  <!-- Bootstrap & Jquery -->
+  <script src="bootstrap/js/jquery-3.6.0.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+  <!-- Script -->
+  <script src="js/igloo.js"></script>
+  <!-- Fontawesome -->
+  <script src="https://kit.fontawesome.com/e22ea825df.js" crossorigin="anonymous"></script>
+  <!-- Libraries -->
+  <link rel="stylesheet" href="css/agent.css" />
+  <link rel="stylesheet" href="css/igloo.css" />
+  <!-- Scripts -->
+  <script src="js/agents.js"></script>
 
-          <div class="row">
-            <div class="col">
-              <hr />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Titillium+Web:wght@600&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body class="bg_igloo" style="height: 100%">
+  <nav th:replace="common/navbar::navbar"></nav>
+  <div class="container-fluid igloo-container">
+    <div class="row">
+      <div class="col-md-2 col-sm-12 lateralMenu border-top">
+        <div class="row mt-5">
+          <div class="col">
+            <h3 class="filterText pl-1">Sales Agents</h3>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col">
+            <div class="input-group">
+              <input onkeyup="getAgents('searchAgent',null,null,true)" type="text" id="searchTerm"
+                class="form-control search filterText" />
             </div>
           </div>
-          <div class="row pt-4">
-            <div class="col">
-              <button type="button" onclick="addAgent()" class="btn btn-addAgent btn-lg btn-block filterText">
-                Add Agent
-              </button>
-            </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col d-flex justify-content-between">
+            <small class="filterText ml-1">Find agents by name</small>
+            <button type="button" name="searchTerm" onclick="getAgents('searchAgent',null,null,true)"
+              class="btn btn-sm btn-search filterText">
+              Search
+            </button>
           </div>
-          <div class="row pt-4">
-            <div class="col">
+        </div>
+        <div class="row mt-3 mb-3 pl-3">
+          <div class="col-2">
+            <i type="button" class="fas fa-star filterIcons"
+              onclick="getAgents('searchFavorites', null, null,true)"></i>
+          </div>
+          <div class="col-10">
+            <label class="filterText">Favorites</label>
+          </div>
+        </div>
+        <div class="row mt-3 mb-3 pl-3">
+          <div class="col-2">
+            <i onclick="getAgents('sort', 'id', 'asc',true)" id="idAgentAsc" type="button"
+              class="fas fa-sort-numeric-up-alt filterIcons"></i>
+          </div>
+          <div class="col-10">
+            <label for="idAgentAsc" class="filterText">Order by ID (Asc)</label>
+          </div>
+        </div>
+        <div class="row mt-3 mb-3 pl-3">
+          <div class="col-2">
+            <i onclick="getAgents('sort', 'id', 'desc',true)" id="idAgentDesc" type="button"
+              class="fas fa-sort-numeric-down-alt filterIcons"></i>
+          </div>
+          <div class="col-10">
+            <label for="idAgentDesc" class="filterText">Order by ID (Des)</label>
+          </div>
+        </div>
+        <div class="row mt-3 mb-3 pl-3">
+          <div class="col-2">
+            <i onclick="getAgents('sort', 'lastName', 'asc',true)" id="lastNameAgentAsc" type="button"
+              class="fas fa-sort-alpha-up-alt filterIcons"></i>
+          </div>
+          <div class="col-10">
+            <label for="lastNameAgentAsc" class="filterText">Order by Last Name (Asc)</label>
+          </div>
+        </div>
+        <div class="row mt-3 mb-3 pl-3">
+          <div class="col-2">
+            <i onclick="getAgents('sort', 'lastName', 'desc',true)" id="lastNameAgentDesc" type="button"
+              class="fas fa-sort-alpha-down-alt filterIcons"></i>
+          </div>
+          <div class="col-10">
+            <label for="lastNameAgentDesc" class="filterText">Order by Last Name (Des)</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <hr />
+          </div>
+        </div>
+        <div class="row pt-4">
+          <div class="col">
+            <button type="button" onclick="addAgent()" class="btn btn-addAgent btn-lg btn-block filterText">
+              Add Agent
+            </button>
+          </div>
+        </div>
+        <div class="row pt-4">
+          <!-- <div class="col">
               <button type="button" onclick="deleteAgents()" class="btn btn-delAgent btn-lg btn-block filterText">
                 Delete Agent
               </button>
-            </div>
-          </div>
+            </div> -->
         </div>
-
-        <div class="col-10" style="height: 1000px; width: fit-content">
-          <div class="row createForm m-5" id="agentForm" style="display: none">
-            <div class="col-8">
-              <form>
-                <div class="row">
-                  <div class="col">
-                    <h2 class="filterTextDark">New Agent Form</h2>
-                  </div>
+      </div>
+      <div class="col-10" style="height: 1000px; width: fit-content">
+        <div class="row createForm m-5" id="agentForm" style="display: none">
+          <div class="col-8">
+            <form>
+              <div class="row">
+                <div class="col">
+                  <h2 class="filterTextDark">New Agent Form</h2>
                 </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="firstName">First Name</label>
-                    <input type="text" class="form-control" name="firstName" id="firstName" />
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" class="form-control" name="lastName" id="lastName" />
-                  </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="firstName">First Name</label>
+                  <input type="text" class="form-control" name="firstName" id="firstName" />
                 </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="email">Email</label>
-                    <input type="text" class="form-control" name="email" id="email" placeholder="snowman@igloo.com" />
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="email">Profile Picture</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="profilePic"
-                      name="profilePic"
-                      placeholder="https://robohash.org/quoasdfsdffsdsendain.png?size=250x250&set=set1"
-                    />
-                  </div>
+                <div class="form-group col-md-6">
+                  <label for="lastName">Last Name</label>
+                  <input type="text" class="form-control" name="lastName" id="lastName" />
                 </div>
-                <div class="form-row">
-                  <div class="form-group col-md-2">
-                    <button type="button" onclick="createAgent()" class="btn btn-block btn-addAgent filterText">
-                      Create
-                    </button>
-                  </div>
-                  <div class="form-group col-md-10">
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="email">Email</label>
+                  <input type="text" class="form-control" name="email" id="email" placeholder="snowman@igloo.com" />
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="email">Profile Picture</label>
+                  <input type="text" class="form-control" id="profilePic" name="profilePic"
+                    placeholder="https://robohash.org/quoasdfsdffsdsendain.png?size=250x250&set=set1" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-2">
+                  <button type="button" onclick="createAgent()" class="btn btn-block btn-addAgent filterText">
+                    Create
+                  </button>
+                </div>
+                <div class="form-group col-md-3">
+                  <button type="button" onclick="cancelCreateAgent()" class="btn btn-block btn-addAgent filterText">
+                    Cancel Create
+                  </button>
+                </div>
+                <!-- <div class="form-group col-md-10">
                     <div class="alert alert-info" role="alert" style="display: none" id="successAlert">
                       Agent successfully added
-                    </div>
-                  </div>
+                    </div> -->
+              </div>
+               </div>
+            </form>
+          <div class="4"></div>
+        </div>
+        <div class="row row-cols-1 row-cols-md-4 mr-5 mb-5 p-5" id="agentsContainer">
+          <div th:each="agent:${agents}" class="col mb-4">
+            <div class="card h-90 w-80">
+              <div class="row pt-2 pl-2 pr-2 ">
+                <div class="col-2 d-flex justify-content-start">
+                  <i type="button" onclick="favAgent(event)" class="far fa-star cardIcon"></i>
                 </div>
-              </form>
-            </div>
-            <div class="4"></div>
-          </div>
-          <div class="row row-cols-1 row-cols-md-4 mr-5 mb-5 p-5" id="agentsContainer">
-            <div th:each="agent:${agents}" class="col mb-4">
-              <div class="card h-90 w-80">
-                <div class="row pt-2 pl-2 pr-2 d-flex justify-content-between">
-                  <div class="col-3">
-                    <i type="button" class="far fa-star cardIcon"></i>
-                  </div>
-                  <div class="col-3">
-                    <i
-                      type="button"
-                      onclick="selectForDelete(event)"
-                      class="fas fa-trash-alt d-flex justify-content-end cardIcon"
-                    ></i>
-                  </div>
+                <div class="col-2 offset-6 d-flex justify-content-end">
+                  <i type="button" onclick="editAgentForm(event)" class="fas fa-edit cardIcon"></i>
                 </div>
-                <div class="row" id="infernalRow">
-                  <div class="col">
-                    <div class="agentProfilePic">
-                      <img th:src="${agent.profilePic}" class="card-img-top" />
-                    </div>
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col-8">
-                          <h5 th:text="${agent.firstName}+' '+${agent.lastName}" class="card-title"></h5>
-                        </div>
-                        <div class="col-4">
-                          <h5 th:text="'#00'+${agent.id}" class="card-title cardId"></h5>
-                        </div>
+                <div class="col-2 d-flex justify-content-end">
+                  <i type="button" onclick="deleteAgentModal(event)"
+                    class="fas fa-trash-alt cardIcon" data-toggle="modal" data-target="#deleteModal"></i></i>
+                </div>
+              </div>
+              <div class="row" id="infernalRow">
+                <div class="col">
+                  <div class="agentProfilePic">
+                    <img th:src="${agent.profilePic}" class="card-img-top" />
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-8">
+                        <h5 th:text="${agent.firstName}+' '+${agent.lastName}" class="card-title"></h5>
                       </div>
-                      <p th:text="${agent.email}" class="card-text"></p>
+                      <div class="col-4">
+                        <h5 th:text="'#00'+${agent.id}" class="card-title cardId"></h5>
+                      </div>
                     </div>
+                    <p th:text="${agent.email}" class="card-text"></p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <div id="afterTableContainer"></div>
+        <!-- Pagination INI -->
+        <nav>
+          <ul class="pagination justify-content-center" id="paginationControls">
+            <li class="page-item">
+              <button id="prevPage" onclick="prevPage(event)" class="page-link" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </button>
+            </li>
+            <li class="page-item">
+              <a style="color: #59bec9" id="currentPageItem" class="page-link">1</a>
+            </li>
+            <li class="page-item">
+              <button id="nextPage" onclick="nextPage(event)" class="page-link" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+        </div>
+        </div>
+      </div>
+    
       </div>
     </div>
-    <div th:replace="common/navbar :: footer"></div>
-  </body>
+    </div><!-- Toast -->
+    <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0">
+      <div id="createToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+        <div class="toast-header">
+          <strong class="mr-auto">Igloo</strong>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="toast-body">The agent was successfully created.</div>
+      </div>
+    </div>
+    <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0">
+      <div id="deleteToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+        <div class="toast-header">
+          <strong class="mr-auto">Igloo</strong>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="toast-body">The agentwas successfully deleted.</div>
+      </div>
+    </div>
+    <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0">
+      <div id="deleteToastFail" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+        <div class="toast-header">
+          <strong class="mr-auto">Igloo</strong>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="toast-body">This agent can not be deleted because it has clients assigned.</div>
+      </div>
+    </div>
+    <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0">
+      <div id="editToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+        <div class="toast-header">
+          <strong class="mr-auto">Igloo</strong>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="toast-body">The agent was successfully edited.</div>
+      </div>
+    </div>
+    <!-- Toast end -->
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+      aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Confirm deletion</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">We won't be able to recover the agent. Are you sure?</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No! Go back!</button>
+            <button type="button" onclick="deleteAgent()" class="btn btn-add" data-dismiss="modal">
+              Understood, delete
+            </button>
+          </div>
+        </div>
+    </div>
+      <!-- Modal End -->
+      <div th:replace="common/navbar :: footer"></div>
+</body>
+
 </html>
