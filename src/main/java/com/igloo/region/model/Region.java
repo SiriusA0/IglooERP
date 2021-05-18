@@ -19,11 +19,9 @@ public class Region {
 	@Column
 	private String name;
 
-	@JsonIgnore //TODO
 	@OneToMany(mappedBy = "region", fetch = FetchType.LAZY)
 	private List<City> cities = new LinkedList<City>();
 
-	@JsonIgnore //TODO
 	@ManyToOne
 	@JoinColumn(name = "country_id")
 	private Country country;

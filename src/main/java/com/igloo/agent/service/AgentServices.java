@@ -57,6 +57,15 @@ public class AgentServices {
 
 	}
 
+	public AgentResponse find(Integer id) {
+
+		Agent agent = new Agent();
+
+		agent = agentRepository.findById(id).get();
+		agentRepository.save(agent);
+		return agentAdapter.of(agent);
+	}
+
 	public List<AgentResponse> search(String action, String option, String term, Integer page) {
 
 		List<Agent> agents = null;

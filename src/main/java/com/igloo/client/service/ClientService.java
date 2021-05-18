@@ -16,6 +16,8 @@ import com.igloo.client.model.Client;
 import com.igloo.client.response.ClientAdapter;
 import com.igloo.client.response.ClientResponse;
 import com.igloo.country.service.CountryRepository;
+import com.igloo.order.model.Order;
+import com.igloo.order.response.OrderResponse;
 import com.igloo.region.service.RegionRepository;
 
 @Service
@@ -91,6 +93,16 @@ public class ClientService {
         clientRepository.save(client);
 
     }
+    
+    public ClientResponse find(Integer id) {
+
+    	Client client = new Client();
+
+    	client = clientRepository.findById(id).get();
+    	clientRepository.save(client);
+		return clientadapter.of(client);
+	}
+    
 
     public List<ClientResponse> search(String action, String option, String term, Integer page) {
 

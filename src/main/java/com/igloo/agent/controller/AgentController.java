@@ -59,6 +59,12 @@ public class AgentController {
 		return agentService.search(action, option, term, page);
 	}
 
+	@GetMapping("api/agent/find")
+	@ResponseBody
+	public AgentResponse find_API(@RequestParam Integer id) {
+		return agentService.find(id);
+	}
+
 	@GetMapping("api/agent/get")
 	@ResponseBody
 	public List<AgentResponse> search_API(@RequestParam(required = false) String action,

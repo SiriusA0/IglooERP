@@ -3,12 +3,13 @@ package com.igloo.category.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.igloo.category.service.CategoryServices;
+import com.igloo.category.service.CategoryService;
+
 
 @Controller
 public class CategoryController {
 	
 	@Autowired
-    private CategoryServices categoryService;
+    private CategoryService categoryService;
 	
 }
