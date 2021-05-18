@@ -56,7 +56,8 @@ function updatePages(currentPage) {
   pageIndicators.querySelector("#currentPageItem").style.color = "#59bec9";
 }
 ////////// Fetch //////////
-function fetchRequest(finalRequest,toast, globalSearch) { //toast
+function fetchRequest(finalRequest, toast, globalSearch) {
+  //toast
   if (globalSearch) {
     search_url = finalRequest;
     console.log("Search url:" + search_url);
@@ -67,7 +68,7 @@ function fetchRequest(finalRequest,toast, globalSearch) { //toast
     .then((clients) => {
       cleanList();
       fillList(clients);
-    /*  if (toast != null) {
+      /*  if (toast != null) {
         $(document).ready(function () {
           {
             $(toast).toast("show");
@@ -83,7 +84,6 @@ function addClient() {
   if (document.querySelector("#clientForm").style.display == "none") {
     document.querySelector("#clientForm").style.display = "";
   } else {
-    document.querySelector("#successAlert").style.display = "none";
     document.querySelector("#clientForm").style.display = "none";
   }
 }
@@ -187,87 +187,75 @@ function createClient() {
       $(document).ready(function () {
         {
           $("#createToast").toast("show");
-        }});
+        }
+      });
     });
-    document.querySelector("#clientForm").style.display="none";
-
+  document.querySelector("#clientForm").style.display = "none";
 }
 
-function cancelCreateClient(){
-  document.querySelector("#clientForm").style.display == "none";
-
+function cancelCreateClient() {
+  document.querySelector("#clientForm").style.display = "none";
 }
-
 
 //////////////////////////////// delete Client /////////////////////////////////////
 
-var urlToDelete="";
-function deleteClientModal(event){
-  var clientInfo= event.currentTarget.closest(".clientInfo");
+var urlToDelete = "";
+function deleteClientModal(event) {
+  var clientInfo = event.currentTarget.closest(".clientInfo");
   var clientId = clientInfo.id;
-  urlToDelete = server_url +
-    "/api/client/delete?" +
-    "id=" +clientId;
+  urlToDelete = server_url + "/api/client/delete?" + "id=" + clientId;
 }
 
-function deleteClient(){
-  var toDelete=urlToDelete;
+function deleteClient() {
+  var toDelete = urlToDelete;
   fetch(toDelete)
     .then((r) => r.json())
     .then((clients) => {
-      if (clients.length==0)
-      {
+      if (clients.length == 0) {
         $(document).ready(function () {
           {
             $("#deleteToastFail").toast("show");
-         }});
-      }
-  else{
+          }
+        });
+      } else {
         cleanList();
         fillList(clients);
-           $(document).ready(function () {
-        {
-      $("#deleteToast").toast("show");
-          }});
-        }
+        $(document).ready(function () {
+          {
+            $("#deleteToast").toast("show");
+          }
         });
-     
-    }
+      }
+    });
+}
 ///////////////////////////////////////// FAV CLIENT ////////////////////////////////////////////////////////////////////////////
-function favClient(event){
-
-  if (event.currentTarget.className=="fas fa-star cardIcon"){
-    event.currentTarget.className="far fa-star cardIcon"
-
+function favClient(event) {
+  if (event.currentTarget.className == "fas fa-star cardIcon") {
+    event.currentTarget.className = "far fa-star cardIcon";
+  } else {
+    event.currentTarget.className = "fas fa-star cardIcon";
   }
-  else {
-    event.currentTarget.className="fas fa-star cardIcon"
-  }
-  
-  var clientInfo= event.currentTarget.closest(".clientInfo");
+
+  var clientInfo = event.currentTarget.closest(".clientInfo");
   var clientId = clientInfo.id;
-  var urlToFav = server_url +
-  "/api/client/favorite?" +
-  "id=" +clientId;
+  var urlToFav = server_url + "/api/client/favorite?" + "id=" + clientId;
   console.log(urlToFav);
   fetch(urlToFav)
-  //.then((r) => r.json())
-  .then(() => {
-    //cleanList();
-    //fillList(clients);
-
-  });
+    //.then((r) => r.json())
+    .then(() => {
+      //cleanList();
+      //fillList(clients);
+    });
 }
 
-
 /////////////////////////////Edit Client ////////////////////////////
-var selectedClientID=""
-function editClientForm(event){
-  document.querySelector("#clientForm").style.display="none";
-  document.querySelector("#clientEdit").style.display="";
-  var clientInfo=event.currentTarget.closest(".clientInfo");
-  clientId=clientInfo.id;
-  selectedClientID=clientId
+var selectedClientID = "";
+function editClientForm(event) {
+  document.querySelector("#clientForm").style.display = "none";
+  document.querySelector("#clientEdit").style.display = "";
+  var clientInfo = event.currentTarget.closest(".clientInfo");
+  clientId = clientInfo.id;
+  selectedClientID = clientId;
   // Fetch request.
   fetch("/api/client/find?id=" + clientId)
     .then((r) => r.json())
@@ -275,7 +263,7 @@ function editClientForm(event){
       console.log("Selected client: ", clientToEdit);
       // Get invoice old atributes.
       document.querySelector("input[name=clientNameEdit]").value = clientToEdit.firstName + " " + clientToEdit.lastName;
-      document.querySelector("input[name=companyAdress1Edit]").value =  clientToEdit.streetLine1;
+      document.querySelector("input[name=companyAdress1Edit]").value = clientToEdit.streetLine1;
       document.querySelector("input[name=phoneNumber1Edit]").value = clientToEdit.phoneNumber1;
       document.querySelector("input[name=companyAdress2Edit]").value = clientToEdit.streetLine2;
       document.querySelector("input[name=phoneNumber2Edit]").value = clientToEdit.phoneNumber2;
@@ -286,26 +274,26 @@ function editClientForm(event){
       document.querySelector("input[name=profilePicEdit]").value = clientToEdit.profilePic;
 
       document.querySelector("select[name=cityEdit]").getElementsByTagName("option")[
-        clientToEdit.city.id - 1].selected = "selected";
-        document.querySelector("select[name=regionEdit]").getElementsByTagName("option")[
-          clientToEdit.region.id - 1
+        clientToEdit.city.id - 1
+      ].selected = "selected";
+      document.querySelector("select[name=regionEdit]").getElementsByTagName("option")[
+        clientToEdit.region.id - 1
       ].selected = "selected";
       document.querySelector("select[name=countryEdit]").getElementsByTagName("option")[
         clientToEdit.country.id - 1
-      ].selected = "selected"; 
+      ].selected = "selected";
       document.querySelector("select[name=categoryEdit]").getElementsByTagName("option")[
         clientToEdit.category.id - 1
-      ].selected = "selected"; 
-    /*   document.querySelector("input[name=typeOfClientEdit]")[clientToEdit.type.id - 1
+      ].selected = "selected";
+      /*   document.querySelector("input[name=typeOfClientEdit]")[clientToEdit.type.id - 1
       ].checked = "selected";  */
     });
 }
 
-
-function editClient(){
-    var clientId=selectedClientID;
-      // Request Definition.
-  var request = server_url + "/api/client/add?id=" + clientId+ "&";
+function editClient() {
+  var clientId = selectedClientID;
+  // Request Definition.
+  var request = server_url + "/api/client/add?id=" + clientId + "&";
   var finalRequest;
 
   // Get client new atributes.
@@ -329,7 +317,8 @@ function editClient(){
   var profilePic = document.querySelector("input[name=profilePicEdit]").value;
 
   // Making the URL.
-  var editData = request +
+  var editData =
+    request +
     "type" +
     "=" +
     type +
@@ -394,31 +383,30 @@ function editClient(){
     "=" +
     categoryId;
 
-    finalRequest = editData;
+  finalRequest = editData;
 
-    var auxUrl = search_url;
-    auxUrl = auxUrl.split("?");
-    if (auxUrl[1].length > 0) {
+  var auxUrl = search_url;
+  auxUrl = auxUrl.split("?");
+  if (auxUrl[1].length > 0) {
     finalRequest = finalRequest + "&page=" + currentPageGlobal + "&" + auxUrl[1];
-    } else {
+  } else {
     finalRequest = finalRequest + "&page=" + currentPageGlobal;
-     }
-     
-     // Fetch request.
-      fetchRequest(finalRequest, "#editToast", false);
+  }
 
-      document.querySelector("#clientEdit").style.display="none";
+  // Fetch request.
+  fetchRequest(finalRequest, "#editToast", false);
 
-            $(document).ready(function () {
-            {
-            $("#editToast").toast("show");
-            }});
+  document.querySelector("#clientEdit").style.display = "none";
 
+  $(document).ready(function () {
+    {
+      $("#editToast").toast("show");
     }
-   
-function cancelEditClient(){
-  document.querySelector("#clientEdit").style.display="none";
+  });
+}
 
+function cancelEditClient() {
+  document.querySelector("#clientEdit").style.display = "none";
 }
 ////////////////////////////////////// Get Client //////////////////////////////////////
 
@@ -434,7 +422,6 @@ function getClients(action, sortTerm, sortMethod, resetPage) {
   // Action selector
 
   switch (action) {
-	
     case "sort": // Sort request
       // Sort Definition.
       sortRequest = request + "?action=sort&";
@@ -451,13 +438,13 @@ function getClients(action, sortTerm, sortMethod, resetPage) {
       break;
 
     case "searchFavorites": {
- 		// Search favorite clients
-	    // Search Definition.
-	    var searchRequest = request + "?action=search";
-	     // Request Parameter.
-	     finalRequest = searchRequest + "&option=favorite";
-   		 break;
-   	}
+      // Search favorite clients
+      // Search Definition.
+      var searchRequest = request + "?action=search";
+      // Request Parameter.
+      finalRequest = searchRequest + "&option=favorite";
+      break;
+    }
 
     default:
       // Simple get all request
@@ -505,8 +492,7 @@ function cleanList(event) {
 }
 ////////////////////////////////////// Fill Client //////////////////////////////////////
 function fillList(clients) {
-
-   if (clients.length == 0) {
+  if (clients.length == 0) {
     currentPageGlobal = currentPageGlobal - 1;
     document.querySelector("#nextPage").disabled = true;
     var afterTableContainer = document.querySelector("#afterTableContainer");
@@ -521,25 +507,24 @@ function fillList(clients) {
     var afterTableContainer = document.querySelector("#afterTableContainer");
     afterTableContainer.innerHTML = "";
     document.querySelector("#nextPage").disabled = false;
-  } 
+  }
 
+  var cardContainer = document.querySelector("#clientsContainer");
+   for (i in clients) {
+    var cardBox = document.createElement("div");
+    cardBox.className = "card mb-3";
+    cardBox.style = "max-width: 540px;";
+    cardContainer.appendChild(cardBox);
 
-  var cardContainer=document.querySelector("#clientsContainer");
-  for (i in clients){
-      var cardBox=document.createElement("div");
-      cardBox.className="card mb-3";
-      cardBox.style="max-width: 540px;"
-      cardContainer.appendChild(cardBox);
+    var cardRow = document.createElement("div");
+    cardRow.className = "row no-gutters";
+    cardBox.appendChild(cardRow);
 
-      var cardRow=document.createElement("div");
-      cardRow.className="row no-gutters";
-      cardBox.appendChild(cardRow);
-
-      var cardFirstCol=document.createElement("div");
-      cardFirstCol.className="col-md-4";
-      cardRow.appendChild(cardFirstCol);
-        //Checkbox for next version update
-      /* var cardcheckrow = document.createElement("div");
+    var cardFirstCol = document.createElement("div");
+    cardFirstCol.className = "col-md-4";
+    cardRow.appendChild(cardFirstCol);
+    //Checkbox for next version update
+    /* var cardcheckrow = document.createElement("div");
       cardcheckrow.className = "row pt-2 pl-4 pr-2";
       cardFirstCol.appendChild(cardcheckrow);
       var BodyCol1=document.createElement("div");
@@ -548,84 +533,87 @@ function fillList(clients) {
       col1Check.setAttribute("type", "checkbox");
       cardcheckrow.appendChild(BodyCol1);
       BodyCol1.appendChild(col1Check); */
-      
-      var divImg=document.createElement("div");
-      divImg.className="clientProfilePic";
 
-      var cardImg=document.createElement("img");
-      cardImg.src=clients[i].profilePic;
-      divImg.appendChild(cardImg);
-      cardFirstCol.appendChild(divImg);
+    var divImg = document.createElement("div");
+    divImg.className = "clientProfilePic";
 
-      var cardSecondCol=document.createElement("div");
-      cardSecondCol.className="col-md-8";
-      cardRow.appendChild(cardSecondCol);
+    var cardImg = document.createElement("img");
+    cardImg.src = clients[i].profilePic;
+    divImg.appendChild(cardImg);
+    cardFirstCol.appendChild(divImg);
 
-      // ---- card icons
-      // Icons
+    var cardSecondCol = document.createElement("div");
+    cardSecondCol.className = "col-md-8";
+    cardRow.appendChild(cardSecondCol);
 
-      var cardIcons = document.createElement("div");
-      cardIcons.className = "row pt-2 pl-2 pr-2 clientInfo";
-      cardIcons.id=clients[i].id;
-  
-      var favContainer = document.createElement("div");
-      favContainer.className = "col-1 offset-8";
-      cardIcons.appendChild(favContainer);
-      var favIcon = document.createElement("i");
-      favIcon.id="editIcon";
-      favIcon.setAttribute("type", "button");
-      //favIcon.className = "far fa-star cardIcon";
-      //change color of favorites clients...
-      
-      if (clients[i].favorite==true){
-        favIcon.className= "fas fa-star cardIcon"
-      }
-      else {
-        favIcon.className= "far fa-star cardIcon"
-      }
-      favIcon.addEventListener("click", function (event) {favClient(event)});
-      favContainer.appendChild(favIcon);
+    // ---- card icons
+    // Icons
 
-      var editContainer = document.createElement("div");
-      editContainer.className = "col-1";
-      cardIcons.appendChild(editContainer);
-      var editIcon = document.createElement("i");
-      editIcon.setAttribute("type", "button");
-      editIcon.addEventListener("click", function (event) {editClientForm(event)}); 
-      editIcon.className = "fas fa-edit  cardIcon";
-      editContainer.appendChild(editIcon);
+    var cardIcons = document.createElement("div");
+    cardIcons.className = "row pt-2 pl-2 pr-2 clientInfo";
+    cardIcons.id = clients[i].id;
 
-      
-      var binContainer = document.createElement("div");
-      binContainer.className = "col-1";
-      cardIcons.appendChild(binContainer);
-      var binIcon = document.createElement("i");
-      binIcon.setAttribute("type", "button");
-      binIcon.className = "fas fa-trash-alt cardIcon deleteButton";
-      binIcon.setAttribute("data-toggle", "modal");
-      binIcon.setAttribute("data-target", "#deleteModal");
-      binIcon.addEventListener("click", function (event) {deleteClientModal(event)});
-      binContainer.appendChild(binIcon);
-      cardSecondCol.appendChild(cardIcons);
+    var favContainer = document.createElement("div");
+    favContainer.className = "col-1 offset-8";
+    cardIcons.appendChild(favContainer);
+    var favIcon = document.createElement("i");
+    favIcon.id = "editIcon";
+    favIcon.setAttribute("type", "button");
+    //favIcon.className = "far fa-star cardIcon";
+    //change color of favorites clients...
 
-    
-      var cardBody=document.createElement("div");
-      cardBody.className="card-body";
-      cardSecondCol.appendChild(cardBody);   
+    if (clients[i].favorite == true) {
+      favIcon.className = "fas fa-star cardIcon";
+    } else {
+      favIcon.className = "far fa-star cardIcon";
+    }
+    favIcon.addEventListener("click", function (event) {
+      favClient(event);
+    });
+    favContainer.appendChild(favIcon);
 
-      var clientName=document.createElement("h5");
-      clientName.className="card-title"
-      clientName.innerHTML=clients[i].firstName + " " + clients[i].lastName
-      cardBody.appendChild(clientName)
-      
-      var clientEmail=document.createElement("p");
-      clientEmail.className="card-text";
-      clientEmail.innerHTML=clients[i].email;
-      cardBody.appendChild(clientEmail);
+    var editContainer = document.createElement("div");
+    editContainer.className = "col-1";
+    cardIcons.appendChild(editContainer);
+    var editIcon = document.createElement("i");
+    editIcon.setAttribute("type", "button");
+    editIcon.addEventListener("click", function (event) {
+      editClientForm(event);
+    });
+    editIcon.className = "fas fa-edit  cardIcon";
+    editContainer.appendChild(editIcon);
 
-      var clientLocation=document.createElement("p");
-      clientLocation.className="card-text"
-      clientLocation.innerHTML=clients[i].city.name + ", " +  clients[i].country.name + "."
-      cardBody.appendChild(clientLocation);
+    var binContainer = document.createElement("div");
+    binContainer.className = "col-1";
+    cardIcons.appendChild(binContainer);
+    var binIcon = document.createElement("i");
+    binIcon.setAttribute("type", "button");
+    binIcon.className = "fas fa-trash-alt cardIcon deleteButton";
+    binIcon.setAttribute("data-toggle", "modal");
+    binIcon.setAttribute("data-target", "#deleteModal");
+    binIcon.addEventListener("click", function (event) {
+      deleteClientModal(event);
+    });
+    binContainer.appendChild(binIcon);
+    cardSecondCol.appendChild(cardIcons);
+
+    var cardBody = document.createElement("div");
+    cardBody.className = "card-body";
+    cardSecondCol.appendChild(cardBody);
+
+    var clientName = document.createElement("h5");
+    clientName.className = "card-title";
+    clientName.innerHTML = clients[i].firstName + " " + clients[i].lastName;
+    cardBody.appendChild(clientName);
+
+    var clientEmail = document.createElement("p");
+    clientEmail.className = "card-text";
+    clientEmail.innerHTML = clients[i].email;
+    cardBody.appendChild(clientEmail);
+
+    var clientLocation = document.createElement("p");
+    clientLocation.className = "card-text";
+    clientLocation.innerHTML = clients[i].city.name + ", " + clients[i].country.name + ".";
+    cardBody.appendChild(clientLocation);
   }
 }
