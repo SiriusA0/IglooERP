@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="${clientfirstName}+', '+${clientLastName} + '.'"></title>
+    <!-- Bootstrap & Jquery -->
+    <script
+      th:src="@{'/bootstrap/js/jquery-3.6.0.min.js'}"
+      src="/src/main/resources/static/bootstrap/js/jquery-3.6.0.min.js"
+    ></script>
+    <script
+      th:src="@{'/bootstrap/js/bootstrap.min.js'}"
+      src="/src/main/resources/static/bootstrap/js/bootstrap.min.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      th:href="@{'/bootstrap/css/bootstrap.min.css'}"
+      href="/src/main/resources/static/bootstrap/css/bootstrap.min.css"
+    />
+    <!-- Script -->
+    <script src="js/igloo.js"></script>
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/e22ea825df.js" crossorigin="anonymous"></script>
+    <!-- Libraries -->
+    <link rel="stylesheet" th:href="@{'/css/igloo.css'}" href="/src/main/resources/static/css/igloo.css" />
+    <link rel="stylesheet" th:href="@{'/css/client.css'}" href="/src/main/resources/static/css/client.css" />
+    <!-- Scripts -->
+    <script th:src="@{'/js/clients.js'}" src="/js/clients.js"></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Titillium+Web:wght@600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg_igloo" style="height: 100%">
+    <nav th:replace="common/navbar::navbar"></nav>
+    <div class="container">
+      <div class="row">
+        <div class="col-10">
+          <h1 th:text="${client.firstName}+' '+${client.lastName} + '.'"></h1>
+        </div>
+        <div class="col-2">
+          <img th:src="${client.profilePic}" alt="No profile picture" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="row">
+            <div class="col-2">
+                <h2>Identification Number</h2>
+            </div>
+            <div class="col-4">
+                <h2 th:text="${client.idNumber}"></h2>
+            </div>
+            <div class="col-2">
+                <h2>Category</h2>
+            </div>
+            <div class="col-4">
+                <h2 th:text="${client.categoryId}"></h2>
+            </div>
+          </div>
+        <div class="col-2">
+          <h2>Company Adress</h2>
+        </div>
+        <div class="col-4">
+          <h2 th:text="${client.streetLine1}"></h2>
+        </div>
+        <div class="col-2">
+          <h2>Phone Number</h2>
+        </div>
+        <div class="col-4">
+          <h2 th:text="${client.phoneNumber1}"></h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-2">
+          <h2>Company Adress Alt</h2>
+        </div>
+        <div class="col-4">
+          <h2 th:text="${client.streetLine2}"></h2>
+        </div>
+        <div class="col-2">
+          <h2>Mobile Number</h2>
+        </div>
+        <div class="col-4">
+          <h2 th:text="${client.phoneNumber2}"></h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-1">
+          <h2>City</h2>
+        </div>
+        <div class="col-2">
+          <h2 th:text="${client.cityId}"></h2>
+        </div>
+        <div class="col-1">
+          <h2>Region</h2>
+        </div>
+        <div class="col-2">
+          <h2 th:text="${client.regionId}"></h2>
+        </div>
+        <div class="col-1">
+          <h2>Country</h2>
+        </div>
+        <div class="col-2">
+          <h2 th:text="${client.countryId}"></h2>
+        </div>
+        <div class="col-1">
+          <h2>ZIP Code</h2>
+        </div>
+        <div class="col-2">
+          <h2 th:text="${client.zipCode}"></h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-2">
+          <h2>Email</h2>
+        </div>
+        <div class="col-4">
+          <h2 th:text="${client.email}"></h2>
+        </div>
+        <div class="col-2">
+          <h2>Website</h2>
+        </div>
+        <div class="col-4">
+          <h2 th:text="${client.web}"></h2>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
