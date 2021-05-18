@@ -79,6 +79,7 @@
         </ul>
       </div>
       <script>
+        getCookie();
         var username = document.querySelector("#navBarUserName").innerHTML;
         if (username == "Please log in") {
           window.location.href = "/login?error=pleaselogin";
@@ -363,8 +364,5 @@
         <div class="toast-body">Successfully edited.</div>
       </div>
     </div>
-    <script>
-      getCookie();
-    </script>
   </body>
 </html>
