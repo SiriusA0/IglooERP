@@ -150,7 +150,8 @@
             </div>
           </div>
           <div class="row pt-4">
-            <div class="col">
+            <!-- Delete selected clients for Igloo next version update
+               <div class="col">
               <button
                 type="button"
                 onclick="deleteClients()"
@@ -158,7 +159,7 @@
               >
                 Delete Selected Clients
               </button>
-            </div>
+            </div> -->
           </div>
         </div>
         <div
@@ -386,15 +387,23 @@
                     />
                   </div>
                 </div>
-
                 <div class="row ml-3 mr-3 pt-5 pl-1 pb-5">
                   <div class="col-3">
                     <button
                       type="button"
                       onclick="createClient()"
-                      class="btn btn-block btn-add"
+                      class="btn btn-block btn-add filterText"
                     >
                       <b>Create Client</b>
+                    </button>
+                  </div>
+                  <div class="col-3">
+                    <button
+                      type="button"
+                      onclick="cancelCreateClient()"
+                      class="btn btn-block btn-outline-info"
+                    >
+                      <b>Cancel Create</b>
                     </button>
                   </div>
               
@@ -635,7 +644,7 @@
                       id="buttonEdit"
                       type="button"
                       onclick=editClient()
-                      class="btn btn-block btn-add"
+                      class="btn  btn-add btn-block filterText "
                     >
                       <b>Edit client</b>
                     </button>
@@ -645,7 +654,7 @@
                       id="buttonCancelEdit"
                       type="button"
                       onclick="cancelEditClient()"
-                      class="btn btn-block btn-add"
+                      class="btn btn-block btn-outline-info"
                     >
                       <b>Cancel edit</b>
                     </button>
@@ -655,20 +664,20 @@
             </div>
           </div>
           <!-- Edit form end-->
-
           <!-- Client cards container -->
           <div
             class="row row-cols-md-2 m-2 "  
             id="clientsContainer"
-          ><!-- (linea 491)row-cols-md-2 mb-5 ------ style="max-width: 1080px;" -->
+          >
             <div th:each="client:${clients}" style="max-width: 540px;" class="card mb-3" >
               <div class="row">
                 <div class="col-md-4">
-                  <div class="row pt-2 pl-4 pr-2">
+                  <!-- checkbox for Igloo  next version update
+                    <div class="row pt-2 pl-4 pr-2">
                     <div class="col-1">
                       <input type="checkbox">
-                    </div>
-                  </div>
+                    </div> 
+                  </div>-->
                     <div class="clientProfilePic">
                         <img th:src="${client.profilePic}" alt="...">
                     </div>

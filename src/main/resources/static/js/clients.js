@@ -77,15 +77,6 @@ function fetchRequest(finalRequest,toast, globalSearch) { //toast
     });
   //resetSelectedList();
 }
-////////////////////////////////////// Load all clients //////////////////////////////////////
-/* function showClients() {
-  fetch("http://localhost:8080/api/client/show")
-    .then((r) => r.json())
-    .then((clients) => {
-      cleanList();
-      fillList(clients);
-    });
-} */
 
 ////////////////////////////////////// Show client form //////////////////////////////////////
 function addClient() {
@@ -200,68 +191,49 @@ function createClient() {
     });
     document.querySelector("#clientForm").style.display="none";
 
+}
 
+function cancelCreateClient(){
+  document.querySelector("#clientForm").style.display == "none";
 
 }
-////////////////////////////////////// Selection //////////////////////////////////////
-var clientsSelected = [];
-function selectForDelete(event) {
-  var clientCard = event.currentTarget.closest(".card");
-  var h5Id = clientCard.querySelector(".cardId");
-  var rawId = h5Id.innerHTML;
-  var processedId = rawId.replace("#00", "");
 
-  var idIndex = clientsSelected.indexOf(processedId);
-  if (idIndex != -1) {
-    clientsSelected.splice(idIndex);
-    event.currentTarget.style.color = "";
-  } else {
-    clientsSelected.push(processedId);
-    event.currentTarget.style.color = "red";
-  }
 
-  console.log(clientsSelected);
-}
-/* function deleteClients() {
-  var urlFinal =
-    server_url +
-    "/api/client/delete?" +
-    "idtodelete=" +
-    clientsSelected.join(",");
-
-  fetch(urlFinal)
-    .then((r) => r.json())
-    .then((clients) => {
-      cleanList();
-      fillList(clients);
-      clientsSelected.splice(0, clientsSelected.length);
-    });
-} */
 //////////////////////////////// delete Client /////////////////////////////////////
 
 var urlToDelete="";
 function deleteClientModal(event){
   var clientInfo= event.currentTarget.closest(".clientInfo");
   var clientId = clientInfo.id;
-  urlToDelete =
-    server_url +
+  urlToDelete = server_url +
     "/api/client/delete?" +
     "id=" +clientId;
-
-  
 }
 
 function deleteClient(){
-
-  fetch(urlToDelete)
+  var toDelete=urlToDelete;
+  fetch(toDelete)
     .then((r) => r.json())
     .then((clients) => {
-      cleanList();
-      fillList(clients);
-      
-    });
-}
-
+      if (clients.length==0)
+      {
+        $(document).ready(function () {
+          {
+            $("#deleteToastFail").toast("show");
+         }});
+      }
+  else{
+        cleanList();
+        fillList(clients);
+           $(document).ready(function () {
+        {
+      $("#deleteToast").toast("show");
+          }});
+        }
+        });
+     
+    }
+///////////////////////////////////////// FAV CLIENT ////////////////////////////////////////////////////////////////////////////
 function favClient(event){
 
   if (event.currentTarget.className=="fas fa-star cardIcon"){
@@ -302,7 +274,7 @@ function editClientForm(event){
     .then((clientToEdit) => {
       console.log("Selected client: ", clientToEdit);
       // Get invoice old atributes.
-      document.querySelector("input[name=clientNameEdit]").value = clientToEdit.firstName + "" + clientToEdit.lastName;
+      document.querySelector("input[name=clientNameEdit]").value = clientToEdit.firstName + " " + clientToEdit.lastName;
       document.querySelector("input[name=companyAdress1Edit]").value =  clientToEdit.streetLine1;
       document.querySelector("input[name=phoneNumber1Edit]").value = clientToEdit.phoneNumber1;
       document.querySelector("input[name=companyAdress2Edit]").value = clientToEdit.streetLine2;
@@ -431,16 +403,19 @@ function editClient(){
     } else {
     finalRequest = finalRequest + "&page=" + currentPageGlobal;
      }
-
+     
      // Fetch request.
-  console.log(finalRequest);
-  fetchRequest(finalRequest, "#editToast", false);
+      fetchRequest(finalRequest, "#editToast", false);
 
-  document.querySelector("#clientEdit").style.display="none";
+      document.querySelector("#clientEdit").style.display="none";
 
-}
+            $(document).ready(function () {
+            {
+            $("#editToast").toast("show");
+            }});
 
-
+    }
+   
 function cancelEditClient(){
   document.querySelector("#clientEdit").style.display="none";
 
@@ -563,8 +538,8 @@ function fillList(clients) {
       var cardFirstCol=document.createElement("div");
       cardFirstCol.className="col-md-4";
       cardRow.appendChild(cardFirstCol);
-
-      var cardcheckrow = document.createElement("div");
+        //Checkbox for next version update
+      /* var cardcheckrow = document.createElement("div");
       cardcheckrow.className = "row pt-2 pl-4 pr-2";
       cardFirstCol.appendChild(cardcheckrow);
       var BodyCol1=document.createElement("div");
@@ -572,7 +547,7 @@ function fillList(clients) {
       var col1Check=document.createElement("input");
       col1Check.setAttribute("type", "checkbox");
       cardcheckrow.appendChild(BodyCol1);
-      BodyCol1.appendChild(col1Check);
+      BodyCol1.appendChild(col1Check); */
       
       var divImg=document.createElement("div");
       divImg.className="clientProfilePic";
