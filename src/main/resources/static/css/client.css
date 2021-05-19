@@ -4,3 +4,22 @@
     display: "flex";
     align-items: "center";
   }
+
+  .clientInfo {
+    padding-top: 0.5rem;
+    text-align: right;
+  }
+  .clientInfo > a, .clientInfo > i {
+    padding: 0.18rem;
+  }
+  .clientInfo > *:last-child {
+    padding-right:0;
+  }
+
+  @media (max-width:768px) {
+    .clientInfo {
+      text-align: left;
+      padding-top: 0rem;
+      padding-left: 1.25rem;
+    }
+  }

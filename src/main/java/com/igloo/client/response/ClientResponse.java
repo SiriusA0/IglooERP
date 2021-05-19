@@ -37,6 +37,15 @@ public class ClientResponse {
 	private RegionResponse region;
 	private CityResponse city;
 	private CategoryResponse category;
+	private String popover;
+
+	public String getPopover() {
+		return popover;
+	}
+
+	public void setPopover(String popover) {
+		this.popover = popover;
+	}
 
 	public int getId() {
 		return id;

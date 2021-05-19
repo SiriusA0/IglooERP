@@ -60,6 +60,21 @@ public class ClientAdapter {
 		Category category = client.getCategory();
 		response.setCategory(categoryAdapter.of(category));
 
+		String popover = """
+				     <ul class="list-group custom-popover"> 
+						  <li class="list-group-item">%s, %s, %s</li>
+		
+						  <li class="list-group-item">ZIP Code: '+${client.zipCode}</li>
+						  <li class="list-group-item">Phone: '+${client.phoneNumber1}</li>
+						  <li class="list-group-item">Mobile: '+${client.phoneNumber2}</li>
+						  <li class="list-group-item">Address 1: '+${client.streetLine1}</li>
+						  <li class="list-group-item">Address 2: '+${client.streetLine2}</li>
+						  <li class="list-group-item">Webpage: '+${client.web}</li>
+						</ul>
+				""".formatted(client.getCountry().getName(),client.getRegion().getName(), client.getCity().getName());
+		response.setPopover(popover);
+
+
 		return response;
 	}
 

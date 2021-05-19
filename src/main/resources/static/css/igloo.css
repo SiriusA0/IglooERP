@@ -41,8 +41,13 @@
   padding-right: 1rem;
   padding-left: 1rem;
 }
+.optionRow.active, 
 .optionRow:hover {
   background-color: rgb(255, 255, 255, 0.1);
+}
+.optionRow.active label, .optionRow.active i, 
+.optionRow:hover label, .optionRow:hover i {
+  color: red;
 }
 .filterIcons {
   color: whitesmoke;

@@ -6,22 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Clients</title>
     <!-- Bootstrap & Jquery -->
-
-    <script th:src="@{'/bootstrap/js/jquery-3.6.0.min.js'}" src="/src/main/resources/static/bootstrap/js/jquery-3.6.0.min.js"></script>
-    <script th:src="@{'/bootstrap/js/bootstrap.min.js'}"  src="/src/main/resources/static/bootstrap/js/bootstrap.min.js"></script>
-    <link rel="stylesheet"  th:href="@{'/bootstrap/css/bootstrap.min.css'}" href="/src/main/resources/static/bootstrap/css/bootstrap.min.css" />
+    <script
+      th:src="@{'/bootstrap/js/jquery-3.6.0.min.js'}"
+      src="/src/main/resources/static/bootstrap/js/jquery-3.6.0.min.js"
+    ></script>
+    <script src="/bootstrap/js/popper.min.js"></script>
+    <script
+      th:src="@{'/bootstrap/js/bootstrap.min.js'}"
+      src="/src/main/resources/static/bootstrap/js/bootstrap.min.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      th:href="@{'/bootstrap/css/bootstrap.min.css'}"
+      href="/src/main/resources/static/bootstrap/css/bootstrap.min.css"
+    />
     <!-- Script -->
     <script src="js/igloo.js"></script>
     <!-- Fontawesome -->
-    <script
-      src="https://kit.fontawesome.com/e22ea825df.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://kit.fontawesome.com/e22ea825df.js" crossorigin="anonymous"></script>
     <!-- Libraries -->
-    <link rel="stylesheet" th:href="@{'/css/igloo.css'}"  href="/src/main/resources/static/css/igloo.css" />
-    <link rel="stylesheet" th:href="@{'/css/client.css'}"  href="/src/main/resources/static/css/client.css" />
+    <link rel="stylesheet" th:href="@{'/css/igloo.css'}" href="/src/main/resources/static/css/igloo.css" />
+    <link rel="stylesheet" th:href="@{'/css/client.css'}" href="/src/main/resources/static/css/client.css" />
     <!-- Scripts -->
-    <script th:src="@{'/js/clients.js'}"  src="/js/clients.js"></script>
+    <script th:src="@{'/js/clients.js'}" src="/js/clients.js"></script>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -31,7 +38,7 @@
   </head>
   <body class="bg_igloo" style="height: 100%">
     <nav th:replace="common/navbar::navbar"></nav>
-    <div class="container-fluid  igloo-container">
+    <div class="container-fluid igloo-container">
       <div class="row">
         <div class="col-md-2 col-sm-12 lateralMenu border-top">
           <div class="row mt-5">
@@ -64,71 +71,90 @@
               </button>
             </div>
           </div>
-          <div class="row mt-3 mb-3 pl-3 optionRow"   type="button" onclick="buttonFn(event,'searchFavorites', null, null,true)">
+          <div
+            class="row mt-3 mb-3 pl-3 optionRow"
+            type="button"
+            onclick="buttonFn(event,'searchFavorites', null, null,true)"
+          >
             <div class="col-2">
-              <i   style="color: rgb(255, 255, 255)" class="fas fa-star filterIcons lateralMenuAux" ></i>
+              <i  class="fas fa-star filterIcons lateralMenuAux"></i>
             </div>
             <div class="col-10">
-              <label   style="color: rgb(255, 255, 255)" type="button" class="filterText lateralMenuAux">Favorites</label>
+              <label type="button" class="filterText lateralMenuAux">Favorites</label>
             </div>
           </div>
-          <div class="row mt-3 mb-3 pl-3 optionRow"  onclick="buttonFn(event,'sort', 'id', 'asc',true)" type="button">
+          <div class="row mt-3 mb-3 pl-3 optionRow" onclick="buttonFn(event,'sort', 'id', 'asc',true)" type="button">
             <div class="col-2">
-              <i   style="color: rgb(255, 255, 255)"
-               
-                id="idClientAsc"
+              <i
                 
+                id="idClientAsc"
                 class="fas fa-sort-numeric-up-alt filterIcons lateralMenuAux"
               ></i>
             </div>
             <div class="col-10">
-              <label   style="color: rgb(255, 255, 255)" type="button"  for="idClientAsc" class="filterText lateralMenuAux"
+              <label  type="button" for="idClientAsc" class="filterText lateralMenuAux"
                 >Order by ID (Asc)</label
               >
             </div>
           </div>
-          <div      type="button" class="row mt-3 mb-3 pl-3 optionRow" onclick="buttonFn(event,'sort', 'id', 'desc',true)">
+          <div type="button" class="row mt-3 mb-3 pl-3 optionRow" onclick="buttonFn(event,'sort', 'id', 'desc',true)">
             <div class="col-2">
-              <i   style="color: rgb(255, 255, 255)"
-               
+              <i
                 
                 id="idClientDesc"
-           
                 class="fas fa-sort-numeric-down-alt filterIcons lateralMenuAux"
               ></i>
             </div>
             <div class="col-10">
-              <label   style="color: rgb(255, 255, 255)"  type="button" for="idClientDesc" class="filterText lateralMenuAux"
+              <label
+            
+                type="button"
+                for="idClientDesc"
+                class="filterText lateralMenuAux"
                 >Order by ID (Des)</label
               >
             </div>
           </div>
-          <div   type="button" class="row mt-3 mb-3 pl-3 optionRow"  onclick="buttonFn(event,'sort', 'lastName', 'asc',true)" >
+          <div
+            type="button"
+            class="row mt-3 mb-3 pl-3 optionRow"
+            onclick="buttonFn(event,'sort', 'lastName', 'asc',true)"
+          >
             <div class="col-2">
-              <i   style="color: rgb(255, 255, 255)"
-                
+              <i
+             
                 id="lastNameClientAsc"
-              
                 class="fas fa-sort-alpha-up-alt filterIcons lateralMenuAux"
               ></i>
             </div>
             <div class="col-10">
-              <label    style="color: rgb(255, 255, 255)" type="button" for="lastNameClientAsc" class="filterText lateralMenuAux"
+              <label
+              
+                type="button"
+                for="lastNameClientAsc"
+                class="filterText lateralMenuAux"
                 >Order by Last Name (Asc)</label
               >
             </div>
           </div>
-          <div    type="button" onclick="buttonFn(event,'sort', 'lastName', 'desc',true)" class="row mt-3 mb-3 pl-3 optionRow">
+          <div
+            type="button"
+            onclick="buttonFn(event,'sort', 'lastName', 'desc',true)"
+            class="row mt-3 mb-3 pl-3 optionRow"
+          >
             <div class="col-2">
-              <i   style="color: rgb(255, 255, 255)"
-                
+              <i
+               
                 id="lastNameClientDesc"
-             
                 class="fas fa-sort-alpha-down-alt filterIcons lateralMenuAux"
               ></i>
             </div>
             <div class="col-10">
-              <label    style="color: rgb(255, 255, 255)" type="button" for="lastNameClientDesc" class="filterText lateralMenuAux"
+              <label
+         
+                type="button"
+                for="lastNameClientDesc"
+                class="filterText lateralMenuAux"
                 >Order by Last Name (Des)</label
               >
             </div>
@@ -141,11 +167,7 @@
           </div>
           <div class="row pt-4">
             <div class="col">
-              <button
-                type="button"
-                onclick="addClient()"
-                class="btn btn-add btn-lg btn-block filterText"
-              >
+              <button type="button" onclick="addClient()" class="btn btn-add btn-lg btn-block filterText">
                 Add Client
               </button>
             </div>
@@ -163,16 +185,9 @@
             </div> -->
           </div>
         </div>
-        <div
-          class="col-10"
-          style=" height: 1000px; width: fit-content"
-        >
-        <!-- Client creation Form -->
-          <div
-            class="row createForm mt-5 ml-5 mr-5"
-            id="clientForm"
-            style="display: none"
-          >
+        <div class="col-md-10" style="height: calc(100vh - 56px); width: fit-content">
+          <!-- Client creation Form -->
+          <div class="row createForm mt-5 ml-5 mr-5" id="clientForm" style="display: none">
             <div class="col">
               <form>
                 <div class="row">
@@ -192,9 +207,7 @@
                         checked
                         required
                       />
-                      <label class="form-check-label" for="individualOption">
-                        Individual
-                      </label>
+                      <label class="form-check-label" for="individualOption"> Individual </label>
                     </div>
                     <div class="form-check form-check-inline">
                       <input
@@ -205,9 +218,7 @@
                         value="C"
                         required
                       />
-                      <label class="form-check-label" for="companyOption">
-                        Company
-                      </label>
+                      <label class="form-check-label" for="companyOption"> Company </label>
                     </div>
                     <input
                       name="clientName"
@@ -221,9 +232,7 @@
                   <div class="col-sm-8 d-flex justify-content-end"></div>
                 </div>
                 <div class="form-group row">
-                  <label for="companyAdress1" class="col-sm-2 col-form-label"
-                    >Company Address</label
-                  >
+                  <label for="companyAdress1" class="col-sm-2 col-form-label">Company Address</label>
                   <div class="col-sm-4">
                     <input
                       name="companyAdress1"
@@ -233,9 +242,7 @@
                       required
                     />
                   </div>
-                  <label for="phoneNumber1" class="col-sm-2 col-form-label"
-                    >Phone number</label
-                  >
+                  <label for="phoneNumber1" class="col-sm-2 col-form-label">Phone number</label>
                   <div class="col-sm-4">
                     <input
                       name="phoneNumber1"
@@ -248,10 +255,7 @@
                 </div>
 
                 <div class="form-group row">
-                  <label
-                    for="companyAdress2"
-                    class="col-sm-2 col-form-label"
-                  ></label>
+                  <label for="companyAdress2" class="col-sm-2 col-form-label"></label>
                   <div class="col-sm-4">
                     <input
                       name="companyAdress2"
@@ -261,9 +265,7 @@
                       required
                     />
                   </div>
-                  <label for="phoneNumber2" class="col-sm-2 col-form-label"
-                    >Mobile number</label
-                  >
+                  <label for="phoneNumber2" class="col-sm-2 col-form-label">Mobile number</label>
                   <div class="col-sm-4">
                     <input
                       name="phoneNumber2"
@@ -277,23 +279,13 @@
                 <div class="form-group row">
                   <label for="city" class="col-sm-2 col-form-label"></label>
                   <div class="col-sm">
-                    <select
-                      name="city"
-                      class="newClientFormInput inputBox form-control"
-                    >
-                      <option th:each="city: ${cities}"
-                      th:value="${city.id}"
-                      th:text="${city.name}"></option>
+                    <select name="city" class="newClientFormInput inputBox form-control">
+                      <option th:each="city: ${cities}" th:value="${city.id}" th:text="${city.name}"></option>
                     </select>
                   </div>
                   <div class="col-sm">
-                    <select
-                      name="region"
-                      class="newClientFormInput inputBox form-control"
-                    >
-                      <option th:each="region: ${regions}"
-                      th:value="${region.id}"
-                      th:text="${region.name}">
+                    <select name="region" class="newClientFormInput inputBox form-control">
+                      <option th:each="region: ${regions}" th:value="${region.id}" th:text="${region.name}"></option>
                     </select>
                   </div>
                   <div class="col-sm">
@@ -305,9 +297,7 @@
                       required
                     />
                   </div>
-                  <label for="email" class="col-sm-2 col-form-label"
-                    >E-mail</label
-                  >
+                  <label for="email" class="col-sm-2 col-form-label">E-mail</label>
                   <div class="col-sm-4">
                     <input
                       name="email"
@@ -322,19 +312,15 @@
                 <div class="form-group row">
                   <label for="country" class="col-sm-2 col-form-label"></label>
                   <div class="col-sm-4">
-                    <select
-                      name="country"
-                      class="newClientFormInput inputBox form-control"
-                    >
-                      <option th:each="country: ${countries}"
-                      th:value="${country.id}"
-                      th:text="${country.name}"></option>
-                    
+                    <select name="country" class="newClientFormInput inputBox form-control">
+                      <option
+                        th:each="country: ${countries}"
+                        th:value="${country.id}"
+                        th:text="${country.name}"
+                      ></option>
                     </select>
                   </div>
-                  <label for="webPage" class="col-sm-2 col-form-label"
-                    >Web page</label
-                  >
+                  <label for="webPage" class="col-sm-2 col-form-label">Web page</label>
                   <div class="col-sm-4">
                     <input
                       name="webPage"
@@ -347,9 +333,7 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="nif" class="col-sm-2 col-form-label"
-                    >Ident. Number (NIF)</label
-                  >
+                  <label for="nif" class="col-sm-2 col-form-label">Ident. Number (NIF)</label>
                   <div class="col-sm-4">
                     <input
                       name="nif"
@@ -359,25 +343,20 @@
                       required
                     />
                   </div>
-                  <label for="category" class="col-sm-2 col-form-label"
-                    >Category</label
-                  >
+                  <label for="category" class="col-sm-2 col-form-label">Category</label>
                   <div class="col-sm-4">
-                    <select
-                      name="category"
-                      class="newClientFormInput inputBox form-control"
-                    >
-                    <option>Labels</option>
-                    <option th:each="category: ${categories}"
-                    th:value="${category.id}"
-                    th:text="${category.name}"></option>
+                    <select name="category" class="newClientFormInput inputBox form-control">
+                      <option>Labels</option>
+                      <option
+                        th:each="category: ${categories}"
+                        th:value="${category.id}"
+                        th:text="${category.name}"
+                      ></option>
                     </select>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="profilePic" class="col-sm-2 col-form-label"
-                    >Profile Picture URL</label
-                  >
+                  <label for="profilePic" class="col-sm-2 col-form-label">Profile Picture URL</label>
                   <div class="col-sm-10">
                     <input
                       name="profilePic"
@@ -390,35 +369,22 @@
                 </div>
                 <div class="row ml-3 mr-3 pt-5 pl-1 pb-5">
                   <div class="col-3">
-                    <button
-                      type="button"
-                      onclick="createClient()"
-                      class="btn btn-block btn-add filterText"
-                    >
+                    <button type="button" onclick="createClient()" class="btn btn-block btn-add filterText">
                       <b>Create Client</b>
                     </button>
                   </div>
                   <div class="col-3">
-                    <button
-                      type="button"
-                      onclick="cancelCreateClient()"
-                      class="btn btn-block btn-outline-info"
-                    >
+                    <button type="button" onclick="cancelCreateClient()" class="btn btn-block btn-outline-info">
                       <b>Cancel Create</b>
                     </button>
                   </div>
-              
                 </div>
               </form>
             </div>
           </div>
           <!-- create form end -->
           <!-- Edit form -->
-          <div
-            class="row createForm mt-5 ml-5 mr-5"
-            id="clientEdit"
-            style="display: none"
-          >
+          <div class="row createForm mt-5 ml-5 mr-5" id="clientEdit" style="display: none">
             <div class="col">
               <form>
                 <div class="row">
@@ -438,9 +404,7 @@
                         checked
                         required
                       />
-                      <label class="form-check-label" for="individualOption">
-                        Individual
-                      </label>
+                      <label class="form-check-label" for="individualOption"> Individual </label>
                     </div>
                     <div class="form-check form-check-inline">
                       <input
@@ -451,9 +415,7 @@
                         value="C"
                         required
                       />
-                      <label class="form-check-label" for="companyOption">
-                        Company
-                      </label>
+                      <label class="form-check-label" for="companyOption"> Company </label>
                     </div>
                     <input
                       name="clientNameEdit"
@@ -467,9 +429,7 @@
                   <div class="col-sm-8 d-flex justify-content-end"></div>
                 </div>
                 <div class="form-group row">
-                  <label for="companyAdress1" class="col-sm-2 col-form-label"
-                    >Company Address</label
-                  >
+                  <label for="companyAdress1" class="col-sm-2 col-form-label">Company Address</label>
                   <div class="col-sm-4">
                     <input
                       name="companyAdress1Edit"
@@ -480,9 +440,7 @@
                       required
                     />
                   </div>
-                  <label for="phoneNumber1" class="col-sm-2 col-form-label"
-                    >Phone number</label
-                  >
+                  <label for="phoneNumber1" class="col-sm-2 col-form-label">Phone number</label>
                   <div class="col-sm-4">
                     <input
                       name="phoneNumber1Edit"
@@ -496,10 +454,7 @@
                 </div>
 
                 <div class="form-group row">
-                  <label
-                    for="companyAdress2"
-                    class="col-sm-2 col-form-label"
-                  ></label>
+                  <label for="companyAdress2" class="col-sm-2 col-form-label"></label>
                   <div class="col-sm-4">
                     <input
                       name="companyAdress2Edit"
@@ -510,9 +465,7 @@
                       required
                     />
                   </div>
-                  <label for="phoneNumber2" class="col-sm-2 col-form-label"
-                    >Mobile number</label
-                  >
+                  <label for="phoneNumber2" class="col-sm-2 col-form-label">Mobile number</label>
                   <div class="col-sm-4">
                     <input
                       name="phoneNumber2Edit"
@@ -526,24 +479,13 @@
                 <div class="form-group row">
                   <label for="city" class="col-sm-2 col-form-label"></label>
                   <div class="col-sm">
-                    <select
-                      name="cityEdit"
-                      class="newClientFormInput inputBox form-control"
-                    >
-                      <option th:each="city: ${cities}"
-                      th:value="${city.id}"
-                      th:text="${city.name}"></option>
-                      
+                    <select name="cityEdit" class="newClientFormInput inputBox form-control">
+                      <option th:each="city: ${cities}" th:value="${city.id}" th:text="${city.name}"></option>
                     </select>
                   </div>
                   <div class="col-sm">
-                    <select
-                      name="regionEdit"
-                      class="newClientFormInput inputBox form-control"
-                    >
-                      <option th:each="region: ${regions}"
-                      th:value="${region.id}"
-                      th:text="${region.name}">
+                    <select name="regionEdit" class="newClientFormInput inputBox form-control">
+                      <option th:each="region: ${regions}" th:value="${region.id}" th:text="${region.name}"></option>
                     </select>
                   </div>
                   <div class="col-sm">
@@ -555,9 +497,7 @@
                       required
                     />
                   </div>
-                  <label for="email" class="col-sm-2 col-form-label"
-                    >E-mail</label
-                  >
+                  <label for="email" class="col-sm-2 col-form-label">E-mail</label>
                   <div class="col-sm-4">
                     <input
                       name="emailEdit"
@@ -572,19 +512,15 @@
                 <div class="form-group row">
                   <label for="country" class="col-sm-2 col-form-label"></label>
                   <div class="col-sm-4">
-                    <select
-                      name="countryEdit"
-                      class="newClientFormInput inputBox form-control"
-                    >
-                      <option th:each="country: ${countries}"
-                      th:value="${country.id}"
-                      th:text="${country.name}"></option>
-                    
+                    <select name="countryEdit" class="newClientFormInput inputBox form-control">
+                      <option
+                        th:each="country: ${countries}"
+                        th:value="${country.id}"
+                        th:text="${country.name}"
+                      ></option>
                     </select>
                   </div>
-                  <label for="webPage" class="col-sm-2 col-form-label"
-                    >Web page</label
-                  >
+                  <label for="webPage" class="col-sm-2 col-form-label">Web page</label>
                   <div class="col-sm-4">
                     <input
                       name="webPageEdit"
@@ -597,9 +533,7 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="nif" class="col-sm-2 col-form-label"
-                    >Ident. Number (NIF)</label
-                  >
+                  <label for="nif" class="col-sm-2 col-form-label">Ident. Number (NIF)</label>
                   <div class="col-sm-4">
                     <input
                       name="nifEdit"
@@ -609,25 +543,19 @@
                       required
                     />
                   </div>
-                  <label for="category" class="col-sm-2 col-form-label"
-                    >Category</label
-                  >
+                  <label for="category" class="col-sm-2 col-form-label">Category</label>
                   <div class="col-sm-4">
-                    <select
-                      name="categoryEdit"
-                      class="newClientFormInput inputBox form-control"
-                    >
-                     
-                      <option th:each="category: ${categories}"
-                              th:value="${category.id}"
-                              th:text="${category.name}"></option>
+                    <select name="categoryEdit" class="newClientFormInput inputBox form-control">
+                      <option
+                        th:each="category: ${categories}"
+                        th:value="${category.id}"
+                        th:text="${category.name}"
+                      ></option>
                     </select>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="profilePic" class="col-sm-2 col-form-label"
-                    >Profile Picture URL</label
-                  >
+                  <label for="profilePic" class="col-sm-2 col-form-label">Profile Picture URL</label>
                   <div class="col-sm-10">
                     <input
                       name="profilePicEdit"
@@ -644,8 +572,8 @@
                     <button
                       id="buttonEdit"
                       type="button"
-                      onclick=editClient()
-                      class="btn  btn-add btn-block filterText "
+                      onclick="editClient()"
+                      class="btn btn-add btn-block filterText"
                     >
                       <b>Edit client</b>
                     </button>
@@ -666,11 +594,8 @@
           </div>
           <!-- Edit form end-->
           <!-- Client cards container -->
-          <div
-            class="row row-cols-md-2 m-5 pl-5 pr-5 d-flex justify-content-around"  
-            id="clientsContainer"
-          >
-            <div th:each="client:${clients}" style="max-width: 540px;" class="card mb-3" >
+          <div class="row row-cols-md-2 m-md-5 pl-md-5 pr-md-5 d-flex justify-content-around" id="clientsContainer">
+            <div th:each="client:${clients}" style="max-width: 540px" class="col-12 card mb-3">
               <div class="row">
                 <div class="col-md-4">
                   <!-- checkbox for Igloo  next version update
@@ -679,103 +604,135 @@
                       <input type="checkbox">
                     </div> 
                   </div>-->
-                    <div class="clientProfilePic">
-                        <img th:src="${client.profilePic}" alt="...">
-                    </div>
+                  <div class="clientProfilePic">
+                    <img th:src="${client.profilePic}" alt="..." />
+                  </div>
                 </div>
                 <div class="col-md-8">
-                    <div class="row pt-2 pl-2 pr-2 clientInfo" th:id="${client.id}">
-                      <div class="col-1 offset-8">
-                        <i type="button" th:if="${client.favorite== true}"  onclick="favClient(event)" id="editIcon" class="fas fa-star cardIcon"> </i>
-                        <i type="button" th:unless="${client.favorite== true}"  onclick="favClient(event)" id="editIcon" class="far fa-star cardIcon"> </i>
-                      </div>
-                      <div class="col-1 ">
-                        <i type="button" onclick="editClientForm(event)" class="fas fa-edit cardIcon"> </i>
-                      </div>
-                      <div class="col-1" >
-                        <i type="button" onclick="deleteClientModal(event)" class="fas fa-trash-alt cardIcon deleteButton" data-toggle="modal" data-target="#deleteModal"> </i>
-                      </div>
-                    </div>
+                  <div class="clientInfo" th:id="${client.id}">
+                    <i
+                      type="button"
+                      th:if="${client.favorite== true}"
+                      onclick="favClient(event)"
+                      id="editIcon"
+                      class="fas fa-star cardIcon"
+                    >
+                    </i>
+                    <i
+                      type="button"
+                      th:unless="${client.favorite== true}"
+                      onclick="favClient(event)"
+                      id="editIcon"
+                      class="far fa-star cardIcon"
+                    >
+                    </i>
+
+                    <i type="button" onclick="editClientForm(event)" class="fas fa-edit cardIcon"> </i>
+
+                    <i
+                      type="button"
+                      onclick="deleteClientModal(event)"
+                      class="fas fa-trash-alt cardIcon deleteButton"
+                      data-toggle="modal"
+                      data-target="#deleteModal"
+                    >
+                    </i>
+
+                    <a
+                      data-trigger="focus"
+                      data-toggle="popover"
+                      th:attr="data-content=${client.popover}"
+                      title="Client Info"
+                      tabindex="0"
+                      ><i type="button" class="fas fa-info-circle cardIcon example-popover deleteButton"> </i
+                    ></a>
+                  </div>
                   <div class="card-body">
                     <h5 class="card-title" th:text="${client.firstName}+' '+${client.lastName}">Card title</h5>
-                    <p class="card-text" th:text="${client.email}" >email</p>
-                    <p class="card-text" th:text="${client.city.name}+', '+${client.country.name} + '.'" ></p>
+                    <p class="card-text" th:text="${client.email}">email</p>
+                    <p class="card-text" th:text="${client.city.name}+', '+${client.country.name} + '.'"></p>
                   </div>
+                  <div class="popClass" th:attr="name=${client.id}" style="display: none"></div>
                 </div>
               </div>
             </div>
-            </div>
-            <div id="afterTableContainer"></div>
-            <!-- Pagination INI -->
-            <nav>
-              <ul class="pagination justify-content-center" id="paginationControls">
-                <li class="page-item">
-                  <button id="prevPage" onclick="prevPage(event)" class="page-link" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                  </button>
-                </li>
-                <li class="page-item">
-                  <a style="color: #59bec9" id="currentPageItem" class="page-link">1</a>
-                </li>
-                <li class="page-item">
-                  <button id="nextPage" onclick="nextPage(event)" class="page-link" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                  </button>
-                </li>
-              </ul>
-            </nav>
+          </div>
+          <div id="afterTableContainer"></div>
+          <!-- Pagination INI -->
+          <nav>
+            <ul class="pagination justify-content-center" id="paginationControls">
+              <li class="page-item">
+                <button id="prevPage" onclick="prevPage(event)" class="page-link" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </button>
+              </li>
+              <li class="page-item">
+                <a style="color: #59bec9" id="currentPageItem" class="page-link">1</a>
+              </li>
+              <li class="page-item">
+                <button id="nextPage" onclick="nextPage(event)" class="page-link" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
 
-          </div>
+    <!-- Toast -->
+    <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0">
+      <div id="createToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+        <div class="toast-header">
+          <strong class="mr-auto">Igloo</strong>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
+        <div class="toast-body">The client was successfully created.</div>
       </div>
-   
-    
-      <!-- Toast -->
-      <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0">
-        <div id="createToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
-          <div class="toast-header">
-            <strong class="mr-auto">Igloo</strong>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="toast-body">The client was successfully created.</div>
+    </div>
+    <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0">
+      <div id="deleteToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+        <div class="toast-header">
+          <strong class="mr-auto">Igloo</strong>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
+        <div class="toast-body">The client was successfully deleted.</div>
       </div>
-      <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0">
-        <div id="deleteToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
-          <div class="toast-header">
-            <strong class="mr-auto">Igloo</strong>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="toast-body">The client was successfully deleted.</div>
+    </div>
+    <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0">
+      <div
+        id="deleteToastFail"
+        class="toast hide"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+        data-delay="5000"
+      >
+        <div class="toast-header">
+          <strong class="mr-auto">Igloo</strong>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
+        <div class="toast-body">This client can not be deleted because it has open orders</div>
       </div>
-      <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0">
-        <div id="deleteToastFail" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
-          <div class="toast-header">
-            <strong class="mr-auto">Igloo</strong>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="toast-body">This client can not be deleted because it has open orders</div>
+    </div>
+    <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0">
+      <div id="editToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+        <div class="toast-header">
+          <strong class="mr-auto">Igloo</strong>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
+        <div class="toast-body">The client was successfully edited.</div>
       </div>
-      <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0">
-        <div id="editToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
-          <div class="toast-header">
-            <strong class="mr-auto">Igloo</strong>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="toast-body">The client was successfully edited.</div>
-        </div>
-      </div>
-      <!-- Toast end -->
+    </div>
+    <!-- Toast end -->
     <!-- Modal -->
     <div
       class="modal fade"
@@ -786,23 +743,42 @@
       aria-labelledby="deleteModalLabel"
       aria-hidden="true"
     >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="deleteModalLabel">Confirm deletion</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">We won't be able to recover the Client. Are you sure?</div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">No! Go back!</button>
-          <button type="button" onclick="deleteClient()" class="btn btn-add" data-dismiss="modal">
-            Understood, delete
-          </button>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Confirm deletion</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">We won't be able to recover the Client. Are you sure?</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No! Go back!</button>
+            <button type="button" onclick="deleteClient()" class="btn btn-add" data-dismiss="modal">
+              Understood, delete
+            </button>
+          </div>
         </div>
       </div>
+      <!-- Modal End -->
     </div>
-    <!-- Modal End -->
+    <script>
+      // let id = document;
+      //  for (var i = 0; i < 10; i++) {
+      //  var ids = document.querySelectorAll(".popClass").className;
+      $(document).ready(() => {
+        $('[data-toggle="popover"]').popover({
+          html: true,
+          //content: (e, ee, eee) => {
+
+          // this;
+          //  debugger;
+          // return $("#" + id).html();
+          //  return $("#popContent"/* + id*/).html();
+          //  },
+        });
+      });
+      // }
+    </script>
   </body>
 </html>

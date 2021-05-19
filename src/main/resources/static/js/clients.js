@@ -1,10 +1,26 @@
 /* Coded with love by Igloo team. */
-$(".toast").toast();
+
 // Server
 var server_url = "http://localhost:8080/";
 var search_url = server_url + "/api/client/get?";
 ////////// Global VARs //////////
 var currentPageGlobal = 1; // Current invoices page
+
+$(document).ready(() =>{
+  $(".toast").toast();
+  
+  ////////// PopOvers //////////
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+  //$(function () {
+  //  $('[data-toggle="popover"]').popover()
+  //}) 
+  $('popover-dismis').popover({
+    trigger: 'focus'
+  })
+})
+
 
 ////////// Pagination //////////
 function nextPage() {
