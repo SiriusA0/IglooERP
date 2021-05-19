@@ -328,7 +328,7 @@ function fillList(agents) {
         agentCol.className = "col mb-4";
 
         var agentCard = document.createElement("div");
-        agentCard.className = "card h-90 w-80";
+        agentCard.className = "card h-80 w-70";
 
         // Card Content
 
@@ -398,10 +398,7 @@ function fillList(agents) {
         cardBodyRow.className = "row";
 
         var cardNameCol = document.createElement("div");
-        cardNameCol.className = "col-8";
-
-        var cardIdCol = document.createElement("div");
-        cardIdCol.className = "col-4";
+        cardNameCol.className = "col d-flex justify-content-between";
 
         var cardName = document.createElement("h5");
         cardName.className = "card-title";
@@ -419,10 +416,10 @@ function fillList(agents) {
         // Appends
 
         cardNameCol.appendChild(cardName);
-        cardIdCol.appendChild(cardId);
+        cardNameCol.appendChild(cardId);
 
         cardBodyRow.appendChild(cardNameCol);
-        cardBodyRow.appendChild(cardIdCol);
+        
 
         cardBody.appendChild(cardBodyRow);
 
