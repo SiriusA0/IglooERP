@@ -214,7 +214,7 @@
           </form>
         </div>
         <!-- Agents cards -->
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3  row-cols-xl-4 mr-5 mb-5 p-3" id="agentsContainer">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 agentInfo" id="agentsContainer">
           <div th:each="agent:${agents}" class="col mb-4">
             <div class="card h-90 w-80">
               <div class="row pt-2 pl-2 pr-2 ">
@@ -236,10 +236,9 @@
                   </div>
                   <div class="card-body">
                     <div class="row">
-                      <div class="col-8">
+                      <div class="col d-flex justify-content-between">
                         <h5 th:text="${agent.firstName}+' '+${agent.lastName}" class="card-title"></h5>
-                      </div>
-                      <div class="col-4">
+
                         <h5 th:text="'#00'+${agent.id}" class="card-title cardId"></h5>
                       </div>
                     </div>
