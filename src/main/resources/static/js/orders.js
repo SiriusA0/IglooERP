@@ -483,8 +483,8 @@ function fillTable(orders) {
     deleteButton.addEventListener("click", function (event) {
       markForDelete(event);
     });
-    $(".deleteButton").attr("data-toggle", "modal");
-    $(".deleteButton").attr("data-target", "#deleteModal");
+    deleteButton.setAttribute("data-target", "#deleteModal");
+    deleteButton.setAttribute("data-toggle", "modal");
     deleteButton.appendChild(deleteIcon);
     buttogroup.appendChild(deleteButton);
     actionsCol.appendChild(buttogroup);
