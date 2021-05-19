@@ -6,12 +6,12 @@ var server_url = 'http://localhost:8080/';
 
 // actions for all tables
 
-//clean Tables
+//////////////////////////////// Clean Tables /////////////////////////////////
 function cleanTable(tableId){
   document.querySelector("#"+tableId+"").innerHTML = "";
 }
 
-//fill Tables
+///////////////////////////////////////////////////fill Tables //////////////////////////////////
                     //sector , "sector", "sectorTable", "Sector Name", 
 function fillTable(settingName, settingStringName, tableId,settingHeadName ){
 
@@ -79,14 +79,13 @@ function fillTable(settingName, settingStringName, tableId,settingHeadName ){
   colOptionsDiv.className="btn-group";
   colOptionsDiv.setAttribute("role", "group");
   
+  /* Favorites for Igloo next version
   var favbutton=document.createElement("button");
   favbutton.type="button";
   favbutton.className="btn btn-secondary";
-  
   var favIcon=document.createElement("i");
   favIcon.className="far fa-star";
-  
-  favbutton.appendChild(favIcon);
+  favbutton.appendChild(favIcon); */
   
   var editbutton=document.createElement("button");
   editbutton.type="button";
@@ -102,7 +101,7 @@ function fillTable(settingName, settingStringName, tableId,settingHeadName ){
   deleteIcon.className="fas fa-trash-alt";
   deletebutton.appendChild(deleteIcon);
   
-  colOptionsDiv.appendChild(favbutton);
+  //  colOptionsDiv.appendChild(favbutton);
   colOptionsDiv.appendChild(editbutton);
   colOptionsDiv.appendChild(deletebutton);
   
@@ -119,7 +118,7 @@ function fillTable(settingName, settingStringName, tableId,settingHeadName ){
   }
   }
   
-  // Delete Item from Table
+  /////////////////////////////////////// Delete Item from Table ////////////////////////////////
 
   function deleteItem(event, settingStringName, tableId, settingHeadName) {
 

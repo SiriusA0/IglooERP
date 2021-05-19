@@ -119,7 +119,7 @@
             </div> -->
         </div>
       </div>
-      <div class="col-10" style="height: 1000px; width: fit-content">
+      <div class="col-md-10" style="height: calc(100vh - 56px); width: fit-content">
         <div class="row createForm m-5" id="agentForm" style="display: none">
           <div class="col-8">
             <form>
@@ -213,7 +213,8 @@
             </div>
           </form>
         </div>
-        <div class="row row-cols-1 row-cols-md-4 mr-5 mb-5 p-5" id="agentsContainer">
+        <!-- Agents cards -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3  row-cols-xl-4 mr-5 mb-5 p-3" id="agentsContainer">
           <div th:each="agent:${agents}" class="col mb-4">
             <div class="card h-90 w-80">
               <div class="row pt-2 pl-2 pr-2 ">
@@ -249,6 +250,7 @@
             </div>
           </div>
         </div>
+        <!-- Agents cards end -->
         <div id="afterTableContainer"></div>
         <!-- Pagination INI -->
         <nav>
