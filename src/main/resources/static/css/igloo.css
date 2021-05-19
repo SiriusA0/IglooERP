@@ -41,14 +41,14 @@
   padding-right: 1rem;
   padding-left: 1rem;
 }
-.optionRow.active, 
+.optionRow.active,
 .optionRow:hover {
   background-color: rgb(255, 255, 255, 0.1);
 }
+/*
 .optionRow.active label, .optionRow.active i, 
 .optionRow:hover label, .optionRow:hover i {
-  color: red;
-}
+  }*/
 .filterIcons {
   color: whitesmoke;
   font-size: 1.5rem;
@@ -85,7 +85,6 @@
 
   color: whitesmoke;
 }
-
 /* Add Button */
 .btn-add {
   border: solid 0.15rem #59bec9;
@@ -98,7 +97,6 @@
   border: solid 0.15rem #59bec9;
   color: whitesmoke;
 }
-
 .createForm {
   background-color: rgb(255, 255, 255);
   padding: 3rem;

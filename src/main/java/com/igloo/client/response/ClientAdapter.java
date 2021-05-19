@@ -19,72 +19,71 @@ import com.igloo.region.response.RegionAdapter;
 @Component
 public class ClientAdapter {
 
-	@Autowired
-	private CountryAdapter countryAdapter;
-	@Autowired
-	private RegionAdapter regionAdapter;
-	@Autowired
-	private CityAdapter cityAdapter;
-	@Autowired
-	private CategoryAdapter categoryAdapter;
+    @Autowired
+    private CountryAdapter countryAdapter;
+    @Autowired
+    private RegionAdapter regionAdapter;
+    @Autowired
+    private CityAdapter cityAdapter;
+    @Autowired
+    private CategoryAdapter categoryAdapter;
 
-	public ClientResponse of(Client client) {
-		if (client == null)
-			return null;
+    public ClientResponse of(Client client) {
+        if (client == null)
+            return null;
 
-		ClientResponse response = new ClientResponse();
+        ClientResponse response = new ClientResponse();
 
-		response.setId(client.getId());
-		response.setIdNumber(client.getIdNumber());
-		response.setFirstName(client.getFirstName());
-		response.setLastName(client.getLastName());
-		response.setStreetLine1(client.getStreetLine1());
-		response.setStreetLine2(client.getStreetLine2());
-		response.setPhoneNumber1(client.getPhoneNumber1());
-		response.setPhoneNumber2(client.getPhoneNumber2());
-		response.setEmail(client.getEmail());
-		response.setFavorite(client.getFavorite());
-		response.setWeb(client.getWeb());
-		response.setProfilePic(client.getProfilePic());
-		response.setZipCode(client.getZipCode());
+        response.setId(client.getId());
+        response.setIdNumber(client.getIdNumber());
+        response.setFirstName(client.getFirstName());
+        response.setLastName(client.getLastName());
+        response.setStreetLine1(client.getStreetLine1());
+        response.setStreetLine2(client.getStreetLine2());
+        response.setPhoneNumber1(client.getPhoneNumber1());
+        response.setPhoneNumber2(client.getPhoneNumber2());
+        response.setEmail(client.getEmail());
+        response.setFavorite(client.getFavorite());
+        response.setWeb(client.getWeb());
+        response.setProfilePic(client.getProfilePic());
+        response.setZipCode(client.getZipCode());
 
-		Country country = client.getCountry();
-		response.setCountry(countryAdapter.of(country));
+        Country country = client.getCountry();
+        response.setCountry(countryAdapter.of(country));
 
-		Region region = client.getRegion();
-		response.setRegion(regionAdapter.of(region));
+        Region region = client.getRegion();
+        response.setRegion(regionAdapter.of(region));
 
-		City city = client.getCity();
-		response.setCity(cityAdapter.of(city));
+        City city = client.getCity();
+        response.setCity(cityAdapter.of(city));
 
-		Category category = client.getCategory();
-		response.setCategory(categoryAdapter.of(category));
+        Category category = client.getCategory();
+        response.setCategory(categoryAdapter.of(category));
 
-		String popover = """
-				     <ul class="list-group custom-popover"> 
-						  <li class="list-group-item">%s, %s, %s</li>
-		
-						  <li class="list-group-item">ZIP Code: '+${client.zipCode}</li>
-						  <li class="list-group-item">Phone: '+${client.phoneNumber1}</li>
-						  <li class="list-group-item">Mobile: '+${client.phoneNumber2}</li>
-						  <li class="list-group-item">Address 1: '+${client.streetLine1}</li>
-						  <li class="list-group-item">Address 2: '+${client.streetLine2}</li>
-						  <li class="list-group-item">Webpage: '+${client.web}</li>
-						</ul>
-				""".formatted(client.getCountry().getName(),client.getRegion().getName(), client.getCity().getName());
-		response.setPopover(popover);
+        String popover = """
+                     <ul class="list-group custom-popover"> 
+                		  <li class="list-group-item">%s, %s, %s</li>
+                		  <li class="list-group-item">ZIP Code: %s</li>
+                		  <li class="list-group-item">Phone: %s</li>
+                		  <li class="list-group-item">Mobile: %s</li>
+                		  <li class="list-group-item">Address 1: %s</li>
+                		  <li class="list-group-item">Address 2: %s</li>
+                		  <li class="list-group-item">Webpage: %s</li>
+                		</ul>
+                """.formatted(client.getCountry().getName(), client.getRegion().getName(), client.getCity().getName(), client.getZipCode(), client.getPhoneNumber1(), client.getPhoneNumber2(), client.getStreetLine1(), client.getStreetLine2(), client.getWeb());
+        response.setPopover(popover);
 
 
-		return response;
-	}
+        return response;
+    }
 
-	public List<ClientResponse> of(List<Client> clients) {
+    public List<ClientResponse> of(List<Client> clients) {
 
-		List<ClientResponse> responses = new ArrayList<>();
-		for (Client client : clients) {
-			responses.add(of(client));
-		}
-		return responses;
-	}
+        List<ClientResponse> responses = new ArrayList<>();
+        for (Client client : clients) {
+            responses.add(of(client));
+        }
+        return responses;
+    }
 
 }

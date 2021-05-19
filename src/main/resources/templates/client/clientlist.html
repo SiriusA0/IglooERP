@@ -77,7 +77,7 @@
             onclick="buttonFn(event,'searchFavorites', null, null,true)"
           >
             <div class="col-2">
-              <i  class="fas fa-star filterIcons lateralMenuAux"></i>
+              <i class="fas fa-star filterIcons lateralMenuAux"></i>
             </div>
             <div class="col-10">
               <label type="button" class="filterText lateralMenuAux">Favorites</label>
@@ -85,34 +85,18 @@
           </div>
           <div class="row mt-3 mb-3 pl-3 optionRow" onclick="buttonFn(event,'sort', 'id', 'asc',true)" type="button">
             <div class="col-2">
-              <i
-                
-                id="idClientAsc"
-                class="fas fa-sort-numeric-up-alt filterIcons lateralMenuAux"
-              ></i>
+              <i id="idClientAsc" class="fas fa-sort-numeric-up-alt filterIcons lateralMenuAux"></i>
             </div>
             <div class="col-10">
-              <label  type="button" for="idClientAsc" class="filterText lateralMenuAux"
-                >Order by ID (Asc)</label
-              >
+              <label type="button" for="idClientAsc" class="filterText lateralMenuAux">Order by ID (Asc)</label>
             </div>
           </div>
           <div type="button" class="row mt-3 mb-3 pl-3 optionRow" onclick="buttonFn(event,'sort', 'id', 'desc',true)">
             <div class="col-2">
-              <i
-                
-                id="idClientDesc"
-                class="fas fa-sort-numeric-down-alt filterIcons lateralMenuAux"
-              ></i>
+              <i id="idClientDesc" class="fas fa-sort-numeric-down-alt filterIcons lateralMenuAux"></i>
             </div>
             <div class="col-10">
-              <label
-            
-                type="button"
-                for="idClientDesc"
-                class="filterText lateralMenuAux"
-                >Order by ID (Des)</label
-              >
+              <label type="button" for="idClientDesc" class="filterText lateralMenuAux">Order by ID (Des)</label>
             </div>
           </div>
           <div
@@ -121,18 +105,10 @@
             onclick="buttonFn(event,'sort', 'lastName', 'asc',true)"
           >
             <div class="col-2">
-              <i
-             
-                id="lastNameClientAsc"
-                class="fas fa-sort-alpha-up-alt filterIcons lateralMenuAux"
-              ></i>
+              <i id="lastNameClientAsc" class="fas fa-sort-alpha-up-alt filterIcons lateralMenuAux"></i>
             </div>
             <div class="col-10">
-              <label
-              
-                type="button"
-                for="lastNameClientAsc"
-                class="filterText lateralMenuAux"
+              <label type="button" for="lastNameClientAsc" class="filterText lateralMenuAux"
                 >Order by Last Name (Asc)</label
               >
             </div>
@@ -143,18 +119,10 @@
             class="row mt-3 mb-3 pl-3 optionRow"
           >
             <div class="col-2">
-              <i
-               
-                id="lastNameClientDesc"
-                class="fas fa-sort-alpha-down-alt filterIcons lateralMenuAux"
-              ></i>
+              <i id="lastNameClientDesc" class="fas fa-sort-alpha-down-alt filterIcons lateralMenuAux"></i>
             </div>
             <div class="col-10">
-              <label
-         
-                type="button"
-                for="lastNameClientDesc"
-                class="filterText lateralMenuAux"
+              <label type="button" for="lastNameClientDesc" class="filterText lateralMenuAux"
                 >Order by Last Name (Des)</label
               >
             </div>
@@ -763,22 +731,11 @@
       <!-- Modal End -->
     </div>
     <script>
-      // let id = document;
-      //  for (var i = 0; i < 10; i++) {
-      //  var ids = document.querySelectorAll(".popClass").className;
       $(document).ready(() => {
         $('[data-toggle="popover"]').popover({
           html: true,
-          //content: (e, ee, eee) => {
-
-          // this;
-          //  debugger;
-          // return $("#" + id).html();
-          //  return $("#popContent"/* + id*/).html();
-          //  },
         });
       });
-      // }
     </script>
   </body>
 </html>
