@@ -99,6 +99,7 @@ function fetchRequest(finalRequest, toast, globalSearch) {
 function addClient() {
   if (document.querySelector("#clientForm").style.display == "none") {
     document.querySelector("#clientForm").style.display = "";
+    document.querySelector("#clientEdit").style.display = "none";
   } else {
     document.querySelector("#clientForm").style.display = "none";
   }

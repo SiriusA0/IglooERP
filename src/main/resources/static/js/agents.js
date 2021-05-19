@@ -77,6 +77,7 @@ function addAgent() {
 
     if (document.querySelector("#agentForm").style.display == "none") {
         document.querySelector("#agentForm").style.display = "";
+        document.querySelector("#agentEditForm").style.display = "none";
     } else {
         document.querySelector("#agentForm").style.display = "none";
     }
