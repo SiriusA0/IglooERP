@@ -19,7 +19,7 @@ function nextPage() {
         var auxUrl = search_url;
         finalRequest = auxUrl + "page=" + nextPage;
       }
-      fetchRequest(finalRequest, null);
+      fetchRequest(finalRequest);
       currentPageGlobal = nextPage;
       updatePages(nextPage);
     }
@@ -41,7 +41,7 @@ function nextPage() {
         var auxUrl = search_url;
         finalRequest = auxUrl + "page=" + prevPage;
       }
-      fetchRequest(finalRequest, null);
+      fetchRequest(finalRequest);
       currentPageGlobal = prevPage;
       updatePages(prevPage);
     }
@@ -56,7 +56,7 @@ function updatePages(currentPage) {
   } 
 
 ////////// Fetch //////////
-function fetchRequest(finalRequest, toast, globalSearch) {
+function fetchRequest(finalRequest, globalSearch) {
     //toast
     if (globalSearch) {
       search_url = finalRequest;
@@ -68,15 +68,9 @@ function fetchRequest(finalRequest, toast, globalSearch) {
       .then((agents) => {
         cleanList();
         fillList(agents);
-        /*  if (toast != null) {
-          $(document).ready(function () {
-            {
-              $(toast).toast("show");
-            } 
-          });
-        } */
+    
       });
-    //resetSelectedList();
+
   }
 ////////////////////////////////////// Show Agent form //////////////////////////////////////
 function addAgent() {
@@ -179,11 +173,15 @@ function editAgentConfirm() {
     finalRequest = finalRequest + "&page=" + currentPageGlobal;
   }
 
-  fetchRequest(finalRequest, "#editToast");
+  fetchRequest(finalRequest);
 
   document.querySelector("#agentEditForm").style.display = "none";
 
-
+  $(document).ready(function () {
+    {
+      $("#editToast").toast("show");
+    }
+  });
 
 }
 
@@ -294,7 +292,7 @@ function getAgents(action, sortTerm, sortMethod, resetPage) {
         finalRequest = request;
     }
     // Fetch request.
-    fetchRequest(finalRequest, null, true);
+    fetchRequest(finalRequest, true);
   }
 
 //////////////////////////////// Clean  Agents Cards /////////////////////////////////////////
@@ -449,8 +447,3 @@ function fillList(agents) {
 }
 
 
-// Query Vars
-function getQueryVars(searchTerm) {
-
-    return 'searchTerm=' + searchTerm;
-}
