@@ -30,7 +30,7 @@
   <nav th:replace="common/navbar::navbar"></nav>
   <div class="container-fluid igloo-container">
     <div class="row">
-      <div class="col-md-2 col-sm-12 lateralMenu border-top">
+      <div class="col-sm-12 col-md-3 col-lg-3 col-xl-2 lateralMenu border-top" style="height:100vh;">
         <div class="row mt-5">
           <div class="col">
             <h3 class="filterText pl-1">Sales Agents</h3>
@@ -119,7 +119,7 @@
             </div> -->
         </div>
       </div>
-      <div class="col-md-10" style="height: calc(100vh - 56px); width: fit-content">
+      <div class=" col-sm-12 col-md-9 col-lg-9 col-xl-10" style="height: calc(100vh - 56px); width: fit-content">
         <div class="row createForm m-5" id="agentForm" style="display: none">
           <div class="col-8">
             <form>
@@ -216,7 +216,7 @@
         <!-- Agents cards -->
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 agentInfo" id="agentsContainer">
           <div th:each="agent:${agents}" class="col mb-4">
-            <div class="card h-90 w-80">
+            <div class="card h-80 w-70">
               <div class="row pt-2 pl-2 pr-2 ">
                 <div class="col-2 d-flex justify-content-start">
                   <i type="button" onclick="favAgent(event)" class="far fa-star cardIcon"></i>
