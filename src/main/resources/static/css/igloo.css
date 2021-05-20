@@ -87,7 +87,7 @@
 }
 /* Add Button */
 .btn-add {
-  border: solid 0.15rem #59bec9;
+  /* border: solid 0.15rem #59bec9; */
   background-color: #59bec9;
   color: whitesmoke;
 }

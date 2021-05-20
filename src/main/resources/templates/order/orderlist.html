@@ -254,7 +254,7 @@
                     </button>
                   </div>
                   <div class="form-group col-md-2">
-                    <button type="button" onclick="hideCreationForm()" class="btn btn-block btn-secondary filterText">
+                    <button type="button" onclick="hideCreationForm()" class="btn btn-block btn-outline-info">
                       Cancel creation
                     </button>
                   </div>
@@ -312,11 +312,11 @@
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-2">
-                    <button type="button" onclick="editOrder()" class="btn btn-block btn-add filterText">Edit</button>
+                    <button type="button" onclick="editOrder()" class="btn btn-block btn-add filterText">Save</button>
                   </div>
                   <div class="form-group col-md-2">
-                    <button type="button" onclick="hideEditForm()" class="btn btn-block btn-secondary filterText">
-                      Cancel edit.
+                    <button type="button" onclick="hideEditForm()" class="btn btn-block btn-outline-info">
+                      Cancel edit
                     </button>
                   </div>
                 </div>
@@ -347,7 +347,7 @@
                     <td class="filterTextDark" th:text="${order.creationDate}">2021/5/21</td>
                     <td class="filterTextDark" th:text="${order.client.firstName}+' '+${order.client.lastName}">0</td>
                     <td class="filterTextDark" th:text="${order.agent.firstName}+' '+${order.agent.lastName}">0</td>
-                    <td class="filterTextDark" th:text="${order.totalAmount}">100000</td>
+                    <td class="filterTextDark" th:text="${order.totalAmount} + '€'" style="text-align: right;">100000</td>
                     <td class="filterTextDark" th:text="${order.status.name}">0</td>
                     <td class="filterTextDark" th:text="${order.sector.name}">0</td>
                     <td>

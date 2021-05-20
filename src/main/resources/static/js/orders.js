@@ -442,7 +442,8 @@ function fillTable(orders) {
     // Amount Column
     var totalAmount = document.createElement("td");
     totalAmount.className = "filterTextDark";
-    totalAmount.innerHTML = orders[i].totalAmount;
+    totalAmount.style.textAlign="right"
+    totalAmount.innerHTML = orders[i].totalAmount + '€';
     row.appendChild(totalAmount);
 
     //  Status Column

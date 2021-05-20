@@ -225,8 +225,8 @@
                     </button>
                   </div>
                   <div class="form-group col-md-2">
-                    <button type="button" onclick="hideCreationForm()" class="btn btn-block btn-secondary filterText">
-                      Cancel creation.
+                    <button type="button" onclick="hideCreationForm()" class="btn btn-block btn-outline-info">
+                      Cancel creation
                     </button>
                   </div>
                 </div>
@@ -283,11 +283,11 @@
                 <div class="form-row">
                   <div class="form-group col-md-2">
                     <button type="button" onclick="editInvoice(event)" class="btn btn-block btn-add filterText">
-                      Edit
+                      Save
                     </button>
                   </div>
                   <div class="form-group col-md-2">
-                    <button type="button" onclick="hideEditForm()" class="btn btn-block btn-secondary filterText">
+                    <button type="button" onclick="hideEditForm()" class="btn btn-block btn-outline-info">
                       Cancel edit
                     </button>
                   </div>
@@ -324,8 +324,8 @@
                     <td class="filterTextDark" th:text="${invoice.client.firstName}+' '+${invoice.client.lastName}">
                       0
                     </td>
-                    <td class="filterTextDark" th:text="${invoice.preTax}">10000</td>
-                    <td class="filterTextDark" th:text="${invoice.afterTax}">12000</td>
+                    <td class="filterTextDark" th:text="${invoice.preTax} + '€'" style="text-align: right;">10000</td>
+                    <td class="filterTextDark" th:text="${invoice.afterTax} + '€'" style="text-align: right;">12000</td>
                     <td class="filterTextDark" th:text="${invoice.status.name}">0</td>
                     <td class="filterTextDark" th:text="${invoice.payment.name}">0</td>
                     <td>

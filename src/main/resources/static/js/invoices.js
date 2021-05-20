@@ -443,13 +443,15 @@ function fillTable(invoices) {
     // Pre Tax Amount Column
     var preTaxCol = document.createElement("td");
     preTaxCol.className = "filterTextDark";
-    preTaxCol.innerHTML = invoices[i].preTax;
+    preTaxCol.style.textAlign="right"
+    preTaxCol.innerHTML = invoices[i].preTax + '€';
     row.appendChild(preTaxCol);
 
     // After Tax Amount Column
     var afterTaxCol = document.createElement("td");
     afterTaxCol.className = "filterTextDark";
-    afterTaxCol.innerHTML = invoices[i].afterTax;
+    afterTaxCol.style.textAlign="right"
+    afterTaxCol.innerHTML = invoices[i].afterTax + '€';
     row.appendChild(afterTaxCol);
 
     //  Status Column
