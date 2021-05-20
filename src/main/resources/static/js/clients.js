@@ -6,21 +6,20 @@ var search_url = server_url + "/api/client/get?";
 ////////// Global VARs //////////
 var currentPageGlobal = 1; // Current invoices page
 
-$(document).ready(() =>{
+$(document).ready(() => {
   $(".toast").toast();
-  
+
   ////////// PopOvers //////////
   $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-  })
+    $('[data-toggle="tooltip"]').tooltip();
+  });
   //$(function () {
   //  $('[data-toggle="popover"]').popover()
-  //}) 
-  $('popover-dismis').popover({
-    trigger: 'focus'
-  })
-})
-
+  //})
+  $("popover-dismis").popover({
+    trigger: "focus",
+  });
+});
 
 ////////// Pagination //////////
 function nextPage() {
@@ -427,7 +426,6 @@ function cancelEditClient() {
 }
 ////////////////////////////////////// Get Client //////////////////////////////////////
 
-
 function getClients(action, sortTerm, sortMethod, resetPage) {
   if (resetPage) {
     currentPageGlobal = 1;
@@ -547,9 +545,9 @@ function fillList(clients) {
   }
 
   var cardContainer = document.querySelector("#clientsContainer");
-   for (i in clients) {
+  for (i in clients) {
     var cardBox = document.createElement("div");
-    cardBox.className = "card mb-3";
+    cardBox.className = "card mb-3 col-12";
     cardBox.style = "max-width: 540px;";
     cardContainer.appendChild(cardBox);
 
@@ -587,15 +585,13 @@ function fillList(clients) {
     // Icons
 
     var cardIcons = document.createElement("div");
-    cardIcons.className = "row pt-2 pl-2 pr-2 clientInfo";
+    cardIcons.className = "clientInfo";
     cardIcons.id = clients[i].id;
 
-    var favContainer = document.createElement("div");
-    favContainer.className = "col-1 offset-8";
-    cardIcons.appendChild(favContainer);
     var favIcon = document.createElement("i");
     favIcon.id = "editIcon";
     favIcon.setAttribute("type", "button");
+    cardIcons.appendChild(favIcon);
     //favIcon.className = "far fa-star cardIcon";
     //change color of favorites clients...
 
@@ -607,22 +603,15 @@ function fillList(clients) {
     favIcon.addEventListener("click", function (event) {
       favClient(event);
     });
-    favContainer.appendChild(favIcon);
 
-    var editContainer = document.createElement("div");
-    editContainer.className = "col-1";
-    cardIcons.appendChild(editContainer);
     var editIcon = document.createElement("i");
     editIcon.setAttribute("type", "button");
     editIcon.addEventListener("click", function (event) {
       editClientForm(event);
     });
     editIcon.className = "fas fa-edit  cardIcon";
-    editContainer.appendChild(editIcon);
+    cardIcons.appendChild(editIcon);
 
-    var binContainer = document.createElement("div");
-    binContainer.className = "col-1";
-    cardIcons.appendChild(binContainer);
     var binIcon = document.createElement("i");
     binIcon.setAttribute("type", "button");
     binIcon.className = "fas fa-trash-alt cardIcon deleteButton";
@@ -631,7 +620,22 @@ function fillList(clients) {
     binIcon.addEventListener("click", function (event) {
       deleteClientModal(event);
     });
-    binContainer.appendChild(binIcon);
+    cardIcons.appendChild(binIcon);
+
+    var infoLink = document.createElement("a");
+    infoLink.tabIndex = "0";
+    infoLink.title = "Client Info";
+    infoLink.setAttribute("data-trigger", "focus");
+    infoLink.setAttribute("data-toggle", "popover");
+    infoLink.setAttribute("data-content", clients[i].popover);
+
+    var infoIcon = document.createElement("i");
+    infoIcon.setAttribute("type", "button");
+    infoIcon.className = "fas fa-info-circle cardIcon example-popover";
+
+    infoLink.appendChild(infoIcon);
+    cardIcons.appendChild(infoLink);
+
     cardSecondCol.appendChild(cardIcons);
 
     var cardBody = document.createElement("div");
@@ -652,5 +656,11 @@ function fillList(clients) {
     clientLocation.className = "card-text";
     clientLocation.innerHTML = clients[i].city.name + ", " + clients[i].country.name + ".";
     cardBody.appendChild(clientLocation);
+
+    $(document).ready(() => {
+      $('[data-toggle="popover"]').popover({
+        html: true,
+      });
+    });
   }
 }

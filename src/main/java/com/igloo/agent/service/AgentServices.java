@@ -75,23 +75,23 @@ public class AgentServices {
 		}
 
 		if (action == null || action.isEmpty()) {
-			Pageable pageable = PageRequest.of(page - 1, 8);
+			Pageable pageable = PageRequest.of(page - 1, 4);
 			Page<Agent> lista = agentRepository.findAll(pageable);
 			agents = lista.getContent();
 
 		} else if (action.equals("sort")) {
 			Sort.Direction direction = Sort.Direction.fromString(option);
 			Sort sort = Sort.by(direction, term);
-			Pageable pageable = PageRequest.of(page - 1, 8, sort);
+			Pageable pageable = PageRequest.of(page - 1, 4, sort);
 			agents = agentRepository.findAll(pageable).getContent();
 
 		} else if (action.equals("search")) {
 			if (option.equals("agent")) {
-				Pageable pageable = PageRequest.of(page - 1, 8);
+				Pageable pageable = PageRequest.of(page - 1, 4);
 				agents = agentRepository.findByFirstNameContainingOrLastNameContaining(term, term, pageable);
 			} else if (option.equals("favorite")) {
 
-				Pageable pageable = PageRequest.of(page - 1, 8);
+				Pageable pageable = PageRequest.of(page - 1, 4);
 				agents = agentRepository.findByFavoriteIs(true, pageable);
 			}
 

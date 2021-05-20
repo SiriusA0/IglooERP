@@ -30,7 +30,7 @@
   <nav th:replace="common/navbar::navbar"></nav>
   <div class="container-fluid igloo-container">
     <div class="row">
-      <div class="col-sm-12 col-md-3 col-lg-3 col-xl-2 lateralMenu border-top" style="height:100vh;">
+      <div class="col-sm-12 col-md-3 col-lg-3 col-xl-2 lateralMenu border-top">
         <div class="row mt-5">
           <div class="col">
             <h3 class="filterText pl-1">Sales Agents</h3>
@@ -53,51 +53,68 @@
             </button>
           </div>
         </div>
-        <div class="row mt-3 mb-3 pl-3">
-          <div class="col-2">
-            <i type="button" class="fas fa-star filterIcons"
-              onclick="getAgents('searchFavorites', null, null,true)"></i>
+
+
+
+
+       <div
+            class="row mt-3 mb-3 pl-3 optionRow"
+            type="button"
+            onclick="buttonFn(event,'searchFavorites', null, null,true)"
+          >
+            <div class="col-2">
+              <i class="fas fa-star filterIcons lateralMenuAux"></i>
+            </div>
+            <div class="col-10">
+              <label type="button" class="filterText lateralMenuAux">Favorites</label>
+            </div>
           </div>
-          <div class="col-10">
-            <label class="filterText">Favorites</label>
+          <div class="row mt-3 mb-3 pl-3 optionRow" onclick="buttonFn(event,'sort', 'id', 'asc',true)" type="button">
+            <div class="col-2">
+              <i id="idAgentAsc" class="fas fa-sort-numeric-up-alt filterIcons lateralMenuAux"></i>
+            </div>
+            <div class="col-10">
+              <label type="button" for="idAgentAsc" class="filterText lateralMenuAux">Order by ID (Asc)</label>
+            </div>
           </div>
-        </div>
-        <div class="row mt-3 mb-3 pl-3">
-          <div class="col-2">
-            <i onclick="getAgents('sort', 'id', 'asc',true)" id="idAgentAsc" type="button"
-              class="fas fa-sort-numeric-up-alt filterIcons"></i>
+          <div type="button" class="row mt-3 mb-3 pl-3 optionRow" onclick="buttonFn(event,'sort', 'id', 'desc',true)">
+            <div class="col-2">
+              <i id="idAgentDesc" class="fas fa-sort-numeric-down-alt filterIcons lateralMenuAux"></i>
+            </div>
+            <div class="col-10">
+              <label type="button" for="idAgentDesc" class="filterText lateralMenuAux">Order by ID (Des)</label>
+            </div>
           </div>
-          <div class="col-10">
-            <label for="idAgentAsc" class="filterText">Order by ID (Asc)</label>
+          <div
+            type="button"
+            class="row mt-3 mb-3 pl-3 optionRow"
+            onclick="buttonFn(event,'sort', 'lastName', 'asc',true)"
+          >
+            <div class="col-2">
+              <i id="lastNameAgentAsc" class="fas fa-sort-alpha-up-alt filterIcons lateralMenuAux"></i>
+            </div>
+            <div class="col-10">
+              <label type="button" for="lastNameAgentAsc" class="filterText lateralMenuAux"
+                >Order by Last Name (Asc)</label
+              >
+            </div>
           </div>
-        </div>
-        <div class="row mt-3 mb-3 pl-3">
-          <div class="col-2">
-            <i onclick="getAgents('sort', 'id', 'desc',true)" id="idAgentDesc" type="button"
-              class="fas fa-sort-numeric-down-alt filterIcons"></i>
+          <div
+            type="button"
+            onclick="buttonFn(event,'sort', 'lastName', 'desc',true)"
+            class="row mt-3 mb-3 pl-3 optionRow"
+          >
+            <div class="col-2">
+              <i id="lastNameAgentDesc" class="fas fa-sort-alpha-down-alt filterIcons lateralMenuAux"></i>
+            </div>
+            <div class="col-10">
+              <label type="button" for="lastNameAgentDesc" class="filterText lateralMenuAux"
+                >Order by Last Name (Des)</label
+              >
+            </div>
           </div>
-          <div class="col-10">
-            <label for="idAgentDesc" class="filterText">Order by ID (Des)</label>
-          </div>
-        </div>
-        <div class="row mt-3 mb-3 pl-3">
-          <div class="col-2">
-            <i onclick="getAgents('sort', 'lastName', 'asc',true)" id="lastNameAgentAsc" type="button"
-              class="fas fa-sort-alpha-up-alt filterIcons"></i>
-          </div>
-          <div class="col-10">
-            <label for="lastNameAgentAsc" class="filterText">Order by Last Name (Asc)</label>
-          </div>
-        </div>
-        <div class="row mt-3 mb-3 pl-3">
-          <div class="col-2">
-            <i onclick="getAgents('sort', 'lastName', 'desc',true)" id="lastNameAgentDesc" type="button"
-              class="fas fa-sort-alpha-down-alt filterIcons"></i>
-          </div>
-          <div class="col-10">
-            <label for="lastNameAgentDesc" class="filterText">Order by Last Name (Des)</label>
-          </div>
-        </div>
+
+
 
         <div class="row">
           <div class="col">
@@ -119,7 +136,7 @@
             </div> -->
         </div>
       </div>
-      <div class=" col-sm-12 col-md-9 col-lg-9 col-xl-10" style="height: calc(100vh - 56px); width: fit-content">
+      <div class="col-sm-12 col-md-9 col-lg-9 col-xl-10" style="height: calc(100vh - 56px); width: fit-content">
         <div class="row createForm m-5" id="agentForm" style="display: none">
           <div class="col-8">
             <form>
