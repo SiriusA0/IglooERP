@@ -77,8 +77,9 @@ function fetchRequest(finalRequest, globalSearch) {
     console.log(aux);
     for (var i = 0; i < aux.length; i++) {
       aux[i].style.color = "rgb(255, 255, 255)";
-    }
+    } 
   
+    
     if (event != null) {
       var rowButton = event.currentTarget.closest(".row");
       var ico = rowButton.querySelector("i");

@@ -646,7 +646,7 @@ function fillList(clients) {
     clientName.className = "card-title";
     clientName.innerHTML = clients[i].firstName + " " + clients[i].lastName;
     cardBody.appendChild(clientName);
-
+    
     var clientEmail = document.createElement("p");
     clientEmail.className = "card-text";
     clientEmail.innerHTML = clients[i].email;

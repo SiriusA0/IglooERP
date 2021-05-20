@@ -241,6 +241,7 @@ function showSector() {
 // Create New Sector
 function createSector(){
 
+  
 var sectorName=document.querySelector("#sectorName").value;
 var urlFinal= server_url + '/api/sector/add?'+"name="+ sectorName;
 
